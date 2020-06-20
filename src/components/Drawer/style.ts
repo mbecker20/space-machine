@@ -25,6 +25,8 @@ const useJSS = createUseStyles({
     justifyContent: 'flex-start',
   },
 
+  // header
+
   DrawerHeader: {
     display: 'flex',
     flexDirection: 'row',
@@ -53,7 +55,7 @@ const useJSS = createUseStyles({
   ItemRouter: {
     display: 'flex',
     flexFlow: 'row wrap',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     alignItems: 'flex-start',
     width: sizes.drawer.width,
     height: 'calc(100% - 60px)',
@@ -66,14 +68,39 @@ const useJSS = createUseStyles({
     },
   },
 
+  // Drawer items
+
   DrawerItem: {
-    backgroundColor: colors.grey,
-    width: sizes.drawer.item,
-    height: sizes.drawer.item,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
     borderRadius: '10px',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     margin: '20px',
   },
+
+  DrawerIcon: {
+    backgroundColor: colors.grey,
+    borderColor: colors.grey,
+    borderStyle: 'solid',
+    width: sizes.drawer.item,
+    height: sizes.drawer.item,
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    marginBottom: '5px',
+    '&:hover': {
+      cursor: 'pointer',
+      borderColor: 'white',
+    },
+  },
+
+  DrawerItemText: {
+    fontSize: 'calc(10px + 1vmin)',
+
+  },
+
+  // toggle
 
   Toggle: {
     backgroundColor: colors.drawerToggle,

@@ -26,14 +26,15 @@ function ModuleViewFill({ mod }: Props) {
       {mod.children.columns.map((col, colIndex) => {
         return (
           col.map((childMod, rowIndex) => {
-            if (childMod.children.columns > 0) {
+            if (childMod.children.columns.length > 0) {
               return (
                 <ModuleViewMid mod={childMod} col={2 * colIndex} row={2 * rowIndex}/>
               )
-            }
+            } else {
               return (
                 <ModuleViewIcon mod={childMod} col={2 * colIndex} row={2 * rowIndex}/>
               )
+            }
           })
         )
       }).flat()}

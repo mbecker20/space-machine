@@ -1,15 +1,19 @@
 import React from 'react'
 import useJSS from './style'
+import { Module } from '../../state/types';
 
 interface Props {
-  children?: React.ReactNode
+  mod: Module
 }
 
-function DrawerItem({ children }: Props) {
+function DrawerItem({ mod }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.DrawerItem}>
-      {children}
+      <div className={classes.DrawerIcon}/>
+      <div className={classes.DrawerItemText}>
+        {mod.id}
+      </div>
     </div>
   );
 }

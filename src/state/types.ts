@@ -12,6 +12,7 @@ export interface State {
 
 
 export interface Module {
+  id: string
   inputs: string
   outputs: string
   parent: Module | null

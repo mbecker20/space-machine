@@ -22,7 +22,7 @@ export const colors: Colors = {
 
 export const sizes: Sizes = {
   drawer: {
-    width: '400px',
+    width: '300px',
     toggleWidth: '15px',
     item: '80px'
   },

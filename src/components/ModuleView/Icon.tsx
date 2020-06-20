@@ -1,13 +1,15 @@
 import React from 'react'
 import CSS from 'csstype'
 import useJSS from './style'
+import { Module } from '../../state/types'
 
 interface Props {
+  mod: Module
   row: number
   col: number
 }
 
-function ModuleViewIcon({ row, col }: Props) {
+function ModuleViewIcon({ mod, row, col }: Props) {
   const classes = useJSS()
   const iconStyle: CSS.Properties = {
     gridColumn: `${col} / span 1`,

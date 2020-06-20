@@ -17,8 +17,9 @@ export default function makeState() {
 // --------------------
 
 
-function makeEmptyModule() {
+export function makeEmptyModule() {
   const mod: Module = {
+    id: 'empty',
     inputs: '',
     outputs: '',
     parent: null,
