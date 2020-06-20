@@ -19,6 +19,7 @@
     "react-redux": "^7.2.0",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
+    "redux": "^4.0.5",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -43,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "redux-devtools": "^3.5.0"
   }
 }
