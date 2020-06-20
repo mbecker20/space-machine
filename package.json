@@ -16,7 +16,6 @@
     "react-dom": "^16.13.1",
     "react-jss": "^10.3.0",
     "react-scripts": "3.4.1",
-    "react-scroll-horizontal": "^1.6.4",
     "react-spring": "^8.0.27",
     "typescript": "~3.7.2"
   },
