@@ -1,6 +1,6 @@
 import React from 'react'
 import useJSS from './style'
-import { Drawer, ModuleViewFill } from '../components/all'
+import { Drawer, ModuleViewFill, HorizontalScrollDiv } from '../components/all'
 import makeState from '../state/makeState'
 
 const state = makeState()
