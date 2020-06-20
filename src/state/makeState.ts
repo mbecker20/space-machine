@@ -22,10 +22,11 @@ function makeEmptyModule() {
     inputs: '',
     outputs: '',
     parent: null,
-    children: {},
+    children: {
+      columns: [],
+      maxRow: 0,
+    },
     controls: {},
-    left: 0,
-    top: 0,
   }
   return mod
 }

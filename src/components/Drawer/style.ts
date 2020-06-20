@@ -33,8 +33,6 @@ const useJSS = createUseStyles({
     fontSize: '25px',
     width: sizes.drawer.width,
     height: '60px',
-    //borderColor: 'white',
-    //borderStyle: 'none none solid none',
     overflowX: 'scroll',
     '&::-webkit-scrollbar': {
       height: '3px',
