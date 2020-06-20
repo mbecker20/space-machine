@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, WheelEvent, useState } from 'react'
+import React, { ReactNode, useRef, WheelEvent } from 'react'
 import CSS from 'csstype'
 
 interface Props {
@@ -15,7 +15,6 @@ const baseStyle = {
 
 function HorizontalScrollDiv({ children, className, style }: Props) {
   const ref = useRef<HTMLDivElement>(null)
-  const [scrollLeft, setSL] = useState(0)
 
   function onWheel(event: WheelEvent) {
     if(ref && ref.current) {
