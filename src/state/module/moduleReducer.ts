@@ -1,6 +1,7 @@
-import { Module } from "../stateTSTypes"
+import { Module, ModuleAction } from "../stateTSTypes"
+import { ADD_CHILD } from './moduleTypes'
 
-const initModule: Module = {
+const initState: Module = {
   id: 'empty',
   inputs: '',
   outputs: '',
@@ -11,3 +12,15 @@ const initModule: Module = {
   },
   controls: {},
 }
+
+const moduleReducer = (state = initState, action: ModuleAction) => {
+  switch(action.type) {
+    case ADD_CHILD: return {
+      ...state,
+
+    }
+    default: return state
+  }
+}
+
+export default moduleReducer
