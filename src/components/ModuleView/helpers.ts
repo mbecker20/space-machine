@@ -1,4 +1,4 @@
-import { Module } from "../../state/types";
+import { Module } from "../../state/stateTSTypes";
 
 export function getMaxRow(mod: Module) {
   let maxRow = 0

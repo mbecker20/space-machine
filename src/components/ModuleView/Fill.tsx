@@ -1,5 +1,5 @@
 import React from 'react'
-import { Module } from '../../state/types'
+import { Module } from '../../state/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'

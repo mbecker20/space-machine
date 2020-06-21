@@ -1,7 +1,7 @@
 import React from 'react'
 import CSS from 'csstype'
 import useJSS from './style'
-import { Module } from '../../state/types'
+import { Module } from '../../state/stateTSTypes'
 
 interface Props {
   mod: Module
