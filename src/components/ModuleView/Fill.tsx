@@ -1,5 +1,5 @@
 import React from 'react'
-import { Module } from '../../state/stateTSTypes'
+import { Module } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
@@ -9,7 +9,7 @@ import ModuleViewIcon from './Icon'
 
 
 interface Props {
-  mod: Module
+  mod?: Module
 }
 
 const iconGridSize = sizes.moduleView.iconGrid
@@ -17,9 +17,17 @@ const gutterGridSize = sizes.moduleView.gutterGrid
 
 function ModuleViewFill({ mod }: Props) {
   const classes = useJSS()
-  const gridStyle: CSS.Properties = {
-    gridTemplateColumns: `repeat(${mod.children.columns.length}, ${iconGridSize} ${gutterGridSize})`,
-    gridTemplateRows: `repeat(${getMaxRow(mod)}, ${iconGridSize} ${gutterGridSize})`,
+  let gridStyle: CSS.Properties
+  if(mod) {
+    gridStyle = {
+      gridTemplateColumns: `repeat(${mod.children.columns.length}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${getMaxRow(mod)}, ${iconGridSize} ${gutterGridSize})`,
+    }
+  } else {
+    gridStyle = {
+      gridTemplateColumns: `repeat(0, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(0, ${iconGridSize} ${gutterGridSize})`,
+    }
   }
   return (
     <div className={classes.Fill} style={gridStyle}>

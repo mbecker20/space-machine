@@ -1,4 +1,4 @@
-import { Module } from "../../state/stateTSTypes";
+import { Module } from "../../redux/stateTSTypes";
 
 export function getMaxRow(mod: Module) {
   let maxRow = 0

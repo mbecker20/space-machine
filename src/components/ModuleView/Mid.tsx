@@ -1,5 +1,5 @@
 import React from 'react'
-import { Module } from '../../state/stateTSTypes'
+import { Module } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 
