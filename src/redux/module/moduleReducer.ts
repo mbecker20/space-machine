@@ -1,5 +1,5 @@
 import { Module, ModuleAction } from "../stateTSTypes"
-import { ADD_CHILD } from './moduleTypes'
+import { ADD_CHILD } from './moduleActionTypes'
 
 const initState: Module = {
   id: 'empty',

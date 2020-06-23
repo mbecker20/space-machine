@@ -1,4 +1,4 @@
-import { ADD_CHILD } from './moduleTypes'
+import { ADD_CHILD } from './moduleActionTypes'
 
 export const addChild = () => {
   return {
