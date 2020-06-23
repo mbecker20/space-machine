@@ -1,9 +1,9 @@
 import React from 'react'
 import useJSS from './style'
-import { Module } from '../../state/types';
+import { Module } from '../../redux/stateTSTypes';
 
 interface Props {
-  mod: Module
+  mod?: Module
 }
 
 function DrawerItem({ mod }: Props) {
@@ -12,7 +12,7 @@ function DrawerItem({ mod }: Props) {
     <div className={classes.DrawerItem}>
       <div className={classes.DrawerIcon}/>
       <div className={classes.DrawerItemText}>
-        {mod.id}
+        'item'
       </div>
     </div>
   );

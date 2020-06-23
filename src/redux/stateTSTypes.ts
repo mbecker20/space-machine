@@ -20,6 +20,10 @@ export interface Module {
   controls: Controls
 }
 
+export interface ModuleAction {
+  type: string
+}
+
 export interface ModuleChildren {
   columns: Module[][]
   maxRow: number
