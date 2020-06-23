@@ -3,7 +3,10 @@
 
 
 export interface State {
-  baseModule: Module
+  baseContainerID: string
+  fillContainerID: string
+  containerModules: ContainerModules
+  modules: Modules
 }
 
 
@@ -11,28 +14,33 @@ export interface State {
 // --------------------
 
 
-export interface Module {
-  id: string
-  inputs: string
-  outputs: string
-  parent: Module | null
-  children: ModuleChildren
+export interface Module { // the base of the Module types
+  id: string // can contain info about nesting level
+  row: number // modules row/col relative to parent container
+  col: number
+  inputs: null
+  outputs: null
+  parent: string | null // id of parent ContainerModule
   controls: Controls
 }
 
-export interface ModuleAction {
-  type: string
+export interface Modules {
+  [index: string]: Module
 }
 
-export interface ModuleChildren {
-  columns: Module[][]
-  maxRow: number
+export interface ContainerModule extends Module { // modules composing other modules in tree structure
+  childContainers: string[] 
+  childModules: string[] 
+  maxRow: number // used for creating grid for when container is filling
+  maxCol: number
 }
 
+export interface ContainerModules {
+  [index: string]: ContainerModule
+}
 
 // control related state
 // ---------------------
-
 
 export interface Control {
 
