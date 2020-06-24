@@ -15,7 +15,9 @@ function App() {
   return (
     <div className={classes.Bounder}>
       <Drawer />
-      <ModuleViewFill mod={containerModules[fillContainerID]}/>
+      <div className={classes.ModuleViewBounder}>
+        <ModuleViewFill mod={containerModules[fillContainerID]}/>
+      </div>
     </div>
   )
 }

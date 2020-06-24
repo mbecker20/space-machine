@@ -8,13 +8,14 @@ const useJSS = createUseStyles({
     borderRadius: '15px',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     minWidth: sizes.moduleView.iconGrid,
-    maxWidth: '90%',
+    //maxWidth: '90%',
     minHeight: sizes.moduleView.iconGrid,
-    maxHeight: '90%',
+    //maxHeight: '90%',
     alignItems: 'center',
     justifyItems: 'center',
     padding: '20px',
-    marginLeft: '10vw'
+    marginLeft: '10vmin',
+    marginTop: '10vmin',
   },
 
   Mid: {

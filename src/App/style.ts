@@ -8,7 +8,7 @@ const useJSS = createUseStyles({
     height: '100vh',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     fontSize: 'calc(20px + 2vmin)',
     color: 'white',
@@ -17,8 +17,20 @@ const useJSS = createUseStyles({
     left: '0px',
     userSelect: 'none',
     zIndex: '-1',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
+
+  ModuleViewBounder: {
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    zIndex: 0,
+    overflowX: 'hidden',
+    overflowY: 'scroll',
+  }
 })
 
 export default useJSS
