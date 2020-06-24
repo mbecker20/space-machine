@@ -1,0 +1,1 @@
+export const DOWN_1_BASE = 'DOWN_1_BASE'
