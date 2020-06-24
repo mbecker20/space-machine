@@ -22,7 +22,7 @@ const initState: ContainerModules = {
 }
 
 const cmReducer = (state = initState, action: CMAction) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_CONTAINER: return addContainer(state, action as AddContainerAction)
     default: return state
   }
