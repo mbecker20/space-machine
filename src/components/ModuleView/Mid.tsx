@@ -7,12 +7,12 @@ import CSS from 'csstype'
 // its onClick makes the module a fill module, and moves its zindex to the top.
 
 interface Props {
-  mod: Module
+  containerMod: Module
   col: number
   row: number
 }
 
-function ModuleViewMid({ mod, col, row }: Props) {
+function ModuleViewMid({ containerMod, col, row }: Props) {
   const classes = useJSS()
   const midStyle: CSS.Properties = {
     gridColumn: `${col} / span 1`,

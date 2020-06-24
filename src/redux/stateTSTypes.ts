@@ -2,7 +2,7 @@
 // -----------------
 
 
-export interface State {
+export interface RootState {
   baseContainerID: string
   fillContainerID: string
   containerModules: ContainerModules
