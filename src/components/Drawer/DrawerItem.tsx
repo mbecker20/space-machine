@@ -1,18 +1,23 @@
 import React from 'react'
 import useJSS from './style'
-import { Module } from '../../redux/stateTSTypes';
 
 interface Props {
-  mod?: Module
+  id: string
 }
 
-function DrawerItem({ mod }: Props) {
+function DrawerItem({ id }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.DrawerItem}>
-      <div className={classes.DrawerIcon}/>
+      <div 
+        className={classes.DrawerIcon} 
+        draggable={true}
+        onDragStart={event => {
+          event.dataTransfer.setData('id', id)
+        }}
+      />
       <div className={classes.DrawerItemText}>
-        'item'
+        {id}
       </div>
     </div>
   );

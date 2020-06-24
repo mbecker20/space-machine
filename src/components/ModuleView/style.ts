@@ -11,6 +11,8 @@ const useJSS = createUseStyles({
     maxWidth: '90%',
     minHeight: sizes.moduleView.iconGrid,
     maxHeight: '90%',
+    alignItems: 'center',
+    justifyItems: 'center',
   },
 
   Mid: {
@@ -18,22 +20,21 @@ const useJSS = createUseStyles({
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
     zIndex: 1,
+    borderRadius: '10px'
   },
 
   Icon: {
     backgroundColor: colors.module,
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
+    borderRadius: '10px',
   },
 
   DropSquare: {
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
     borderStyle: 'none',
-    '&:hover': {
-      borderColor: 'white',
-      borderStyle: 'solid',
-    },
+    borderColor: colors.dropSquareHL,
   },
 })
 

@@ -14,10 +14,12 @@ export const colors: Colors = {
   drawerToggleLine: '#001b40',
 
   fillModule: '#1b1e24',
-  module: '#1b1e24',
+  module: '#37538a',
 
   text: 'white',
   selectedText: '#007ab3',
+
+  dropSquareHL: 'white',
 }
 
 export const sizes: Sizes = {
@@ -29,6 +31,6 @@ export const sizes: Sizes = {
   moduleView: {
     iconGrid: '15vmin',
     gutterGrid: '5vmin',
-    icon: '14vmin',
+    icon: '13vmin',
   }
 }

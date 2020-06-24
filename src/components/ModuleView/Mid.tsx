@@ -8,15 +8,15 @@ import CSS from 'csstype'
 
 interface Props {
   containerMod: Module
-  col: number
-  row: number
+  gridCol: number
+  gridRow: number
 }
 
-function ModuleViewMid({ containerMod, col, row }: Props) {
+function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
   const classes = useJSS()
   const midStyle: CSS.Properties = {
-    gridColumn: `${col} / span 1`,
-    gridRow: `${row} / span 1`,
+    gridColumn: `${gridCol} / span 1`,
+    gridRow: `${gridRow} / span 1`,
   }
   return (
     <div className={classes.Mid} style={midStyle}>

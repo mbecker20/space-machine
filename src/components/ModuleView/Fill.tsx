@@ -7,7 +7,8 @@ import ModuleViewMid from './Mid'
 import { ContainerModule } from '../../redux/stateTSTypes'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import { getGridRange } from './helpers'
+import { getGridRange, range } from './helpers'
+import DropSquare from './DropSquare'
 
 
 interface Props {
@@ -22,27 +23,38 @@ function ModuleViewFill({ mod }: Props) {
   const containerMods = useSelector((state: RootState) => state.containerModules)
   const { maxRow, maxCol } = getGridRange(mod.childContainers, containerMods)
   let gridStyle: CSS.Properties
-  if(mod) {
+  const isEmpty = mod.childContainers.length === 0
+  if (isEmpty) {
     gridStyle = {
-      gridTemplateRows: `repeat(${maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
-      gridTemplateColumns: `repeat(${maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${1}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateColumns: `repeat(${1}, ${iconGridSize} ${gutterGridSize})`,
     }
   } else {
     gridStyle = {
-      gridTemplateColumns: `repeat(0, ${iconGridSize} ${gutterGridSize})`,
-      gridTemplateRows: `repeat(0, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${maxRow + 2}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateColumns: `repeat(${maxCol + 2}, ${iconGridSize} ${gutterGridSize})`,
     }
   }
   return (
     <div className={classes.Fill} style={gridStyle}>
-      {}
+      {isEmpty ? <DropSquare row={0} col={0}/> :
+      range(0, maxRow + 2).map(row => {
+        return range(0, maxCol + 2).map(col => {
+          return (
+            <DropSquare 
+              row={row} 
+              col={col}
+            />
+          )
+        })
+      }).flat()}
       {mod.childContainers.map((containerID) => {
         const containerMod = containerMods[containerID]
         return (
           <ModuleViewMid 
             containerMod={containerMod}
-            row={containerMod.row}
-            col={containerMod.col}
+            gridRow={containerMod.row * 2 + 1}
+            gridCol={containerMod.col * 2 + 1}
           />
         )
       })}

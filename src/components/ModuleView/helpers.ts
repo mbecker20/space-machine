@@ -1,4 +1,13 @@
-import { ContainerModules } from "../../redux/stateTSTypes";
+import { ContainerModules } from "../../redux/stateTSTypes"
+
+export function range(start: number, stop: number) {
+	// returns list of integers from start (inclusive) to stop (exclusive)
+	var out = []
+	for (var i = start; i < stop; i++) {
+		out.push(i)
+	}
+	return out
+}
 
 export function getGridRange(childContainers: string[], containerModules: ContainerModules) {
   let maxRow = 0
