@@ -13,6 +13,8 @@ const useJSS = createUseStyles({
     maxHeight: '90%',
     alignItems: 'center',
     justifyItems: 'center',
+    padding: '20px',
+    marginLeft: '10vw'
   },
 
   Mid: {

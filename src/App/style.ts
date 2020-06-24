@@ -9,7 +9,7 @@ const useJSS = createUseStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     fontSize: 'calc(20px + 2vmin)',
     color: 'white',
     position: 'absolute',
