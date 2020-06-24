@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CSS from 'csstype'
 import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
-import { addContainer } from '../../redux/allActions'
+import { addContainer, setIsExpanded } from '../../redux/allActions'
 import { RootState } from '../../redux/stateTSTypes'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 function DropSquare({ row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
-  const parentID = useSelector((state: RootState) => state.fillContainerID)
+  const parentID = useSelector((state: RootState) => state.fillContainer.id)
   const [isHL, setHL] = useState(false) // to highlight on drag enter
   const dsStyle: CSS.Properties = {
     gridColumn: `${col * 2 + 1} / span 1`,
@@ -37,6 +37,7 @@ function DropSquare({ row, col }: Props) {
         const id = `${event.dataTransfer.getData('id')} ${parentID} ${row} ${col}`
         setHL(false)
         dispatch(addContainer(id, parentID, row, col))
+        dispatch(setIsExpanded(false))
       }}
     />
   )

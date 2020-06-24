@@ -35,6 +35,7 @@ const useJSS = createUseStyles({
     height: sizes.moduleView.icon,
     borderStyle: 'none',
     borderColor: colors.dropSquareHL,
+    borderRadius: '10px',
   },
 })
 

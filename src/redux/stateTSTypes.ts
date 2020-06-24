@@ -4,7 +4,7 @@
 
 export interface RootState {
   baseContainerID: string
-  fillContainerID: string
+  fillContainer: FillContainerState
   containerModules: ContainerModules
   //modules: Modules
 }
@@ -35,6 +35,11 @@ export interface ContainerModule extends Module { // modules composing other mod
 
 export interface ContainerModules {
   [index: string]: ContainerModule
+}
+
+export interface FillContainerState {
+  id: string
+  isExpanded: boolean
 }
 
 // control related state

@@ -20,7 +20,12 @@ const gutterGridSize = sizes.moduleView.gutterGrid
 
 function ModuleViewFill({ mod }: Props) {
   const classes = useJSS()
-  const containerMods = useSelector((state: RootState) => state.containerModules)
+  const { containerMods, isExpanded } = useSelector((state: RootState) => {
+    return {
+      containerMods: state.containerModules,
+      isExpanded: state.fillContainer.isExpanded,
+    }
+  })
   const { maxRow, maxCol } = getGridRange(mod.childContainers, containerMods)
   let gridStyle: CSS.Properties
   const isEmpty = mod.childContainers.length === 0
@@ -31,15 +36,16 @@ function ModuleViewFill({ mod }: Props) {
     }
   } else {
     gridStyle = {
-      gridTemplateRows: `repeat(${maxRow + 2}, ${iconGridSize} ${gutterGridSize})`,
-      gridTemplateColumns: `repeat(${maxCol + 2}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${isExpanded ? maxRow + 2 : maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateColumns: `repeat(${isExpanded ? maxCol + 2 : maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
     }
   }
   return (
     <div className={classes.Fill} style={gridStyle}>
-      {isEmpty ? <DropSquare row={0} col={0}/> :
-      range(0, maxRow + 2).map(row => {
-        return range(0, maxCol + 2).map(col => {
+      {!isExpanded ? null : 
+      isEmpty ? <DropSquare row={0} col={0}/> :
+      range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {
+        return range(0, isExpanded ? maxCol + 2 : maxCol + 1).map(col => {
           return (
             <DropSquare 
               row={row} 

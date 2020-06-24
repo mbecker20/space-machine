@@ -14,6 +14,7 @@ const useJSS = createUseStyles({
     position: 'absolute',
     top: '0px',
     userSelect: 'none',
+    zIndex: '10',
   },
 
   Drawer: {

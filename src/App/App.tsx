@@ -8,7 +8,7 @@ function App() {
   const classes = useJSS()
   const { fillContainerID, containerModules } = useSelector((state: RootState) => {
     return {
-      fillContainerID: state.fillContainerID,
+      fillContainerID: state.fillContainer.id,
       containerModules: state.containerModules,
     }
   })
