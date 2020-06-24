@@ -7,6 +7,7 @@ import ModuleViewMid from './Mid'
 import { ContainerModule } from '../../redux/stateTSTypes'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
+import { getGridRange } from './helpers'
 
 
 interface Props {
@@ -18,11 +19,13 @@ const gutterGridSize = sizes.moduleView.gutterGrid
 
 function ModuleViewFill({ mod }: Props) {
   const classes = useJSS()
+  const containerMods = useSelector((state: RootState) => state.containerModules)
+  const { maxRow, maxCol } = getGridRange(mod.childContainers, containerMods)
   let gridStyle: CSS.Properties
   if(mod) {
     gridStyle = {
-      gridTemplateRows: `repeat(${mod.maxRow}, ${iconGridSize} ${gutterGridSize})`,
-      gridTemplateColumns: `repeat(${mod.maxCol}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateColumns: `repeat(${maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
     }
   } else {
     gridStyle = {
@@ -30,9 +33,9 @@ function ModuleViewFill({ mod }: Props) {
       gridTemplateRows: `repeat(0, ${iconGridSize} ${gutterGridSize})`,
     }
   }
-  const containerMods = useSelector((state: RootState) => state.containerModules)
   return (
     <div className={classes.Fill} style={gridStyle}>
+      {}
       {mod.childContainers.map((containerID) => {
         const containerMod = containerMods[containerID]
         return (

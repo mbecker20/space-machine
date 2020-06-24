@@ -14,13 +14,26 @@ const useJSS = createUseStyles({
   },
 
   Mid: {
-  
+    backgroundColor: colors.module,
+    width: sizes.moduleView.icon,
+    height: sizes.moduleView.icon,
+    zIndex: 1,
   },
 
   Icon: {
     backgroundColor: colors.module,
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
+  },
+
+  DropSquare: {
+    width: sizes.moduleView.icon,
+    height: sizes.moduleView.icon,
+    borderStyle: 'none',
+    '&:hover': {
+      borderColor: 'white',
+      borderStyle: 'solid',
+    },
   },
 })
 

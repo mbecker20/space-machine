@@ -30,9 +30,7 @@ export interface Modules {
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure
   childContainers: string[] 
-  childModules: string[] 
-  maxRow: number // used for creating grid for when container is filling
-  maxCol: number
+  childModules: string[]
 }
 
 export interface ContainerModules {

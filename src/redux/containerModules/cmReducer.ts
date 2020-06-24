@@ -12,8 +12,6 @@ const initBaseCM: ContainerModule = { // this is the target. will be deleted
   parent: null,
   childContainers: [],
   childModules: [],
-  maxRow: 0,
-  maxCol: 0,
   controls: {},
 }
 

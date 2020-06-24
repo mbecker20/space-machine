@@ -12,8 +12,6 @@ const addContainer = (state: ContainerModules, { id, row, col, parentID }: AddCo
       outputs: null,
       childContainers: [],
       childModules: [],
-      maxRow: 0,
-      maxCol: 0,
       controls: {},
     },
     [parentID]: {
