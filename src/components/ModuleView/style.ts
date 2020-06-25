@@ -34,8 +34,8 @@ const useJSS = createUseStyles({
   },
 
   DropSquare: {
-    width: sizes.moduleView.icon,
-    height: sizes.moduleView.icon,
+    width: sizes.moduleView.iconGrid,
+    height: sizes.moduleView.iconGrid,
     borderStyle: 'none',
     borderColor: colors.dropSquareHL,
     borderRadius: '10px',
