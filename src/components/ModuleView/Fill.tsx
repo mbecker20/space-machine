@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
@@ -10,6 +10,9 @@ import { RootState } from '../../redux/stateTSTypes'
 import { getGridRange, range } from './helpers'
 import DropSquare from './DropSquare'
 
+declare global {
+  interface Window { setFillIsExpanded: (isExpanded: boolean) => void }
+}
 
 interface Props {
   mod: ContainerModule
@@ -20,10 +23,11 @@ const gutterGridSize = sizes.moduleView.gutterGrid
 
 function ModuleViewFill({ mod }: Props) {
   const classes = useJSS()
-  const { containerMods, isExpanded } = useSelector((state: RootState) => {
+  const [isExpanded, setIsExpanded] = useState(false)
+  window.setFillIsExpanded = setIsExpanded
+  const { containerMods } = useSelector((state: RootState) => {
     return {
       containerMods: state.containerModules,
-      isExpanded: state.fillContainer.isExpanded,
     }
   })
   const { maxRow, maxCol } = getGridRange(mod.childContainers, containerMods)
@@ -47,7 +51,8 @@ function ModuleViewFill({ mod }: Props) {
       range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {
         return range(0, isExpanded ? maxCol + 2 : maxCol + 1).map(col => {
           return (
-            <DropSquare 
+            <DropSquare
+              key={`${row} ${col}`}
               row={row} 
               col={col}
             />
@@ -58,6 +63,7 @@ function ModuleViewFill({ mod }: Props) {
         const containerMod = containerMods[containerID]
         return (
           <ModuleViewMid
+            key={containerMod.id}
             containerMod={containerMod}
             gridRow={containerMod.row * 2 + 1}
             gridCol={containerMod.col * 2 + 1}

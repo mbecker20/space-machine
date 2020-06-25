@@ -39,7 +39,6 @@ export interface ContainerModules {
 
 export interface FillContainerState {
   id: string
-  isExpanded: boolean
 }
 
 // control related state

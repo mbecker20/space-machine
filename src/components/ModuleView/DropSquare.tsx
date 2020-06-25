@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import CSS from 'csstype'
 import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
-import { addContainer, setIsExpanded } from '../../redux/allActions'
+import { addContainer } from '../../redux/allActions'
 import { RootState } from '../../redux/stateTSTypes'
 
 interface Props {
@@ -37,7 +37,7 @@ function DropSquare({ row, col }: Props) {
         const id = `${event.dataTransfer.getData('id')} ${parentID} ${row} ${col}`
         setHL(false)
         dispatch(addContainer(id, parentID, row, col))
-        dispatch(setIsExpanded(false))
+        window.setFillIsExpanded(false)
       }}
     />
   )

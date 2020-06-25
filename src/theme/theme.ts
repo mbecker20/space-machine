@@ -29,8 +29,8 @@ export const sizes: Sizes = {
     item: '80px'
   },
   moduleView: {
-    iconGrid: '15vmin',
-    gutterGrid: '5vmin',
-    icon: '13vmin',
+    iconGrid: '13vmin',
+    gutterGrid: '4vmin',
+    icon: '10vmin',
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import useJSS from './style'
-import { useDispatch } from 'react-redux'
-import { setIsExpanded } from '../../redux/fillContainer/fcActions'
+//import { useDispatch } from 'react-redux'
+//import { setIsExpanded } from '../../redux/fillContainer/fcActions'
 
 interface Props {
   id: string
@@ -9,7 +9,7 @@ interface Props {
 
 function DrawerItem({ id }: Props) {
   const classes = useJSS()
-  const dispatch = useDispatch()
+  //const dispatch = useDispatch()
   return (
     <div className={classes.DrawerItem}>
       <div 
@@ -17,10 +17,10 @@ function DrawerItem({ id }: Props) {
         draggable={true}
         onDragStart={event => {
           event.dataTransfer.setData('id', id)
-          dispatch(setIsExpanded(true))
+          window.setFillIsExpanded(true)
         }}
         onDragEnd={() => {
-          dispatch(setIsExpanded(false))
+          window.setFillIsExpanded(false)
         }}
       />
       <div className={classes.DrawerItemText}>

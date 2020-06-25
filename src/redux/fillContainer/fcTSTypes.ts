@@ -3,9 +3,4 @@ export interface ChangeFillContainerAction {
   newID: string
 }
 
-export interface SetIsExpandedAction {
-  type: string
-  isExpanded: boolean
-}
-
-export type FCAction = ChangeFillContainerAction | SetIsExpandedAction
+export type FCAction = ChangeFillContainerAction
