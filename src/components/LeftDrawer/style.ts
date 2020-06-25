@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss'
-import { colors } from '../../theme/theme'
+import { colors, sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   LeftDrawer: {
@@ -34,6 +34,18 @@ const useJSS = createUseStyles({
     },
   },
 
+  DrawerHeader: {
+    width: '100%',
+    fontSize: sizes.text.large,
+    padding: '1vmin 0vmin',
+    borderColor: 'white',
+    borderStyle: 'none none solid none',
+    borderWidth: '1px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   BottomItems: {
     display: 'flex',
     flexDirection: 'column',
@@ -51,24 +63,13 @@ const useJSS = createUseStyles({
     },
   },
 
-  DrawerHeader: {
-    width: '100%',
-    padding: '15px 0px',
-    borderColor: 'white',
-    borderStyle: 'none none solid none',
-    borderWidth: '1px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   Delete: {
     backgroundColor: colors.deleteButton,
     color: colors.deleteButtonText,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: '3vmin',
+    fontSize: sizes.text.medium,
     width: '6em',
     height: '2em',
     '&:hover': {

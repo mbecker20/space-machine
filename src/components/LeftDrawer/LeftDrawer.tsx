@@ -23,7 +23,7 @@ function LeftDrawer() {
   const [topText, setTopText] = useState(window.highlightedID)
   window.setLeftDrawerTopText = setTopText
   const springStyle = useSpring({
-    width: isOpen ? sizes.leftDrawer.width : '0vmin',
+    width: isOpen ? sizes.leftDrawer.width : '0vw',
     config: {
       tension: 300,
       velocity: 10,

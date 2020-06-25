@@ -5,15 +5,13 @@ const useJSS = createUseStyles({
   Fill: {
     backgroundColor: colors.fillModule,
     display: 'grid',
-    borderRadius: '15px',
+    borderRadius: '2vmin',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     minWidth: sizes.moduleView.iconGrid,
-    //maxWidth: '90%',
     minHeight: sizes.moduleView.iconGrid,
-    //maxHeight: '90%',
     alignItems: 'center',
     justifyItems: 'center',
-    padding: '20px',
+    padding: '2vmin',
     margin: '10vmin',
   },
 
@@ -22,7 +20,7 @@ const useJSS = createUseStyles({
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
     zIndex: 1,
-    borderRadius: '10px',
+    borderRadius: '1.5vmin',
     borderColor: 'white',
     borderStyle: 'none',
     '&:hover': {
@@ -35,7 +33,7 @@ const useJSS = createUseStyles({
     backgroundColor: colors.module,
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
-    borderRadius: '10px',
+    borderRadius: '1.5vmin',
     '&:hover': {
       cursor: 'pointer'
     }

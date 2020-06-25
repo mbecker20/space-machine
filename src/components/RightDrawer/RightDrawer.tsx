@@ -11,7 +11,7 @@ function RightDrawer() {
   const [open, setOpen] = useState(true)
   const closed = '-' + sizes.rightDrawer.width
   const drawerSpring = useSpring({
-    right: open ? '0px' : closed,
+    right: open ? '0vw' : closed,
     config: {
       tension: 220,
       clamp: true,

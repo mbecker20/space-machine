@@ -34,11 +34,16 @@ export const sizes: Sizes = {
     item: '10vmin'
   },
   leftDrawer: {
-    width: '25vw',
+    width: '20vw',
   },
   moduleView: {
     iconGrid: '14vmin',
     gutterGrid: '4vmin',
     icon: '12vmin',
-  }
+  },
+  text: {
+    large: 'calc(20px + 2.5vmin)',
+    medium: 'calc(15px + 1.5vmin)',
+    small: 'calc(10px + 1.3vmin)',
+  },
 }

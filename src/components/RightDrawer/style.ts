@@ -9,7 +9,6 @@ const useJSS = createUseStyles({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    fontSize: 'calc(20px + 2vmin)',
     color: 'white',
     position: 'absolute',
     top: '0px',
@@ -44,7 +43,7 @@ const useJSS = createUseStyles({
   },
 
   DrawerHeaderItem: {
-    fontSize: 'calc(20px + 4vmin)',
+    fontSize: sizes.text.large,
     padding: '1vmin 1.5vmin',
     color: colors.text,
     textDecoration: 'none',
@@ -98,7 +97,7 @@ const useJSS = createUseStyles({
   },
 
   DrawerItemText: {
-    fontSize: 'calc(10px + 2.5vmin)',
+    fontSize: sizes.text.small,
   },
 
   // toggle
@@ -117,7 +116,8 @@ const useJSS = createUseStyles({
 
   ToggleLine: {
     backgroundColor: colors.drawerToggleLine,
-    width: '4px',
+    borderRadius: '4px',
+    width: '0.75vmin',
     height: '80px',
   },
 })
