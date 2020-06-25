@@ -14,8 +14,7 @@ const useJSS = createUseStyles({
     alignItems: 'center',
     justifyItems: 'center',
     padding: '20px',
-    marginLeft: '10vmin',
-    marginTop: '10vmin',
+    margin: '10vmin',
   },
 
   Mid: {
@@ -24,10 +23,10 @@ const useJSS = createUseStyles({
     height: sizes.moduleView.icon,
     zIndex: 1,
     borderRadius: '10px',
+    borderColor: 'white',
     borderStyle: 'none',
     '&:hover': {
       cursor: 'pointer',
-      borderColor: 'white',
       borderStyle: 'solid',
     }
   },

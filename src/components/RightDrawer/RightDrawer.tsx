@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
-import { Router } from '@reach/router'
 import DrawerRouteLink from './DrawerRouteLink'
 import BaseModules from './ModuleIcons/BaseModules'
 import { HorizontalScrollDiv } from '../all'
@@ -18,7 +17,7 @@ function RightDrawer() {
       clamp: true,
     }
   })
-  const [selectedRoute, setSR] = useState('')
+  const [selectedRoute, setSR] = useState('base modules')
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring}>
       <div className={classes.Toggle} onClick={() => {setOpen(!open)}}>
@@ -28,29 +27,34 @@ function RightDrawer() {
         <HorizontalScrollDiv className={classes.DrawerHeader}>
           <DrawerRouteLink
             className={classes.DrawerHeaderItem} 
-            to='baseModules'
-            text='base modules' 
+            text='base modules'
             onClick={() => {setSR('base modules')}}
             selectedRoute={selectedRoute}
           />
-          <DrawerRouteLink 
+          <DrawerRouteLink
             className={classes.DrawerHeaderItem} 
-            to='higherOrder' 
             text='higher order' 
             onClick={() => {setSR('higher order')}}
             selectedRoute={selectedRoute}
           />
           <DrawerRouteLink 
             className={classes.DrawerHeaderItem} 
-            to='settings' 
             text='settings' 
             onClick={() => {setSR('settings')}}
             selectedRoute={selectedRoute}
           />
         </HorizontalScrollDiv>
-        <Router className={classes.ItemRouter}>
-          <BaseModules path='baseModules'/>
-        </Router>
+        <div className={classes.ItemRouter}>
+          {
+            selectedRoute === 'base modules' ?
+            <BaseModules /> :
+            selectedRoute === 'higher order' ?
+            <div/> :
+            selectedRoute === 'settings' ?
+            <div/> :
+            null
+          }
+        </div>
       </div>
     </animated.div>
   )

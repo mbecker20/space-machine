@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react'
-import { RouteComponentProps } from '@reach/router'
 import DrawerItem from '../DrawerItem'
 
-function BaseModules(props: RouteComponentProps) {
+function BaseModules() {
   return (
     <Fragment>
       <DrawerItem id='container'/>

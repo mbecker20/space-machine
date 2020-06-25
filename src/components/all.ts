@@ -1,4 +1,5 @@
 export { default as RightDrawer } from './RightDrawer/RightDrawer'
+export { default as LeftDrawer } from './LeftDrawer/LeftDrawer'
 export { default as ModuleViewFill } from './ModuleView/Fill'
 export { default as ModuleViewMid } from './ModuleView/Mid'
 export { default as ModuleViewIcon } from './ModuleView/Icon'

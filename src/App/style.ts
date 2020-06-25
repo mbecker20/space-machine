@@ -21,7 +21,7 @@ const useJSS = createUseStyles({
   },
 
   ModuleViewBounder: {
-    width: '100vw',
+    minWidth: '60vw',
     height: '100vh',
     display: 'flex',
     flexDirection: 'row',
@@ -30,6 +30,9 @@ const useJSS = createUseStyles({
     zIndex: 0,
     overflowX: 'hidden',
     overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      width: '0px',
+    },
   }
 })
 

@@ -3,18 +3,25 @@ import { colors } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   LeftDrawer: {
-    backgroundColor: colors.grey,
+    backgroundColor: colors.leftDrawer,
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'flex-start',
     fontSize: 'calc(20px + 2vmin)',
     color: 'white',
     userSelect: 'none',
     zIndex: '1',
     overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      width: '4px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+    },
     overflowX: 'hidden',
+    whiteSpace: 'nowrap'
   },
 })
 

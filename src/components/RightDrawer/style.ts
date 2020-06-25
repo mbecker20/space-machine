@@ -51,6 +51,9 @@ const useJSS = createUseStyles({
     textDecoration: 'none',
     whiteSpace: 'nowrap',
     height: '30px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 
   ItemRouter: {
