@@ -18,4 +18,10 @@ export interface MoveContainerAction {
   newCol: number
 }
 
-export type CMAction = AddContainerAction | RemoveContainerAction | MoveContainerAction
+export interface RenameContainerAction {
+  type: string
+  id: string
+  newID: string
+}
+
+export type CMAction = AddContainerAction | RemoveContainerAction | MoveContainerAction | RenameContainerAction
