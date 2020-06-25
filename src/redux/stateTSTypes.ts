@@ -20,7 +20,7 @@ export interface Module { // the base of the Module types
   col: number
   inputs: null
   outputs: null
-  parent: string | null // id of parent ContainerModule
+  parentID: string | null // id of parent ContainerModule
   controls: Controls
 }
 

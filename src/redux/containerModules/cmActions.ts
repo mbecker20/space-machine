@@ -1,7 +1,6 @@
 import { 
   ADD_CONTAINER,
-  //UPDATE_CONTAINER_MAXROW,
-  //UPDATE_CONTAINER_MAXCOL, 
+  REMOVE_CONTAINER, 
 } from './cmActionTypes'
 
 export const addContainer = (id: string, parentID: string, row: number, col: number) => {
@@ -11,5 +10,12 @@ export const addContainer = (id: string, parentID: string, row: number, col: num
     row,
     col,
     parentID,
+  }
+}
+
+export const removeContainer = (id: string) => {
+  return {
+    type: REMOVE_CONTAINER,
+    id,
   }
 }

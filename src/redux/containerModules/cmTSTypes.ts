@@ -6,4 +6,9 @@ export interface AddContainerAction {
   col: number
 }
 
-export type CMAction = AddContainerAction // or ...
+export interface RemoveContainerAction {
+  type: string
+  id: string
+}
+
+export type CMAction = AddContainerAction | RemoveContainerAction
