@@ -54,10 +54,10 @@ function ModuleViewFill({ mod }: Props) {
           )
         })
       }).flat()}
-      {mod.childContainers.map((containerID) => {
+      {mod.childContainers.map(containerID => {
         const containerMod = containerMods[containerID]
         return (
-          <ModuleViewMid 
+          <ModuleViewMid
             containerMod={containerMod}
             gridRow={containerMod.row * 2 + 1}
             gridCol={containerMod.col * 2 + 1}
