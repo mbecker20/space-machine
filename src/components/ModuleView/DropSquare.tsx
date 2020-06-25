@@ -4,6 +4,7 @@ import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { addContainer } from '../../redux/allActions'
 import { RootState } from '../../redux/stateTSTypes'
+import { moveContainer } from '../../redux/containerModules/cmActions'
 
 interface Props {
   row: number
@@ -13,7 +14,12 @@ interface Props {
 function DropSquare({ row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
-  const parentID = useSelector((state: RootState) => state.fillContainer.id)
+  const { parentID, containerModules } = useSelector((state: RootState) => {
+    return {
+      parentID: state.fillContainer.id,
+      containerModules: state.containerModules
+    }
+  })
   const [isHL, setHL] = useState(false) // to highlight on drag enter
   const dsStyle: CSS.Properties = {
     gridColumn: `${col * 2 + 1} / span 1`,
@@ -34,10 +40,18 @@ function DropSquare({ row, col }: Props) {
         setHL(false)
       }}
       onDrop={event => {
-        const id = `${event.dataTransfer.getData('id')} ${parentID} ${row} ${col}`
-        setHL(false)
-        dispatch(addContainer(id, parentID, row, col))
-        window.setFillIsExpanded(false)
+        const id = event.dataTransfer.getData('id')
+        const possiblyMod = containerModules[id]
+        if (!possiblyMod) {
+          const newID = `${id} ${parentID} ${row} ${col}`
+          setHL(false)
+          dispatch(addContainer(newID, parentID, row, col))
+          window.setFillIsExpanded(false)
+        } else {
+          setHL(false)
+          window.setFillIsExpanded(false)
+          dispatch(moveContainer(id, row, col))
+        }
       }}
     />
   )

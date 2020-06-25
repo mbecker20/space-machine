@@ -19,9 +19,18 @@ function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
     gridRow: `${gridRow} / span 1`,
   }
   return (
-    <div className={classes.Mid} style={midStyle}>
-      
-    </div>
+    <div 
+      className={classes.Mid} 
+      style={midStyle}
+      draggable={true}
+      onDragStart={event => {
+        event.dataTransfer.setData('id', containerMod.id)
+        window.setFillIsExpanded(true)
+      }}
+      onDragEnd={() => {
+        window.setFillIsExpanded(false)
+      }}
+    />
   )
 }
 

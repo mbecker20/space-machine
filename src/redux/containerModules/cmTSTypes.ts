@@ -11,4 +11,11 @@ export interface RemoveContainerAction {
   id: string
 }
 
-export type CMAction = AddContainerAction | RemoveContainerAction
+export interface MoveContainerAction {
+  type: string
+  id: string
+  newRow: number
+  newCol: number
+}
+
+export type CMAction = AddContainerAction | RemoveContainerAction | MoveContainerAction

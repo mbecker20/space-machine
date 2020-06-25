@@ -1,6 +1,7 @@
 import { 
   ADD_CONTAINER,
-  REMOVE_CONTAINER, 
+  REMOVE_CONTAINER,
+  MOVE_CONTAINER, 
 } from './cmActionTypes'
 
 export const addContainer = (id: string, parentID: string, row: number, col: number) => {
@@ -17,5 +18,14 @@ export const removeContainer = (id: string) => {
   return {
     type: REMOVE_CONTAINER,
     id,
+  }
+}
+
+export const moveContainer = (id: string, newRow: number, newCol: number) => {
+  return {
+    type: MOVE_CONTAINER,
+    id,
+    newRow,
+    newCol,
   }
 }

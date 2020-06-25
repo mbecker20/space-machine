@@ -1,8 +1,7 @@
 import { ContainerModule, ContainerModules } from "../stateTSTypes"
-import { ADD_CONTAINER, REMOVE_CONTAINER } from './cmActionTypes'
-import { CMAction, AddContainerAction, RemoveContainerAction } from './cmTSTypes'
-import addContainer from './reducers/addContainer'
-import { removeContainerReducer } from "./reducers/allCMReducers"
+import { ADD_CONTAINER, REMOVE_CONTAINER, MOVE_CONTAINER } from './cmActionTypes'
+import { CMAction, AddContainerAction, RemoveContainerAction, MoveContainerAction } from './cmTSTypes'
+import { removeContainerReducer, addContainerReducer, moveContainerReducer } from "./reducers/allCMReducers"
 
 const initBaseCM: ContainerModule = {
   id: '0',
@@ -22,8 +21,9 @@ const initState: ContainerModules = {
 
 const cmReducer = (state = initState, action: CMAction) => {
   switch (action.type) {
-    case ADD_CONTAINER: return addContainer(state, action as AddContainerAction)
+    case ADD_CONTAINER: return addContainerReducer(state, action as AddContainerAction)
     case REMOVE_CONTAINER: return removeContainerReducer(state, action as RemoveContainerAction)
+    case MOVE_CONTAINER: return moveContainerReducer(state, action as MoveContainerAction)
     default: return state
   }
 }

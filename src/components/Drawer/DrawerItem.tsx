@@ -1,23 +1,23 @@
 import React from 'react'
 import useJSS from './style'
-//import { useDispatch } from 'react-redux'
-//import { setIsExpanded } from '../../redux/fillContainer/fcActions'
 
 interface Props {
   id: string
 }
 
+let numAdds = 0
+
 function DrawerItem({ id }: Props) {
   const classes = useJSS()
-  //const dispatch = useDispatch()
   return (
     <div className={classes.DrawerItem}>
       <div 
         className={classes.DrawerIcon} 
         draggable={true}
         onDragStart={event => {
-          event.dataTransfer.setData('id', id)
+          event.dataTransfer.setData('id', `${id} ${numAdds}`)
           window.setFillIsExpanded(true)
+          numAdds+=1
         }}
         onDragEnd={() => {
           window.setFillIsExpanded(false)
