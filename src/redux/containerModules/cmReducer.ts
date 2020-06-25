@@ -4,7 +4,7 @@ import { CMAction, AddContainerAction, RemoveContainerAction } from './cmTSTypes
 import addContainer from './reducers/addContainer'
 import { removeContainerReducer } from "./reducers/allCMReducers"
 
-const initBaseCM: ContainerModule = { // this is the target. will be deleted
+const initBaseCM: ContainerModule = {
   id: '0',
   row: 0,
   col: 0,
