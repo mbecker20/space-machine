@@ -3,7 +3,8 @@ import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
 import { sizes } from '../../theme/theme'
 import { useDispatch } from 'react-redux'
-import { removeContainer } from '../../redux/allActions'
+import { removeContainer, renameContainer } from '../../redux/allActions'
+import { HorizontalScrollDiv } from '../all'
 
 declare global {
   interface Window { 
@@ -34,7 +35,16 @@ function LeftDrawer() {
   return (
     <animated.div className={classes.LeftDrawer} style={springStyle}>
       <div className={classes.TopItems}>
-        <div className={classes.DrawerHeader}>{topText}</div>
+        <HorizontalScrollDiv className={classes.HeaderScrollBounder}>
+          <textarea className={classes.DrawerHeader}
+            value={topText}
+            onChange={(e) => {
+              setTopText(e.target.value)
+              dispatch(renameContainer(window.highlightedID, e.target.value))
+              window.highlightedID = e.target.value
+            }}
+          />
+        </HorizontalScrollDiv>
       </div>
       <div className={classes.BottomItems}>
         <div className={classes.Delete}

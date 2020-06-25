@@ -34,16 +34,33 @@ const useJSS = createUseStyles({
     },
   },
 
+  HeaderScrollBounder: {
+    borderColor: 'white',
+    borderStyle: 'none none solid none',
+    '&::-webkit-scrollbar': {
+      height: '4px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+    },
+  },
+
   DrawerHeader: {
     width: '100%',
+    height: '1em',
+    whiteSpace: 'nowrap',
+    backgroundColor: 'transparent',
+    color: 'white',
     fontSize: sizes.text.large,
     padding: '1vmin 0vmin',
     borderColor: 'white',
-    borderStyle: 'none none solid none',
+    borderStyle: 'none none none none',
     borderWidth: '1px',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    textAlign: 'center',
+    justifyText: 'center',
+    resize: 'none',
+    overflow: 'hidden',
   },
 
   BottomItems: {
