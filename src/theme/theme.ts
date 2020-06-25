@@ -22,16 +22,19 @@ export const colors: Colors = {
   selectedText: '#007ab3',
 
   dropSquareHL: 'white',
+
+  deleteButton: '#cc0000',
+  deleteButtonText: 'white',
 }
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '400px',
-    toggleWidth: '15px',
-    item: '80px'
+    width: '25vw',
+    toggleWidth: '1.5vmin',
+    item: '10vmin'
   },
   leftDrawer: {
-    width: '300px',
+    width: '25vw',
   },
   moduleView: {
     iconGrid: '14vmin',

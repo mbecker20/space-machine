@@ -20,7 +20,10 @@ interface Props {
 
 function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
   const classes = useJSS()
-  const [isHighlighted, setHighlighted] = useState(false)
+  const [isHighlighted, setHighlighted] = useState(containerMod.id === window.highlightedID)
+  if (containerMod.id === window.highlightedID) {
+    window.currSetHighlighted = setHighlighted
+  }
   const midStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
@@ -46,11 +49,11 @@ function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
           window.currSetHighlighted = (setHighlighted) => {}
         } else {
           window.setLeftDrawerOpen(true)
+          window.setLeftDrawerTopText(containerMod.id)
           setHighlighted(true)
           window.highlightedID = containerMod.id
           window.currSetHighlighted(false)
           window.currSetHighlighted = setHighlighted
-          window.setLeftDrawerTopText(containerMod.id)
         }
       }}
     ></div>

@@ -33,9 +33,7 @@ const useJSS = createUseStyles({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    fontSize: '25px',
     width: sizes.rightDrawer.width,
-    height: '60px',
     overflowX: 'scroll',
     '&::-webkit-scrollbar': {
       height: '3px',
@@ -46,11 +44,11 @@ const useJSS = createUseStyles({
   },
 
   DrawerHeaderItem: {
-    padding: '10px',
+    fontSize: 'calc(20px + 4vmin)',
+    padding: '1vmin 1.5vmin',
     color: colors.text,
     textDecoration: 'none',
     whiteSpace: 'nowrap',
-    height: '30px',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -81,7 +79,7 @@ const useJSS = createUseStyles({
     justifyContent: 'space-evenly',
     borderRadius: '10px',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    margin: '20px',
+    margin: '4vmin',
   },
 
   DrawerIcon: {
@@ -90,9 +88,9 @@ const useJSS = createUseStyles({
     borderStyle: 'solid',
     width: sizes.rightDrawer.item,
     height: sizes.rightDrawer.item,
-    borderRadius: '10px',
+    borderRadius: '1.5vmin',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    marginBottom: '5px',
+    marginBottom: '1.5vmin',
     '&:hover': {
       cursor: 'pointer',
       borderColor: 'white',
@@ -100,8 +98,7 @@ const useJSS = createUseStyles({
   },
 
   DrawerItemText: {
-    fontSize: 'calc(10px + 1vmin)',
-
+    fontSize: 'calc(10px + 2.5vmin)',
   },
 
   // toggle

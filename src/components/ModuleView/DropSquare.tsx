@@ -47,6 +47,10 @@ function DropSquare({ row, col }: Props) {
           setHL(false)
           dispatch(addContainer(newID, parentID, row, col))
           window.setFillIsExpanded(false)
+          window.currSetHighlighted(false)
+          window.highlightedID = newID
+          window.setLeftDrawerOpen(true)
+          window.setLeftDrawerTopText(newID)
         } else {
           setHL(false)
           window.setFillIsExpanded(false)
