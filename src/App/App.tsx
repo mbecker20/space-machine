@@ -1,6 +1,6 @@
 import React from 'react'
 import useJSS from './style'
-import { Drawer, ModuleViewFill } from '../components/all'
+import { RightDrawer, ModuleViewFill } from '../components/all'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/stateTSTypes'
 
@@ -14,10 +14,10 @@ function App() {
   })
   return (
     <div className={classes.Bounder}>
-      <Drawer />
       <div className={classes.ModuleViewBounder}>
-        <ModuleViewFill mod={containerModules[fillContainerID]}/>
+          <ModuleViewFill mod={containerModules[fillContainerID]}/>
       </div>
+      <RightDrawer />
     </div>
   )
 }

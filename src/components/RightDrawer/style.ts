@@ -3,7 +3,7 @@ import { colors, sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   DrawerBounder: {
-    backgroundColor: colors.drawer,
+    backgroundColor: colors.rightDrawer,
     height: '100vh',
     display: 'flex',
     flexDirection: 'row',
@@ -19,7 +19,7 @@ const useJSS = createUseStyles({
 
   Drawer: {
     height: '100vh',
-    width: sizes.drawer.width,
+    width: sizes.rightDrawer.width,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -34,7 +34,7 @@ const useJSS = createUseStyles({
     alignItems: 'center',
     justifyContent: 'flex-start',
     fontSize: '25px',
-    width: sizes.drawer.width,
+    width: sizes.rightDrawer.width,
     height: '60px',
     overflowX: 'scroll',
     '&::-webkit-scrollbar': {
@@ -58,7 +58,7 @@ const useJSS = createUseStyles({
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    width: sizes.drawer.width,
+    width: sizes.rightDrawer.width,
     height: 'calc(100% - 60px)',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
@@ -85,8 +85,8 @@ const useJSS = createUseStyles({
     backgroundColor: colors.grey,
     borderColor: colors.grey,
     borderStyle: 'solid',
-    width: sizes.drawer.item,
-    height: sizes.drawer.item,
+    width: sizes.rightDrawer.item,
+    height: sizes.rightDrawer.item,
     borderRadius: '10px',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     marginBottom: '5px',
@@ -105,7 +105,7 @@ const useJSS = createUseStyles({
 
   Toggle: {
     backgroundColor: colors.drawerToggle,
-    width: sizes.drawer.toggleWidth,
+    width: sizes.rightDrawer.toggleWidth,
     height: '100%',
     display: 'flex',
     alignItems: 'center',

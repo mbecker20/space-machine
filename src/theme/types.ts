@@ -11,6 +11,7 @@ interface ModuleView {
 }
 
 export interface Sizes {
-  drawer: Drawer
+  rightDrawer: Drawer
+  leftDrawer: Drawer
   moduleView: ModuleView
 }

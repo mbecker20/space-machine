@@ -30,7 +30,7 @@ function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
       onDragEnd={() => {
         window.setFillIsExpanded(false)
       }}
-    />
+    ></div>
   )
 }
 

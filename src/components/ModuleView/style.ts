@@ -23,7 +23,13 @@ const useJSS = createUseStyles({
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
     zIndex: 1,
-    borderRadius: '10px'
+    borderRadius: '10px',
+    borderStyle: 'none',
+    '&:hover': {
+      cursor: 'pointer',
+      borderColor: 'white',
+      borderStyle: 'solid',
+    }
   },
 
   Icon: {
@@ -31,6 +37,9 @@ const useJSS = createUseStyles({
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
     borderRadius: '10px',
+    '&:hover': {
+      cursor: 'pointer'
+    }
   },
 
   DropSquare: {

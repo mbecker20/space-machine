@@ -7,10 +7,10 @@ import DrawerRouteLink from './DrawerRouteLink'
 import BaseModules from './ModuleIcons/BaseModules'
 import { HorizontalScrollDiv } from '../all'
 
-function Drawer() {
+function RightDrawer() {
   const classes = useJSS()
   const [open, setOpen] = useState(true)
-  const closed = '-' + sizes.drawer.width
+  const closed = '-' + sizes.rightDrawer.width
   const drawerSpring = useSpring({
     right: open ? '0px' : closed,
     config: {
@@ -56,4 +56,4 @@ function Drawer() {
   )
 }
 
-export default Drawer
+export default RightDrawer

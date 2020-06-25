@@ -9,7 +9,7 @@ export const colors: Colors = {
   secondary: secondary,
   tertiary: tertiary,
 
-  drawer: 'black',
+  rightDrawer: 'black',
   drawerToggle: '#00347d',
   drawerToggleLine: '#001b40',
 
@@ -23,14 +23,17 @@ export const colors: Colors = {
 }
 
 export const sizes: Sizes = {
-  drawer: {
+  rightDrawer: {
     width: '300px',
     toggleWidth: '15px',
     item: '80px'
   },
+  leftDrawer: {
+    width: '300px',
+  },
   moduleView: {
-    iconGrid: '13vmin',
+    iconGrid: '14vmin',
     gutterGrid: '4vmin',
-    icon: '10vmin',
+    icon: '12vmin',
   }
 }
