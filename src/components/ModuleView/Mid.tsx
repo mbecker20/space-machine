@@ -41,7 +41,10 @@ function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
       onDragEnd={() => {
         window.setFillIsExpanded(false)
       }}
-      onClick={() => {
+      onClick={(e) => {
+        if (e.stopPropagation) {
+          e.stopPropagation()
+        }
         if (containerMod.id === window.highlightedID) {
           window.setLeftDrawerOpen(false)
           setHighlighted(false)

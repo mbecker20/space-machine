@@ -45,7 +45,11 @@ function ModuleViewFill({ mod }: Props) {
     }
   }
   return (
-    <div className={classes.Fill} style={gridStyle}>
+    <div className={classes.Fill} style={gridStyle} onClick={() => {
+      window.highlightedID = ''
+      window.currSetHighlighted(false)
+      window.setLeftDrawerOpen(false)
+    }}>
       {!isExpanded ? null : 
       isEmpty ? <DropSquare row={0} col={0}/> :
       range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {

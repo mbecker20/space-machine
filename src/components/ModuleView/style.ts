@@ -19,7 +19,6 @@ const useJSS = createUseStyles({
     backgroundColor: colors.module,
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
-    zIndex: 1,
     borderRadius: '1.5vmin',
     borderColor: 'white',
     borderStyle: 'none',
