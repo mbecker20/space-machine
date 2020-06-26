@@ -2,12 +2,13 @@ import React from 'react'
 import useJSS from './style'
 
 interface Props {
+  name: string
   id: string
 }
 
 let numAdds = 0
 
-function DrawerItem({ id }: Props) {
+function DrawerItem({ name, id }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.DrawerItem}>
@@ -24,7 +25,7 @@ function DrawerItem({ id }: Props) {
         }}
       />
       <div className={classes.DrawerItemText}>
-        {id}
+        {name}
       </div>
     </div>
   );

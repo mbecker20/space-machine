@@ -43,14 +43,13 @@ function DropSquare({ row, col }: Props) {
         const id = event.dataTransfer.getData('id')
         const possiblyMod = containerModules[id]
         if (!possiblyMod) {
-          const newID = `${id} ${parentID} ${row} ${col}`
           setHL(false)
-          dispatch(addContainer(newID, parentID, row, col))
+          dispatch(addContainer(id, parentID, row, col))
           window.setFillIsExpanded(false)
           window.currSetHighlighted(false)
-          window.highlightedID = newID
+          window.highlightedID = id
           window.setLeftDrawerOpen(true)
-          window.setLeftDrawerTopText(newID)
+          window.setLeftDrawerTopText(id)
         } else {
           setHL(false)
           window.setFillIsExpanded(false)

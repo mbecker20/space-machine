@@ -59,7 +59,7 @@ function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
           window.currSetHighlighted = setHighlighted
         }
       }}
-    ></div>
+    >{containerMod.id}</div>
   )
 }
 

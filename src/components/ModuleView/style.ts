@@ -22,6 +22,11 @@ const useJSS = createUseStyles({
     borderRadius: '1.5vmin',
     borderColor: 'white',
     borderStyle: 'none',
+    whiteSpace: 'wrap',
+    fontSize: sizes.text.medium,
+    padding: '1vmin',
+    display: 'flex',
+    overflow: 'hidden',
     '&:hover': {
       cursor: 'pointer',
       borderStyle: 'solid',

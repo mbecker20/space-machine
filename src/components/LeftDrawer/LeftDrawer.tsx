@@ -1,10 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
 import { sizes } from '../../theme/theme'
 import { useDispatch } from 'react-redux'
-import { removeContainer, renameContainer } from '../../redux/allActions'
-import { HorizontalScrollDiv, CenterMenu } from '../all'
+import { removeContainer } from '../../redux/allActions'
+import { HorizontalScrollDiv } from '../all'
+import RenameMenu from './RenameMenu'
 
 declare global {
   interface Window { 
@@ -33,7 +34,6 @@ function LeftDrawer() {
   })
   const dispatch = useDispatch()
   const [isRenameMenuOpen, setRMOpen] = useState(false)
-  const renameInputRef = useRef<HTMLInputElement>(null)
   return (
     <React.Fragment>
       <animated.div className={classes.LeftDrawer} style={springStyle}>
@@ -57,39 +57,7 @@ function LeftDrawer() {
         </div>
       </animated.div>
       {!isRenameMenuOpen ? null :
-      <CenterMenu header='rename' onClose={() => setRMOpen(false)}>
-        <div className={classes.CMInputBounder}>
-          <input className={classes.CenterMenuInput}
-            placeholder={window.highlightedID}
-            onChange={(e) => {
-              e.preventDefault()
-            }}
-            onKeyUp={event => {
-              if (renameInputRef && renameInputRef.current) {
-                if (event.keyCode === 13) {
-                  event.preventDefault()
-                  dispatch(renameContainer(window.highlightedID, renameInputRef.current.value))
-                  setRMOpen(false)
-                  window.highlightedID = renameInputRef.current.value
-                  setTopText(renameInputRef.current.value)
-                }
-              }
-            }}
-            ref={renameInputRef}
-            autoFocus
-          />
-          <div className={classes.InputSubmit}
-            onClick={() => {
-              if (renameInputRef && renameInputRef.current) {
-                dispatch(renameContainer(window.highlightedID, renameInputRef.current.value))
-                setRMOpen(false)
-                window.highlightedID = renameInputRef.current.value
-                setTopText(renameInputRef.current.value)
-              }
-            }}
-          >enter</div>
-        </div>
-      </CenterMenu>}
+      <RenameMenu setRMOpen={setRMOpen} setTopText={setTopText}/>}
     </React.Fragment>
   )
 }

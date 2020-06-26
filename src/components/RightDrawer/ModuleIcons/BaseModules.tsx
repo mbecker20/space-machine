@@ -4,7 +4,7 @@ import DrawerItem from '../DrawerItem'
 function BaseModules() {
   return (
     <Fragment>
-      <DrawerItem id='container'/>
+      <DrawerItem name='container' id='cntnr'/>
     </Fragment>
   )
 }

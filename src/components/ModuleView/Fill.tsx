@@ -48,6 +48,7 @@ function ModuleViewFill({ mod }: Props) {
     <div className={classes.Fill} style={gridStyle} onClick={() => {
       window.highlightedID = ''
       window.currSetHighlighted(false)
+      window.currSetHighlighted = (setHighlighted) => {}
       window.setLeftDrawerOpen(false)
     }}>
       {!isExpanded ? null : 
