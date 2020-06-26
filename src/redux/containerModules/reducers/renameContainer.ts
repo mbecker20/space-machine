@@ -4,7 +4,7 @@ import { filterObj } from '../../helpers'
 
 const renameContainer = (state: ContainerModules, { id, newID }: RenameContainerAction) => {
   const parentID = state[id].parentID as string
-  return Object.assign({}, filterObj(state, [newID]), {
+  return Object.assign({}, filterObj(state, [id]), {
     [newID]: {
       ...state[id],
       id: newID

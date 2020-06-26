@@ -17,6 +17,8 @@ const useJSS = createUseStyles({
     whiteSpace: 'nowrap',
   },
 
+  // TopItems
+
   TopItems: {
     display: 'flex',
     flexDirection: 'column',
@@ -34,7 +36,13 @@ const useJSS = createUseStyles({
     },
   },
 
+  //header
+
   HeaderScrollBounder: {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     borderColor: 'white',
     borderStyle: 'none none solid none',
     '&::-webkit-scrollbar': {
@@ -53,15 +61,20 @@ const useJSS = createUseStyles({
     color: 'white',
     fontSize: sizes.text.large,
     padding: '1vmin 0vmin',
-    borderColor: 'white',
-    borderStyle: 'none none none none',
     borderWidth: '1px',
     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     textAlign: 'center',
     justifyText: 'center',
     resize: 'none',
     overflow: 'hidden',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
+
+  // bottom items
 
   BottomItems: {
     display: 'flex',
@@ -94,7 +107,47 @@ const useJSS = createUseStyles({
     },
     borderRadius: '15px',
     margin: '15px',
-  }
+  },
+
+  // Center Menu
+
+  CMInputBounder: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+
+  CenterMenuInput: {
+    backgroundColor: colors.grey,
+    color: 'white',
+    height: '2vmin',
+    padding: '1vmin',
+    margin: '1.5vmin .75vmin 1.5vmin 1.5vmin',
+    borderStyle: 'none',
+    borderRadius: '1vmin',
+    fontSize: sizes.text.small,
+    '&:hover': {
+      cursor: 'text',
+    },
+    width: '23vmin',
+  },
+
+  InputSubmit: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.grey,
+    height: '2vmin',
+    padding: '1vmin',
+    margin: '1.5vmin 1.5vmin 1.5vmin 0.75vmin',
+    borderRadius: '1vmin',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    fontSize: sizes.text.small,
+  },
 })
 
 export default useJSS

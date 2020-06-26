@@ -15,6 +15,8 @@ export const colors: Colors = {
 
   leftDrawer: 'black',
 
+  centerMenu: 'black',
+
   fillModule: '#1b1e24',
   module: '#37538a',
 
