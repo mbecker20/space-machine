@@ -128,10 +128,10 @@ const useJSS = createUseStyles({
     borderStyle: 'none',
     borderRadius: '1vmin',
     fontSize: sizes.text.small,
+    width: '23vmin',
     '&:hover': {
       cursor: 'text',
     },
-    width: '23vmin',
   },
 
   InputSubmit: {
@@ -150,7 +150,16 @@ const useJSS = createUseStyles({
   },
 
   Error: {
-    
+    backgroundColor: colors.errorBackground,
+    width: '90%',
+    color: 'white',
+    fontSize: sizes.text.small,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: '1vmin',
+    padding: '1vmin 0vmin',
+    marginBottom: '1vmin',
   }
 })
 

@@ -27,6 +27,8 @@ export const colors: Colors = {
 
   deleteButton: '#cc0000',
   deleteButtonText: 'white',
+
+  errorBackground: '#cc0000',
 }
 
 export const sizes: Sizes = {

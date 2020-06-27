@@ -26,7 +26,7 @@ function RenameMenu({ setRMOpen, setTopText }: Props) {
     }
   })
   const dispatch = useDispatch()
-  const [ {isTooShort, isAlreadyTaken }, setSubmitState] = useState(createSubmitState())
+  const [ { isTooShort, isAlreadyTaken }, setSubmitState] = useState(createSubmitState())
   function submitNewName() {
     if (renameInputRef && renameInputRef.current) {
       const newName = renameInputRef.current.value
