@@ -25,3 +25,13 @@ export function getGridRange(childContainers: string[], containerModules: Contai
   })
   return { maxRow, maxCol }
 }
+
+export function isOccupied(row: number, col: number, currentChildren: string[], containerModules: ContainerModules) {
+  for (var i = 0; i < currentChildren.length; i++) {
+    const mod = containerModules[currentChildren[i]]
+    if (mod.row === row && mod.col === col) {
+      return mod.id
+    }
+  }
+  return false
+}

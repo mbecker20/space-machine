@@ -14,9 +14,15 @@ function makeNewParent(state: ContainerModules, id: string, newID: string, paren
   }
 }
 
-function makeNewChildren(state: ContainerModules, id: string) {
+function makeNewChildren(state: ContainerModules, id: string, newID: string) {
   const childContainerIDs = state[id].childContainers
-  const newChildren = Object.values(keepOnlyIdsInObj(state, childContainerIDs))
+  const oldChildren = Object.values(keepOnlyIdsInObj(state, childContainerIDs))
+  const newChildren = oldChildren.map(child => {
+    return {
+      ...child,
+      parentID: newID,
+    }
+  })
   return ObjFrom2Arrays(childContainerIDs, newChildren)
 }
 
@@ -27,7 +33,7 @@ const renameContainer = (state: ContainerModules, { id, newID }: RenameContainer
       ...state[id],
       id: newID
     },
-  }, makeNewParent(state, id, newID, parentID), makeNewChildren(state, id))
+  }, makeNewParent(state, id, newID, parentID), makeNewChildren(state, id, newID))
 }
 
 export default renameContainer

@@ -42,6 +42,7 @@ function RenameMenu({ setRMOpen, setTopText }: Props) {
         if (window.highlightedID === window.fillContainerID) {
           window.fillContainerID = newName
         }
+        window.highlightedID = newName
         setTopText(newName)
         setSubmitState(createSubmitState())
         setRMOpen(false)

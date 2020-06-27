@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { Module } from '../../redux/stateTSTypes'
+import { Module, RootState } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
+import { useSelector, useDispatch } from 'react-redux'
+import { moveContainer } from '../../redux/allActions'
 
 declare global {
   interface Window { 
@@ -29,13 +31,31 @@ function ModuleViewMid({ containerMod, gridCol, gridRow }: Props) {
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none'
   }
+  const containerModules = useSelector((state: RootState) => state.containerModules)
+  const dispatch = useDispatch()
   return (
     <div 
       className={classes.Mid} 
       style={midStyle}
+      onDragOver={event => {
+        event.preventDefault()
+      }}
+      onDrop={event => {
+        const id = event.dataTransfer.getData('id')
+        const possiblyMod = containerModules[id]
+        if (possiblyMod) {
+          const fromRow = event.dataTransfer.getData('fromRow')
+          const fromCol = event.dataTransfer.getData('fromCol')
+          window.setFillIsExpanded(false)
+          dispatch(moveContainer(id, containerMod.row, containerMod.col))
+          dispatch(moveContainer(containerMod.id, Number(fromRow), Number(fromCol)))
+        }
+      }}
       draggable={true}
       onDragStart={event => {
         event.dataTransfer.setData('id', containerMod.id)
+        event.dataTransfer.setData('fromRow', `${containerMod.row}`)
+        event.dataTransfer.setData('fromCol', `${containerMod.col}`)
         window.setFillIsExpanded(true)
       }}
       onDragEnd={() => {
