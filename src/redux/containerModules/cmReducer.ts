@@ -4,7 +4,7 @@ import { CMAction, AddContainerAction, RemoveContainerAction, MoveContainerActio
 import { removeContainerReducer, addContainerReducer, moveContainerReducer, renameContainerReducer } from "./reducers/allCMReducers"
 
 const initBaseCM: ContainerModule = {
-  id: '0',
+  id: 'project',
   row: 0,
   col: 0,
   inputs: null,
@@ -17,7 +17,7 @@ const initBaseCM: ContainerModule = {
 }
 
 const initState: ContainerModules = {
-  '0': initBaseCM
+  'project': initBaseCM
 }
 
 const cmReducer = (state = initState, action: CMAction) => {

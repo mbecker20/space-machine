@@ -10,8 +10,8 @@ declare global {
   }
 }
 
-window.highlightedID = '0' // delete this, for dev
-window.fillContainerID = '0'
+window.highlightedID = 'project' // delete this, for dev
+window.fillContainerID = 'project'
 
 function App() {
   const classes = useJSS()

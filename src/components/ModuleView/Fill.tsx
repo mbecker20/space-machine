@@ -47,7 +47,7 @@ function ModuleViewFill({ mod }: Props) {
   return (
     <div className={classes.FillBounder}>
       <div className={classes.FillHeader}
-        style={{ width: `${mod.id.length}em` }}
+        style={{ width: `${mod.id.length / 2}em` }}
         onClick={(e) => {
           e.stopPropagation()
           window.highlightedID = mod.id // need to add cases to on rename reducer to rename fill/base containers

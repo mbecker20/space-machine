@@ -14,7 +14,7 @@ const useJSS = createUseStyles({
   FillHeader: {
     borderColor: 'white',
     borderStyle: 'none none solid none',
-    padding: '0.5vmin',
+    padding: '1vmin',
     marginLeft: '2vmin',
     '&:hover': {
       cursor: 'pointer'
@@ -42,6 +42,7 @@ const useJSS = createUseStyles({
     padding: '1vmin',
     display: 'flex',
     overflow: 'hidden',
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     '&:hover': {
       cursor: 'pointer',
       borderStyle: 'solid',
