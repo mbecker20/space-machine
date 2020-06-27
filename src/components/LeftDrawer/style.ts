@@ -148,6 +148,10 @@ const useJSS = createUseStyles({
     },
     fontSize: sizes.text.small,
   },
+
+  Error: {
+    
+  }
 })
 
 export default useJSS

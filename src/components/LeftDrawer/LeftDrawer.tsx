@@ -20,7 +20,7 @@ interface Props {
 
 function LeftDrawer() {
   const classes = useJSS()
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(true)
   window.setLeftDrawerOpen = setOpen
   const [topText, setTopText] = useState(window.highlightedID)
   window.setLeftDrawerTopText = setTopText

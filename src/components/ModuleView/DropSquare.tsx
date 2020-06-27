@@ -14,9 +14,8 @@ interface Props {
 function DropSquare({ row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
-  const { parentID, containerModules } = useSelector((state: RootState) => {
+  const { containerModules } = useSelector((state: RootState) => {
     return {
-      parentID: state.fillContainer.id,
       containerModules: state.containerModules
     }
   })
@@ -44,7 +43,7 @@ function DropSquare({ row, col }: Props) {
         const possiblyMod = containerModules[id]
         if (!possiblyMod) {
           setHL(false)
-          dispatch(addContainer(id, parentID, row, col))
+          dispatch(addContainer(id, window.fillContainerID, row, col))
           window.setFillIsExpanded(false)
           window.currSetHighlighted(false)
           window.highlightedID = id

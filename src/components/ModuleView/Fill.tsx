@@ -45,36 +45,47 @@ function ModuleViewFill({ mod }: Props) {
     }
   }
   return (
-    <div className={classes.Fill} style={gridStyle} onClick={() => {
-      window.highlightedID = ''
-      window.currSetHighlighted(false)
-      window.currSetHighlighted = (setHighlighted) => {}
-      window.setLeftDrawerOpen(false)
-    }}>
-      {!isExpanded ? null : 
-      isEmpty ? <DropSquare row={0} col={0}/> :
-      range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {
-        return range(0, isExpanded ? maxCol + 2 : maxCol + 1).map(col => {
+    <div className={classes.FillBounder}>
+      <div className={classes.FillHeader}
+        style={{ width: `${mod.id.length}em` }}
+        onClick={(e) => {
+          e.stopPropagation()
+          window.highlightedID = mod.id // need to add cases to on rename reducer to rename fill/base containers
+          window.setLeftDrawerOpen(true)
+          window.setLeftDrawerTopText(mod.id)
+        }}
+      >{mod.id}</div>
+      <div className={classes.Fill} style={gridStyle} onClick={() => {
+        window.highlightedID = ''
+        window.currSetHighlighted(false)
+        window.currSetHighlighted = (setHighlighted) => {}
+        window.setLeftDrawerOpen(false)
+      }}>
+        {!isExpanded ? null : 
+        isEmpty ? <DropSquare row={0} col={0}/> :
+        range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {
+          return range(0, isExpanded ? maxCol + 2 : maxCol + 1).map(col => {
+            return (
+              <DropSquare
+                key={`${row} ${col}`}
+                row={row} 
+                col={col}
+              />
+            )
+          })
+        }).flat()}
+        {mod.childContainers.map(containerID => {
+          const containerMod = containerMods[containerID]
           return (
-            <DropSquare
-              key={`${row} ${col}`}
-              row={row} 
-              col={col}
+            <ModuleViewMid
+              key={containerMod.id}
+              containerMod={containerMod}
+              gridRow={containerMod.row * 2 + 1}
+              gridCol={containerMod.col * 2 + 1}
             />
           )
-        })
-      }).flat()}
-      {mod.childContainers.map(containerID => {
-        const containerMod = containerMods[containerID]
-        return (
-          <ModuleViewMid
-            key={containerMod.id}
-            containerMod={containerMod}
-            gridRow={containerMod.row * 2 + 1}
-            gridCol={containerMod.col * 2 + 1}
-          />
-        )
-      })}
+        })}
+      </div>
     </div>
   )
 }

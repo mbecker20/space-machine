@@ -4,19 +4,25 @@ import { RightDrawer, LeftDrawer, ModuleViewFill } from '../components/all'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/stateTSTypes'
 
+declare global {
+  interface Window { 
+    fillContainerID: string
+  }
+}
+
+window.highlightedID = '0' // delete this, for dev
+window.fillContainerID = '0'
+
 function App() {
   const classes = useJSS()
-  const { fillContainerID, containerModules } = useSelector((state: RootState) => {
-    return {
-      fillContainerID: state.fillContainer.id,
-      containerModules: state.containerModules,
-    }
+  const containerModules = useSelector((state: RootState) => {
+    return state.containerModules
   })
   return (
     <div className={classes.Bounder}>
       <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
-        <ModuleViewFill mod={containerModules[fillContainerID]}/>
+        <ModuleViewFill mod={containerModules[window.fillContainerID]}/>
       </div>
       <RightDrawer />
     </div>

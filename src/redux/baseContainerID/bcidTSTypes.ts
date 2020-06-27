@@ -3,4 +3,9 @@ export interface Down1BaseAction {
   newID: string
 }
 
-export type BCIDAction = Down1BaseAction
+export interface ChangeBaseAction {
+  type: string
+  newID: string
+}
+
+export type BCIDAction = Down1BaseAction | ChangeBaseAction

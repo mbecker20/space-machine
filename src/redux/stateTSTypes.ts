@@ -4,7 +4,6 @@
 
 export interface RootState {
   baseContainerID: string
-  fillContainer: FillContainerState
   containerModules: ContainerModules
   //modules: Modules
 }
@@ -31,6 +30,7 @@ export interface Modules {
 export interface ContainerModule extends Module { // modules composing other modules in tree structure
   childContainers: string[] 
   childModules: string[]
+  isBaseContainer: boolean
 }
 
 export interface ContainerModules {

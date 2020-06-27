@@ -13,6 +13,7 @@ const addContainer = (state: ContainerModules, { id, row, col, parentID }: AddCo
       childContainers: [],
       childModules: [],
       controls: {},
+      isBaseContainer: false,
     },
     [parentID]: {
       ...state[parentID],
