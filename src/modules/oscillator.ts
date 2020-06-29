@@ -7,9 +7,21 @@ function makeOscillator(type: OscillatorType, freq: number, detune: number) {
   osc.detune.setValueAtTime(detune, audioCtx.currentTime)
   
   //controls
+  
+  function setType(newType: OscillatorType) {
+    osc.type = newType
+  }
+
+  function setFrequency(newFreq: number) {
+    osc.frequency.setValueAtTime(newFreq, audioCtx.currentTime)
+  }
+
+  function setDetune(newDetune: number) {
+    osc.detune.setValueAtTime(newDetune, audioCtx.currentTime)
+  }
 
   osc.start()
-  return { module: osc }
+  return { module: osc, setType, setFrequency, setDetune }
 }
 
 export default makeOscillator
