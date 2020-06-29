@@ -21,7 +21,7 @@ function makeOscillator(type: OscillatorType, freq: number, detune: number) {
   }
 
   osc.start()
-  return { module: osc, setType, setFrequency, setDetune }
+  return { audioNode: osc, setType, setFrequency, setDetune }
 }
 
 export default makeOscillator
