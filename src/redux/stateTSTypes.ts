@@ -15,6 +15,7 @@ export interface RootState {
 
 export interface Module { // the base of the Module types
   id: string // can contain info about nesting level
+  type: string
   row: number // modules row/col relative to parent container
   col: number
   inputs: null

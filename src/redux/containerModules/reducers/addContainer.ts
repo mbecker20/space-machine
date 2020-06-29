@@ -1,6 +1,7 @@
 import { ContainerModules } from '../../stateTSTypes'
 import { AddContainerAction } from '../cmTSTypes'
 
+
 const addContainer = (state: ContainerModules, { id, row, col, parentID }: AddContainerAction) => {
   return Object.assign({}, state, {
     [id]: {
@@ -8,6 +9,7 @@ const addContainer = (state: ContainerModules, { id, row, col, parentID }: AddCo
       row,
       col,
       parentID,
+      type: 
       inputs: null,
       outputs: null,
       childContainers: [],
