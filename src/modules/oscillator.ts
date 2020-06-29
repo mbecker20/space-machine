@@ -1,13 +1,20 @@
 import audioCtx from '../audioCtx'
 
-function makeOscillator(type: OscillatorType, freq: number, detune: number) {
+interface OscillatorModule {
+  audioNode: OscillatorNode
+  setType: (newType: OscillatorType) => void
+  setFrequency: (newFreq: number) => void
+  setDetune: (newDetune: number) => void
+}
+
+function makeOscillator(type: OscillatorType, freq: number, detune: number): OscillatorModule {
   const osc = audioCtx.createOscillator()
   osc.type = type
   osc.frequency.setValueAtTime(freq, audioCtx.currentTime)
   osc.detune.setValueAtTime(detune, audioCtx.currentTime)
   
   //controls
-  
+
   function setType(newType: OscillatorType) {
     osc.type = newType
   }
