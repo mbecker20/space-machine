@@ -23,14 +23,14 @@ export interface Module { // the base of the Module types
   controls: Controls
 }
 
-export interface Modules {
-  [index: string]: Module
-}
-
 export interface ContainerModule extends Module { // modules composing other modules in tree structure
   childContainers: string[] 
   childModules: string[]
   isBaseContainer: boolean
+}
+
+export interface Modules {
+  [index: string]: Module
 }
 
 export interface ContainerModules {
