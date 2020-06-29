@@ -2,11 +2,13 @@ import { ContainerModule, ContainerModules } from "../stateTSTypes"
 import { ADD_CONTAINER, REMOVE_CONTAINER, MOVE_CONTAINER, RENAME_CONTAINER } from './cmActionTypes'
 import { CMAction, AddContainerAction, RemoveContainerAction, MoveContainerAction, RenameContainerAction } from './cmTSTypes'
 import { removeContainerReducer, addContainerReducer, moveContainerReducer, renameContainerReducer } from "./reducers/allCMReducers"
+import { CONTAINER } from "../../modules/moduleTypes"
 
 const initBaseCM: ContainerModule = {
   id: 'project',
   row: 0,
   col: 0,
+  type: CONTAINER,
   inputs: null,
   outputs: null,
   parentID: null,
