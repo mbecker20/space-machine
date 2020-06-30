@@ -1,8 +1,8 @@
 import { ContainerModules } from '../../stateTSTypes'
-import { AddContainerAction } from '../cmTSTypes'
+import { AddModuleAction } from '../moduleTSTypes'
 import { CONTAINER } from '../../../modules/moduleTypes'
 
-const addContainer = (state: ContainerModules, { id, row, col, parentID }: AddContainerAction) => {
+const addmodule = (state: ContainerModules, { id, row, col, parentID }: AddContainerAction) => {
   return Object.assign({}, state, {
     [id]: {
       id,

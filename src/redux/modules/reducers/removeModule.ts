@@ -1,5 +1,5 @@
 import { ContainerModules } from "../../stateTSTypes";
-import { RemoveContainerAction } from "../cmTSTypes";
+import { RemoveContainerAction } from "../moduleTSTypes";
 
 const removeContainer = (state: ContainerModules, { id }: RemoveContainerAction) => {
   const parentID = state[id].parentID as string

@@ -1,7 +1,7 @@
 import { ContainerModule, ContainerModules } from "../stateTSTypes"
-import { ADD_CONTAINER, REMOVE_CONTAINER, MOVE_CONTAINER, RENAME_CONTAINER } from './cmActionTypes'
-import { CMAction, AddContainerAction, RemoveContainerAction, MoveContainerAction, RenameContainerAction } from './cmTSTypes'
-import { removeContainerReducer, addContainerReducer, moveContainerReducer, renameContainerReducer } from "./reducers/allCMReducers"
+import { ADD_CONTAINER, REMOVE_CONTAINER, MOVE_CONTAINER, RENAME_CONTAINER } from './moduleActionTypes'
+import { CMAction, AddContainerAction, RemoveContainerAction, MoveContainerAction, RenameContainerAction } from './moduleTSTypes'
+import { removeContainerReducer, addContainerReducer, moveContainerReducer, renameContainerReducer } from "./reducers/allModuleReducers"
 import { CONTAINER } from "../../modules/moduleTypes"
 
 const initBaseCM: ContainerModule = {
@@ -22,7 +22,7 @@ const initState: ContainerModules = {
   'project': initBaseCM
 }
 
-const cmReducer = (state = initState, action: CMAction) => {
+const moduleReducer = (state = initState, action: CMAction) => {
   switch (action.type) {
     case ADD_CONTAINER: return addContainerReducer(state, action as AddContainerAction)
     case REMOVE_CONTAINER: return removeContainerReducer(state, action as RemoveContainerAction)
@@ -32,4 +32,4 @@ const cmReducer = (state = initState, action: CMAction) => {
   }
 }
 
-export default cmReducer
+export default moduleReducer

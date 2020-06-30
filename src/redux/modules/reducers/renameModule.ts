@@ -1,5 +1,5 @@
 import { ContainerModules } from "../../stateTSTypes"
-import { RenameContainerAction } from "../cmTSTypes"
+import { RenameContainerAction } from "../moduleTSTypes"
 import { filterOutFromObj, keepOnlyIdsInObj, ObjFrom2Arrays } from '../../helpers'
 
 function makeNewParent(state: ContainerModules, id: string, newID: string, parentID: string) {

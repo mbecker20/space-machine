@@ -4,7 +4,7 @@ import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { addContainer } from '../../redux/allActions'
 import { RootState } from '../../redux/stateTSTypes'
-import { moveContainer } from '../../redux/containerModules/cmActions'
+import { moveContainer } from '../../redux/modules/moduleActions'
 import { isOccupied } from './helpers'
 
 interface Props {

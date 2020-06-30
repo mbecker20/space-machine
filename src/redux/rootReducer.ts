@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import cmReducer from './containerModules/cmReducer'
+import cmReducer from './modules/moduleReducer'
 import bcidReducer from './baseContainerID/bcidReducer'
 
 const rootReducer = combineReducers({

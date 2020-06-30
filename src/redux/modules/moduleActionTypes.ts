@@ -1,0 +1,4 @@
+export const ADD_MODULE = 'ADD_MODULE'
+export const REMOVE_MODULE = 'REMOVE_MODULE'
+export const MOVE_MODULE = 'MOVE_MODULE'
+export const RENAME_MODULE = 'RENAME_MODULE'

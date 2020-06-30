@@ -4,8 +4,7 @@
 
 export interface RootState {
   baseContainerID: string
-  containerModules: ContainerModules
-  //modules: Modules
+  modules: Modules
 }
 
 
@@ -31,22 +30,14 @@ export interface ContainerModule extends Module { // modules composing other mod
 }
 
 export interface Modules {
-  [index: string]: Module
-}
-
-export interface ContainerModules {
-  [index: string]: ContainerModule
-}
-
-export interface FillContainerState {
-  id: string
+  [index: string]: Module | ContainerModule
 }
 
 // control related state
 // ---------------------
 
 export interface Control {
-
+  
 }
 
 export interface Controls {

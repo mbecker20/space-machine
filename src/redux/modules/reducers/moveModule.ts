@@ -1,5 +1,5 @@
 import { ContainerModules } from "../../stateTSTypes";
-import { MoveContainerAction } from "../cmTSTypes";
+import { MoveContainerAction } from "../moduleTSTypes";
 
 const moveContainer = (state: ContainerModules, { id, newRow, newCol }: MoveContainerAction) => {
   return Object.assign({}, state, {
