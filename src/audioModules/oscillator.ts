@@ -1,6 +1,6 @@
 import audioCtx from '../audioCtx'
 
-interface OscillatorModule {
+export interface OscillatorModule {
   audioNode: OscillatorNode
   setType: (newType: OscillatorType) => void
   setFrequency: (newFreq: number) => void

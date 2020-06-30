@@ -1,7 +1,7 @@
 import { Modules, ContainerModule } from "../../stateTSTypes"
 import { RenameModuleAction } from "../moduleTSTypes"
 import { filterOutFromObj, keepOnlyIdsInObj, ObjFrom2Arrays } from '../../helpers'
-import { CONTAINER } from "../../../modules/moduleTypes"
+import { CONTAINER } from "../../../audioModules/moduleTypes"
 
 function makeNewParent(state: Modules, id: string, newID: string, parentID: string) {
   return (state[id] as ContainerModule).isBaseContainer ? {} : {

@@ -4,7 +4,7 @@ import {
   MOVE_MODULE, 
   RENAME_MODULE,
 } from './moduleActionTypes'
-import { ModuleType } from '../../modules/moduleTypes'
+import { ModuleType } from '../../audioModules/moduleTypes'
 
 export const addModule = (id: string, moduleType: ModuleType, parentID: string, row: number, col: number) => {
   return {

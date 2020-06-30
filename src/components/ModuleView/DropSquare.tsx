@@ -6,7 +6,7 @@ import { addModule } from '../../redux/allActions'
 import { RootState, ContainerModule } from '../../redux/stateTSTypes'
 import { moveModule } from '../../redux/modules/moduleActions'
 import { isOccupied } from './helpers'
-import { ModuleType } from '../../modules/moduleTypes'
+import { ModuleType } from '../../audioModules/moduleTypes'
 
 interface Props {
   row: number

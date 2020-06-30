@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import DrawerItem from '../DrawerItem'
-import { CONTAINER, OSCILLATOR, GATE, OUTPUT } from '../../../modules/moduleTypes'
+import { CONTAINER, OSCILLATOR, GATE, OUTPUT } from '../../../audioModules/moduleTypes'
 
 function BaseModules() {
   return (

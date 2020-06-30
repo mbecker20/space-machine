@@ -1,4 +1,4 @@
-import { ModuleType } from "../../modules/moduleTypes";
+import { ModuleType } from "../../audioModules/moduleTypes";
 
 export interface AddModuleAction {
   type: string

@@ -2,7 +2,7 @@ import { ContainerModule, Modules } from "../stateTSTypes"
 import { ADD_MODULE, REMOVE_MODULE, MOVE_MODULE, RENAME_MODULE } from './moduleActionTypes'
 import { ModuleAction, AddModuleAction, RemoveModuleAction, MoveModuleAction, RenameModuleAction } from './moduleTSTypes'
 import { removeModuleReducer, addModuleReducer, moveModuleReducer, renameModuleReducer } from "./reducers/allModuleReducers"
-import { CONTAINER } from "../../modules/moduleTypes"
+import { CONTAINER } from "../../audioModules/moduleTypes"
 
 const initBaseCM: ContainerModule = {
   id: 'project',
