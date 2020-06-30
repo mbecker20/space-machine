@@ -5,7 +5,7 @@ function TestingArea() {
   const classes = useJSS()
   return (
     <div className={classes.TestingArea}>
-      {'TestingArea'}
+      {'testing area'}
       <div className={classes.ButtonDiv}>
         <div 
           className={classes.Button}

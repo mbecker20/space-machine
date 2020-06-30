@@ -14,7 +14,6 @@ const useJSS = createUseStyles({
   },
 
   ButtonDiv: {
-    marginTop: '3vmin',
     display: 'flex',
     flexFlow: 'row wrap',
   },
@@ -25,6 +24,9 @@ const useJSS = createUseStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   }
 })
 
