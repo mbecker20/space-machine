@@ -45,6 +45,7 @@ function LeftDrawer() {
               {topText}
             </div>
           </HorizontalScrollDiv>
+          {}
         </div>
         <div className={classes.BottomItems}>
           <div className={classes.Delete}

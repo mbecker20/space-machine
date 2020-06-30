@@ -1,6 +1,6 @@
 import { Modules, ContainerModule } from '../../stateTSTypes'
 import { AddModuleAction } from '../moduleTSTypes'
-import { CONTAINER, OSCILLATOR } from '../../../modules/moduleTypes'
+import { CONTAINER, OSCILLATOR, GATE, OUTPUT } from '../../../modules/moduleTypes'
 
 const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddModuleAction) => {
   switch(moduleType) {
@@ -11,7 +11,6 @@ const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddMo
         col,
         parentID,
         moduleType,
-        type: CONTAINER,
         inputs: null,
         outputs: null,
         childModules: [],
@@ -20,7 +19,7 @@ const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddMo
       },
       [parentID]: {
         ...state[parentID],
-        childContainers: [
+        childModules: [
           ...(state[parentID] as ContainerModule).childModules,
           id
         ]
@@ -33,19 +32,57 @@ const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddMo
         col,
         parentID,
         moduleType,
-        type: OSCILLATOR,
         inputs: null,
         outputs: null,
         controls: {},
       },
       [parentID]: {
         ...state[parentID],
-        childContainers: [
+        childModules: [
           ...(state[parentID] as ContainerModule).childModules,
           id
         ]
       }
     })
+    case GATE: return Object.assign({}, state, {
+      [id]: {
+        id,
+        row,
+        col,
+        parentID,
+        moduleType,
+        inputs: null,
+        outputs: null,
+        controls: {},
+      },
+      [parentID]: {
+        ...state[parentID],
+        childModules: [
+          ...(state[parentID] as ContainerModule).childModules,
+          id
+        ]
+      }
+    })
+    case OUTPUT: return Object.assign({}, state, {
+      [id]: {
+        id,
+        row,
+        col,
+        parentID,
+        moduleType,
+        inputs: null,
+        outputs: null,
+        controls: {},
+      },
+      [parentID]: {
+        ...state[parentID],
+        childModules: [
+          ...(state[parentID] as ContainerModule).childModules,
+          id
+        ]
+      }
+    })
+    default: return state
   }
 }
 

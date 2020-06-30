@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react'
 import DrawerItem from '../DrawerItem'
+import { CONTAINER, OSCILLATOR, GATE, OUTPUT } from '../../../modules/moduleTypes'
 
 function BaseModules() {
   return (
     <Fragment>
-      <DrawerItem name='container' id='cntnr'/>
-      <DrawerItem name='oscillator' id='osc'/>
-      <DrawerItem name='gate' id='gate'/>
-      <DrawerItem name='output' id='out'/>
+      <DrawerItem name='oscillator' id='osc' moduleType={OSCILLATOR}/>
+      <DrawerItem name='output' id='out' moduleType={OUTPUT}/>
+      <DrawerItem name='container' id='cntnr' moduleType={CONTAINER}/>
+      <DrawerItem name='gate' id='gate' moduleType={GATE}/>
     </Fragment>
   )
 }
