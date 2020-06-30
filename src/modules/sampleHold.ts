@@ -10,4 +10,4 @@ function makeSampleHold(inputModule: AudioNode) {
   return { audioNode: sampleHold, holdSample }
 }
 
-export default makeSampleHolds
+export default makeSampleHold
