@@ -31,3 +31,5 @@ function makeSampleHold(inputModule: AudioNode) {
     sampleHold.frequency.cancelAndHoldAtTime(audioCtx.currentTime)
   }
 }
+
+export default makeSampleHold
