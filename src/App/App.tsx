@@ -1,6 +1,6 @@
 import React from 'react'
 import useJSS from './style'
-import { RightDrawer, LeftDrawer, ModuleViewFill } from '../components/all'
+import { RightDrawer, LeftDrawer, ModuleViewFill, TestingArea } from '../components/all'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/stateTSTypes'
 
@@ -20,6 +20,7 @@ function App() {
   })
   return (
     <div className={classes.Bounder}>
+      <TestingArea/>
       <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
         <ModuleViewFill mod={containerModules[window.fillContainerID]}/>
