@@ -1,13 +1,11 @@
 import React from 'react'
 import useJSS from './style'
-import audioCtx from '../../audioCtx'
-import { makeOscillator, makeSampleHold } from '../../modules/all'
+//import audioCtx from '../../audioCtx'
+//import { makeOscillator } from '../../modules/all'
 
-const sampleOsc = makeOscillator('sine', .5, 0)
+//const sampleOsc = makeOscillator('sine', .5, 0)
 
-const sampleHold = makeSampleHold(sampleOsc.audioNode)
-
-sampleHold.audioNode.connect(audioCtx.destination)
+//sampleHold.audioNode.connect(audioCtx.destination)
 
 function TestingArea() {
   const classes = useJSS()
@@ -19,14 +17,14 @@ function TestingArea() {
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}
           onClick={() => {
-            audioCtx.resume()
+            //audioCtx.resume()
           }}
         >start ctx</div>
       </div>
         <div className={classes.Button}
           style={{ backgroundColor: 'blue' }}
           onClick={() => {
-            sampleHold.holdSample()
+            //sampleHold.holdSample()
           }}
         >hold sample</div>
       </div>
@@ -34,7 +32,7 @@ function TestingArea() {
         <div className={classes.Button}
           style={{ backgroundColor: 'red' }}
           onClick={() => {
-            audioCtx.suspend()
+            //audioCtx.suspend()
           }}
         >stop ctx</div>
       </div>

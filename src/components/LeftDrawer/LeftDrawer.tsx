@@ -3,7 +3,7 @@ import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
 import { sizes } from '../../theme/theme'
 import { useDispatch } from 'react-redux'
-import { removeContainer } from '../../redux/allActions'
+import { removeModule } from '../../redux/allActions'
 import { HorizontalScrollDiv } from '../all'
 import RenameMenu from './RenameMenu'
 
@@ -50,7 +50,7 @@ function LeftDrawer() {
           <div className={classes.Delete}
             onClick={() => {
               window.setLeftDrawerOpen(false)
-              dispatch(removeContainer(window.highlightedID))
+              dispatch(removeModule(window.highlightedID))
               window.highlightedID = ''
             }}
           >delete</div>

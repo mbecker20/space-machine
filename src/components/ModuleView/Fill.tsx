@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
-import ModuleViewMid from './Mid'
+import ModuleViewIcon from './Icon'
 //import ModuleViewIcon from './Icon'
 import { ContainerModule } from '../../redux/stateTSTypes'
 import { useSelector } from 'react-redux'
@@ -25,14 +25,14 @@ function ModuleViewFill({ mod }: Props) {
   const classes = useJSS()
   const [isExpanded, setIsExpanded] = useState(false)
   window.setFillIsExpanded = setIsExpanded
-  const { containerMods } = useSelector((state: RootState) => {
+  const { modules } = useSelector((state: RootState) => {
     return {
-      containerMods: state.containerModules,
+      modules: state.modules,
     }
   })
-  const { maxRow, maxCol } = getGridRange(mod.childContainers, containerMods)
+  const { maxRow, maxCol } = getGridRange(mod.childModules, modules)
   let gridStyle: CSS.Properties
-  const isEmpty = mod.childContainers.length === 0
+  const isEmpty = mod.childModules.length === 0
   if (isEmpty) {
     gridStyle = {
       gridTemplateRows: `repeat(${1}, ${iconGridSize} ${gutterGridSize})`,
@@ -74,14 +74,14 @@ function ModuleViewFill({ mod }: Props) {
             )
           })
         }).flat()}
-        {mod.childContainers.map(containerID => {
-          const containerMod = containerMods[containerID]
+        {mod.childModules.map(moduleID => {
+          const mod = modules[moduleID]
           return (
-            <ModuleViewMid
-              key={containerMod.id}
-              containerMod={containerMod}
-              gridRow={containerMod.row * 2 + 1}
-              gridCol={containerMod.col * 2 + 1}
+            <ModuleViewIcon
+              key={mod.id}
+              mod={mod}
+              gridRow={mod.row * 2 + 1}
+              gridCol={mod.col * 2 + 1}
             />
           )
         })}

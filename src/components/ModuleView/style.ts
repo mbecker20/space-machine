@@ -30,7 +30,7 @@ const useJSS = createUseStyles({
     padding: '2vmin',
   },
 
-  Mid: {
+  Icon: {
     backgroundColor: colors.module,
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
@@ -46,16 +46,6 @@ const useJSS = createUseStyles({
     '&:hover': {
       cursor: 'pointer',
       borderStyle: 'solid',
-    }
-  },
-
-  Icon: {
-    backgroundColor: colors.module,
-    width: sizes.moduleView.icon,
-    height: sizes.moduleView.icon,
-    borderRadius: '1.5vmin',
-    '&:hover': {
-      cursor: 'pointer'
     }
   },
 

@@ -2,7 +2,7 @@ import React from 'react'
 import useJSS from './style'
 import { RightDrawer, LeftDrawer, ModuleViewFill } from '../components/all'
 import { useSelector } from 'react-redux'
-import { RootState } from '../redux/stateTSTypes'
+import { RootState, ContainerModule } from '../redux/stateTSTypes'
 
 declare global {
   interface Window { 
@@ -15,14 +15,14 @@ window.fillContainerID = 'project'
 
 function App() {
   const classes = useJSS()
-  const containerModules = useSelector((state: RootState) => {
-    return state.containerModules
+  const modules = useSelector((state: RootState) => {
+    return state.modules
   })
   return (
     <div className={classes.Bounder}>
       <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
-        <ModuleViewFill mod={containerModules[window.fillContainerID]}/>
+        <ModuleViewFill mod={modules[window.fillContainerID] as ContainerModule}/>
       </div>
       <RightDrawer />
     </div>
