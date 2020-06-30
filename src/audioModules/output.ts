@@ -1,6 +1,6 @@
 import audioCtx from '../audioCtx'
 
-interface OutputModule {
+export interface OutputModule {
   audioNode: AudioNode
 }
 

@@ -3,7 +3,8 @@ import { Module, RootState } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
-import { moveModule } from '../../redux/allActions'
+import { moveModule, addConnection, removeConnection } from '../../redux/allActions'
+import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
 
 declare global {
   interface Window {
@@ -81,9 +82,11 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         } else {
           const am = window.audioModules
           if (window.linkIsConnecting) {
-            am[window.linkToOutputID].connect(am[mod.id])
+            (am[window.linkToOutputID] as ConnectingAudioModule).connect(am[mod.id])
+            dispatch(addConnection(window.linkToOutputID, mod.id))
           } else {
-            am[window.linkToOutputID].disconnect(am[mod.id])
+            (am[window.linkToOutputID] as ConnectingAudioModule).disconnect(am[mod.id])
+            dispatch(removeConnection(window.linkToOutputID, mod.id))
           }
           
         }

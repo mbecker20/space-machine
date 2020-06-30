@@ -39,4 +39,4 @@ export interface RemoveConnectionAction {
   toID: string
 }
 
-export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction
+export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | RemoveConnectionAction
