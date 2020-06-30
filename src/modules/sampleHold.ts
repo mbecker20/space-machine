@@ -10,6 +10,8 @@ function makeSampleHold(inputModule: AudioNode) {
   function holdSample() {
     sampleHold.frequency.cancelAndHoldAtTime(audioCtx.currentTime)
   }
+
+  return { audioNode: sampleHold, holdSample }
 }
 
 export default makeSampleHold
