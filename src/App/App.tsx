@@ -3,12 +3,14 @@ import useJSS from './style'
 import { RightDrawer, LeftDrawer, ModuleViewFill } from '../components/all'
 import { useSelector } from 'react-redux'
 import { RootState, ContainerModule } from '../redux/stateTSTypes'
-import { AudioModules } from '../audioModules/moduleTypes'
+import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
+import makeAddModule from '../audioModules/makeAddModule'
 
 declare global {
   interface Window { 
     fillContainerID: string
     audioModules: AudioModules
+    addModule: (id: string, moduleType: ModuleType) => void
   }
 }
 
@@ -16,6 +18,7 @@ window.highlightedID = 'project' // delete this, for dev
 window.fillContainerID = 'project'
 
 window.audioModules = {}
+window.addModule = makeAddModule()
 
 function App() {
   const classes = useJSS()

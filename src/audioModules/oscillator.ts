@@ -1,19 +1,44 @@
 import audioCtx from '../audioCtx'
+import { AudioModule } from './moduleTypes'
 
-export interface OscillatorModule {
-  audioNode: OscillatorNode
+export interface OscControls {
+  start: () => void
+  stop: () => void
   setType: (newType: OscillatorType) => void
   setFrequency: (newFreq: number) => void
   setDetune: (newDetune: number) => void
 }
 
-function makeOscillator(type: OscillatorType, freq: number, detune: number): OscillatorModule {
+export interface OscillatorModule {
+  audioNode: OscillatorNode
+  controls: OscControls
+  connect: (module: AudioModule) => void
+  disconnect: (module: AudioModule) => void
+}
+
+function makeOscillator(type: OscillatorType = 'sine', freq = 440, detune = 0): OscillatorModule {
   const osc = audioCtx.createOscillator()
   osc.type = type
   osc.frequency.setValueAtTime(freq, audioCtx.currentTime)
   osc.detune.setValueAtTime(detune, audioCtx.currentTime)
+
+  function connect(module: AudioModule) {
+    osc.connect(module.audioNode)
+  }
+
+  function disconnect(module: AudioModule) {
+    osc.disconnect(module.audioNode)
+  }
   
   //controls
+
+  function start() {
+    osc.start()
+  }
+
+  function stop() {
+    osc.stop()
+  }
 
   function setType(newType: OscillatorType) {
     osc.type = newType
@@ -28,7 +53,7 @@ function makeOscillator(type: OscillatorType, freq: number, detune: number): Osc
   }
 
   osc.start()
-  return { audioNode: osc, setType, setFrequency, setDetune }
+  return { audioNode: osc, connect, disconnect, controls: { start, stop, setType, setFrequency, setDetune } }
 }
 
 export default makeOscillator

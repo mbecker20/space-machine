@@ -1,14 +1,18 @@
 import audioCtx from '../audioCtx'
 
-interface GateModule {
-  audioNode: GainNode
+export interface GateControls {
   setState: (gateLevel: number, gateLength: number) => void
   openGate: () => void
 }
 
-function makeGate(gateLevel: number, gateLength: number): GateModule {
+export interface GateModule {
+  audioNode: GainNode
+  controls: GateControls
+}
+
+function makeGate(gateLevel = 0, gateLength = 1): GateModule {
   const gate = audioCtx.createGain()
-  gate.gain.setValueAtTime (0, audioCtx.currentTime)
+  gate.gain.setValueAtTime(0, audioCtx.currentTime)
 
   let gateState = {
     level: gateLevel,
@@ -28,7 +32,7 @@ function makeGate(gateLevel: number, gateLength: number): GateModule {
     gate.gain.setValueAtTime (0, audioCtx.currentTime + length )
   }
 
-  return { audioNode: gate, setState, openGate }
+  return { audioNode: gate, controls: { setState, openGate } }
 }
 
 export default makeGate

@@ -53,6 +53,7 @@ function DropSquare({ row, col }: Props) {
           if (!possiblyOccupyingID) {
             setHL(false)
             dispatch(addModule(id, moduleType, window.fillContainerID, row, col))
+            window.addModule(id, moduleType)
             window.setFillIsExpanded(false)
             window.currSetHighlighted(false)
             window.highlightedID = id
