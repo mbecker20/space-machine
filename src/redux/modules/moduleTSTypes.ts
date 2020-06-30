@@ -1,5 +1,8 @@
+import { ModuleType } from "../../modules/moduleTypes";
+
 export interface AddModuleAction {
   type: string
+  moduleType: ModuleType
   id: string
   parentID: string
   row: number
@@ -24,4 +27,4 @@ export interface RenameModuleAction {
   newID: string
 }
 
-export type CMAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction
+export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction

@@ -1,14 +1,14 @@
-import { ContainerModules } from "../../stateTSTypes";
-import { RemoveContainerAction } from "../moduleTSTypes";
+import { Modules, ContainerModule } from "../../stateTSTypes";
+import { RemoveModuleAction } from "../moduleTSTypes";
 
-const removeContainer = (state: ContainerModules, { id }: RemoveContainerAction) => {
+const removeModule = (state: Modules, { id }: RemoveModuleAction) => {
   const parentID = state[id].parentID as string
   return Object.assign({}, Object.fromEntries(Object.entries(state).filter(entry => entry[0] !== id)), {
     [parentID]: {
       ...state[parentID],
-      childContainers: state[parentID].childContainers.filter(childID => childID !== id)
+      childModules: (state[parentID] as ContainerModule).childModules.filter(childID => childID !== id)
     }
   })
 }
 
-export default removeContainer
+export default removeModule

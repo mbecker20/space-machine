@@ -1,7 +1,7 @@
-import { ContainerModules } from "../../stateTSTypes";
-import { MoveContainerAction } from "../moduleTSTypes";
+import { Modules } from "../../stateTSTypes";
+import { MoveModuleAction } from "../moduleTSTypes";
 
-const moveContainer = (state: ContainerModules, { id, newRow, newCol }: MoveContainerAction) => {
+const moveModuleAction = (state: Modules, { id, newRow, newCol }: MoveModuleAction) => {
   return Object.assign({}, state, {
     [id]: {
       ...state[id],
@@ -11,4 +11,4 @@ const moveContainer = (state: ContainerModules, { id, newRow, newCol }: MoveCont
   })
 }
 
-export default moveContainer
+export default moveModuleAction

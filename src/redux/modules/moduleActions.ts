@@ -4,10 +4,12 @@ import {
   MOVE_MODULE, 
   RENAME_MODULE,
 } from './moduleActionTypes'
+import { ModuleType } from '../../modules/moduleTypes'
 
-export const addModule = (id: string, type: , parentID: string, row: number, col: number) => {
+export const addModule = (id: string, moduleType: ModuleType, parentID: string, row: number, col: number) => {
   return {
     type: ADD_MODULE,
+    moduleType,
     id,
     row,
     col,

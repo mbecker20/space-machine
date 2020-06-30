@@ -1,33 +1,32 @@
-import { ContainerModule, ContainerModules } from "../stateTSTypes"
-import { ADD_CONTAINER, REMOVE_CONTAINER, MOVE_CONTAINER, RENAME_CONTAINER } from './moduleActionTypes'
-import { CMAction, AddContainerAction, RemoveContainerAction, MoveContainerAction, RenameContainerAction } from './moduleTSTypes'
-import { removeContainerReducer, addContainerReducer, moveContainerReducer, renameContainerReducer } from "./reducers/allModuleReducers"
+import { ContainerModule, Modules } from "../stateTSTypes"
+import { ADD_MODULE, REMOVE_MODULE, MOVE_MODULE, RENAME_MODULE } from './moduleActionTypes'
+import { ModuleAction, AddModuleAction, RemoveModuleAction, MoveModuleAction, RenameModuleAction } from './moduleTSTypes'
+import { removeModuleReducer, addModuleReducer, moveModuleReducer, renameModuleReducer } from "./reducers/allModuleReducers"
 import { CONTAINER } from "../../modules/moduleTypes"
 
 const initBaseCM: ContainerModule = {
   id: 'project',
   row: 0,
   col: 0,
-  type: CONTAINER,
+  moduleType: CONTAINER,
   inputs: null,
   outputs: null,
   parentID: null,
-  childContainers: [],
   childModules: [],
   controls: {},
   isBaseContainer: true
 }
 
-const initState: ContainerModules = {
+const initState: Modules = {
   'project': initBaseCM
 }
 
-const moduleReducer = (state = initState, action: CMAction) => {
+const moduleReducer = (state = initState, action: ModuleAction) => {
   switch (action.type) {
-    case ADD_CONTAINER: return addContainerReducer(state, action as AddContainerAction)
-    case REMOVE_CONTAINER: return removeContainerReducer(state, action as RemoveContainerAction)
-    case MOVE_CONTAINER: return moveContainerReducer(state, action as MoveContainerAction)
-    case RENAME_CONTAINER: return renameContainerReducer(state, action as RenameContainerAction)
+    case ADD_MODULE: return addModuleReducer(state, action as AddModuleAction)
+    case REMOVE_MODULE: return removeModuleReducer(state, action as RemoveModuleAction)
+    case MOVE_MODULE: return moveModuleReducer(state, action as MoveModuleAction)
+    case RENAME_MODULE: return renameModuleReducer(state, action as RenameModuleAction)
     default: return state
   }
 }
