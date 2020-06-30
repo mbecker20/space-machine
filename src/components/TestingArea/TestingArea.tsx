@@ -1,7 +1,7 @@
 import React from 'react'
 import useJSS from './style'
 import audioCtx from '../../audioCtx'
-import {}
+import { makeOscillator, makeSampleHold } from '../../modules/all'
 
 
 
