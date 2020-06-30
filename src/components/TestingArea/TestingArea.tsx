@@ -10,6 +10,9 @@ function TestingArea() {
         <div 
           className={classes.Button}
           style={{ backgroundColor: 'blue' }}
+          onClick={() => {
+            
+          }}
         >button</div>
       </div>
     </div>
