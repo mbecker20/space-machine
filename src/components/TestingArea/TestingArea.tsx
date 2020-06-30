@@ -7,11 +7,10 @@ function TestingArea() {
     <div className={classes.TestingArea}>
       {'testing area'}
       <div className={classes.ButtonDiv}>
-        <div 
-          className={classes.Button}
+        <div className={classes.Button}
           style={{ backgroundColor: 'blue' }}
           onClick={() => {
-            
+
           }}
         >button</div>
       </div>

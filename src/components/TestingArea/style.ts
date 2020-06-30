@@ -11,6 +11,7 @@ const useJSS = createUseStyles({
     height: '50vh',
     display: 'flex',
     flexDirection: 'column',
+    zIndex: 150,
   },
 
   ButtonDiv: {
