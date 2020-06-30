@@ -3,7 +3,7 @@ import useJSS from './style'
 import audioCtx from '../../audioCtx'
 import { makeOscillator, makeSampleHold } from '../../modules/all'
 
-const sampleOsc = makeOscillator('sine', 440, 0)
+const sampleOsc = makeOscillator('sine', .5, 0)
 
 const sampleHold = makeSampleHold(sampleOsc.audioNode)
 
@@ -28,7 +28,7 @@ function TestingArea() {
           onClick={() => {
             sampleHold.holdSample()
           }}
-        >button</div>
+        >hold sample</div>
       </div>
       <div className={classes.ButtonDiv}>
         <div className={classes.Button}
