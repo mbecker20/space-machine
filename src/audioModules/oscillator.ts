@@ -51,6 +51,8 @@ function makeOscillator(type: OscillatorType = 'sine', freq = 440, detune = 0): 
   function setDetune(newDetune: number) {
     osc.detune.setValueAtTime(newDetune, audioCtx.currentTime)
   }
+
+  osc.start()
   
   return { audioNode: osc, connect, disconnect, controls: { start, stop, setType, setFrequency, setDetune } }
 }

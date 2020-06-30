@@ -11,8 +11,8 @@ const addConnection = (state: Modules, { fromID, toID }: AddConnectionAction) =>
       ],
     },
     [fromID]: {
-      ...state[toID],
-      inputs: [
+      ...state[fromID],
+      outputs: [
         ...state[fromID].inputs,
         toID,
       ],

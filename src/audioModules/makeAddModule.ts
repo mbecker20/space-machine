@@ -9,6 +9,8 @@ function makeAddModule() {
       case GATE: window.audioModules = { ...window.audioModules, [id]: makeGate() }; break 
       case OUTPUT: window.audioModules = { ...window.audioModules, [id]: makeOutput() }; break
     }
+    console.log('module added (in makeAddModule)')
+    console.log(window.audioModules)
   }
 }
 

@@ -88,7 +88,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             (am[window.linkToOutputID] as ConnectingAudioModule).disconnect(am[mod.id])
             dispatch(removeConnection(window.linkToOutputID, mod.id))
           }
-          
+          window.linkToOutputID = ''
         }
       }}
     >

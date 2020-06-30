@@ -34,7 +34,7 @@ function LeftDrawer() {
   const dispatch = useDispatch()
   const [isRenameMenuOpen, setRMOpen] = useState(false)
   const selectedModule = useSelector((state: RootState) => state.modules[window.highlightedID])
-  const moduleType = selectedModule.moduleType
+  const moduleType = selectedModule ? selectedModule.moduleType : false
   return (
     <React.Fragment>
       <animated.div className={classes.LeftDrawer} style={springStyle}>
@@ -46,10 +46,10 @@ function LeftDrawer() {
               {topText}
             </div>
           </HorizontalScrollDiv>
+          {
+            (moduleType === OSCILLATOR) ? <OscillatorMenu mod={selectedModule}/> : null
+          }
         </div>
-        {
-          (moduleType === OSCILLATOR) ? <OscillatorMenu mod={selectedModule}/> : null
-        }
         <div className={classes.BottomItems}>
           <div className={classes.Delete}
             onClick={() => {

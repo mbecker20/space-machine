@@ -49,14 +49,6 @@ const useJSS = createUseStyles({
       cursor: 'pointer',
       borderStyle: 'solid',
     },
-    position: 'absolute'
-  },
-
-  IconInputButton: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    margin: '.5vmin',
   },
 
   DropSquare: {

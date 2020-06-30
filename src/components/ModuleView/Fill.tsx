@@ -15,13 +15,13 @@ declare global {
 }
 
 interface Props {
-  mod: ContainerModule
+  containerModule: ContainerModule
 }
 
 const iconGridSize = sizes.moduleView.iconGrid
 const gutterGridSize = sizes.moduleView.gutterGrid
 
-function ModuleViewFill({ mod }: Props) {
+function ModuleViewFill({ containerModule }: Props) {
   const classes = useJSS()
   const [isExpanded, setIsExpanded] = useState(false)
   window.setFillIsExpanded = setIsExpanded
@@ -30,9 +30,9 @@ function ModuleViewFill({ mod }: Props) {
       modules: state.modules,
     }
   })
-  const { maxRow, maxCol } = getGridRange(mod.childModules, modules)
+  const { maxRow, maxCol } = getGridRange(containerModule.childModules, modules)
   let gridStyle: CSS.Properties
-  const isEmpty = mod.childModules.length === 0
+  const isEmpty = containerModule.childModules.length === 0
   if (isEmpty) {
     gridStyle = {
       gridTemplateRows: `repeat(${1}, ${iconGridSize} ${gutterGridSize})`,
@@ -47,14 +47,14 @@ function ModuleViewFill({ mod }: Props) {
   return (
     <div className={classes.FillBounder}>
       <div className={classes.FillHeader}
-        style={{ width: `${mod.id.length / 2}em` }}
+        style={{ width: `${containerModule.id.length / 2}em` }}
         onClick={(e) => {
           e.stopPropagation()
-          window.highlightedID = mod.id // need to add cases to on rename reducer to rename fill/base containers
+          window.highlightedID = containerModule.id // need to add cases to on rename reducer to rename fill/base containers
           window.setLeftDrawerOpen(true)
-          window.setLeftDrawerTopText(mod.id)
+          window.setLeftDrawerTopText(containerModule.id)
         }}
-      >{mod.id}</div>
+      >{containerModule.id}</div>
       <div className={classes.Fill} style={gridStyle} onClick={() => {
         window.highlightedID = ''
         window.currSetHighlighted(false)
@@ -74,7 +74,7 @@ function ModuleViewFill({ mod }: Props) {
             )
           })
         }).flat()}
-        {mod.childModules.map(moduleID => {
+        {containerModule.childModules.map(moduleID => {
           const mod = modules[moduleID]
           return (
             <ModuleViewIcon

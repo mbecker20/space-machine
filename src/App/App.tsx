@@ -34,7 +34,7 @@ function App() {
     <div className={classes.Bounder}>
       <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
-        <ModuleViewFill mod={modules[window.fillContainerID] as ContainerModule}/>
+        <ModuleViewFill containerModule={modules[window.fillContainerID] as ContainerModule}/>
       </div>
       <RightDrawer />
     </div>
