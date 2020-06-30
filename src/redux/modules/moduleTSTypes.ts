@@ -27,4 +27,16 @@ export interface RenameModuleAction {
   newID: string
 }
 
+export interface AddConnectionAction {
+  type: string
+  fromID: string
+  toID: string
+}
+
+export interface RemoveConnectionAction {
+  type: string
+  fromID: string
+  toID: string
+}
+
 export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction

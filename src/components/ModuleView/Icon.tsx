@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
 
 declare global {
-  interface Window { 
-    highlightedID: string,
+  interface Window {
     currSetHighlighted: (setHighlighted: boolean) => void
   }
 }
@@ -26,7 +25,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   if (mod.id === window.highlightedID) {
     window.currSetHighlighted = setHighlighted
   }
-  const midStyle: CSS.Properties = {
+  const iconStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none'
@@ -36,7 +35,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   return (
     <div 
       className={classes.Icon} 
-      style={midStyle}
+      style={iconStyle}
       onDragOver={event => {
         event.preventDefault()
       }}
@@ -65,21 +64,33 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         if (e.stopPropagation) {
           e.stopPropagation()
         }
-        if (mod.id === window.highlightedID) {
-          window.setLeftDrawerOpen(false)
-          setHighlighted(false)
-          window.highlightedID = ''
-          window.currSetHighlighted = (setHighlighted) => {}
+        if (window.linkToOutputID.length === 0) {
+          if (mod.id === window.highlightedID) {
+            window.setLeftDrawerOpen(false)
+            setHighlighted(false)
+            window.highlightedID = ''
+            window.currSetHighlighted = (setHighlighted) => {}
+          } else {
+            window.setLeftDrawerOpen(true)
+            window.setLeftDrawerTopText(mod.id)
+            setHighlighted(true)
+            window.highlightedID = mod.id
+            window.currSetHighlighted(false)
+            window.currSetHighlighted = setHighlighted
+          }
         } else {
-          window.setLeftDrawerOpen(true)
-          window.setLeftDrawerTopText(mod.id)
-          setHighlighted(true)
-          window.highlightedID = mod.id
-          window.currSetHighlighted(false)
-          window.currSetHighlighted = setHighlighted
+          const am = window.audioModules
+          if (window.linkIsConnecting) {
+            am[window.linkToOutputID].connect(am[mod.id])
+          } else {
+            am[window.linkToOutputID].disconnect(am[mod.id])
+          }
+          
         }
       }}
-    >{mod.id}</div>
+    >
+      {mod.id}
+    </div>
   )
 }
 

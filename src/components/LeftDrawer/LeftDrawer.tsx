@@ -14,13 +14,9 @@ declare global {
   }
 }
 
-interface Props {
-
-}
-
 function LeftDrawer() {
   const classes = useJSS()
-  const [isOpen, setOpen] = useState(true)
+  const [isOpen, setOpen] = useState(false)
   window.setLeftDrawerOpen = setOpen
   const [topText, setTopText] = useState(window.highlightedID)
   window.setLeftDrawerTopText = setTopText

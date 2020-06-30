@@ -3,6 +3,8 @@ import {
   REMOVE_MODULE,
   MOVE_MODULE, 
   RENAME_MODULE,
+  ADD_CONNECTION,
+  REMOVE_CONNECTION
 } from './moduleActionTypes'
 import { ModuleType } from '../../audioModules/moduleTypes'
 
@@ -38,5 +40,21 @@ export const renameModule = (id: string, newID: string) => {
     type: RENAME_MODULE,
     id,
     newID,
+  }
+}
+
+export const addConnection = (fromID: string, toID: string) => {
+  return {
+    type: ADD_CONNECTION,
+    fromID,
+    toID,
+  }
+}
+
+export const removeConnection = (fromID: string, toID: string) => {
+  return {
+    type: REMOVE_CONNECTION,
+    fromID,
+    toID,
   }
 }

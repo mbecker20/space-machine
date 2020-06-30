@@ -17,8 +17,8 @@ export interface Module { // the base of the Module types
   moduleType: string
   row: number // modules row/col relative to parent container
   col: number
-  inputs: null
-  outputs: null
+  inputs: string[]
+  outputs: string[]
   parentID: string | null // id of parent ContainerModule
   controls: Controls
 }

@@ -35,18 +35,28 @@ const useJSS = createUseStyles({
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
     borderRadius: '1.5vmin',
-    borderColor: 'white',
     borderStyle: 'none',
     whiteSpace: 'wrap',
     fontSize: sizes.text.medium,
     padding: '1vmin',
     display: 'flex',
+    borderColor: 'white',
+    //alignItems: 'center',
+    //justifyContent: 'center',
     overflow: 'hidden',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     '&:hover': {
       cursor: 'pointer',
       borderStyle: 'solid',
-    }
+    },
+    position: 'absolute'
+  },
+
+  IconInputButton: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    margin: '.5vmin',
   },
 
   DropSquare: {

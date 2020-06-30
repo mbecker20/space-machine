@@ -8,14 +8,19 @@ import makeAddModule from '../audioModules/makeAddModule'
 
 declare global {
   interface Window { 
+    highlightedID: string
     fillContainerID: string
+    linkToOutputID: string
+    linkIsConnecting: boolean
     audioModules: AudioModules
     addModule: (id: string, moduleType: ModuleType) => void
   }
 }
 
-window.highlightedID = 'project' // delete this, for dev
+window.highlightedID = 'project' // make this '', for dev
 window.fillContainerID = 'project'
+window.linkToOutputID = ''
+window.linkIsConnecting = true
 
 window.audioModules = {}
 window.addModule = makeAddModule()
