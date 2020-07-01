@@ -15,6 +15,10 @@ declare global {
     audioModules: AudioModules
     addModule: (id: string, moduleType: ModuleType) => void
   }
+
+  interface AudioNode {
+    [index: string]: AudioParam
+  }
 }
 
 window.highlightedID = 'project' // make this '', for dev
