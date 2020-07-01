@@ -33,11 +33,11 @@ function TestingArea() {
       {'testing area'}
       <div className={classes.ButtonDiv}>
         <div className={classes.Button}
-          style={{ backgroundColor: 'blue' }}
+          style={{ backgroundColor: 'green' }}
           onClick={() => {
-            //gate2.controls.openGate()
+            output.controls.resume()
           }}
-        >open gate2</div>
+        >start ctx</div>
       </div>
       <div className={classes.ButtonDiv}>
         <div className={classes.Button}
