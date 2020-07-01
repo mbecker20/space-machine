@@ -1,9 +1,22 @@
 import React from 'react'
 import useJSS from './style'
-import { makeOscillator, makeGate } from '../../audioModules/all';
+import { makeOscillator, makeGate, makeGain } from '../../audioModules/all';
 import makeOutput from '../../audioModules/output';
 import audioCtx from '../../audioCtx'
 
+const modOsc = makeOscillator('sine', 0.1, 0)
+const modGain = makeGain(1000)
+
+const carOsc = makeOscillator('sine', 50, 0)
+const carGain = makeGain(1)
+
+const output = makeOutput()
+
+modOsc.connect(modGain)
+modGain.audioNode.connect(carOsc.audioNode.frequency)
+carOsc.connect(carGain)
+
+carGain.connect(output)
 
 
 

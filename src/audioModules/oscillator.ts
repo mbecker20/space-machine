@@ -16,10 +16,10 @@ export interface OscillatorModule {
   disconnect: (module: AudioModule) => void
 }
 
-function makeOscillator(type: OscillatorType = 'sine', freq = 440, detune = 0): OscillatorModule {
+function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune = 0): OscillatorModule {
   const osc = audioCtx.createOscillator()
   osc.type = type
-  osc.frequency.setValueAtTime(freq, audioCtx.currentTime)
+  osc.frequency.setValueAtTime(frequency, audioCtx.currentTime)
   osc.detune.setValueAtTime(detune, audioCtx.currentTime)
 
   function connect(module: AudioModule) {

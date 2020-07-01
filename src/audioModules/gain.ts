@@ -12,9 +12,9 @@ export interface GainModule {
   disconnect: (audioModule: AudioModule) => void
 }
 
-function makeGain(): GainModule {
+function makeGain(gainAmount: number): GainModule {
   const gain = audioCtx.createGain()
-  gain.gain.value = 0
+  gain.gain.setValueAtTime(gainAmount, audioCtx.currentTime)
 
   function setGain(newGain: number) {
     gain.gain.setValueAtTime(newGain, audioCtx.currentTime)
