@@ -4,6 +4,8 @@ import { makeOscillator, makeGate, makeGain } from '../../audioModules/all';
 import makeOutput from '../../audioModules/output';
 import audioCtx from '../../audioCtx'
 
+// Successful FM Synth implementation!
+
 const modOsc = makeOscillator('sine', 0.1, 0)
 const modGain = makeGain(1000)
 
@@ -19,26 +21,7 @@ carOsc.connect(carGain)
 carGain.connect(output)
 
 
-
-//import { makeOscillator } from '../../modules/all'
-
-//const sampleOsc = makeOscillator('sine', .5, 0)
-
-//sampleHold.audioNode.connect(audioCtx.destination)
-
-/*
-const osc = makeOscillator('sine', 440, 0)
-const osc2 = makeOscillator('sine', 350, 0)
-const gate = makeGate(1, 2)
-const gate2 = makeGate(1, 2)
-const output = makeOutput()
-
-osc.connect(gate)
-
-osc2.connect(gate2)
-
-gate2.connect(output)
-*/
+//FM SYNTH EXAMPLE
 
 /*
 const modOsc = audioCtx.createOscillator()
