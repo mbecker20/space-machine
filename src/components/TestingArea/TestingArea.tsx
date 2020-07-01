@@ -1,10 +1,10 @@
 import React from 'react'
 import useJSS from './style'
-import { makeOscillator, makeGate, makeGain } from '../../audioModules/all';
-import makeOutput from '../../audioModules/output';
-import audioCtx from '../../audioCtx'
+import { makeOscillator, makeGain, makeOutput } from '../../audioModules/all'
+import { connect } from '../../audioModules/connection'
 
 // Successful FM Synth implementation!
+// done using new dynamic module connect function
 
 const modOsc = makeOscillator('sine', 0.1, 0)
 const modGain = makeGain(1000)
@@ -14,44 +14,17 @@ const carGain = makeGain(1)
 
 const output = makeOutput()
 
-modOsc.connect(modGain)
-modGain.audioNode.connect(carOsc.audioNode.frequency)
-carOsc.connect(carGain)
+connect(modOsc, modGain)
+connect(modGain, carOsc, 'frequency')
+connect(carOsc, carGain)
 
-carGain.connect(output)
+connect(carGain, output)
 
+//modOsc.connect(modGain)
+//modGain.audioNode.connect(carOsc.audioNode.frequency)
+//carOsc.connect(carGain)
 
-//FM SYNTH EXAMPLE
-
-/*
-const modOsc = audioCtx.createOscillator()
-  modOsc.type = 'sine'
-  modOsc.frequency.value = 1000
-const modGain = audioCtx.createGain()
-  modGain.gain.value = 100
-const carOsc = audioCtx.createOscillator()
-  carOsc.type = 'sine'
-  carOsc.frequency.value = 100
-const carOscGain = audioCtx.createGain()
-  carOscGain.gain.value = 1
-const gainModOsc = audioCtx.createOscillator()
-  gainModOsc.type = 'sine'
-  gainModOsc.frequency.value = 1
-const gainModOscGain = audioCtx.createGain()
-  gainModOscGain.gain.value = 1
-
-
-modOsc.connect(modGain)
-gainModOsc.connect(gainModOscGain)
-gainModOscGain.connect(carOscGain.gain)
-modGain.connect(carOsc.frequency)
-carOsc.connect(carOscGain)
-carOscGain.connect(audioCtx.destination)
-
-modOsc.start()
-gainModOsc.start()
-carOsc.start()
-*/
+//carGain.connect(output)
 
 function TestingArea() {
   const classes = useJSS()
@@ -96,7 +69,7 @@ function TestingArea() {
         <div className={classes.Button}
           style={{ backgroundColor: 'red' }}
           onClick={() => {
-            audioCtx.suspend()
+            output.controls.suspend()
           }}
         >stop ctx</div>
       </div>
