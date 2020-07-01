@@ -1,5 +1,4 @@
 import audioCtx from '../audioCtx'
-import { AudioModule } from './moduleTypes'
 
 export interface OscControls {
   stop: () => void
