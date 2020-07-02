@@ -1,36 +1,25 @@
 import React from 'react'
 import useJSS from './style'
-import { makeOscillator, makeGain, makeOutput } from '../../audioModules/all'
+import { makeOscillator, makeGain, makeOutput, makeAutoFilter } from '../../audioModules/all'
 import { connect } from '../../audioModules/connection'
 
 // Successful FM Synth implementation!
 // done using new dynamic module connect function
 
-const modOsc = makeOscillator('sine', 0.1, 0)
-const modGain = makeGain(1000)
-
-const carOsc = makeOscillator('sine', 50, 0)
-const carGain = makeGain(1)
-
+const osc = makeOscillator('sine', 440, 0)
+const oscGain = makeGain (1)
+const lpf = makeAutoFilter('lowpass', 300, 0, 0, 1)
 const output = makeOutput()
 
-connect(modOsc, modGain)
-connect(modGain, carOsc, 'frequency')
-connect(carOsc, carGain)
+connect(osc, oscGain)
+connect(oscGain, lpf)
+connect(lpf, output)
 
-connect(carGain, output)
-
-//modOsc.connect(modGain)
-//modGain.audioNode.connect(carOsc.audioNode.frequency)
-//carOsc.connect(carGain)
-
-//carGain.connect(output)
-
-function TestingArea() {
+function MrTesterr() {
   const classes = useJSS()
   return (
     <div className={classes.TestingArea}>
-      {'testing area'}
+      {'mr testerrr'}
       <div className={classes.ButtonDiv}>
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}
@@ -47,7 +36,7 @@ function TestingArea() {
           <input style={{ height: '2em' }}
             
             onChange={(e) => {
-              //osc.controls.setFrequency(Number(e.target.value))
+              osc.controls.setFrequency(Number(e.target.value))
             }}
           />
         </div>
@@ -56,11 +45,11 @@ function TestingArea() {
         <div className={classes.Button}
           style={{ backgroundColor: 'blue' }}
         >
-          {'osc2 freq'}
+          {'lpf freq'}
           <input style={{ height: '2em' }}
             
             onChange={(e) => {
-              //osc2.controls.setFrequency(Number(e.target.value))
+              lpf.controls.setFrequency(Number(e.target.value))
             }}
           />
         </div>
@@ -77,4 +66,4 @@ function TestingArea() {
   );
 }
 
-export default TestingArea
+export default MrTesterr
