@@ -25,7 +25,7 @@ const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddMo
         ]
       }
     })
-    case OSCILLATOR: return Object.assign({}, state, {
+    default: return Object.assign({}, state, {
       [id]: {
         id,
         row,
@@ -44,45 +44,6 @@ const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddMo
         ]
       }
     })
-    case GATE: return Object.assign({}, state, {
-      [id]: {
-        id,
-        row,
-        col,
-        parentID,
-        moduleType,
-        inputs: [],
-        outputs: [],
-        controls: {},
-      },
-      [parentID]: {
-        ...state[parentID],
-        childModules: [
-          ...(state[parentID] as ContainerModule).childModules,
-          id
-        ]
-      }
-    })
-    case OUTPUT: return Object.assign({}, state, {
-      [id]: {
-        id,
-        row,
-        col,
-        parentID,
-        moduleType,
-        inputs: [],
-        outputs: [],
-        controls: {},
-      },
-      [parentID]: {
-        ...state[parentID],
-        childModules: [
-          ...(state[parentID] as ContainerModule).childModules,
-          id
-        ]
-      }
-    })
-    default: return state
   }
 }
 
