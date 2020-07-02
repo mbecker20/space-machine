@@ -59,7 +59,6 @@ function DropSquare({ row, col }: Props) {
             window.currSetHighlighted(false)
             window.highlightedID = id
             window.setLeftDrawerOpen(true)
-            window.setLeftDrawerTopText(id)
           }
         } else if (possiblyOccupyingID) {
           const fromRow = event.dataTransfer.getData('fromRow')

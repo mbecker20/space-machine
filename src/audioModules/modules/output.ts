@@ -8,6 +8,7 @@ export interface OutputModule extends BaseAM {
 
 function makeOutput(): OutputModule {
   function resume(arg = '') {
+    console.log('resuming')
     audioCtx.resume()
   }
 

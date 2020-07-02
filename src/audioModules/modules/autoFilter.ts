@@ -24,7 +24,7 @@ function makeAutoFilter (type: BiquadFilterType = 'lowpass', frequency = 12500, 
     autoFilter.detune.setValueAtTime(Number(newDetune), audioCtx.currentTime)
   }
   function setQ(newQ: string) {
-    autoFilter.q.setValueAtTime(Number(newQ), audioCtx.currentTime)
+    autoFilter.Q.setValueAtTime(Number(newQ), audioCtx.currentTime)
   }
   function setGain(newGain: string) {
     autoFilter.gain.setValueAtTime(Number(newGain), audioCtx.currentTime)

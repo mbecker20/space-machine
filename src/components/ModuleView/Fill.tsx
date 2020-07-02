@@ -53,7 +53,6 @@ function ModuleViewFill({ containerModule }: Props) {
           e.stopPropagation()
           window.highlightedID = containerModule.id // need to add cases to on rename reducer to rename fill/base containers
           window.setLeftDrawerOpen(true)
-          window.setLeftDrawerTopText(containerModule.id)
         }}
       >{containerModule.id}</div>
       <div className={classes.Fill} style={gridStyle} onClick={() => {
