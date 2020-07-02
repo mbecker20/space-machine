@@ -35,11 +35,11 @@ export const moveModule = (id: string, newRow: number, newCol: number) => {
   }
 }
 
-export const renameModule = (id: string, newID: string) => {
+export const renameModule = (id: string, newName: string) => {
   return {
     type: RENAME_MODULE,
     id,
-    newID,
+    newName,
   }
 }
 

@@ -2,11 +2,12 @@ import { Modules, ContainerModule } from '../../stateTSTypes'
 import { AddModuleAction } from '../moduleTSTypes'
 import { CONTAINER } from '../../../audioModules/moduleTypes'
 
-const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddModuleAction) => {
+const addModule = (state: Modules, { id, name, moduleType, row, col, parentID }: AddModuleAction) => {
   switch(moduleType) {
     case CONTAINER: return Object.assign({}, state, {
       [id]: {
         id,
+        name,
         row,
         col,
         parentID,
@@ -28,6 +29,7 @@ const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddMo
     default: return Object.assign({}, state, {
       [id]: {
         id,
+        name,
         row,
         col,
         parentID,

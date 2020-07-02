@@ -6,6 +6,7 @@ import { CONTAINER } from "../../audioModules/moduleTypes"
 
 const initBaseCM: ContainerModule = {
   id: 'project',
+  name: 'project',
   row: 0,
   col: 0,
   moduleType: CONTAINER,

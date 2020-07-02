@@ -2,6 +2,7 @@ import { ModuleType } from "../../audioModules/moduleTypes";
 
 export interface AddModuleAction {
   type: string
+  name: string
   moduleType: ModuleType
   id: string
   parentID: string
@@ -24,7 +25,7 @@ export interface MoveModuleAction {
 export interface RenameModuleAction {
   type: string
   id: string
-  newID: string
+  newName: string
 }
 
 export interface AddConnectionAction {
