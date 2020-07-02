@@ -28,8 +28,8 @@ function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune =
     osc.type = newType
   }
 
-  function setFrequency(newFreq: number) {
-    osc.frequency.setValueAtTime(newFreq, audioCtx.currentTime)
+  function setFrequency(newFrequency: number) {
+    osc.frequency.setValueAtTime(newFrequency, audioCtx.currentTime)
   }
 
   function setDetune(newDetune: number) {
