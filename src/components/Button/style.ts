@@ -6,8 +6,12 @@ const useJSS = createUseStyles({
     backgroundColor: colors.defaultButton,
     borderColor: 'white',
     borderStyle: 'none',
+    borderRadius: '1vmin',
     '&:active': {
       borderStyle: 'solid',
+    },
+    '&:hover': {
+      cursor: 'pointer',
     },
     display: 'flex',
     alignItems: 'center',
