@@ -11,7 +11,6 @@ declare global {
     highlightedID: string
     fillContainerID: string
     linkToOutputID: string
-    linkIsConnecting: boolean
     audioModules: AudioModules
     addModule: (id: string, moduleType: ModuleType) => void
   }
@@ -24,7 +23,6 @@ declare global {
 window.highlightedID = 'project' // make this '', for dev
 window.fillContainerID = 'project'
 window.linkToOutputID = ''
-window.linkIsConnecting = true
 
 window.audioModules = {}
 window.addModule = makeAddModule()

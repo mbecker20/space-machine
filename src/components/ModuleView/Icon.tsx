@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { moveModule, addConnection, removeConnection } from '../../redux/allActions'
 import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
 import { connect, disconnect } from '../../audioModules/connection'
+import ConnectionMenu from './ConnectionMenu'
 
 declare global {
   interface Window {
@@ -34,6 +35,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   }
   const modules = useSelector((state: RootState) => state.modules)
   const dispatch = useDispatch()
+  const [cmState, setCMState] = useState({ // connectionMenuState
+    isOpen: false,
+    fromID: '',
+  })
   return (
     <div 
       className={classes.Icon} 
@@ -81,15 +86,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             window.currSetHighlighted = setHighlighted
           }
         } else {
-          const am = window.audioModules
-          if (window.linkIsConnecting) {
-            connect(am[window.linkToOutputID] as ConnectingAudioModule, am[mod.id])
-            dispatch(addConnection(window.linkToOutputID, mod.id))
-          } else {
-            disconnect(am[window.linkToOutputID] as ConnectingAudioModule, am[mod.id])
-            dispatch(removeConnection(window.linkToOutputID, mod.id))
-          }
-          window.linkToOutputID = ''
+          setCMState({
+            isOpen: true,
+            fromID: window.linkToOutputID
+          })
         }
       }}
     >
@@ -99,6 +99,17 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
       <div className={classes.IconConnector}
         draggable={true}
       />
+      {!cmState.isOpen ? null : 
+      <ConnectionMenu fromID={cmState.fromID} toID={mod.id} 
+        onClose={() => {
+          setCMState({
+            isOpen: false,
+            fromID: '',
+          })
+          window.linkToOutputID = ''
+        }}
+      />
+      }
     </div>
   )
 }

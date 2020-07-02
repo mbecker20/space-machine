@@ -30,6 +30,8 @@ export const colors: Colors = {
   deleteButtonText: 'white',
 
   errorBackground: '#cc0000',
+
+  outputConnector: 'red',
 }
 
 export const sizes: Sizes = {
@@ -50,5 +52,9 @@ export const sizes: Sizes = {
     large: 'calc(20px + 2.5vmin)',
     medium: 'calc(15px + 1.5vmin)',
     small: 'calc(10px + 1.3vmin)',
+  },
+  connector: {
+    size: '3vmin',
+    borderRadius: '1.5vmin'
   },
 }
