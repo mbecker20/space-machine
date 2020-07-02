@@ -7,7 +7,8 @@ import ModuleViewIcon from './Icon'
 import { ContainerModule } from '../../redux/stateTSTypes'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import { getGridRange, range } from './helpers'
+import { getGridRange } from './helpers'
+import { range } from '../../helpers/genFuncs'
 import DropSquare from './DropSquare'
 
 declare global {

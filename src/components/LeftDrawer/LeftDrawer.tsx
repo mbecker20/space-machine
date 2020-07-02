@@ -7,8 +7,6 @@ import { removeModule } from '../../redux/allActions'
 import { HorizontalScrollDiv } from '../all'
 import RenameMenu from './RenameMenu'
 import { RootState } from '../../redux/stateTSTypes'
-import { OSCILLATOR } from '../../audioModules/moduleTypes'
-import OscillatorMenu from './controlMenus/OscillatorMenu'
 
 declare global {
   interface Window { 
@@ -34,7 +32,7 @@ function LeftDrawer() {
   const dispatch = useDispatch()
   const [isRenameMenuOpen, setRMOpen] = useState(false)
   const selectedModule = useSelector((state: RootState) => state.modules[window.highlightedID])
-  const moduleType = selectedModule ? selectedModule.moduleType : false
+  const am = window.audioModules
   return (
     <React.Fragment>
       <animated.div className={classes.LeftDrawer} style={springStyle}>
@@ -46,9 +44,13 @@ function LeftDrawer() {
               {topText}
             </div>
           </HorizontalScrollDiv>
-          {
-            (moduleType === OSCILLATOR) ? <OscillatorMenu mod={selectedModule}/> : null
-          }
+          {selectedModule.inputs.length === 0 ? null : <div>inputs</div>}
+          {selectedModule.inputs.map((inputData, key) => {
+            return (
+              <div></div>
+            )
+          })}
+          <div>outputs</div>
         </div>
         <div className={classes.BottomItems}>
           <div className={classes.Delete}

@@ -2,10 +2,10 @@ import audioCtx from '../../audioCtx'
 import { BaseAM } from '../moduleTypes'
 
 export interface OscControls {
-  stop: () => void
-  setType: (newType: OscillatorType) => void
-  setFrequency: (newFreq: number) => void
-  setDetune: (newDetune: number) => void
+  'stop': () => void
+  'set type': (newType: OscillatorType) => void
+  'set frequency': (newFreq: number) => void
+  'set detune': (newDetune: number) => void
 }
 
 export interface OscillatorModule extends BaseAM {
@@ -37,9 +37,16 @@ function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune =
     osc.detune.setValueAtTime(newDetune, audioCtx.currentTime)
   }
 
+  const controls = {
+    'stop': stop,
+    'set type': setType,
+    'set frequency': setFrequency,
+    'set detune': setDetune,
+  }
+
   osc.start()
   
-  return { audioNode: osc, paramIDs: ['frequency', 'detune'], controls: { stop, setType, setFrequency, setDetune } }
+  return { audioNode: osc, paramIDs: ['frequency', 'detune'], controls }
 }
 
 export default makeOscillator

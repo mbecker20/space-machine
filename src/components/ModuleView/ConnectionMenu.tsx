@@ -29,12 +29,13 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
               dispatch(addConnection(fromID, toID))
             }}
           >module</Button>
+          {am[toID].paramIDs.length === 0 ? null :
           <Button style={{}}
             onClick={(e) => {
               e.stopPropagation()
               setOpenMenu(1)
             }}
-          >params</Button>
+          >params</Button>}
         </CenterMenu>
         :
         <CenterMenu header={'props'} onClose={() => {}}>
