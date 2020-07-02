@@ -19,7 +19,10 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
   return (
     <Fragment>
       {openMenu === 0 ?
-        <CenterMenu header={'connect to'} onClose={onClose}>
+        <CenterMenu header={'connect to'} onClose={() => {
+          onClose()
+          setOpenMenu(0)
+        }}>
           <Button style={{}}
             onClick={() => {
               connect(am[fromID] as ConnectingAudioModule, am[toID])
@@ -31,7 +34,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
               e.stopPropagation()
               setOpenMenu(1)
             }}
-          >props</Button>
+          >params</Button>
         </CenterMenu>
         :
         <CenterMenu header={'props'} onClose={() => {}}>

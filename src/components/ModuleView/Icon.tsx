@@ -46,16 +46,33 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
       onDragOver={event => {
         event.preventDefault()
       }}
-      onDrop={event => {
-        const id = event.dataTransfer.getData('id')
-        const possiblyMod = modules[id]
-        if (possiblyMod) {
-          const fromRow = event.dataTransfer.getData('fromRow')
-          const fromCol = event.dataTransfer.getData('fromCol')
-          window.setFillIsExpanded(false)
-          dispatch(moveModule(id, mod.row, mod.col))
-          dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
+      onDragEnter={() => {
+        setHighlighted(true)
+      }}
+      onDragLeave={() => {
+        setHighlighted(false)
+      }}
+      onDrop={e => {
+        const id = e.dataTransfer.getData('id')
+        if (id) {
+          const possiblyMod = modules[id]
+          if (possiblyMod) {
+            const fromRow = e.dataTransfer.getData('fromRow')
+            const fromCol = e.dataTransfer.getData('fromCol')
+            window.setFillIsExpanded(false)
+            dispatch(moveModule(id, mod.row, mod.col))
+            dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
+          }
+        } else {
+          const fromID = e.dataTransfer.getData('fromID')
+          if (fromID) {
+            setCMState({
+              isOpen: true,
+              fromID
+            })
+          }
         }
+        setHighlighted(false)
       }}
       draggable={true}
       onDragStart={event => {
@@ -67,7 +84,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
       onDragEnd={() => {
         window.setFillIsExpanded(false)
       }}
-      onClick={(e) => {
+      onClick={e => {
         if (e.stopPropagation) {
           e.stopPropagation()
         }
@@ -93,12 +110,15 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }
       }}
     >
-      <div className={classes.IconName}>
-        {mod.id}
-      </div>
       <div className={classes.IconConnector}
         draggable={true}
+        onDragStart={(e) => {
+          e.dataTransfer.setData('fromID', mod.id)
+        }}
       />
+      <div className={classes.IconName}>
+        {mod.name}
+      </div>
       {!cmState.isOpen ? null : 
       <ConnectionMenu fromID={cmState.fromID} toID={mod.id} 
         onClose={() => {
@@ -108,8 +128,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           })
           window.linkToOutputID = ''
         }}
-      />
-      }
+      />}
     </div>
   )
 }
