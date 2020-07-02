@@ -13,7 +13,6 @@ const initBaseCM: ContainerModule = {
   outputs: [],
   parentID: null,
   childModules: [],
-  controls: {},
   isBaseContainer: true
 }
 
