@@ -3,6 +3,7 @@ import { CenterMenu, Button } from '../all'
 import { Module } from '../../redux/stateTSTypes'
 import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
+import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
 
 interface Props {
   fromMod: Module
@@ -23,20 +24,21 @@ function ConnectionMenu({ fromMod, toMod }: Props) {
             }}
           >module</Button>
           <Button
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation()
               setOpenMenu(1)
             }}
           >props</Button>
         </CenterMenu>
         :
         <CenterMenu header={'props'} onClose={() => {}}>
-          {am[fromMod.id].paramIDs.map((id, key) => {
+          {am[fromMod.id].paramIDs.map((paramID, key) => {
             return (
-            <Button key={id + key}
+            <Button key={paramID + key}
               onClick={() => {
-                
+                connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id])
               }}
-            >{id}</Button>
+            >{paramID}</Button>
             )
           })}
         </CenterMenu>

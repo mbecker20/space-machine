@@ -44,15 +44,16 @@ function DropSquare({ row, col }: Props) {
       }}
       onDrop={event => {
         const id = event.dataTransfer.getData('id')
-        const moduleType = event.dataTransfer.getData('moduleType') as ModuleType
         const fc = modules[window.fillContainerID] as ContainerModule
         const currentChildren = fc.childModules.concat(fc.childModules)
         const possiblyMod = modules[id]
         const possiblyOccupyingID = isOccupied(row, col, currentChildren, modules)
         if (!possiblyMod) {
           if (!possiblyOccupyingID) {
+            const moduleType = event.dataTransfer.getData('moduleType') as ModuleType
+            const name = event.dataTransfer.getData('name')
             setHL(false)
-            dispatch(addModule(id, moduleType, window.fillContainerID, row, col))
+            dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
             window.addModule(id, moduleType)
             window.setFillIsExpanded(false)
             window.currSetHighlighted(false)

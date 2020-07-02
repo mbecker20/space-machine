@@ -19,6 +19,7 @@ function DrawerItem({ name, id, moduleType }: Props) {
         onDragStart={event => {
           event.dataTransfer.setData('id', `${id} ${numAdds}`)
           event.dataTransfer.setData('moduleType', moduleType)
+          event.dataTransfer.setData('name', name)
           window.setFillIsExpanded(true)
           numAdds+=1
         }}
@@ -30,7 +31,7 @@ function DrawerItem({ name, id, moduleType }: Props) {
         {name}
       </div>
     </div>
-  );
+  )
 }
 
 export default DrawerItem

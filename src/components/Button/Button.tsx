@@ -4,7 +4,7 @@ import CSS from 'csstype'
 
 interface Props {
   children?: React.ReactNode
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   style?: CSS.Properties
 }
 
