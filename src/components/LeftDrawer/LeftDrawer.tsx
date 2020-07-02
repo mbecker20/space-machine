@@ -21,8 +21,6 @@ function LeftDrawer() {
   const classes = useJSS()
   const [isOpen, setOpen] = useState(false)
   window.setLeftDrawerOpen = setOpen
-  const [topText, setTopText] = useState(window.highlightedID)
-  window.setLeftDrawerTopText = setTopText
   const springStyle = useSpring({
     width: isOpen ? sizes.leftDrawer.width : '0vw',
     config: {
@@ -35,6 +33,9 @@ function LeftDrawer() {
   const [isRenameMenuOpen, setRMOpen] = useState(false)
   const selectedModule = useSelector((state: RootState) => state.modules[window.highlightedID])
   const am = window.audioModules
+  const audioModule = am[window.highlightedID]
+  const [topText, setTopText] = useState('')
+  window.setLeftDrawerTopText = setTopText
   return (
     <React.Fragment>
       <animated.div className={classes.LeftDrawer} style={springStyle}>
@@ -46,8 +47,8 @@ function LeftDrawer() {
               {topText}
             </div>
           </HorizontalScrollDiv>
-          {selectedModule.inputs.length === 0 ? null : <div>inputs</div>}
-          {selectedModule.inputs.map((inputData, key) => {
+          {!selectedModule ? null : selectedModule.inputs.length === 0 ? null : <div>inputs</div>}
+          {!selectedModule ? null : selectedModule.inputs.map((inputData, key) => {
             return (
               <div key={inputData[0] + key}
                 onClick={() => {
@@ -57,8 +58,8 @@ function LeftDrawer() {
               >{inputData[1].length === 0 ? inputData[0] : `${inputData[0]} - ${inputData[1]}`}</div>
             )
           })}
-          {selectedModule.outputs.length === 0 ? null : <div>outputs</div>}
-          {selectedModule.outputs.map((outputData, key) => {
+          {!selectedModule ? null : selectedModule.outputs.length === 0 ? null : <div>outputs</div>}
+          {!selectedModule ? null : selectedModule.outputs.map((outputData, key) => {
             return (
               <div key={outputData[0] + key}
                 onClick={() => {
@@ -69,9 +70,17 @@ function LeftDrawer() {
             )
           })}
         </div>
-        {am[window.highlightedID] ? Object.keys(am[window.highlightedID].controls).map(controlID => {
+        {audioModule ? Object.keys(audioModule.controls).map((controlID, index) => {
           return (
-            <div>{controlID}</div>
+            <div className={classes.ControlBounder}>
+              <div>{controlID}</div>
+              <input className={classes.ControlInput}
+                placeholder={`${audioModule.audioNode[audioModule.paramIDs[index]] ? audioModule.audioNode[audioModule.paramIDs[index]].value : null}`}
+                onChange={(e) => {
+                  audioModule.controls[controlID](e.target.value)
+                }}
+              />
+            </div>
           )
         }) : null}
         <div className={classes.BottomItems}>

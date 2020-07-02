@@ -13,7 +13,7 @@ const addConnection = (state: Modules, { fromID, toID, param }: AddConnectionAct
     [fromID]: {
       ...state[fromID],
       outputs: [
-        ...state[fromID].inputs,
+        ...state[fromID].outputs,
         [toID, param],
       ],
     }

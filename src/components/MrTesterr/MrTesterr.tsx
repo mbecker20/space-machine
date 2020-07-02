@@ -24,7 +24,7 @@ function MrTesterr() {
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}
           onClick={() => {
-            output.controls.resume()
+            output.controls.resume('')
           }}
         >start ctx</div>
       </div>
@@ -36,7 +36,7 @@ function MrTesterr() {
           <input style={{ height: '2em' }}
             
             onChange={(e) => {
-              osc.controls['set frequency'](Number(e.target.value))
+              osc.controls['set frequency'](e.target.value)
             }}
           />
         </div>
@@ -49,7 +49,7 @@ function MrTesterr() {
           <input style={{ height: '2em' }}
             
             onChange={(e) => {
-              lpf.controls['set frequency'](Number(e.target.value))
+              lpf.controls['set frequency'](e.target.value)
             }}
           />
         </div>
@@ -58,7 +58,7 @@ function MrTesterr() {
         <div className={classes.Button}
           style={{ backgroundColor: 'red' }}
           onClick={() => {
-            output.controls.suspend()
+            output.controls.suspend('')
           }}
         >stop ctx</div>
       </div>

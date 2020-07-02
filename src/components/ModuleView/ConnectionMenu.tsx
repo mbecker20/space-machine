@@ -19,13 +19,15 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
     <Fragment>
       {openMenu === 0 ?
         <CenterMenu header={'connect to'} onClose={() => {
-          onClose()
           setOpenMenu(0)
+          onClose()
         }}>
           <Button style={{}}
             onClick={() => {
               connect(am[fromID] as ConnectingAudioModule, am[toID])
               dispatch(addConnection(fromID, toID))
+              setOpenMenu(0)
+              onClose()
             }}
           >module</Button>
           {am[toID].paramIDs.length === 0 ? null :
@@ -37,7 +39,10 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
           >params</Button>}
         </CenterMenu>
         :
-        <CenterMenu header={'props'} onClose={() => {}}>
+        <CenterMenu header={'props'} onClose={() => {
+          setOpenMenu(0)
+          onClose()
+        }}>
           {am[toID].paramIDs.map((paramID, key) => {
             return (
             <Button key={paramID + key}
@@ -45,6 +50,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
                 connect(am[fromID] as ConnectingAudioModule, am[toID], paramID)
                 dispatch(addConnection(fromID, toID, paramID))
                 setOpenMenu(0)
+                onClose()
               }}
             >{paramID}</Button>
             )

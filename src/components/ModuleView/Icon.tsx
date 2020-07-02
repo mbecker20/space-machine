@@ -5,6 +5,7 @@ import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
 import ConnectionMenu from './ConnectionMenu'
+import { OUTPUT } from '../../audioModules/moduleTypes'
 
 declare global {
   interface Window {
@@ -108,12 +109,14 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }
       }}
     >
+      {mod.moduleType !== OUTPUT ? 
       <div className={classes.IconConnector}
         draggable={true}
         onDragStart={(e) => {
+          e.stopPropagation()
           e.dataTransfer.setData('fromID', mod.id)
         }}
-      />
+      /> : <div style={{ width: '1vmin', height: '1vmin' }}/>}
       <div className={classes.IconName}>
         {mod.name}
       </div>

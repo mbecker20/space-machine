@@ -161,7 +161,16 @@ const useJSS = createUseStyles({
     borderRadius: '1vmin',
     padding: '1vmin 0vmin',
     marginBottom: '1vmin',
-  }
+  },
+
+  ControlBounder: {
+    display: 'flex',
+  },
+
+  ControlInput: {
+    fontSize: sizes.text.medium,
+    width: '9vmin'
+  },
 })
 
 export default useJSS

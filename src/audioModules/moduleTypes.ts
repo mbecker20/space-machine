@@ -22,3 +22,7 @@ export interface AudioModules {
 export interface BaseAM {
   paramIDs: string[]
 }
+
+export interface BaseControls {
+  [index: string]: (arg: string) => void
+}

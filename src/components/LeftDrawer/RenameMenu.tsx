@@ -19,12 +19,13 @@ function createSubmitState(isTooShort = false, isAlreadyTaken = false) { // defa
 function RenameMenu({ setRMOpen, setTopText }: Props) {
   const classes = useJSS()
   const renameInputRef = useRef<HTMLInputElement>(null)
-  const { existingIDs, baseContainerID } = useSelector((state: RootState) => {
+  const { modules, baseContainerID } = useSelector((state: RootState) => {
     return {
-      existingIDs: Object.keys(state.modules),
+      modules: state.modules,
       baseContainerID: state.baseContainerID
     }
   })
+  const existingIDs = Object.keys(modules)
   const dispatch = useDispatch()
   const [ { isTooShort, isAlreadyTaken }, setSubmitState] = useState(createSubmitState())
   function submitNewName() {
@@ -53,7 +54,7 @@ function RenameMenu({ setRMOpen, setTopText }: Props) {
     <CenterMenu header='rename' onClose={() => {setRMOpen(false)}}>
         <div className={classes.CMInputBounder}>
           <input className={classes.CenterMenuInput}
-            placeholder={window.highlightedID}
+            placeholder={modules[window.highlightedID].name}
             onKeyUp={event => {
               if (event.keyCode === 13) {
                 submitNewName()

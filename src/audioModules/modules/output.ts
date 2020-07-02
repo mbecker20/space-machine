@@ -1,27 +1,22 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM } from '../moduleTypes'
-
-export interface OutputControls {
-  'resume': () => void
-  'suspend': () => void
-}
+import { BaseAM, BaseControls } from '../moduleTypes'
 
 export interface OutputModule extends BaseAM {
   audioNode: AudioNode
-  controls: OutputControls
+  controls: BaseControls
 }
 
 function makeOutput(): OutputModule {
-  function resume() {
+  function resume(arg = '') {
     audioCtx.resume()
   }
 
-  function suspend() {
+  function suspend(arg = '') {
     audioCtx.suspend()
   }
 
   audioCtx.resume()
-  return { audioNode: audioCtx.destination, paramIDs: [], controls: { 'resume': resume, 'suspend': suspend } }
+  return { audioNode: audioCtx.destination, paramIDs: ['resume', 'suspend'], controls: { 'resume': resume, 'suspend': suspend } }
 }
 
 export default makeOutput
