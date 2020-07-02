@@ -32,7 +32,11 @@ function ConnectionMenu({ fromMod, toMod }: Props) {
         <CenterMenu header={'props'} onClose={() => {}}>
           {am[fromMod.id].paramIDs.map((id, key) => {
             return (
-              <div></div>
+            <Button key={id + key}
+              onClick={() => {
+                
+              }}
+            >{id}</Button>
             )
           })}
         </CenterMenu>
