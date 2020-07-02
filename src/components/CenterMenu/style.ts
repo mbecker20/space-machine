@@ -2,6 +2,16 @@ import { createUseStyles } from 'react-jss'
 import { colors, sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
+  CenterMenuBounder: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    zIndex: 200,
+  },
+
   CenterMenu: {
     backgroundColor: colors.centerMenu,
     position: 'absolute',
