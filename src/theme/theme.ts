@@ -25,6 +25,7 @@ export const colors: Colors = {
 
   dropSquareHL: 'white',
 
+  defaultButton: 'black',
   deleteButton: '#cc0000',
   deleteButtonText: 'white',
 

@@ -51,6 +51,14 @@ const useJSS = createUseStyles({
     },
   },
 
+  IconName: {
+    
+  },
+
+  IconConnector: {
+
+  },
+
   DropSquare: {
     width: sizes.moduleView.iconGrid,
     height: sizes.moduleView.iconGrid,

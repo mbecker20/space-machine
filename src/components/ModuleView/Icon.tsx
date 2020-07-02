@@ -93,7 +93,12 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }
       }}
     >
-      {mod.id}
+      <div className={classes.IconName}>
+        {mod.id}
+      </div>
+      <div className={classes.IconConnector}
+        draggable={true}
+      />
     </div>
   )
 }
