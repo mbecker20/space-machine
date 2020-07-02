@@ -1,6 +1,6 @@
 import { Modules, ContainerModule } from '../../stateTSTypes'
 import { AddModuleAction } from '../moduleTSTypes'
-import { CONTAINER, OSCILLATOR, GATE, OUTPUT } from '../../../audioModules/moduleTypes'
+import { CONTAINER } from '../../../audioModules/moduleTypes'
 
 const addModule = (state: Modules, { id, moduleType, row, col, parentID }: AddModuleAction) => {
   switch(moduleType) {
