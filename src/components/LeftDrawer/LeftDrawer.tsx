@@ -47,11 +47,21 @@ function LeftDrawer() {
           {selectedModule.inputs.length === 0 ? null : <div>inputs</div>}
           {selectedModule.inputs.map((inputData, key) => {
             return (
-              <div></div>
+              <div key={inputData[0] + key}>{inputData[1].length === 0 ? inputData[0] : `${inputData[0]} - ${inputData[1]}`}</div>
             )
           })}
-          <div>outputs</div>
+          {selectedModule.outputs.length === 0 ? null : <div>outputs</div>}
+          {selectedModule.outputs.map((outputData, key) => {
+            return (
+              <div key={outputData[0] + key}>{outputData[1].length === 0 ? outputData[0] : `${outputData[0]} - ${outputData[1]}`}</div>
+            )
+          })}
         </div>
+        {Object.keys(am[window.highlightedID].controls).map(controlID => {
+          return (
+            <div></div>
+          )
+        })}
         <div className={classes.BottomItems}>
           <div className={classes.Delete}
             onClick={() => {
