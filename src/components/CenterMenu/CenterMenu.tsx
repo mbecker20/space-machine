@@ -14,11 +14,6 @@ function CenterMenu({ children, header, onClose }: Props) {
       onClick={onClose}
     >
       <div className={classes.CenterMenu}
-        onKeyUp={(e) => {
-          if (e.keyCode === 27 ) { //escape
-            onClose()
-          }
-        }}
         onClick={(e) => {e.stopPropagation()}} 
       >
         <div className={classes.Header}>
