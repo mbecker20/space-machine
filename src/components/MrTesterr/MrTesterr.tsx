@@ -36,7 +36,7 @@ function MrTesterr() {
           <input style={{ height: '2em' }}
             
             onChange={(e) => {
-              osc.controls.setFrequency(Number(e.target.value))
+              osc.controls['set frequency'](Number(e.target.value))
             }}
           />
         </div>
@@ -49,7 +49,7 @@ function MrTesterr() {
           <input style={{ height: '2em' }}
             
             onChange={(e) => {
-              lpf.controls.setFrequency(Number(e.target.value))
+              lpf.controls['set frequency'](Number(e.target.value))
             }}
           />
         </div>

@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
-import { Module } from '../../redux/stateTSTypes'
 import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
 import { ConnectingAudioModule } from '../../audioModules/moduleTypes'

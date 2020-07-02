@@ -1,6 +1,6 @@
 import React from 'react'
 import useJSS from './style'
-import { RightDrawer, LeftDrawer, ModuleViewFill, MrTesterr } from '../components/all'
+import { RightDrawer, LeftDrawer, ModuleViewFill } from '../components/all'
 import { useSelector } from 'react-redux'
 import { RootState, ContainerModule } from '../redux/stateTSTypes'
 import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
@@ -34,7 +34,6 @@ function App() {
   })
   return (
     <div className={classes.Bounder}>
-      <MrTesterr />
       <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
         <ModuleViewFill containerModule={modules[window.fillContainerID] as ContainerModule}/>

@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react'
 import DrawerItem from '../DrawerItem'
-import { CONTAINER, OSCILLATOR, GATE, OUTPUT } from '../../../audioModules/moduleTypes'
+import { CONTAINER, OSCILLATOR, AUTOFILTER, GAIN, OUTPUT } from '../../../audioModules/moduleTypes'
 
 function BaseModules() {
   return (
     <Fragment>
-      <DrawerItem name='oscillator' id='osc' moduleType={OSCILLATOR}/>
-      <DrawerItem name='output' id='out' moduleType={OUTPUT}/>
-      <DrawerItem name='container' id='cntnr' moduleType={CONTAINER}/>
-      <DrawerItem name='gate' id='gate' moduleType={GATE}/>
+      <DrawerItem fullName='oscillator' id='osc' moduleType={OSCILLATOR}/>
+      <DrawerItem fullName='gain' id='gain' moduleType={GAIN}/>
+      <DrawerItem fullName='output' id='out' moduleType={OUTPUT}/>
+      <DrawerItem fullName='container'  id='cntnr' moduleType={CONTAINER}/>
+      <DrawerItem fullName='auto filter' id='filter' moduleType={AUTOFILTER}/>
     </Fragment>
   )
 }

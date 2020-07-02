@@ -3,9 +3,7 @@ import { Module, RootState } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
-import { moveModule, addConnection, removeConnection } from '../../redux/allActions'
-import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
-import { connect, disconnect } from '../../audioModules/connection'
+import { moveModule } from '../../redux/allActions'
 import ConnectionMenu from './ConnectionMenu'
 
 declare global {

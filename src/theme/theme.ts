@@ -36,7 +36,7 @@ export const colors: Colors = {
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '25vw',
+    width: '20vw',
     toggleWidth: '1.5vmin',
     item: '10vmin'
   },
@@ -44,9 +44,9 @@ export const sizes: Sizes = {
     width: '20vw',
   },
   moduleView: {
-    iconGrid: '14vmin',
-    gutterGrid: '4vmin',
-    icon: '10vmin',
+    iconGrid: '13vmin',
+    gutterGrid: '7vmin',
+    icon: '11vmin',
   },
   text: {
     large: 'calc(20px + 2.5vmin)',

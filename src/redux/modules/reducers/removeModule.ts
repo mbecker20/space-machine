@@ -1,6 +1,5 @@
 import { Modules, ContainerModule } from "../../stateTSTypes"
 import { RemoveModuleAction } from "../moduleTSTypes"
-import { stringIn } from '../../../helpers/genFuncs'
 
 const removeModule = (state: Modules, { id }: RemoveModuleAction) => {
   const parentID = state[id].parentID as string
