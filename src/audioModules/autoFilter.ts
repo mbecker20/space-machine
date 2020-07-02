@@ -13,7 +13,7 @@ export interface AutoFilterModule {
   controls: AutoFilterControls
 }
 
-function makeAutoFilter (type: BiquadFilterType, frequency: number, detune: number, Q: number, gain: number) {
+function makeAutoFilter (type: BiquadFilterType = 'lowpass', frequency = 12500, detune = 0, Q = 0, gain = 1) {
   const autoFilter = audioCtx.createBiquadFilter()
     autoFilter.type = type
     autoFilter.frequency.setValueAtTime(frequency, audioCtx.currentTime)

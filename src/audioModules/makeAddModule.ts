@@ -1,5 +1,5 @@
-import { ModuleType, OSCILLATOR, GATE, OUTPUT, GAIN } from './moduleTypes'
-import { makeOscillator, makeGate, makeOutput, makeGain } from './all'
+import { ModuleType, OSCILLATOR, GATE, OUTPUT, GAIN, AUTOFILTER } from './moduleTypes'
+import { makeOscillator, makeGate, makeOutput, makeGain, makeAutoFilter } from './all'
 
 function makeAddModule() {
   return function(id: string, moduleType: ModuleType) {
@@ -8,6 +8,7 @@ function makeAddModule() {
       case GATE: window.audioModules = { ...window.audioModules, [id]: makeGate() }; break
       case GAIN: window.audioModules = { ...window.audioModules, [id]: makeGain() }; break
       case OUTPUT: window.audioModules = { ...window.audioModules, [id]: makeOutput() }; break
+      case AUTOFILTER: window.audioModules = { ...window.audioModules, [id]: makeAutoFilter() }; break
     }
   }
 }
