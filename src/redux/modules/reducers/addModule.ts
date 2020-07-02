@@ -15,7 +15,6 @@ const addModule = (state: Modules, { id, name, moduleType, row, col, parentID }:
         inputs: [],
         outputs: [],
         childModules: [],
-        controls: {},
         isBaseContainer: false,
       },
       [parentID]: {
@@ -36,7 +35,6 @@ const addModule = (state: Modules, { id, name, moduleType, row, col, parentID }:
         moduleType,
         inputs: [],
         outputs: [],
-        controls: {},
       },
       [parentID]: {
         ...state[parentID],
