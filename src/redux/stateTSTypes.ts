@@ -20,7 +20,6 @@ export interface Module { // the base of the Module types
   inputs: string[]
   outputs: string[]
   parentID: string | null // id of parent ContainerModule
-  controls: Controls
 }
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 
@@ -30,15 +29,4 @@ export interface ContainerModule extends Module { // modules composing other mod
 
 export interface Modules {
   [index: string]: Module | ContainerModule
-}
-
-// control related state
-// ---------------------
-
-export interface Control {
-  
-}
-
-export interface Controls {
-  [index: string]: Control
 }

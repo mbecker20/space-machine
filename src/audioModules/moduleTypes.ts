@@ -20,3 +20,7 @@ export type AudioModule = ConnectingAudioModule | OutputModule
 export interface AudioModules {
   [index: string]: AudioModule
 }
+
+export interface Controls {
+  allIDs: string[]
+}
