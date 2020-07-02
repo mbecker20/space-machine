@@ -32,14 +32,14 @@ export interface AddConnectionAction {
   type: string
   fromID: string
   toID: string
-  prop: string
+  param: string
 }
 
 export interface RemoveConnectionAction {
   type: string
   fromID: string
   toID: string
-  prop: string
+  param: string
 }
 
 export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | RemoveConnectionAction

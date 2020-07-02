@@ -1,20 +1,20 @@
 import { Modules } from "../../stateTSTypes";
 import { AddConnectionAction } from "../moduleTSTypes";
 
-const addConnection = (state: Modules, { fromID, toID, prop }: AddConnectionAction) => {
+const addConnection = (state: Modules, { fromID, toID, param }: AddConnectionAction) => {
   return Object.assign({}, state, {
     [toID]: {
       ...state[toID],
       inputs: [
         ...state[toID].inputs,
-        [fromID, prop]
+        [fromID, param]
       ],
     },
     [fromID]: {
       ...state[fromID],
       outputs: [
         ...state[fromID].inputs,
-        [toID, prop],
+        [toID, param],
       ],
     }
   })

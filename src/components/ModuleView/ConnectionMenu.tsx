@@ -4,26 +4,29 @@ import { Module } from '../../redux/stateTSTypes'
 import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
 import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
+import { addConnection } from '../../redux/allActions'
 
 interface Props {
-  fromMod: Module
-  toMod: Module
+  fromID: string
+  toID: string
+  onClose: () => void
 }
 
-function ConnectionMenu({ fromMod, toMod }: Props) {
+function ConnectionMenu({ fromID, toID, onClose }: Props) {
   const [openMenu, setOpenMenu] = useState(0)
   const am = window.audioModules
   const dispatch = useDispatch()
   return (
     <Fragment>
       {openMenu === 0 ?
-        <CenterMenu header={'connect to'} onClose={() => {}}>
-          <Button
+        <CenterMenu header={'connect to'} onClose={onClose}>
+          <Button style={{}}
             onClick={() => {
-              
+              connect(am[fromID] as ConnectingAudioModule, am[toID])
+              dispatch(addConnection(fromID, toID))
             }}
           >module</Button>
-          <Button
+          <Button style={{}}
             onClick={(e) => {
               e.stopPropagation()
               setOpenMenu(1)
@@ -32,11 +35,13 @@ function ConnectionMenu({ fromMod, toMod }: Props) {
         </CenterMenu>
         :
         <CenterMenu header={'props'} onClose={() => {}}>
-          {am[fromMod.id].paramIDs.map((paramID, key) => {
+          {am[toID].paramIDs.map((paramID, key) => {
             return (
             <Button key={paramID + key}
               onClick={() => {
-                connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id])
+                connect(am[fromID] as ConnectingAudioModule, am[toID], paramID)
+                dispatch(addConnection(fromID, toID, paramID))
+                setOpenMenu(0)
               }}
             >{paramID}</Button>
             )

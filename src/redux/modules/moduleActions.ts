@@ -44,20 +44,20 @@ export const renameModule = (id: string, newName: string) => {
   }
 }
 
-export const addConnection = (fromID: string, toID: string, prop = '') => {
+export const addConnection = (fromID: string, toID: string, param = '') => {
   return {
     type: ADD_CONNECTION,
     fromID,
     toID,
-    prop,
+    param,
   }
 }
 
-export const removeConnection = (fromID: string, toID: string, prop = '') => {
+export const removeConnection = (fromID: string, toID: string, param = '') => {
   return {
     type: REMOVE_CONNECTION,
     fromID,
     toID,
-    prop,
+    param,
   }
 }
