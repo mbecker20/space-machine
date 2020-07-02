@@ -1,7 +1,7 @@
 import React from 'react'
 import useJSS from './style'
 import { Module } from '../../../redux/stateTSTypes'
-import { OscillatorModule } from '../../../audioModules/oscillator'
+import { OscillatorModule } from '../../../audioModules/modules/oscillator'
 import { disconnect } from '../../../audioModules/connection'
 import { useDispatch } from 'react-redux'
 import { removeConnection } from '../../../redux/allActions'

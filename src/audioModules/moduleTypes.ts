@@ -1,8 +1,8 @@
-import { OscillatorModule } from './oscillator'
-import { GateModule } from './gate'
-import { GainModule } from './gain'
-import { OutputModule } from './output'
-import { AutoFilterModule } from './autoFilter'
+import { OscillatorModule } from './modules/oscillator'
+import { GateModule } from './modules/gate'
+import { GainModule } from './modules/gain'
+import { OutputModule } from './modules/output'
+import { AutoFilterModule } from './modules/autoFilter'
 
 export const GATE = 'GATE'
 export const GAIN = 'GAIN'
@@ -21,6 +21,6 @@ export interface AudioModules {
   [index: string]: AudioModule
 }
 
-export interface Controls {
-  allIDs: string[]
+export interface BaseAM {
+  paramIDs: string[]
 }

@@ -1,11 +1,12 @@
-import audioCtx from '../audioCtx'
+import audioCtx from '../../audioCtx'
+import { BaseAM } from '../moduleTypes'
 
 export interface GateControls {
   setState: (gateLevel: number, gateLength: number) => void
   openGate: () => void
 }
 
-export interface GateModule {
+export interface GateModule extends BaseAM {
   audioNode: GainNode
   controls: GateControls
 }
@@ -34,7 +35,7 @@ function makeGate(gateLevel = 0, gateLength = 1): GateModule {
     gate.gain.setValueAtTime (0, audioCtx.currentTime + length )
   }
 
-  return { audioNode: gate, controls: { setState, openGate } }
+  return { audioNode: gate, paramIDs: [], controls: { setState, openGate } }
 }
 
 export default makeGate
