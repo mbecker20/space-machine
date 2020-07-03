@@ -74,6 +74,19 @@ const useJSS = createUseStyles({
     },
   },
 
+  MenuHeader: {
+    fontSize: sizes.text.medium,
+    borderStyle: 'none none solid none',
+    margin: '.5vmin 3vmin',
+    //borderColor: 'white'
+  }, 
+
+  Connection: {
+    fontSize: sizes.text.small,
+    margin: '.5vmin 3vmin',
+    //borderColor: 'white'
+  },
+
   // bottom items
 
   BottomItems: {
@@ -163,13 +176,22 @@ const useJSS = createUseStyles({
     marginBottom: '1vmin',
   },
 
+  ControlMenu: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%'
+  },
+
   ControlBounder: {
     display: 'flex',
+    justifyContent: 'space-around',
+    padding: '1vmin',
+    fontSize: sizes.text.small,
   },
 
   ControlInput: {
-    fontSize: sizes.text.medium,
-    width: '9vmin'
+    width: '9vmin',
+    margin: '1vmin',
   },
 })
 

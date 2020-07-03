@@ -1,7 +1,7 @@
 import React from 'react'
 import useJSS from './style'
-import { makeOscillator, makeGain, makeOutput, makeAutoFilter } from '../../audioModules/all'
-import { connect } from '../../audioModules/connection'
+//import { makeOscillator, makeGain, makeOutput, makeAutoFilter } from '../../audioModules/all'
+//import { connect } from '../../audioModules/connection'
 
 // Successful FM Synth implementation!
 // done using new dynamic module connect function

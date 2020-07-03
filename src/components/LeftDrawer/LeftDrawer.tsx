@@ -48,11 +48,14 @@ function LeftDrawer() {
               {selectedModule ? selectedModule.name : null}
             </div>
           </HorizontalScrollDiv>
-          {!selectedModule ? null : selectedModule.inputs.length === 0 ? null : <div>inputs</div>}
+          {!selectedModule ? null : selectedModule.inputs.length === 0 ? null : 
+            <div className={classes.MenuHeader}>inputs</div>
+          }
           {!selectedModule ? null : selectedModule.inputs.map((inputData, key) => {
             const name = modules[inputData[0]].name
             return (
-              <div key={inputData[0] + key}
+              <div className={classes.Connection}
+                key={inputData[0] + key}
                 onClick={() => {
                   dispatch(removeConnection(inputData[0], selectedModule.id, inputData[1]))
                   disconnect(am[inputData[0]] as ConnectingAudioModule, am[selectedModule.id], inputData[1])
@@ -60,7 +63,9 @@ function LeftDrawer() {
               >{inputData[1].length === 0 ? name : `${name} - ${inputData[1]}`}</div>
             )
           })}
-          {!selectedModule ? null : selectedModule.outputs.length === 0 ? null : <div>outputs</div>}
+          {!selectedModule ? null : selectedModule.outputs.length === 0 ? null :
+            <div className={classes.MenuHeader}>outputs</div>
+          }
           {!selectedModule ? null : selectedModule.outputs.map((outputData, key) => {
             const name = modules[outputData[0]].name
             return (
@@ -73,19 +78,22 @@ function LeftDrawer() {
             )
           })}
         </div>
-        {audioModule ? Object.keys(audioModule.controls).map((controlID, index) => {
-          return (
-            <div className={classes.ControlBounder} key={controlID + index}>
-              <div>{controlID}</div>
-              <input className={classes.ControlInput}
-                placeholder={`${audioModule.audioNode[audioModule.paramIDs[index]] ? audioModule.audioNode[audioModule.paramIDs[index]].value : null}`}
-                onChange={(e) => {
-                  audioModule.controls[controlID](e.target.value)
-                }}
-              />
-            </div>
-          )
-        }) : null}
+        <div className={classes.ControlMenu}>
+          <div className={classes.MenuHeader}>controls</div>
+          {audioModule ? Object.keys(audioModule.controls).map((controlID, index) => {
+            return (
+              <div className={classes.ControlBounder} key={controlID + index}>
+                <div>{controlID}</div>
+                <input className={classes.ControlInput}
+                  placeholder={`${audioModule.audioNode[audioModule.paramIDs[index]] ? audioModule.audioNode[audioModule.paramIDs[index]].value : null}`}
+                  onChange={(e) => {
+                    audioModule.controls[controlID](e.target.value)
+                  }}
+                />
+              </div>
+            )
+          }) : null}
+        </div>
         <div className={classes.BottomItems}>
           <div className={classes.Delete}
             onClick={() => {
