@@ -1,14 +1,15 @@
 import React, { useState, Fragment } from 'react'
 import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
-import { sizes } from '../../theme/theme'
+import { colors, sizes } from '../../theme/theme'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeModule, removeConnection } from '../../redux/allActions'
-import { HorizontalScrollDiv } from '../all'
+import { HorizontalScrollDiv, Button } from '../all'
 import RenameMenu from './RenameMenu'
 import { RootState } from '../../redux/stateTSTypes'
 import { disconnect } from '../../audioModules/connection'
 import { ConnectingAudioModule, TYPE, BUTTON, VALUE } from '../../audioModules/moduleTypes'
+import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
 
 declare global {
   interface Window { 
@@ -60,7 +61,9 @@ function LeftDrawer() {
                   dispatch(removeConnection(inputData[0], selectedModule.id, inputData[1]))
                   disconnect(am[inputData[0]] as ConnectingAudioModule, am[selectedModule.id], inputData[1])
                 }}
-              >{inputData[1].length === 0 ? name : `${name} - ${inputData[1]}`}</div>
+              >
+                {inputData[1].length === 0 ? name : `${name} - ${inputData[1]}`}
+              </div>
             )
           })}
           {!selectedModule ? null : selectedModule.outputs.length === 0 ? null :
@@ -90,36 +93,64 @@ function LeftDrawer() {
                 <Fragment>
                   <div>{controlID}</div>
                   <input className={classes.ControlInput}
-                    placeholder={`${audioModule.audioNode[paramID] ? audioModule.audioNode[paramID].value : null}`}
+                    type='number'
+                    value={`${audioModule.audioNode[paramID] ? audioModule.audioNode[paramID].value : null}`}
                     onChange={(e) => {
                       audioModule.controls[controlID](e.target.value)
+                      window.reRenderLeftDrawer()
                     }}
                   />
                 </Fragment>
                 :
                 ctrlType === BUTTON
                 ?
-                <div></div>
+                <Button style={{
+                    //backgroundColor: colors.fillModule,
+                    borderColor: colors.deleteButton,
+                    width: '50%',
+                  }}
+                  onClick={() => {
+                    audioModule.controls[controlID]('')
+                  }}
+                >{controlID}</Button>
                 :
                 ctrlType === TYPE
                 ?
-                <div></div>
+                <Fragment>
+                  <label htmlFor={'type'}>choose type</label>
+                  <select className={classes.ControlTypeSelect}
+                    name='type' id='type'
+                    onChange={(e) => {
+                      audioModule.controls[controlID](e.target.value)
+                    }}
+                  >
+                    {(audioModule as AudioModuleWithTypes).typeTypes.map(type => {
+                      return (
+                        <option value={type} key={selectedModule.id + type}>{type}</option>
+                      )
+                    })}
+                  </select>
+                </Fragment>
                 :
                 null
                 }
-                
               </div>
             )
           }) : null}
         </div>
         <div className={classes.BottomItems}>
-          <div className={classes.Delete}
+          <Button style={{ 
+            borderColor: colors.deleteButton,
+            //backgroundColor: colors.fillModule,
+            width: '50%',
+            fontSize: sizes.text.small
+          }}
             onClick={() => {
               dispatch(removeModule(window.highlightedID))
               window.setLeftDrawerOpen(false)
               window.highlightedID = ''
             }}
-          >delete</div>
+          >delete</Button>
         </div>
       </animated.div>
       {!isRenameMenuOpen ? null :

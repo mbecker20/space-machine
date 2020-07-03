@@ -21,6 +21,8 @@ export const BUTTON = 'BUTTON'
 
 export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON'
 
+export type AudioModuleWithTypes = OscillatorModule
+
 export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule
 
 export type AudioModule = ConnectingAudioModule | OutputModule

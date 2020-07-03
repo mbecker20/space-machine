@@ -8,12 +8,12 @@ export interface GainModule extends BaseAM {
 
 function makeGain(gainAmount = 1): GainModule {
   const gain = audioCtx.createGain()
-  gain.gain.setValueAtTime(gainAmount, audioCtx.currentTime)
+  gain.gain.value = gainAmount
 
   // controls 
 
   function setGain(newGain: string) {
-    gain.gain.setValueAtTime(Number(newGain), audioCtx.currentTime)
+    gain.gain.value = Number(newGain)
   }
 
   return { audioNode: gain, paramIDs: [['gain', VALUE]], controls: { 'set gain': setGain } }

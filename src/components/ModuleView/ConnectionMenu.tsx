@@ -36,7 +36,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
               onClose()
             }}
           >module</Button>
-          {stringIn(VALUE, am[toID].paramIDs.flat()) ? null :
+          {!stringIn(VALUE, am[toID].paramIDs.flat()) ? null :
           <Button style={buttonStyle}
             onClick={(e) => {
               e.stopPropagation()
