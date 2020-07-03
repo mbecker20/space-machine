@@ -122,6 +122,7 @@ function LeftDrawer() {
                     name='type' id='type'
                     onChange={(e) => {
                       audioModule.controls[controlID](e.target.value)
+                      window.reRenderLeftDrawer()
                     }}
                     value={audioModule.audioNode.type as string}
                   >
