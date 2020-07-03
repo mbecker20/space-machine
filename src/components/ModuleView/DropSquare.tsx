@@ -56,9 +56,6 @@ function DropSquare({ row, col }: Props) {
             dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
             window.addModule(id, moduleType)
             window.setFillIsExpanded(false)
-            window.currSetHighlighted(false)
-            window.highlightedID = id
-            window.setLeftDrawerOpen(true)
           }
         } else if (possiblyOccupyingID) {
           const fromRow = event.dataTransfer.getData('fromRow')
