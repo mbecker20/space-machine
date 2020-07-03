@@ -74,6 +74,19 @@ const useJSS = createUseStyles({
     },
   },
 
+  MenuHeader: {
+    fontSize: sizes.text.medium,
+    borderStyle: 'none none solid none',
+    margin: '.5vmin 3vmin',
+    //borderColor: 'white'
+  }, 
+
+  Connection: {
+    fontSize: sizes.text.small,
+    margin: '.5vmin 3vmin',
+    //borderColor: 'white'
+  },
+
   // bottom items
 
   BottomItems: {
@@ -106,6 +119,7 @@ const useJSS = createUseStyles({
       cursor: 'pointer',
     },
     borderRadius: '15px',
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     margin: '15px',
   },
 
@@ -160,7 +174,26 @@ const useJSS = createUseStyles({
     borderRadius: '1vmin',
     padding: '1vmin 0vmin',
     marginBottom: '1vmin',
-  }
+  },
+
+  ControlMenu: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%'
+  },
+
+  ControlBounder: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    padding: '1vmin',
+    fontSize: sizes.text.small,
+  },
+
+  ControlInput: {
+    minWidth: '9vmin',
+    margin: '1vmin',
+    fontSize: sizes.text.small
+  },
 })
 
 export default useJSS

@@ -4,27 +4,22 @@ import useJSS from './style'
 import { stringIn } from '../../helpers/genFuncs'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import { renameContainer, changeBase } from '../../redux/allActions'
+import { renameModule } from '../../redux/allActions'
 
 
 interface Props {
   setRMOpen: (bool: boolean) => void
-  setTopText: (str: string) => void
 }
 
 function createSubmitState(isTooShort = false, isAlreadyTaken = false) { // default is deactivated
   return { isTooShort, isAlreadyTaken }
 }
 
-function RenameMenu({ setRMOpen, setTopText }: Props) {
+function RenameMenu({ setRMOpen }: Props) {
   const classes = useJSS()
   const renameInputRef = useRef<HTMLInputElement>(null)
-  const { existingIDs, baseContainerID } = useSelector((state: RootState) => {
-    return {
-      existingIDs: Object.keys(state.containerModules),
-      baseContainerID: state.baseContainerID
-    }
-  })
+  const modules = useSelector((state: RootState) => state.modules)
+  const existingIDs = Object.keys(modules)
   const dispatch = useDispatch()
   const [ { isTooShort, isAlreadyTaken }, setSubmitState] = useState(createSubmitState())
   function submitNewName() {
@@ -35,28 +30,22 @@ function RenameMenu({ setRMOpen, setTopText }: Props) {
       } else if (stringIn(newName, existingIDs)) {
         setSubmitState(createSubmitState(false, true))
       } else {
-        dispatch(renameContainer(window.highlightedID, newName))
-        if (window.highlightedID === baseContainerID) {
-          dispatch(changeBase(newName))
-        }
-        if (window.highlightedID === window.fillContainerID) {
-          window.fillContainerID = newName
-        }
-        window.highlightedID = newName
-        setTopText(newName)
-        setSubmitState(createSubmitState())
+        dispatch(renameModule(window.highlightedID, newName))
+        window.reRenderLeftDrawer()
         setRMOpen(false)
-      }
+      } 
     }
   }
   return (
     <CenterMenu header='rename' onClose={() => {setRMOpen(false)}}>
         <div className={classes.CMInputBounder}>
           <input className={classes.CenterMenuInput}
-            placeholder={window.highlightedID}
+            placeholder={modules[window.highlightedID].name}
             onKeyUp={event => {
               if (event.keyCode === 13) {
                 submitNewName()
+              } else if (event.keyCode === 27) {
+                setRMOpen(false)
               }
             }}
             ref={renameInputRef}

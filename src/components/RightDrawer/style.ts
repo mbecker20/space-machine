@@ -58,6 +58,7 @@ const useJSS = createUseStyles({
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    alignContent: 'flex-start',
     width: sizes.rightDrawer.width,
     height: 'calc(100% - 60px)',
     overflowY: 'scroll',

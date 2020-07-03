@@ -2,21 +2,24 @@ import React from 'react'
 import useJSS from './style'
 
 interface Props {
-  name: string
+  fullName: string
   id: string
+  moduleType: string
 }
 
 let numAdds = 0
 
-function DrawerItem({ name, id }: Props) {
+function DrawerItem({ fullName, id, moduleType }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.DrawerItem}>
       <div 
-        className={classes.DrawerIcon} 
+        className={classes.DrawerIcon}
         draggable={true}
         onDragStart={event => {
           event.dataTransfer.setData('id', `${id} ${numAdds}`)
+          event.dataTransfer.setData('moduleType', moduleType)
+          event.dataTransfer.setData('name', id)
           window.setFillIsExpanded(true)
           numAdds+=1
         }}
@@ -25,10 +28,10 @@ function DrawerItem({ name, id }: Props) {
         }}
       />
       <div className={classes.DrawerItemText}>
-        {name}
+        {fullName}
       </div>
     </div>
-  );
+  )
 }
 
 export default DrawerItem

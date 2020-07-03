@@ -43,3 +43,12 @@ export function arrayEqual(arr1: any[], arr2: any[]) {
 		return false
 	}
 }
+
+export function range(start: number, stop: number) {
+	// returns list of integers from start (inclusive) to stop (exclusive)
+	var out = []
+	for (var i = start; i < stop; i++) {
+		out.push(i)
+	}
+	return out
+}

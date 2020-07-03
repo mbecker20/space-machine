@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import cmReducer from './containerModules/cmReducer'
+import moduleReducer from './modules/moduleReducer'
 import bcidReducer from './baseContainerID/bcidReducer'
 
 const rootReducer = combineReducers({
-  containerModules: cmReducer,
+  modules: moduleReducer,
   baseContainerID: bcidReducer,
 })
 

@@ -14,6 +14,12 @@ interface Text {
   large: string
   medium: string
   small: string
+  xsmall: string
+}
+
+interface Connector {
+  size: string
+  borderRadius: string
 }
 
 export interface Sizes {
@@ -21,4 +27,5 @@ export interface Sizes {
   leftDrawer: Drawer
   moduleView: ModuleView
   text: Text
+  connector: Connector
 }

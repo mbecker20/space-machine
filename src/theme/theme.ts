@@ -25,15 +25,18 @@ export const colors: Colors = {
 
   dropSquareHL: 'white',
 
+  defaultButton: 'black',
   deleteButton: '#cc0000',
   deleteButtonText: 'white',
 
   errorBackground: '#cc0000',
+
+  outputConnector: 'red',
 }
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '25vw',
+    width: '21vw',
     toggleWidth: '1.5vmin',
     item: '10vmin'
   },
@@ -41,13 +44,18 @@ export const sizes: Sizes = {
     width: '20vw',
   },
   moduleView: {
-    iconGrid: '14vmin',
-    gutterGrid: '4vmin',
-    icon: '10vmin',
+    iconGrid: '13vmin',
+    gutterGrid: '7vmin',
+    icon: '11vmin',
   },
   text: {
-    large: 'calc(20px + 2.5vmin)',
-    medium: 'calc(15px + 1.5vmin)',
-    small: 'calc(10px + 1.3vmin)',
+    large: 'calc(25px + 3vmin)',
+    medium: 'calc(20px + 2.5vmin)',
+    small: 'calc(12px + 1.5vmin)',
+    xsmall: 'calc(10px + 1.3vmin)',
+  },
+  connector: {
+    size: '3vmin',
+    borderRadius: '1.5vmin'
   },
 }
