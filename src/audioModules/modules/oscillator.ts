@@ -31,15 +31,15 @@ function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune =
   }
 
   const controls = {
-    'stop': stop,
     'set type': setType,
     'set frequency': setFrequency,
     'set detune': setDetune,
+    'stop': stop,
   }
 
   osc.start()
   
-  return { audioNode: osc, paramIDs: ['stop', 'type', 'frequency', 'detune'], controls }
+  return { audioNode: osc, paramIDs: ['type', 'frequency', 'detune', 'stop'], controls }
 }
 
 export default makeOscillator

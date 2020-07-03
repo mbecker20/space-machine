@@ -12,9 +12,9 @@ const useJSS = createUseStyles({
     fontSize: 'calc(20px + 2vmin)',
     color: 'white',
     userSelect: 'none',
-    zIndex: '1',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
+    zIndex: '20',
   },
 
   // TopItems
@@ -78,13 +78,35 @@ const useJSS = createUseStyles({
     fontSize: sizes.text.medium,
     borderStyle: 'none none solid none',
     margin: '.5vmin 3vmin',
-    //borderColor: 'white'
+    width: '90%'
   }, 
 
   Connection: {
     fontSize: sizes.text.small,
     margin: '.5vmin 3vmin',
     //borderColor: 'white'
+  },
+
+  //control menu (in the center of left drawer)
+
+  ControlMenu: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    alignItems: 'space-evenly'
+  },
+
+  ControlBounder: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    padding: '1vmin',
+    fontSize: sizes.text.small,
+  },
+
+  ControlInput: {
+    minWidth: '9vmin',
+    margin: '1vmin',
+    fontSize: sizes.text.small
   },
 
   // bottom items
@@ -112,7 +134,7 @@ const useJSS = createUseStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: sizes.text.medium,
+    fontSize: sizes.text.small,
     width: '6em',
     height: '2em',
     '&:hover': {
@@ -174,25 +196,6 @@ const useJSS = createUseStyles({
     borderRadius: '1vmin',
     padding: '1vmin 0vmin',
     marginBottom: '1vmin',
-  },
-
-  ControlMenu: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%'
-  },
-
-  ControlBounder: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    padding: '1vmin',
-    fontSize: sizes.text.small,
-  },
-
-  ControlInput: {
-    minWidth: '9vmin',
-    margin: '1vmin',
-    fontSize: sizes.text.small
   },
 })
 
