@@ -53,7 +53,7 @@ const useJSS = createUseStyles({
   },
 
   IconName: {
-    
+    fontSize: sizes.text.small,
   },
 
   IconConnector: {
