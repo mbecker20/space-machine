@@ -1,5 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls } from '../moduleTypes'
+import { BaseAM, BaseControls, VALUE } from '../moduleTypes'
 
 export interface GainModule extends BaseAM {
   audioNode: GainNode
@@ -16,7 +16,7 @@ function makeGain(gainAmount = 1): GainModule {
     gain.gain.setValueAtTime(Number(newGain), audioCtx.currentTime)
   }
 
-  return { audioNode: gain, paramIDs: ['gain'], controls: { 'set gain': setGain } }
+  return { audioNode: gain, paramIDs: [['gain', VALUE]], controls: { 'set gain': setGain } }
 }
 
 export default makeGain

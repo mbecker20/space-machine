@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
 import { sizes } from '../../theme/theme'
@@ -8,7 +8,7 @@ import { HorizontalScrollDiv } from '../all'
 import RenameMenu from './RenameMenu'
 import { RootState } from '../../redux/stateTSTypes'
 import { disconnect } from '../../audioModules/connection'
-import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, TYPE, BUTTON, VALUE } from '../../audioModules/moduleTypes'
 
 declare global {
   interface Window { 
@@ -82,15 +82,32 @@ function LeftDrawer() {
         <div className={classes.ControlMenu}>
           <div className={classes.MenuHeader}>controls</div>
           {audioModule ? Object.keys(audioModule.controls).map((controlID, index) => {
+            const [paramID, ctrlType] = audioModule.paramIDs[index]
             return (
               <div className={classes.ControlBounder} key={selectedModule.id + index}>
-                <div>{controlID}</div>
-                <input className={classes.ControlInput}
-                  placeholder={`${audioModule.audioNode[audioModule.paramIDs[index]] ? audioModule.audioNode[audioModule.paramIDs[index]].value : null}`}
-                  onChange={(e) => {
-                    audioModule.controls[controlID](e.target.value)
-                  }}
-                />
+                {ctrlType === VALUE
+                ?
+                <Fragment>
+                  <div>{controlID}</div>
+                  <input className={classes.ControlInput}
+                    placeholder={`${audioModule.audioNode[paramID] ? audioModule.audioNode[paramID].value : null}`}
+                    onChange={(e) => {
+                      audioModule.controls[controlID](e.target.value)
+                    }}
+                  />
+                </Fragment>
+                :
+                ctrlType === BUTTON
+                ?
+                <div></div>
+                :
+                ctrlType === TYPE
+                ?
+                <div></div>
+                :
+                null
+                }
+                
               </div>
             )
           }) : null}

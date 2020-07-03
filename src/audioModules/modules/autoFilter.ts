@@ -1,5 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls } from '../moduleTypes'
+import { BaseAM, BaseControls, TYPE, VALUE } from '../moduleTypes'
 
 export interface AutoFilterModule extends BaseAM {
   audioNode: BiquadFilterNode
@@ -38,7 +38,11 @@ function makeAutoFilter (type: BiquadFilterType = 'lowpass', frequency = 12500, 
     'set gain': setGain,
   }
 
-  return { audioNode: autoFilter, paramIDs: ['type', 'frequency', 'detune', 'Q', 'gain'], controls }
+  return { 
+    audioNode: autoFilter, 
+    paramIDs: [['type', TYPE], ['frequency', VALUE], ['detune', VALUE], ['Q', VALUE], ['gain', VALUE]], 
+    controls
+  }
 }
 
 export default makeAutoFilter

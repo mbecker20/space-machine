@@ -1,5 +1,6 @@
 import audioCtx from '../../audioCtx'
 import { BaseAM, BaseControls } from '../moduleTypes'
+import { TYPE, VALUE, BUTTON } from '../moduleTypes'
 
 export interface OscillatorModule extends BaseAM {
   audioNode: OscillatorNode
@@ -39,7 +40,11 @@ function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune =
 
   osc.start()
   
-  return { audioNode: osc, paramIDs: ['type', 'frequency', 'detune', 'stop'], controls }
+  return { 
+    audioNode: osc,
+    paramIDs: [['type', TYPE], ['frequency', VALUE], ['detune', VALUE], ['stop', BUTTON]],
+    controls,
+  }
 }
 
 export default makeOscillator
