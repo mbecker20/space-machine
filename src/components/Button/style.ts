@@ -19,6 +19,7 @@ const useJSS = createUseStyles({
     justifyContent: 'center',
     padding: '1vmin',
     margin: '1vmin',
+    textAlign: 'center',
   },
 })
 

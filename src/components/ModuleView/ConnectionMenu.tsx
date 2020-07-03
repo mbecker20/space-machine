@@ -2,9 +2,10 @@ import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
 import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
-import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, VALUE } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
 import CSS from 'csstype'
+import { stringIn } from '../../helpers/genFuncs'
 
 interface Props {
   fromID: string
@@ -35,7 +36,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
               onClose()
             }}
           >module</Button>
-          {am[toID].paramIDs.length === 0 ? null :
+          {!stringIn(VALUE, am[toID].paramIDs.flat()) ? null :
           <Button style={buttonStyle}
             onClick={(e) => {
               e.stopPropagation()
@@ -48,16 +49,16 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
           setOpenMenu(0)
           onClose()
         }}>
-          {am[toID].paramIDs.map((paramID, key) => {
+          {am[toID].paramIDs.filter(paramData => paramData[1] === VALUE).map((paramData, key) => {
             return (
-            <Button key={paramID + key}
+            <Button key={fromID + toID + key}
               onClick={() => {
-                connect(am[fromID] as ConnectingAudioModule, am[toID], paramID)
-                dispatch(addConnection(fromID, toID, paramID))
+                connect(am[fromID] as ConnectingAudioModule, am[toID], paramData[0])
+                dispatch(addConnection(fromID, toID, paramData[0]))
                 setOpenMenu(0)
                 onClose()
               }}
-            >{paramID}</Button>
+            >{paramData[0]}</Button>
             )
           })}
         </CenterMenu>
