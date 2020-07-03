@@ -9,7 +9,7 @@ const useJSS = createUseStyles({
     left: 0,
     width: '100vw',
     height: '100vh',
-    zIndex: 200,
+    zIndex: 100,
   },
 
   CenterMenu: {
@@ -22,8 +22,8 @@ const useJSS = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
     borderRadius: '2vmin',
-    zIndex: 20,
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    minWidth: '15vw',
   },
 
   Header: {

@@ -190,8 +190,9 @@ const useJSS = createUseStyles({
   },
 
   ControlInput: {
-    width: '9vmin',
+    minWidth: '9vmin',
     margin: '1vmin',
+    fontSize: sizes.text.small
   },
 })
 

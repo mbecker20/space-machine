@@ -4,11 +4,16 @@ import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
 import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
+import CSS from 'csstype'
 
 interface Props {
   fromID: string
   toID: string
   onClose: () => void
+}
+
+const buttonStyle: CSS.Properties = {
+  
 }
 
 function ConnectionMenu({ fromID, toID, onClose }: Props) {
@@ -22,7 +27,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
           setOpenMenu(0)
           onClose()
         }}>
-          <Button style={{}}
+          <Button style={buttonStyle}
             onClick={() => {
               connect(am[fromID] as ConnectingAudioModule, am[toID])
               dispatch(addConnection(fromID, toID))
@@ -31,7 +36,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
             }}
           >module</Button>
           {am[toID].paramIDs.length === 0 ? null :
-          <Button style={{}}
+          <Button style={buttonStyle}
             onClick={(e) => {
               e.stopPropagation()
               setOpenMenu(1)

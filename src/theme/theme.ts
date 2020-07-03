@@ -36,7 +36,7 @@ export const colors: Colors = {
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '20vw',
+    width: '21vw',
     toggleWidth: '1.5vmin',
     item: '10vmin'
   },
@@ -49,9 +49,10 @@ export const sizes: Sizes = {
     icon: '11vmin',
   },
   text: {
-    large: 'calc(20px + 2.5vmin)',
-    medium: 'calc(15px + 1.5vmin)',
-    small: 'calc(10px + 1.3vmin)',
+    large: 'calc(25px + 3vmin)',
+    medium: 'calc(20px + 2.5vmin)',
+    small: 'calc(12px + 1.5vmin)',
+    xsmall: 'calc(10px + 1.3vmin)',
   },
   connector: {
     size: '3vmin',

@@ -4,20 +4,21 @@ import { colors } from '../../theme/theme'
 const useJSS = createUseStyles({
   Button: {
     backgroundColor: colors.defaultButton,
-    borderColor: 'white',
-    borderStyle: 'none',
+    borderColor: 'transparent',
     borderRadius: '1vmin',
+    borderStyle: 'solid',
     '&:active': {
-      borderStyle: 'solid',
+      borderColor: 'transparent',
     },
     '&:hover': {
       cursor: 'pointer',
+      borderColor: 'white',
     },
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: '1vmin',
-    margnin: '1vmin',
+    margin: '1vmin',
   },
 })
 

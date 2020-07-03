@@ -14,6 +14,7 @@ interface Text {
   large: string
   medium: string
   small: string
+  xsmall: string
 }
 
 interface Connector {

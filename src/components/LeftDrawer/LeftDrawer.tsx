@@ -69,7 +69,8 @@ function LeftDrawer() {
           {!selectedModule ? null : selectedModule.outputs.map((outputData, key) => {
             const name = modules[outputData[0]].name
             return (
-              <div key={outputData[0] + key}
+              <div className={classes.Connection}
+                key={outputData[0] + key}
                 onClick={() => {
                   dispatch(removeConnection(selectedModule.id, outputData[0], outputData[1]))
                   disconnect(am[selectedModule.id] as ConnectingAudioModule, am[outputData[0]], outputData[1])
@@ -82,7 +83,7 @@ function LeftDrawer() {
           <div className={classes.MenuHeader}>controls</div>
           {audioModule ? Object.keys(audioModule.controls).map((controlID, index) => {
             return (
-              <div className={classes.ControlBounder} key={controlID + index}>
+              <div className={classes.ControlBounder} key={selectedModule.id + index}>
                 <div>{controlID}</div>
                 <input className={classes.ControlInput}
                   placeholder={`${audioModule.audioNode[audioModule.paramIDs[index]] ? audioModule.audioNode[audioModule.paramIDs[index]].value : null}`}
