@@ -123,6 +123,7 @@ function LeftDrawer() {
                     onChange={(e) => {
                       audioModule.controls[controlID](e.target.value)
                     }}
+                    value={audioModule.audioNode.type as string}
                   >
                     {(audioModule as AudioModuleWithTypes).typeTypes.map(type => {
                       return (
