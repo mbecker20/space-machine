@@ -1,6 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls } from '../moduleTypes'
-import { TYPE, VALUE, BUTTON } from '../moduleTypes'
+import { BaseAM, BaseControls, TYPE, VALUE, BUTTON } from '../moduleTypes'
 
 export interface OscillatorModule extends BaseAM {
   audioNode: OscillatorNode
