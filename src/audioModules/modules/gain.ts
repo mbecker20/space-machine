@@ -10,13 +10,11 @@ function makeGain(gainAmount = 1): GainModule {
   const gain = audioCtx.createGain()
   gain.gain.value = gainAmount
 
-  // controls 
-
-  function setGain(newGain: string) {
-    gain.gain.value = Number(newGain)
+  const controls = {
+    'set gain': (newGain: string) => {gain.gain.value = Number(newGain)}
   }
-
-  return { audioNode: gain, paramIDs: [['gain', VALUE]], controls: { 'set gain': setGain } }
+  
+  return { audioNode: gain, paramIDs: [['gain', VALUE]], controls }
 }
 
 export default makeGain

@@ -11,10 +11,6 @@ function makeConstant(value = 0): ConstantModule {
   const constant = audioCtx.createConstantSource()
   constant.offset.setValueAtTime(value, audioCtx.currentTime)
 
-  function setValue(newValue: string) {
-    constant.offset.setValueAtTime(Number(newValue), audioCtx.currentTime)
-  }
-
   function linRampValue(newValue: string) {
     constant.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime)
   }
@@ -24,7 +20,7 @@ function makeConstant(value = 0): ConstantModule {
   }
 
   const controls = {
-    'set value': setValue,
+    'set value': (newValue: string) => {constant.offset.value = Number(newValue)},
   }
   
   return { 
