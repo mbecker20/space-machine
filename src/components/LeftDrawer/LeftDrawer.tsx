@@ -148,6 +148,14 @@ function LeftDrawer() {
             fontSize: sizes.text.small
           }}
             onClick={() => {
+              selectedModule.inputs.forEach(inputData => {
+                disconnect(am[inputData[0]] as ConnectingAudioModule, audioModule)
+                dispatch(removeConnection(inputData[0], selectedModule.id, inputData[1]))
+              })
+              selectedModule.outputs.forEach(outputData => {
+                disconnect(audioModule as ConnectingAudioModule, am[outputData[0]])
+                dispatch(removeConnection(selectedModule.id, outputData[0], outputData[1]))
+              })
               dispatch(removeModule(window.highlightedID))
               window.setLeftDrawerOpen(false)
               window.highlightedID = ''
