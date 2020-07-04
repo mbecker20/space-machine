@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d12f4a381af53a09d79ba916769c03b3",
+    "revision": "7c9a8e834b90ce60be9e173e196b9c26",
     "url": "/space-machine/index.html"
   },
   {
-    "revision": "86cc2d4536d7e842ac8c",
+    "revision": "2ca5796dcf78c5d51575",
     "url": "/space-machine/static/css/main.d776b7e9.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/space-machine/static/js/2.9885ed45.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "86cc2d4536d7e842ac8c",
-    "url": "/space-machine/static/js/main.434e9060.chunk.js"
+    "revision": "2ca5796dcf78c5d51575",
+    "url": "/space-machine/static/js/main.2b8ef0fb.chunk.js"
   },
   {
     "revision": "3b767ef35ca3650f6e49",
