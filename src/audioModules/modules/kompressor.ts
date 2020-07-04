@@ -13,7 +13,7 @@ function makeKompressor() {
   }
 
   return {
-    AudioNode: kompressor,
+    audioNode: kompressor,
     paramIDs: [['threshold', VALUE], ['knee', VALUE], ['ratio', VALUE], ['attack', VALUE], ['release', VALUE]],
     controls,
   }
