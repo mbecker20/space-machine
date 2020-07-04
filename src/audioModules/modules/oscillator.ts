@@ -20,7 +20,7 @@ function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune =
     'set type': (newType: string) => {osc.type = newType as OscillatorType},
     'set frequency': (newFrequency: string) => {osc.frequency.value = Number(newFrequency)},
     'set detune': (newDetune: string) => {osc.detune.value = Number(newDetune)},
-    'kill': (arg = '') => {osc.stop}
+    'kill': (arg = '') => {osc.stop()}
   }
 
   osc.start()
