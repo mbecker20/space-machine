@@ -35,3 +35,4 @@ function makeConstant(value = 0): ConstantModule {
 
 }
 
+export default makeConstant
