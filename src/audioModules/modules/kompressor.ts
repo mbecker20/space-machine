@@ -4,12 +4,19 @@ import { BaseAM, BaseControls, VALUE } from '../moduleTypes'
 function makeKompressor() {
   const kompressor = audioCtx.createDynamicsCompressor()
 
-  function setThreshold(threshold: string) {
-    kompressor.threshold.value = Number(threshold)
+  const controls = {
+    'set threshold': (newThreshold: string) => {kompressor.threshold.value = Number(newThreshold)},
+    'set knee': (newKnee: string) => {kompressor.knee.value = Number(newKnee)},
+    'set ratio': (newRatio: string) => {kompressor.ratio.value = Number(newRatio)},
+    'set attack': (newAttack: string) => {kompressor.attack.value = Number(newAttack)},
+    'set release': (newRelease: string) => {kompressor.release.value = Number(newRelease)},
   }
 
-  function setKnee(knee: string) {
-    kompressor.knee.value = Number(knee)
+  return {
+    AudioNode: kompressor,
+    paramIDs: [['threshold', VALUE], ['knee', VALUE], ['ratio', VALUE], ['attack', VALUE], ['release', VALUE]],
+    controls,
   }
-
 }
+
+export default makeKompressor
