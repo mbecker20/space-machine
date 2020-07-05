@@ -15,7 +15,7 @@ function makeSignalDelay() {
 
   return {
     audioNode: signalDelay,
-    paramIDs: [['delay time', VALUE]],
+    paramIDs: [['delayTime', VALUE]],
     controls,
   }
 
