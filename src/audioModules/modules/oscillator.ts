@@ -1,6 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls } from '../moduleTypes'
-import { TYPE, VALUE, BUTTON } from '../moduleTypes'
+import { BaseAM, BaseControls, TYPE, VALUE, BUTTON } from '../moduleTypes'
 
 export interface OscillatorModule extends BaseAM {
   audioNode: OscillatorNode
@@ -10,35 +9,15 @@ export interface OscillatorModule extends BaseAM {
 
 const oscTypes = ['sine', 'square', 'triangle', 'sawtooth']
 
-function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune = 0): OscillatorModule {
+function makeOscillator(): OscillatorModule {
+ 
   const osc = audioCtx.createOscillator()
-  osc.type = type
-  osc.frequency.setValueAtTime(frequency, audioCtx.currentTime)
-  osc.detune.setValueAtTime(detune, audioCtx.currentTime)
-  
-  //controls
-
-  function kill() {
-    osc.stop()
-  }
-
-  function setType(newType: string) {
-    osc.type = newType as OscillatorType
-  }
-
-  function setFrequency(newFrequency: string) {
-    osc.frequency.value = Number(newFrequency)
-  }
-
-  function setDetune(newDetune: string) {
-    osc.detune.value = Number(newDetune)
-  }
-
+   
   const controls = {
-    'set type': setType,
-    'set frequency': setFrequency,
-    'set detune': setDetune,
-    'kill': kill,
+    'set type': (newType: string) => {osc.type = newType as OscillatorType},
+    'set frequency': (newFrequency: string) => {osc.frequency.value = Number(newFrequency)},
+    'set detune': (newDetune: string) => {osc.detune.value = Number(newDetune)},
+    'kill': (arg = '') => {osc.stop()}
   }
 
   osc.start()
