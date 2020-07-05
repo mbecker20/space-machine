@@ -6,7 +6,7 @@ export interface StereoPannerModule extends BaseAM {
   controls: BaseControls
 }
 
-function makeStereoPanner() {
+function makeStereoPanner(): StereoPannerModule {
   const stereoPanner = audioCtx.createStereoPanner()
 
   const controls = {

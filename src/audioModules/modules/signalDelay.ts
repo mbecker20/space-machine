@@ -6,7 +6,7 @@ export interface SignalDelayModule extends BaseAM {
   controls: BaseControls
 }
 
-function makeSignalDelay() {
+function makeSignalDelay(): SignalDelayModule {
   const signalDelay = audioCtx.createDelay()
 
   const controls = {

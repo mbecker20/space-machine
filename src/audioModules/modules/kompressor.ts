@@ -6,7 +6,7 @@ export interface KompressorModule extends BaseAM {
   controls: BaseControls
 }
 
-function makeKompressor() {
+function makeKompressor(): KompressorModule {
   const kompressor = audioCtx.createDynamicsCompressor()
 
   const controls = {

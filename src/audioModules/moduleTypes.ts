@@ -17,7 +17,7 @@ export const KOMPRESSOR = 'KOMPRESSOR'
 export const STEREO_PANNER = 'STEREO_PANNER'
 export const SIGNAL_DELAY = 'SIGNAL_DELAY'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL DELAY'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY'
 
 // control type strings
 
