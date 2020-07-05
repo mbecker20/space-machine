@@ -1,8 +1,5 @@
 import { ModuleType, OSCILLATOR, OUTPUT, GAIN, AUTOFILTER, KOMPRESSOR, STEREO_PANNER, SIGNAL_DELAY } from './moduleTypes'
-import { makeOscillator, makeOutput, makeGain, makeAutoFilter } from './all'
-import makeKompressor from './modules/kompressor';
-import makeSignalDelay from './modules/signalDelay';
-import makeStereoPanner from './modules/stereoPanner';
+import { makeOscillator, makeOutput, makeGain, makeAutoFilter, makeKompressor, makeStereoPanner, makeSignalDelay } from './all'
 
 function makeAddModule() {
   return function(id: string, moduleType: ModuleType) {
