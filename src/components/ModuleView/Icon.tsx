@@ -61,6 +61,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             window.setFillIsExpanded(false)
             dispatch(moveModule(id, mod.row, mod.col))
             dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
+            window.setTimeout(window.refreshArcherContainer, 500)
           }
         } else {
           const fromID = e.dataTransfer.getData('fromID')

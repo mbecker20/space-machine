@@ -64,10 +64,12 @@ function DropSquare({ row, col }: Props) {
           window.setFillIsExpanded(false)
           dispatch(moveModule(id, row, col))
           dispatch(moveModule(possiblyOccupyingID, Number(fromRow), Number(fromCol)))
+          window.setTimeout(window.refreshArcherContainer, 1)
         } else {
           setHL(false)
           window.setFillIsExpanded(false)
           dispatch(moveModule(id, row, col))
+          window.setTimeout(window.refreshArcherContainer, 1)
         }
       }}
     />
