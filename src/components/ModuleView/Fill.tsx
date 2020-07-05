@@ -9,6 +9,7 @@ import { RootState } from '../../redux/stateTSTypes'
 import { getGridRange } from './helpers'
 import { range } from '../../helpers/genFuncs'
 import DropSquare from './DropSquare'
+import { ArcherContainer, ArcherElement } from 'react-archer'
 
 declare global {
   interface Window { setFillIsExpanded: (isExpanded: boolean) => void }
@@ -84,6 +85,45 @@ function ModuleViewFill({ containerModule }: Props) {
             />
           )
         })}
+        <ArcherContainer className={classes.ArcherContainer} style={{ 
+          gridRow: `1 / span ${maxRow * 2 + 2}`, 
+          gridColumn: `1 / span ${maxCol * 2 + 2}`,
+        }}>
+          <div style={{ 
+            display: 'grid',
+            gridTemplateRows: `repeat(${maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
+            gridTemplateColumns: `repeat(${maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
+            alignItems: 'center',
+            justifyItems: 'center',
+          }}>
+          {containerModule.childModules.map((moduleID, index) => {
+            const mod = modules[moduleID]
+            return (
+              <div key={mod.id + index} style={{
+                gridColumn: `${mod.col * 2 + 1} / span 1`,
+                gridRow: `${mod.row * 2 + 1} / span 1`,
+              }}>
+                <ArcherElement
+                  id={mod.id}
+                  relations={mod.outputs.map(outputData => {
+                    return {
+                      targetId: outputData[0],
+                      targetAnchor: 'left',
+                      sourceAnchor: 'right',
+                    }
+                  })}
+                >
+                  <div style={{ 
+                    width: '10px', 
+                    height: '10px', 
+                    backgroundColor: 'black',
+                  }}></div>
+                </ArcherElement>
+              </div>
+            )
+          })}
+          </div>
+        </ArcherContainer>
       </div>
     </div>
   )

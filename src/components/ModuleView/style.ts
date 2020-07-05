@@ -28,6 +28,14 @@ const useJSS = createUseStyles({
     alignItems: 'center',
     justifyItems: 'center',
     padding: '2vmin',
+    zIndex: 1,
+  },
+
+  ArcherContainer: {
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+    display: 'grid',
   },
 
   Icon: {
@@ -50,6 +58,7 @@ const useJSS = createUseStyles({
       cursor: 'pointer',
       borderStyle: 'solid',
     },
+    zIndex: 2,
   },
 
   IconName: {
@@ -76,6 +85,7 @@ const useJSS = createUseStyles({
     borderStyle: 'none',
     borderColor: colors.dropSquareHL,
     borderRadius: '10px',
+    zIndex: 1,
   },
 })
 
