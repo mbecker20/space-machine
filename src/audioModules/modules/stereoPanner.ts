@@ -1,6 +1,12 @@
 import audioCtx from '../../audioCtx'
 import { BaseAM, BaseControls, VALUE} from '../moduleTypes'
 
+export interface StereoPannerModule extends BaseAM {
+  audioNode: StereoPannerNode
+  controls: BaseControls
+}
+
+
 function makeStereoPanner() {
   const stereoPanner = audioCtx.createStereoPanner()
 

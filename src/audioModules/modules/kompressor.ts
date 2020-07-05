@@ -1,6 +1,11 @@
 import audioCtx from '../../audioCtx'
 import { BaseAM, BaseControls, VALUE } from '../moduleTypes'
 
+export interface KompressorModule extends BaseAM {
+  audioNode: DynamicsCompressorNode
+  controls: BaseControls
+}
+
 function makeKompressor() {
   const kompressor = audioCtx.createDynamicsCompressor()
 
