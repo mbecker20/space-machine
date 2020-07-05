@@ -4,8 +4,6 @@ object-assign
 @license MIT
 */
 
-/*! For license information please see react-archer.js.LICENSE */
-
 /**
  * A better abstraction over CSS.
  *
