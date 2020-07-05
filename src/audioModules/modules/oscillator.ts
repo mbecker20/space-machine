@@ -9,13 +9,10 @@ export interface OscillatorModule extends BaseAM {
 
 const oscTypes = ['sine', 'square', 'triangle', 'sawtooth']
 
-function makeOscillator(type: OscillatorType = 'sine', frequency = 440, detune = 0): OscillatorModule {
+function makeOscillator(): OscillatorModule {
  
   const osc = audioCtx.createOscillator()
-    osc.type = type
-    osc.frequency.setValueAtTime(frequency, audioCtx.currentTime)
-    osc.detune.setValueAtTime(detune, audioCtx.currentTime)
-
+   
   const controls = {
     'set type': (newType: string) => {osc.type = newType as OscillatorType},
     'set frequency': (newFrequency: string) => {osc.frequency.value = Number(newFrequency)},

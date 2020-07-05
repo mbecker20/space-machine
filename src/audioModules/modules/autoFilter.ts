@@ -9,13 +9,9 @@ export interface AutoFilterModule extends BaseAM {
 
 const filterTypes = ['lowpass', 'lowshelf', 'highpass', 'highshelf', 'allpass', 'bandpass', 'notch', 'peaking']
 
-function makeAutoFilter (type: BiquadFilterType = 'lowpass', frequency = 12500, detune = 0, Q = 0, gain = 1): AutoFilterModule {
+function makeAutoFilter (): AutoFilterModule {
+  
   const autoFilter = audioCtx.createBiquadFilter()
-    autoFilter.type = type
-    autoFilter.frequency.setValueAtTime(frequency, audioCtx.currentTime)
-    autoFilter.detune.setValueAtTime(detune, audioCtx.currentTime)
-    autoFilter.Q.setValueAtTime(Q, audioCtx.currentTime)
-    autoFilter.gain.setValueAtTime(gain, audioCtx.currentTime)
 
   const controls = {
     'set type': (newType: string) => {autoFilter.type = newType as BiquadFilterType},
