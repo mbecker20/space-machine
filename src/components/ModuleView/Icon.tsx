@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { Module, RootState } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
@@ -39,89 +39,91 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     fromID: '',
   })
   return (
-    <div 
-      className={classes.Icon} 
-      style={iconStyle}
-      onDragOver={event => {
-        event.preventDefault()
-      }}
-      onDragEnter={() => {
-        setHighlighted(true)
-      }}
-      onDragLeave={() => {
-        setHighlighted(false)
-      }}
-      onDrop={e => {
-        const id = e.dataTransfer.getData('id')
-        if (id) {
-          const possiblyMod = modules[id]
-          if (possiblyMod) {
-            const fromRow = e.dataTransfer.getData('fromRow')
-            const fromCol = e.dataTransfer.getData('fromCol')
-            window.setFillIsExpanded(false)
-            dispatch(moveModule(id, mod.row, mod.col))
-            dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
-            window.setTimeout(window.refreshArcherContainer, 500)
+    <Fragment>
+      <div 
+        className={classes.Icon} 
+        style={iconStyle}
+        onDragOver={event => {
+          event.preventDefault()
+        }}
+        onDragEnter={() => {
+          setHighlighted(true)
+        }}
+        onDragLeave={() => {
+          setHighlighted(false)
+        }}
+        onDrop={e => {
+          const id = e.dataTransfer.getData('id')
+          if (id) {
+            const possiblyMod = modules[id]
+            if (possiblyMod) {
+              const fromRow = e.dataTransfer.getData('fromRow')
+              const fromCol = e.dataTransfer.getData('fromCol')
+              window.setFillIsExpanded(false)
+              dispatch(moveModule(id, mod.row, mod.col))
+              dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
+              window.setTimeout(window.refreshArcherContainer, 500)
+            }
+          } else {
+            const fromID = e.dataTransfer.getData('fromID')
+            if (fromID) {
+              setCMState({
+                isOpen: true,
+                fromID
+              })
+            }
           }
-        } else {
-          const fromID = e.dataTransfer.getData('fromID')
-          if (fromID) {
+          setHighlighted(false)
+        }}
+        draggable={true}
+        onDragStart={event => {
+          event.dataTransfer.setData('id', mod.id)
+          event.dataTransfer.setData('fromRow', `${mod.row}`)
+          event.dataTransfer.setData('fromCol', `${mod.col}`)
+          window.setFillIsExpanded(true)
+        }}
+        onDragEnd={() => {
+          window.setFillIsExpanded(false)
+        }}
+        onClick={e => {
+          if (e.stopPropagation) {
+            e.stopPropagation()
+          }
+          if (window.linkToOutputID.length === 0) {
+            if (mod.id === window.highlightedID) {
+              window.setLeftDrawerOpen(false)
+              setHighlighted(false)
+              window.highlightedID = ''
+              window.currSetHighlighted = (setHighlighted) => {}
+            } else {
+              window.setLeftDrawerOpen(true)
+              window.reRenderLeftDrawer()
+              setHighlighted(true)
+              window.highlightedID = mod.id
+              window.currSetHighlighted(false)
+              window.currSetHighlighted = setHighlighted
+            }
+          } else {
             setCMState({
               isOpen: true,
-              fromID
+              fromID: window.linkToOutputID
             })
           }
-        }
-        setHighlighted(false)
-      }}
-      draggable={true}
-      onDragStart={event => {
-        event.dataTransfer.setData('id', mod.id)
-        event.dataTransfer.setData('fromRow', `${mod.row}`)
-        event.dataTransfer.setData('fromCol', `${mod.col}`)
-        window.setFillIsExpanded(true)
-      }}
-      onDragEnd={() => {
-        window.setFillIsExpanded(false)
-      }}
-      onClick={e => {
-        if (e.stopPropagation) {
-          e.stopPropagation()
-        }
-        if (window.linkToOutputID.length === 0) {
-          if (mod.id === window.highlightedID) {
-            window.setLeftDrawerOpen(false)
-            setHighlighted(false)
-            window.highlightedID = ''
-            window.currSetHighlighted = (setHighlighted) => {}
-          } else {
-            window.setLeftDrawerOpen(true)
-            window.reRenderLeftDrawer()
-            setHighlighted(true)
-            window.highlightedID = mod.id
-            window.currSetHighlighted(false)
-            window.currSetHighlighted = setHighlighted
-          }
-        } else {
-          setCMState({
-            isOpen: true,
-            fromID: window.linkToOutputID
-          })
-        }
-      }}
-    >
-      {mod.moduleType !== OUTPUT ? 
-      <div className={classes.IconConnector}
-        draggable={true}
-        onDragStart={(e) => {
-          e.stopPropagation()
-          e.dataTransfer.setData('fromID', mod.id)
         }}
-      /> : <div style={{ width: '1vmin', height: '1vmin' }}/>}
-      <div className={classes.IconName}>
-        {mod.name}
+      >
+        {mod.moduleType !== OUTPUT ? 
+        <div className={classes.IconConnector}
+          draggable={true}
+          onDragStart={(e) => {
+            e.stopPropagation()
+            e.dataTransfer.setData('fromID', mod.id)
+          }}
+        /> : <div style={{ width: '1vmin', height: '1vmin' }}/>}
+        <div className={classes.IconName}>
+          {mod.name}
+        </div>
       </div>
-      {!cmState.isOpen ? null : 
+      {!cmState.isOpen ? null :
       <ConnectionMenu fromID={cmState.fromID} toID={mod.id} toType={mod.moduleType}
         onClose={() => {
           setCMState({
@@ -131,7 +133,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           window.linkToOutputID = ''
         }}
       />}
-    </div>
+    </Fragment>
   )
 }
 
