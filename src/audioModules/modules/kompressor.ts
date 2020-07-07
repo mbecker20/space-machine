@@ -1,26 +1,66 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, VALUE } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE } from '../moduleTypes'
 
 export interface KompressorModule extends BaseAM {
   audioNode: DynamicsCompressorNode
-  controls: BaseControls
 }
 
 function makeKompressor(): KompressorModule {
   const kompressor = audioCtx.createDynamicsCompressor()
 
-  const controls = {
-    'set threshold': (newThreshold: string) => {kompressor.threshold.value = Number(newThreshold)},
-    'set knee': (newKnee: string) => {kompressor.knee.value = Number(newKnee)},
-    'set ratio': (newRatio: string) => {kompressor.ratio.value = Number(newRatio)},
-    'set attack': (newAttack: string) => {kompressor.attack.value = Number(newAttack)},
-    'set release': (newRelease: string) => {kompressor.release.value = Number(newRelease)},
+  const connectingParamIDs = ['threshold', 'knee', 'ratio', 'attack', 'release']
+
+  const controlData: ControlData = {
+    'set threshold': {
+      controlType: VALUE,
+      value: kompressor.threshold.value
+    },
+    'set knee': {
+      controlType: VALUE,
+      value: kompressor.knee.value
+    },
+    'set ratio': {
+      controlType: VALUE,
+      value: kompressor.ratio.value
+    },
+    'set attack': {
+      controlType: VALUE,
+      value: kompressor.attack.value
+    },
+    'set release': {
+      controlType: VALUE,
+      value: kompressor.release.value
+    }
+  }
+
+  const controlSetFuncs: ControlSetFuncs = {
+    'set threshold': (newThreshold: string) => {
+      controlData['set threshold'].value = Number(newThreshold)
+      kompressor.threshold.value = controlData['set threshold'].value
+    },
+    'set knee': (newKnee: string) => {
+      controlData['set knee'].value = Number(newKnee)
+      kompressor.knee.value = controlData['set knee'].value
+    },
+    'set ratio': (newRatio: string) => {
+      controlData['set ratio'].value = Number(newRatio)
+      kompressor.ratio.value = controlData['set ratio'].value
+    },
+    'set attack': (newAttack: string) => {
+      controlData['set attack'].value = Number(newAttack)
+      kompressor.attack.value = controlData['set attack'].value
+    },
+    'set release': (newRelease: string) => {
+      controlData['set release'].value = Number(newRelease)
+      kompressor.release.value = controlData['set release'].value
+    },
   }
 
   return {
     audioNode: kompressor,
-    paramIDs: [['threshold', VALUE], ['knee', VALUE], ['ratio', VALUE], ['attack', VALUE], ['release', VALUE]],
-    controls,
+    connectingParamIDs,
+    controlData,
+    controlSetFuncs,
   }
 }
 

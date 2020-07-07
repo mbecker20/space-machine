@@ -6,7 +6,7 @@ import { KompressorModule } from './modules/kompressor'
 import { StereoPannerModule } from './modules/stereoPanner'
 import { SignalDelayModule } from './modules/signalDelay'
 
-// module type strings
+// module type
 
 export const CONTAINER = 'CONTAINER'
 export const GAIN = 'GAIN'
@@ -19,14 +19,6 @@ export const SIGNAL_DELAY = 'SIGNAL_DELAY'
 
 export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY'
 
-// control type strings
-
-export const TYPE = 'TYPE'
-export const VALUE = 'VALUE'
-export const BUTTON = 'BUTTON'
-
-export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON'
-
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
 export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule
@@ -37,10 +29,35 @@ export interface AudioModules {
   [index: string]: AudioModule
 }
 
-export interface BaseAM {
-  paramIDs: [string, ControlType][]
+// control type
+
+export const TYPE = 'TYPE'
+export const VALUE = 'VALUE'
+export const BUTTON = 'BUTTON'
+
+export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON'
+type Value = number
+type SetFunc = (arg: string) => void
+type Range = [number, number, number?] // min / max / step
+
+export interface ControlDataPacket {
+  controlType: ControlType
+  value: Value
+  range?: Range
 }
 
-export interface BaseControls {
-  [index: string]: (arg: string) => void
+export interface ControlData {
+  [name: string]: ControlDataPacket
 }
+
+export interface ControlSetFuncs {
+  [name: string]: SetFunc
+}
+
+export interface BaseAM {
+  connectingParamIDs: string[]
+  controlData: ControlData
+  controlSetFuncs: 
+}
+
+
