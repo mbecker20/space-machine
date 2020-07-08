@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
 import { connect } from '../../audioModules/connection'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ConnectingAudioModule, OSCILLATOR, CONSTANT } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
 import CSS from 'csstype'
+import { RootState } from '../../redux/stateTSTypes'
 
 interface Props {
   fromID: string
@@ -21,10 +22,16 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   const [openMenu, setOpenMenu] = useState(0)
   const am = window.audioModules
   const dispatch = useDispatch()
+  const { fromName, toName } = useSelector((state: RootState) => {
+    return {
+      fromName: state.modules[fromID].name,
+      toName: state.modules[toID].name,
+    }
+  })
   return (
     <Fragment>
       {openMenu === 0 ?
-        <CenterMenu header={`connect ${fromID} to ${toID}`} onClose={() => {
+        <CenterMenu header={`connect ${fromName} to ${toName}`} onClose={() => {
           setOpenMenu(0)
           onClose()
         }}>
