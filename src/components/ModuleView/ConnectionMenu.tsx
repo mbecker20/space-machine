@@ -25,7 +25,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   return (
     <Fragment>
       {openMenu === 0 ?
-        <CenterMenu header={'connect to'} onClose={() => {
+        <CenterMenu header={`connect ${fromID} to ${toID}`} onClose={() => {
           setOpenMenu(0)
           onClose()
         }}>
@@ -38,7 +38,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
               onClose()
             }}
           >module</Button>}
-          {!stringIn(VALUE, am[toID].paramIDs.flat()) ? null :
+          {am[toID].connectingParamIDs.length === 0 ? null :
           <Button style={buttonStyle}
             onClick={(e) => {
               e.stopPropagation()
@@ -51,16 +51,16 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
           setOpenMenu(0)
           onClose()
         }}>
-          {am[toID].paramIDs.filter(paramData => paramData[1] === VALUE).map((paramData, key) => {
+          {am[toID].connectingParamIDs.map((paramID, key) => {
             return (
             <Button key={fromID + toID + key}
               onClick={() => {
-                connect(am[fromID] as ConnectingAudioModule, am[toID], paramData[0])
-                dispatch(addConnection(fromID, toID, paramData[0]))
+                connect(am[fromID] as ConnectingAudioModule, am[toID], paramID)
+                dispatch(addConnection(fromID, toID, paramID))
                 setOpenMenu(0)
                 onClose()
               }}
-            >{paramData[0]}</Button>
+            >{paramID}</Button>
             )
           })}
         </CenterMenu>
