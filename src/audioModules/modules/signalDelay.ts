@@ -17,16 +17,16 @@ function makeSignalDelay(): SignalDelayModule {
     }
   }
 
-  const controLSetFuncs: ControlSetFuncs = { 
+  const controlSetFuncs: ControlSetFuncs = { 
     'set delay time': (newDelayTime: string) => { signalDelay.delayTime.value = Number(newDelayTime)}
   }
 
   return {
     audioNode: signalDelay,
-    paramIDs: [['delayTime', VALUE]],
-    controls,
+    connectingParamIDs,
+    controlData,
+    controlSetFuncs,
   }
-
 }
 
 export default makeSignalDelay
