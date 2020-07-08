@@ -1,5 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, ControlData, ControlSetFuncs, VALUE } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE, TYPE } from '../moduleTypes'
 
 export interface OscillatorModule extends BaseAM {
   audioNode: OscillatorNode
@@ -14,6 +14,10 @@ function makeOscillator(): OscillatorModule {
   const connectingParamIDs = ['frequency', 'detune']
 
   const controlData: ControlData = {
+    'set type': {
+      controlType: TYPE,
+      paramID: 'type',
+    },
     'set frequency': {
       controlType: VALUE,
       paramID: 'frequency'
@@ -25,6 +29,7 @@ function makeOscillator(): OscillatorModule {
   }
 
   const controlSetFuncs: ControlSetFuncs = {
+    'set type': (newType: string) => { oscillator.type = newType as OscillatorType },
     'set frequency': (newFrequency: string) => { oscillator.frequency.value = Number(newFrequency) },
     'set detune': (newDetune: string) => { oscillator.detune.value = Number(newDetune) },
     'kill': (arg = '') => { oscillator.stop() }
