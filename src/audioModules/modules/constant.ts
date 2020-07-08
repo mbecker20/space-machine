@@ -35,11 +35,7 @@ function makeConstantSource(): ConstantModule {
       value: 1,
       range: [0, 10000, 0.01],
     },
-    'start': {
-      controlType: BUTTON,
-      paramID: 'n/a',
-    },
-    'stop': {
+    'kill': {
       controlType: BUTTON,
       paramID: 'n/a',
     }
@@ -62,8 +58,7 @@ function makeConstantSource(): ConstantModule {
     'set value': (newValue: string) => { setValFuncs[controlData['set ramp'].value as string](newValue) },
     'set ramp': (newType: string) => { controlData['set ramp'].value = newType },
     'set ramp length': (newValue: string) => { controlData['set ramp length'].value = Number(newValue) },
-    'start': (arg = '') => { constantSource.start() },
-    'stop': (arg = '') => { constantSource.stop() }
+    'kill': (arg = '') => { constantSource.stop() }
   }
 
   constantSource.start()
