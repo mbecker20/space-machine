@@ -22,14 +22,14 @@ function makeGain(gainAmount = 0): GainModule {
       controlType: VALUE,
       paramID: 'gain',
       value: 0,
-      range: [-100, 100, 1]
+      range: [-1, 1, .01]
     }
   }
 
   function updateGain() {
-    gain.gain.value = (controlData['set gain'].value as number) + (controlData['set fine gain'].value as number) / 100
+    gain.gain.value = (controlData['set gain'].value as number) + (controlData['set fine gain'].value as number)
   }
-  
+
   const controlSetFuncs: ControlSetFuncs = {
     'set gain': (newGain: string) => {
       controlData['set gain'].value = Number(newGain)

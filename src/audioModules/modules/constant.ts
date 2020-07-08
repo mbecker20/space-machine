@@ -1,5 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, ControlData, ControlSetFuncs, VALUE, TYPE } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE, TYPE, BUTTON } from '../moduleTypes'
 
 export interface ConstantModule extends BaseAM {
   audioNode: ConstantSourceNode
@@ -34,20 +34,39 @@ function makeConstantSource(): ConstantModule {
       paramID: 'n/a',
       value: 1,
       range: [0, 10000, 0.01],
+    },
+    'start': {
+      controlType: BUTTON,
+      paramID: 'n/a',
+    },
+    'stop': {
+      controlType: BUTTON,
+      paramID: 'n/a',
     }
   }
 
   const setValFuncs: SetValFuncs = {
-    'no ramp': (newValue: string) => { constantSource.offset.value = Number(newValue) },
-    'linear': (newValue: string) => { constantSource.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))},
-    'exponential': (newValue: string) => {constantSource.offset.exponentialRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))}
+    'no ramp': (newValue: string) => {
+      controlData['set value'].value = Number(newValue)
+      constantSource.offset.value = Number(newValue) 
+    },
+    'linear': (newValue: string) => {
+      controlData['set value'].value = Number(newValue)
+      constantSource.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))},
+    'exponential': (newValue: string) => {
+      controlData['set value'].value = Number(newValue)
+      constantSource.offset.exponentialRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))}
   }
 
   const controlSetFuncs: ControlSetFuncs = {
     'set value': (newValue: string) => { setValFuncs[controlData['set ramp'].value as string](newValue) },
     'set ramp': (newType: string) => { controlData['set ramp'].value = newType },
     'set ramp length': (newValue: string) => { controlData['set ramp length'].value = Number(newValue) },
+    'start': (arg = '') => { constantSource.start() },
+    'stop': (arg = '') => { constantSource.stop() }
   }
+
+  constantSource.start()
 
   return { 
     audioNode: constantSource, 

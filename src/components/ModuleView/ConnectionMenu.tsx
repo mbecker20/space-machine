@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
 import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
-import { ConnectingAudioModule, OSCILLATOR } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, OSCILLATOR, CONSTANT } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
 import CSS from 'csstype'
 
@@ -28,7 +28,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
           setOpenMenu(0)
           onClose()
         }}>
-          {toType === OSCILLATOR ? null :
+          {toType === OSCILLATOR || toType === CONSTANT ? null :
           <Button style={buttonStyle}
             onClick={() => {
               connect(am[fromID] as ConnectingAudioModule, am[toID])

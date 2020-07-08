@@ -98,7 +98,6 @@ function ModuleViewFill({ containerModule }: Props) {
           }}
           arrowLength={0}
           ref={archerContainerRef}
-          noCurves={true}
         >
           <div style={{ 
             display: 'grid',

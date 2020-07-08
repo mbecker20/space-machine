@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import DrawerItem from '../DrawerItem'
-import { CONTAINER, OSCILLATOR, AUTOFILTER, GAIN, OUTPUT, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER } from '../../../audioModules/moduleTypes'
+import { CONTAINER, OSCILLATOR, AUTOFILTER, GAIN, OUTPUT, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, CONSTANT } from '../../../audioModules/moduleTypes'
 
 function BaseModules() {
   return (
@@ -12,6 +12,7 @@ function BaseModules() {
       <DrawerItem fullName='kompressor' id='komp' moduleType={KOMPRESSOR}/>
       <DrawerItem fullName='stereo panner' id='str pan' moduleType={STEREO_PANNER}/>
       <DrawerItem fullName='signal delay' id='sig dly' moduleType={SIGNAL_DELAY}/>
+      <DrawerItem fullName='constant' id='const' moduleType={CONSTANT} />
       <DrawerItem fullName='container' id='cntnr' moduleType={CONTAINER} />
     </Fragment>
   )
