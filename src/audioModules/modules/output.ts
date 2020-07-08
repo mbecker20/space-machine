@@ -1,9 +1,8 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, BUTTON } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, BUTTON } from '../moduleTypes'
 
 export interface OutputModule extends BaseAM {
   audioNode: AudioNode
-  controls: BaseControls
 }
 
 function makeOutput(): OutputModule {
@@ -16,11 +15,28 @@ function makeOutput(): OutputModule {
     audioCtx.suspend()
   }
 
+  const controlData: ControlData = {
+    'resume': {
+      controlType: BUTTON,
+      paramID: 'n/a'
+    },
+    'suspend': {
+      controlType: BUTTON,
+      paramID: 'n/a'
+    }
+  }
+
+  const controlSetFuncs = {
+    'resume': (arg: string) => { audioCtx.resume() },
+    'suspend': (arg: string) => { audioCtx.suspend() }
+  }
+
   audioCtx.resume()
   return { 
     audioNode: audioCtx.destination, 
-    paramIDs: [['resume', BUTTON], ['suspend', BUTTON]], 
-    controls: { 'resume': resume, 'suspend': suspend },
+    connectingParamIDs: [],
+    controlData,
+    controlSetFuncs,
   }
 }
 
