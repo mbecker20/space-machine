@@ -1,5 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, ControlData, ControlSetFuncs, VALUE, AUTOFILTER } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE } from '../moduleTypes'
 
 export interface SignalDelayModule extends BaseAM {
   audioNode: DelayNode

@@ -2,10 +2,9 @@ import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
 import { connect } from '../../audioModules/connection'
 import { useDispatch } from 'react-redux'
-import { ConnectingAudioModule, VALUE, OSCILLATOR } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, OSCILLATOR } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
 import CSS from 'csstype'
-import { stringIn } from '../../helpers/genFuncs'
 
 interface Props {
   fromID: string

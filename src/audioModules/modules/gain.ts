@@ -27,9 +27,9 @@ function makeGain(gainAmount = 0): GainModule {
   }
 
   function updateGain() {
-    gain.gain.value = controlData['set gain'].value + controlData['set fine gain'].value / 100
+    gain.gain.value = (controlData['set gain'].value as number) + (controlData['set fine gain'].value as number) / 100
   }
-
+  
   const controlSetFuncs: ControlSetFuncs = {
     'set gain': (newGain: string) => {
       controlData['set gain'].value = Number(newGain)

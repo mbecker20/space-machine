@@ -58,7 +58,7 @@ export interface ControlSetFuncs {
 export interface BaseAM {
   connectingParamIDs: string[]
   controlData: ControlData
-  controlSetFuncs: 
+  controlSetFuncs: ControlSetFuncs
 }
 
 

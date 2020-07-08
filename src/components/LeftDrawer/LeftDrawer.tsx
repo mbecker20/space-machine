@@ -85,7 +85,7 @@ function LeftDrawer() {
         <div className={classes.ControlMenu}>
           <div className={classes.MenuHeader}>controls</div>
           {audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
-            const { controlType, paramID, value, range } = audioModule.controlData[controlID]
+            const { controlType, paramID, range } = audioModule.controlData[controlID]
             const setFunc = audioModule.controlSetFuncs[controlID]
             const audioNode = audioModule.audioNode
             return (
@@ -96,7 +96,7 @@ function LeftDrawer() {
                   <div>{controlID}</div>
                   <input className={classes.ControlInput}
                     type='number'
-                    value={`${value ? value : audioNode[paramID].value}`}
+                    value={audioModule.controlData[controlID].value ? audioModule.controlData[controlID].value : audioNode[paramID].value}
                     min={range ? range[0] : undefined}
                     max={range ? range[1] : undefined}
                     step={!range ? undefined : range[2] ? range[2] : undefined}

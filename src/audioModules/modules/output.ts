@@ -1,20 +1,11 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, ControlData, ControlSetFuncs, BUTTON } from '../moduleTypes'
+import { BaseAM, ControlData, BUTTON } from '../moduleTypes'
 
 export interface OutputModule extends BaseAM {
   audioNode: AudioNode
 }
 
 function makeOutput(): OutputModule {
-  function resume(arg = '') {
-    console.log('resuming')
-    audioCtx.resume()
-  }
-
-  function suspend(arg = '') {
-    audioCtx.suspend()
-  }
-
   const controlData: ControlData = {
     'resume': {
       controlType: BUTTON,

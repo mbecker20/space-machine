@@ -1,5 +1,5 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, ControlData, ControlSetFuncs, TYPE, VALUE, KOMPRESSOR } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE } from '../moduleTypes'
 
 export interface AutoFilterModule extends BaseAM {
   audioNode: BiquadFilterNode
