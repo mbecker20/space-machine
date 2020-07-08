@@ -14,11 +14,13 @@ function makeGain(gainAmount = 0): GainModule {
   const controlData: ControlData = {
     'set gain': {
       controlType: VALUE,
+      paramID: 'gain',
       value: 0,
       range: [-10000, 10000, 1]
     },
     'set fine gain': {
       controlType: VALUE,
+      paramID: 'gain',
       value: 0,
       range: [-100, 100, 1]
     }

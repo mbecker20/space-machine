@@ -42,8 +42,8 @@ type Range = [number, number, number?] // min / max / step
 
 export interface ControlDataPacket {
   controlType: ControlType
-  paramID?: string
-  value?: Value
+  paramID: string
+  value?: Value // need either paramID or value
   range?: Range
 }
 
