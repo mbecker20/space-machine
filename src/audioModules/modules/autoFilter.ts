@@ -16,39 +16,27 @@ function makeAutoFilter (): AutoFilterModule {
   const controlData: ControlData = {
     'set frequency': {
       controlType: VALUE,
-      value: autoFilter.frequency.value
+      paramID: 'frequency'
     },
     'set detune': {
       controlType: VALUE,
-      value: autoFilter.detune.value
+      paramID: 'detune'
     },
     'set Q': {
       controlType: VALUE,
-      value: autoFilter.Q.value
+      paramID: 'Q'
     },
     'set gain': {
       controlType: VALUE,
-      value: autoFilter.gain.value
+      paramID: 'gain'
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = {
-    'set frequency': (newFrequency: string) => {
-      controlData['set frequency'].value = Number(newFrequency)
-      autoFilter.frequency.value = controlData['set frequency'].value
-    },
-    'set detune': (newDetune: string) => {
-      controlData['set detune'].value = Number(newDetune)
-      autoFilter.detune.value = controlData['set detune'].value
-    },
-    'set Q': (newQ: string) => {
-      controlData['set Q'].value = Number(newQ)
-      autoFilter.Q.value = controlData['set Q'].value
-    },
-    'set gain': (newGain: string) => {
-      controlData['set gain'].value = Number(newGain)
-      autoFilter.gain.value = controlData['set gain'].value
-    },
+    'set frequency': (newFrequency: string) => { autoFilter.frequency.value = Number(newFrequency) },
+    'set detune': (newDetune: string) => { autoFilter.detune.value = Number(newDetune) },
+    'set Q': (newQ: string) => { autoFilter.Q.value = Number(newQ) },
+    'set gain': (newGain: string) => { autoFilter.gain.value = Number(newGain) },
   }
 
   return {
