@@ -1,16 +1,24 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, VALUE } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE, AUTOFILTER } from '../moduleTypes'
 
 export interface SignalDelayModule extends BaseAM {
   audioNode: DelayNode
-  controls: BaseControls
 }
 
 function makeSignalDelay(): SignalDelayModule {
   const signalDelay = audioCtx.createDelay()
 
-  const controls = {
-    'set delay time': (newDelay: string) => {signalDelay.delayTime.value = Number(newDelay)},
+  const connectingParamIDs = ['delay time']
+
+  const controlData: ControlData = {
+    'set delay time': {
+      controlType: VALUE,
+      paramID: 'delay time'
+    }
+  }
+
+  const controLSetFuncs: ControlSetFuncs = { 
+    'set delay time': (newDelayTime: string) => { signalDelay.delayTime.value = Number(newDelayTime)}
   }
 
   return {
