@@ -44,15 +44,15 @@ export const sizes: Sizes = {
     width: '20vw',
   },
   moduleView: {
-    iconGrid: '13vmin',
+    iconGrid: '12vmin',
     gutterGrid: '7vmin',
-    icon: '11vmin',
+    icon: '9vmin',
   },
   text: {
-    large: 'calc(25px + 3vmin)',
-    medium: 'calc(20px + 2.5vmin)',
-    small: 'calc(12px + 1.5vmin)',
-    xsmall: 'calc(10px + 1.3vmin)',
+    large: 'calc(25px + 2.8vmin)',
+    medium: 'calc(20px + 2.4vmin)',
+    small: 'calc(12px + 1.4vmin)',
+    xsmall: 'calc(10px + 1.2vmin)',
   },
   connector: {
     size: '3vmin',
