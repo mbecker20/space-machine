@@ -36,7 +36,7 @@ export const VALUE = 'VALUE'
 export const BUTTON = 'BUTTON'
 
 export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON'
-type Value = number
+type Value = number | string
 type SetFunc = (arg: string) => void
 type Range = [number, number, number?] // min / max / step
 
