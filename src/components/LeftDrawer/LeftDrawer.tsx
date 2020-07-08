@@ -84,19 +84,21 @@ function LeftDrawer() {
         </div>
         <div className={classes.ControlMenu}>
           <div className={classes.MenuHeader}>controls</div>
-          {audioModule ? Object.keys(audioModule.controls).map((controlID, index) => {
-            const [paramID, ctrlType] = audioModule.paramIDs[index]
+          {audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
+            const { controlType, paramID, value, range } = audioModule.controlData[controlID]
+            const setFunc = audioModule.controlSetFuncs[controlID]
+            const audioNode = audioModule.audioNode
             return (
               <div className={classes.ControlBounder} key={selectedModule.id + index}>
-                {ctrlType === VALUE
+                {controlType === VALUE
                 ?
                 <Fragment>
                   <div>{controlID}</div>
                   <input className={classes.ControlInput}
                     type='number'
-                    value={`${audioModule.audioNode[paramID] ? audioModule.audioNode[paramID].value : null}`}
+                    value={value ? value : audioNode[paramID as string].value}
                     onChange={(e) => {
-                      audioModule.controls[controlID](e.target.value)
+                      setFunc(e.target.value)
                       window.reRenderLeftDrawer()
                     }}
                   />
