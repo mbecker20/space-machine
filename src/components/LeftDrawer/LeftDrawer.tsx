@@ -96,7 +96,10 @@ function LeftDrawer() {
                   <div>{controlID}</div>
                   <input className={classes.ControlInput}
                     type='number'
-                    value={value ? value : audioNode[paramID as string].value}
+                    value={`${value ? value : audioNode[paramID].value}`}
+                    min={range ? range[0] : undefined}
+                    max={range ? range[1] : undefined}
+                    step={!range ? undefined : range[2] ? range[2] : undefined}
                     onChange={(e) => {
                       setFunc(e.target.value)
                       window.reRenderLeftDrawer()
@@ -104,7 +107,7 @@ function LeftDrawer() {
                   />
                 </Fragment>
                 :
-                ctrlType === BUTTON
+                controlType === BUTTON
                 ?
                 <Button style={{
                     //backgroundColor: colors.fillModule,
@@ -112,21 +115,21 @@ function LeftDrawer() {
                     width: '50%',
                   }}
                   onClick={() => {
-                    audioModule.controls[controlID]('')
+                    setFunc('')
                   }}
                 >{controlID}</Button>
                 :
-                ctrlType === TYPE
+                controlType === TYPE
                 ?
                 <Fragment>
                   <label htmlFor={'type'}>choose type</label>
                   <select className={classes.ControlTypeSelect}
                     name='type' id='type'
                     onChange={(e) => {
-                      audioModule.controls[controlID](e.target.value)
+                      setFunc(e.target.value)
                       window.reRenderLeftDrawer()
                     }}
-                    value={audioModule.audioNode.type as string}
+                    value={audioNode.type as string}
                   >
                     {(audioModule as AudioModuleWithTypes).typeTypes.map(type => {
                       return (
