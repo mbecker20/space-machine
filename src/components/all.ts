@@ -7,5 +7,4 @@ export { default as HorizontalScrollDiv } from './HorizontalScrollDiv/Horizontal
 export { default as CenterMenu } from './CenterMenu/CenterMenu'
 export { default as MrTesterr } from './MrTesterr/MrTesterr'
 export { default as Button } from './Button/Button'
-export { default as DndAudio } from './dndAudio/DndAudio'
 export { default as AudioTags } from './AudioTags/AudioTags'

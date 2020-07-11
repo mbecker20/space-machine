@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { makeMediaElement } from '../../audioModules/all'
 
 interface Props {
@@ -7,15 +7,18 @@ interface Props {
 
 function AudioTag({ id }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null)
-  if (!window.audioModules[id]) {
-    window.setTimeout(() => {
-      window.audioModules = { ...window.audioModules, [id]: makeMediaElement(audioRef) }
-    }, 2000)
-  }
+  useEffect(() => {
+    if (!window.audioModules[id]) {
+      const possiblyMediaElement = makeMediaElement(audioRef)
+      if (possiblyMediaElement) {
+        window.audioModules = { ...window.audioModules, [id]: possiblyMediaElement }
+      }
+    }
+  })
   return (
     <audio
       ref={audioRef}
-      src={window.audioTags[id].src}
+      autoPlay
     />
   )
 }

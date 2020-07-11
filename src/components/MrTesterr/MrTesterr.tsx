@@ -1,6 +1,5 @@
 import React from 'react'
 import useJSS from './style'
-import { DndAudio } from '../all'
 //import { makeOscillator, makeGain, makeOutput, makeAutoFilter } from '../../audioModules/all'
 //import { connect } from '../../audioModules/connection'
 
@@ -23,7 +22,6 @@ function MrTesterr() {
   return (
     <div className={classes.TestingArea}>
       {'mr testerrr'}
-      <DndAudio></DndAudio>
       <div className={classes.ButtonDiv}>
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}

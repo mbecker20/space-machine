@@ -7,28 +7,34 @@ export interface MediaElementModule extends BaseAM {
   ref: RefObject<HTMLAudioElement>
 }
 
-function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementModule {
-  const mediaElement = audioCtx.createMediaElementSource(audioRef.current as HTMLAudioElement)
+function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementModule | null {
+  if (audioRef.current) {
+    const mediaElement = audioCtx.createMediaElementSource(audioRef.current)
 
-  const controlData: ControlData = {
-    'set file': {
-      controlType: FILE,
-      paramID: 'n/a'
+    console.log(audioRef)
+
+    const controlData: ControlData = {
+      'set file': {
+        controlType: FILE,
+        paramID: 'n/a'
+      }
     }
-  }
 
-  const controlSetFuncs: ControlSetFuncs = {
-    'set file': (url: string) => {
-      (audioRef.current as HTMLAudioElement).src = url
+    const controlSetFuncs: ControlSetFuncs = {
+      'set file': (url: string) => {
+        (audioRef.current as HTMLAudioElement).src = url
+      }
     }
-  }
 
-  return {
-    audioNode: mediaElement,
-    ref: audioRef,
-    connectingParamIDs: [],
-    controlData,
-    controlSetFuncs,
+    return {
+      audioNode: mediaElement,
+      ref: audioRef,
+      connectingParamIDs: [],
+      controlData,
+      controlSetFuncs,
+    }
+  } else {
+    return null
   }
 }
 
