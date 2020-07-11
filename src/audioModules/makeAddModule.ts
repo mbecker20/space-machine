@@ -1,4 +1,4 @@
-import { ModuleType, OSCILLATOR, OUTPUT, GAIN, AUTOFILTER, KOMPRESSOR, STEREO_PANNER, SIGNAL_DELAY, CONSTANT } from './moduleTypes'
+import { ModuleType, OSCILLATOR, OUTPUT, GAIN, AUTOFILTER, KOMPRESSOR, STEREO_PANNER, SIGNAL_DELAY, CONSTANT, MEDIA_ELEMENT } from './moduleTypes'
 import { makeOscillator, makeOutput, makeGain, makeAutoFilter, makeKompressor, makeStereoPanner, makeSignalDelay, makeConstantSource } from './all'
 
 function makeAddModule() {
@@ -12,6 +12,7 @@ function makeAddModule() {
       case STEREO_PANNER: window.audioModules = { ...window.audioModules, [id]: makeStereoPanner() }; break
       case SIGNAL_DELAY: window.audioModules = { ...window.audioModules, [id]: makeSignalDelay() }; break
       case CONSTANT: window.audioModules = { ...window.audioModules, [id]: makeConstantSource() }; break
+      case MEDIA_ELEMENT: window.addAudioTag(id); window.reRenderAudioTags(); break
     }
   }
 }

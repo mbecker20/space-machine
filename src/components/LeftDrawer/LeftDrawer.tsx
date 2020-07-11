@@ -8,7 +8,7 @@ import { HorizontalScrollDiv, Button } from '../all'
 import RenameMenu from './RenameMenu'
 import { RootState } from '../../redux/stateTSTypes'
 import { disconnect } from '../../audioModules/connection'
-import { ConnectingAudioModule, TYPE, BUTTON, VALUE } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, TYPE, BUTTON, VALUE, FILE } from '../../audioModules/moduleTypes'
 import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
 
 declare global {
@@ -137,6 +137,20 @@ function LeftDrawer() {
                       )
                     })}
                   </select>
+                </Fragment>
+                :
+                controlType === FILE
+                ?
+                <Fragment>
+                  <div>{controlID}</div>
+                  <input className={classes.ControlInput}
+                    type='file'
+                    onChange={(e) => {
+                      const file = ((e.target as HTMLInputElement).files as FileList)[0]
+                      setFunc(URL.createObjectURL(file))
+                      window.reRenderAudioTags()
+                    }}
+                  />
                 </Fragment>
                 :
                 null

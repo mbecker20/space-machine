@@ -6,6 +6,7 @@ import { KompressorModule } from './modules/kompressor'
 import { StereoPannerModule } from './modules/stereoPanner'
 import { SignalDelayModule } from './modules/signalDelay'
 import { ConstantModule } from './modules/constant'
+import { MediaElementModule } from './modules/mediaElement'
 
 // module type
 
@@ -18,12 +19,13 @@ export const KOMPRESSOR = 'KOMPRESSOR'
 export const STEREO_PANNER = 'STEREO_PANNER'
 export const SIGNAL_DELAY = 'SIGNAL_DELAY'
 export const CONSTANT = 'CONSTANT'
+export const MEDIA_ELEMENT = 'MEDIA_ELEMENT'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule
 
 export type AudioModule = ConnectingAudioModule | OutputModule
 
@@ -36,8 +38,9 @@ export interface AudioModules {
 export const TYPE = 'TYPE'
 export const VALUE = 'VALUE'
 export const BUTTON = 'BUTTON'
+export const FILE = 'FILE'
 
-export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON'
+export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE'
 type Value = number | string
 type SetFunc = (arg: string) => void
 type Range = [number, number, number?] // min / max / step
