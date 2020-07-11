@@ -13,7 +13,7 @@ function makeStereoPanner(): StereoPannerModule {
   const controlData: ControlData = {
     'set pan': {
       controlType: VALUE,
-      paramID: 'frequency'
+      paramID: 'pan'
     }
   }
 

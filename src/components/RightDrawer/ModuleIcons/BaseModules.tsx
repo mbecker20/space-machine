@@ -22,8 +22,8 @@ function BaseModules() {
       <DrawerItem fullName='output' id='out' moduleType={OUTPUT}/>
       <DrawerItem fullName='auto filter' id='filter' moduleType={AUTOFILTER}/>
       <DrawerItem fullName='kompressor' id='komp' moduleType={KOMPRESSOR}/>
-      <DrawerItem fullName='stereo panner' id='str pan' moduleType={STEREO_PANNER}/>
-      <DrawerItem fullName='signal delay' id='sig dly' moduleType={SIGNAL_DELAY}/>
+      <DrawerItem fullName='stereo panner' id='pan' moduleType={STEREO_PANNER}/>
+      <DrawerItem fullName='signal delay' id='dly' moduleType={SIGNAL_DELAY}/>
       <DrawerItem fullName='constant' id='const' moduleType={CONSTANT} />
       <DrawerItem fullName='container' id='cntnr' moduleType={CONTAINER} />
     </Fragment>
