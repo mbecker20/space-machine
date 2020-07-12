@@ -104,10 +104,10 @@ function ModuleViewFill({ containerModule }: Props) {
             gridTemplateRows: `repeat(${maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
             gridTemplateColumns: `repeat(${maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
           }}>
-          {containerModule.childModules.map((moduleID, index) => {
+          {containerModule.childModules.map(moduleID => {
             const mod = modules[moduleID]
             return (
-              <Fragment key={mod.id + index}>
+              <Fragment key={mod.id}>
                 <div style={{
                   gridColumn: `${mod.col * 2 + 1} / span 1`,
                   gridRow: `${mod.row * 2 + 1} / span 1`,
