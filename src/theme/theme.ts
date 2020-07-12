@@ -52,7 +52,7 @@ export const sizes: Sizes = {
     large: 'calc(25px + 2.8vmin)',
     medium: 'calc(20px + 2.4vmin)',
     small: 'calc(12px + 1.4vmin)',
-    xsmall: 'calc(10px + 1.2vmin)',
+    xsmall: 'calc(8px + 1vmin)',
   },
   connector: {
     size: '3vmin',

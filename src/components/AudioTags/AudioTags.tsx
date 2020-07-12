@@ -3,6 +3,7 @@ import AudioTag from './AudioTag'
 
 interface AudioTag {
   id: string
+  srcName: string
   ref?: React.RefObject<HTMLAudioElement>
 }
 
@@ -21,6 +22,7 @@ declare global {
 window.addAudioTag = (id: string) => {
   window.audioTags[id] = {
     id: id,
+    srcName: ''
   }
 }
 

@@ -111,6 +111,7 @@ const useJSS = createUseStyles({
 
   ControlBounder: {
     display: 'flex',
+    flexFlow: 'row wrap',
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
