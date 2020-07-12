@@ -122,7 +122,7 @@ function ModuleViewFill({ containerModule }: Props) {
                     <div style={{ 
                       width: '10px', 
                       height: '10px', 
-                      backgroundColor: 'blue',
+                      //backgroundColor: 'blue',
                     }}></div>
                   </ArcherElement>
                 </div>
@@ -140,7 +140,7 @@ function ModuleViewFill({ containerModule }: Props) {
                     <div style={{
                       width: '10px',
                       height: '10px',
-                      backgroundColor: 'yellow',
+                      //backgroundColor: 'yellow',
                     }}></div>
                   </ArcherElement>
                 </div>
@@ -169,7 +169,7 @@ function ModuleViewFill({ containerModule }: Props) {
                     <div style={{
                       width: '10px',
                       height: '10px',
-                      backgroundColor: 'red',
+                      //backgroundColor: 'red',
                     }}></div>
                   </ArcherElement>
                 </div>
