@@ -14,7 +14,8 @@ function makeSignalDelay(): SignalDelayModule {
     'set delay time': {
       controlType: VALUE,
       paramID: 'delayTime',
-      value: signalDelay.delayTime.value
+      value: signalDelay.delayTime.value,
+      range: [0, 1, .01]
     }
   }
 
