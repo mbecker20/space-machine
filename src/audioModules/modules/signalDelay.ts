@@ -13,12 +13,16 @@ function makeSignalDelay(): SignalDelayModule {
   const controlData: ControlData = {
     'set delay time': {
       controlType: VALUE,
-      paramID: 'delayTime'
+      paramID: 'delayTime',
+      value: signalDelay.delayTime.value
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = { 
-    'set delay time': (newDelayTime: string) => { signalDelay.delayTime.value = Number(newDelayTime)}
+    'set delay time': (newDelayTime: string) => {
+      controlData['set delay time'].value = Number(newDelayTime)
+      signalDelay.delayTime.value = Number(newDelayTime)
+    }
   }
 
   return {

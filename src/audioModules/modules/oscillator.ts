@@ -20,7 +20,8 @@ function makeOscillator(): OscillatorModule {
     },
     'set frequency': {
       controlType: VALUE,
-      paramID: 'frequency'
+      paramID: 'frequency',
+      value: oscillator.frequency.value,
     },
     'set detune': {
       controlType: VALUE,
@@ -30,7 +31,10 @@ function makeOscillator(): OscillatorModule {
 
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { oscillator.type = newType as OscillatorType },
-    'set frequency': (newFrequency: string) => { oscillator.frequency.value = Number(newFrequency) },
+    'set frequency': (newFrequency: string) => {
+      controlData['set frequency'].value = Number(newFrequency)
+      oscillator.frequency.value = Number(newFrequency)
+    },
     'set detune': (newDetune: string) => { oscillator.detune.value = Number(newDetune) },
     'kill': (arg = '') => { oscillator.stop() }
   }
