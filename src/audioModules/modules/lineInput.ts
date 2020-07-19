@@ -1,15 +1,31 @@
 import audioCtx from '../../audioCtx'
+import { BaseAM } from '../moduleTypes'
 
-//export interface 
+export interface LineInputModule extends BaseAM {
+  audioNode: MediaStreamAudioSourceNode
+}
 
-async function makeLineInput() {
-  const stream = await navigator.mediaDevices.getUserMedia({
+function makeLineInput(id: string) {
+  navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: false,
       autoGainControl: false,
       noiseSuppression: false,
       latency: 0
     }
+  }).then(stream => {
+    const lineInput = audioCtx.createMediaStreamSource(stream)
+    const lineInputModule: LineInputModule = {
+      audioNode: lineInput,
+      connectingParamIDs: [],
+      controlData: {},
+      controlSetFuncs: {},
+    }
+    window.audioModules = {
+      ...window.audioModules,
+      [id]: lineInputModule
+    }
   })
-  const lineInput = audioCtx.createMediaStreamSource(stream)
 }
+
+export default makeLineInput

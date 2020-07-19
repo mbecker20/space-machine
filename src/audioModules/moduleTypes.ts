@@ -7,8 +7,9 @@ import { StereoPannerModule } from './modules/stereoPanner'
 import { SignalDelayModule } from './modules/signalDelay'
 import { ConstantModule } from './modules/constant'
 import { MediaElementModule } from './modules/mediaElement'
+import { LineInputModule } from './modules/lineInput'
 
-// module type
+// module types
 
 export const CONTAINER = 'CONTAINER'
 export const GAIN = 'GAIN'
@@ -20,12 +21,13 @@ export const STEREO_PANNER = 'STEREO_PANNER'
 export const SIGNAL_DELAY = 'SIGNAL_DELAY'
 export const CONSTANT = 'CONSTANT'
 export const MEDIA_ELEMENT = 'MEDIA_ELEMENT'
+export const LINE_IN = 'LINE_IN'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule
 
 export type AudioModule = ConnectingAudioModule | OutputModule
 
@@ -33,7 +35,7 @@ export interface AudioModules {
   [index: string]: AudioModule
 }
 
-// control type
+// control types
 
 export const TYPE = 'TYPE'
 export const VALUE = 'VALUE'
