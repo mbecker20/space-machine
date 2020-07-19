@@ -1,21 +1,24 @@
 import React from 'react'
 import useJSS from './style'
 
-const context = new AudioContext();
+const context = new AudioContext()
 
-const stream = await navigator.mediaDevices
-  .getUserMedia({
+async function makeStreamSource() {
+  const stream = await navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: false,
       autoGainControl: false,
       noiseSuppression: false,
       latency: 0
     }
-  });
-const lineInSource = context.createMediaStreamSource(stream);
+  })
 
-lineInSource.connect(context.destination);
+  return context.createMediaStreamSource(stream)
+}
 
+const lineInSource = await makeStreamSource()
+
+lineInSource.connect(context.destination)
 
 function MrTesterr() {
   const classes = useJSS()
