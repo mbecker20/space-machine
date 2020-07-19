@@ -1,7 +1,19 @@
 import React from 'react'
 import useJSS from './style'
+import audioCtx from '../../audioCtx'
 
-const context = new AudioContext()
+interface Thing {
+  audioNode?: MediaStreamAudioSourceNode
+}
+
+const thing: Thing = {}
+
+var splitter = audioCtx.createChannelSplitter(2)
+var merger = audioCtx.createChannelMerger(2)
+var lpf = audioCtx.createBiquadFilter()
+  lpf.type = "lowpass"
+  lpf.frequency.value = 440
+  lpf.Q.value = 10
 
 navigator.mediaDevices.getUserMedia({
   audio: {
@@ -11,9 +23,14 @@ navigator.mediaDevices.getUserMedia({
     latency: 0
   }
 }).then(stream => {
-  const lineInSource = context.createMediaStreamSource(stream)
-  lineInSource.connect(context.destination)
+  thing.audioNode = audioCtx.createMediaStreamSource(stream)
 })
+
+thing.lineInSource.connect(splitter)
+splitter.connect(lpf, 1)
+lpf.connect(merger, 0, 1)
+splitter.connect(merger, 0, 0)
+merger.connect(audioCtx.destination)
 
 function MrTesterr() {
   const classes = useJSS()
@@ -24,7 +41,7 @@ function MrTesterr() {
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}
           onClick={() => {
-            context.resume()
+            audioCtx.resume()
           }}
         >start ctx</div>
       </div>
@@ -58,7 +75,7 @@ function MrTesterr() {
         <div className={classes.Button}
           style={{ backgroundColor: 'red' }}
           onClick={() => {
-            //output.controls.suspend('')
+            audioCtx.suspend()
           }}
         >stop ctx</div>
       </div>
