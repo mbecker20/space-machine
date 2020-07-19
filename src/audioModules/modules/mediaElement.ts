@@ -11,8 +11,6 @@ function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementMo
   if (audioRef.current) {
     const mediaElement = audioCtx.createMediaElementSource(audioRef.current)
 
-    console.log(audioRef)
-
     const controlData: ControlData = {
       'set file': {
         controlType: FILE,

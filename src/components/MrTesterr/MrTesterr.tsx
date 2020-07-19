@@ -1,21 +1,25 @@
 import React from 'react'
 import useJSS from './style'
-//import { makeOscillator, makeGain, makeOutput, makeAutoFilter } from '../../audioModules/all'
-//import { connect } from '../../audioModules/connection'
 
-// Successful FM Synth implementation!
-// done using new dynamic module connect function
+const context = new AudioContext();
 
-/*
-const osc = makeOscillator('sine', 440, 0)
-const oscGain = makeGain (1)
-const lpf = makeAutoFilter('lowpass', 300, 0, 0, 1)
-const output = makeOutput()
+if (context.state === 'suspended') {
+  await context.resume();
+}
 
-connect(osc, oscGain)
-connect(oscGain, lpf)
-connect(lpf, output)
-*/
+const stream = await navigator.mediaDevices
+  .getUserMedia({
+    audio: {
+      echoCancellation: false,
+      autoGainControl: false,
+      noiseSuppression: false,
+      latency: 0
+    }
+  });
+const lineInSource = context.createMediaStreamSource(stream);
+
+lineInSource.connect(context.destination);
+
 
 function MrTesterr() {
   const classes = useJSS()
