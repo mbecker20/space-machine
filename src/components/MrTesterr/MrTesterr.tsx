@@ -3,22 +3,17 @@ import useJSS from './style'
 
 const context = new AudioContext()
 
-async function makeStreamSource() {
-  const stream = await navigator.mediaDevices.getUserMedia({
-    audio: {
-      echoCancellation: false,
-      autoGainControl: false,
-      noiseSuppression: false,
-      latency: 0
-    }
-  })
-
-  return context.createMediaStreamSource(stream)
-}
-
-const lineInSource = await makeStreamSource()
-
-lineInSource.connect(context.destination)
+navigator.mediaDevices.getUserMedia({
+  audio: {
+    echoCancellation: false,
+    autoGainControl: false,
+    noiseSuppression: false,
+    latency: 0
+  }
+}).then(stream => {
+  const lineInSource = context.createMediaStreamSource(stream)
+  lineInSource.connect(context.destination)
+})
 
 function MrTesterr() {
   const classes = useJSS()
