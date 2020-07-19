@@ -3,10 +3,6 @@ import useJSS from './style'
 
 const context = new AudioContext();
 
-if (context.state === 'suspended') {
-  await context.resume();
-}
-
 const stream = await navigator.mediaDevices
   .getUserMedia({
     audio: {
@@ -30,7 +26,7 @@ function MrTesterr() {
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}
           onClick={() => {
-            //output.controls.resume('')
+            context.resume()
           }}
         >start ctx</div>
       </div>
