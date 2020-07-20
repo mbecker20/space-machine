@@ -31,6 +31,7 @@ function makeSignalDelay(): SignalDelayModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
+    outputs: ['0'],
   }
 }
 

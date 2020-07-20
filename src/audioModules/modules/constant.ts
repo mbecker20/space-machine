@@ -68,7 +68,8 @@ function makeConstantSource(): ConstantModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
-    typeTypes: constantSourceTypes
+    typeTypes: constantSourceTypes,
+    outputs: ['0'],
   }
 
 }

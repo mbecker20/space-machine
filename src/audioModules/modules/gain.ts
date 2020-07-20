@@ -41,7 +41,13 @@ function makeGain(gainAmount = 0): GainModule {
     },
   }
   
-  return { audioNode: gain, connectingParamIDs, controlData, controlSetFuncs }
+  return { 
+    audioNode: gain,
+    connectingParamIDs,
+    controlData,
+    controlSetFuncs,
+    outputs: ['0'],
+  }
 }
 
 export default makeGain

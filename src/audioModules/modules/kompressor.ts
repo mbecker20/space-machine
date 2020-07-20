@@ -46,6 +46,7 @@ function makeKompressor(): KompressorModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
+    outputs: ['0'],
   }
 }
 

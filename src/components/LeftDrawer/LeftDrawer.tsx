@@ -3,8 +3,7 @@ import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
 import { sizes } from '../../theme/theme'
 import { useSelector } from 'react-redux'
-import { HorizontalScrollDiv } from '../all'
-import RenameMenu from '../RenameMenu/RenameMenu'
+import { HorizontalScrollDiv, RenameMenu } from '../all'
 import { RootState } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
 import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
@@ -13,7 +12,7 @@ import DeleteButton from './DeleteButton'
 import InputOutputView from './InputOutputView'
 
 declare global {
-  interface Window { 
+  interface Window {
     setLeftDrawerOpen: (isOpen: boolean) => void
     reRenderLeftDrawer: () => void
   }

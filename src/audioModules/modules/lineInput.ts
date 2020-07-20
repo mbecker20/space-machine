@@ -15,7 +15,7 @@ function makeLineInput(id: string) {
     }
   }).then(stream => {
     const lineInput = audioCtx.createMediaStreamSource(stream)
-    const channelSplitter = audioCtx.createChannelSplitter()
+    const channelSplitter = audioCtx.createChannelSplitter(2)
     lineInput.connect(channelSplitter)
 
     const controlData: ControlData = {
@@ -47,6 +47,7 @@ function makeLineInput(id: string) {
       connectingParamIDs: [],
       controlData,
       controlSetFuncs,
+      outputs: ['0 (L)', '1 (R)']
     }
 
     window.audioModules = {

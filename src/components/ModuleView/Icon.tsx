@@ -4,7 +4,7 @@ import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
-import ConnectionMenu from './ConnectionMenu'
+import ConnectionMenu from '../ConnectionMenu/ConnectionMenu'
 import { OUTPUT } from '../../audioModules/moduleTypes'
 
 declare global {

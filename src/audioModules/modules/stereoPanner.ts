@@ -26,6 +26,7 @@ function makeStereoPanner(): StereoPannerModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
+    outputs: ['0'],
   }
 
 }
