@@ -23,9 +23,11 @@ const buttonStyle: CSS.Properties = {
   
 }
 
-function ConnectionMenu({ fromID, toID, toType, onClose, initMenu }: Props) {
-  const [openMenu, setOpenMenu] = useState(initMenu)
+function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   const am = window.audioModules
+  const initMenu = am[fromID].outputs.length === 1 ? CONNECT_TO : CHOOSE_OUTPUT
+  const [openMenu, setOpenMenu] = useState(initMenu)
+  const [output, setOutput] = useState(0)
   const dispatch = useDispatch()
   const [ fromName, toName ] = useSelector((state: RootState) => {
     return [ 
@@ -41,7 +43,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose, initMenu }: Props) {
         {toType === OSCILLATOR || toType === CONSTANT ? null :
         <Button style={buttonStyle}
           onClick={() => {
-            connect(am[fromID] as ConnectingAudioModule, am[toID])
+            connect(am[fromID] as ConnectingAudioModule, am[toID], '', output)
             dispatch(addConnection(fromID, toID))
             onClose()
           }}
@@ -62,9 +64,8 @@ function ConnectionMenu({ fromID, toID, toType, onClose, initMenu }: Props) {
           return (
           <Button key={fromID + toID + key}
             onClick={() => {
-              connect(am[fromID] as ConnectingAudioModule, am[toID], paramID)
+              connect(am[fromID] as ConnectingAudioModule, am[toID], paramID, output)
               dispatch(addConnection(fromID, toID, paramID))
-              setOpenMenu(0)
               onClose()
             }}
           >{paramID}</Button>
@@ -75,16 +76,15 @@ function ConnectionMenu({ fromID, toID, toType, onClose, initMenu }: Props) {
       openMenu === CHOOSE_OUTPUT
       ?
       <CenterMenu header={'choose output'} onClose={onClose}>
-        {am[toID].connectingParamIDs.map((paramID, key) => {
+        {am[toID].outputs.map((outputID, index) => {
           return (
-            <Button key={fromID + toID + key}
-              onClick={() => {
-                connect(am[fromID] as ConnectingAudioModule, am[toID], paramID)
-                dispatch(addConnection(fromID, toID, paramID))
-                setOpenMenu(0)
-                onClose()
+            <Button key={fromID + toID + outputID}
+              onClick={(e) => {
+                e.stopPropagation()
+                setOutput(index)
+                setOpenMenu(CONNECT_TO)
               }}
-            >{paramID}</Button>
+            >{outputID}</Button>
           )
         })}
       </CenterMenu>
