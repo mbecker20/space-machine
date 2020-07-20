@@ -12,7 +12,6 @@ interface Props {
   toID: string
   toType: string
   onClose: () => void
-  initMenu: string
 }
 
 export const CHOOSE_OUTPUT = 'CHOOSE_OUTPUT'
@@ -45,6 +44,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
           onClick={() => {
             connect(am[fromID] as ConnectingAudioModule, am[toID], '', output)
             dispatch(addConnection(fromID, toID))
+            console.log(output)
             onClose()
           }}
         >module</Button>}
@@ -76,7 +76,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
       openMenu === CHOOSE_OUTPUT
       ?
       <CenterMenu header={'choose output'} onClose={onClose}>
-        {am[toID].outputs.map((outputID, index) => {
+        {am[fromID].outputs.map((outputID, index) => {
           return (
             <Button key={fromID + toID + outputID}
               onClick={(e) => {

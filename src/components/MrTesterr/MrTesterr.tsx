@@ -9,7 +9,7 @@ var lpf = audioCtx.createBiquadFilter()
   lpf.type = "lowpass"
   lpf.frequency.value = 440
   lpf.Q.value = 10
-*/
+
 
 navigator.mediaDevices.getUserMedia({
   audio: {
@@ -25,7 +25,7 @@ navigator.mediaDevices.getUserMedia({
   const gain0 = audioCtx.createGain()
   const gain1 = audioCtx.createGain()
   const gain2 = audioCtx.createGain()
-  const merger = audioCtx.createChannelMerger(3)
+  //const merger = audioCtx.createChannelMerger(3)
   //const dly = audioCtx.createDelay(); dly.delayTime.value = .18
   //const dlyFdbk = audioCtx.createGain(); dlyFdbk.gain.value = .6
   //dly.connect(dlyFdbk); dlyFdbk.connect(dly)
@@ -45,6 +45,7 @@ navigator.mediaDevices.getUserMedia({
   //merger.connect(master)
   master.connect(audioCtx.destination)
 })
+*/
 
 function MrTesterr() {
   const classes = useJSS()
