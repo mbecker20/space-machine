@@ -73,10 +73,9 @@ export const connectInputModule = (id: string) => {
   }
 }
 
-export const disconnectInputModule = (id: string) => {
+export const disconnectInputModule = () => {
   return {
     type: DISCONNECT_INPUT_MODULE,
-    id
   }
 }
 
@@ -87,9 +86,8 @@ export const connectOutputModule = (id: string) => {
   }
 }
 
-export const disconnectOutputModule = (id: string) => {
+export const disconnectOutputModule = () => {
   return {
     type: DISCONNECT_OUTPUT_MODULE,
-    id
   }
 }

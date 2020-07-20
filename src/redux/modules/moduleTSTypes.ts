@@ -49,7 +49,6 @@ export interface ConnectInputModuleAction {
 
 export interface DisconnectInputModuleAction {
   type: string
-  id: string
 }
 
 export interface ConnectOutputModuleAction {
@@ -59,7 +58,6 @@ export interface ConnectOutputModuleAction {
 
 export interface DisconnectOutputModuleAction {
   type: string
-  id: string
 }
 
 export type ModuleAction = AddModuleAction | 
