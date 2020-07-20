@@ -28,6 +28,8 @@ export interface Module { // the base of the Module types
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 
   childModules: string[]
   isBaseContainer: boolean
+  inputModuleID?: string
+  outputModuleID?: string
 }
 
 export interface Modules {

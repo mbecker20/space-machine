@@ -42,4 +42,27 @@ export interface RemoveConnectionAction {
   param: string
 }
 
-export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | RemoveConnectionAction
+export interface ConnectInputModuleAction {
+  type: string
+  id: string
+}
+
+export interface DisconnectInputModuleAction {
+  type: string
+  id: string
+}
+
+export interface ConnectOutputModuleAction {
+  type: string
+  id: string
+}
+
+export interface DisconnectOutputModuleAction {
+  type: string
+  id: string
+}
+
+export type ModuleAction = AddModuleAction | 
+RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | 
+RemoveConnectionAction | ConnectInputModuleAction | DisconnectInputModuleAction |
+ConnectOutputModuleAction | ConnectInputModuleAction
