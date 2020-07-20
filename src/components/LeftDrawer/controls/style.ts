@@ -62,25 +62,6 @@ const useJSS = createUseStyles({
     fontSize: sizes.text.small
   },
 
-  // bottom items
-
-  BottomItems: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    width: '100%',
-    maxHeight: '50%',
-    overflowX: 'hidden',
-    overflowY: 'scroll',
-    '&::-webkit-scrollbar': {
-      width: '4px',
-    },
-    '&::-webkit-scrollbar-thumb': {
-      backgroundColor: 'white',
-    },
-  },
-
   // Center Menu
 
   CMInputBounder: {
