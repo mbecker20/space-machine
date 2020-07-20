@@ -10,16 +10,18 @@ import {
   SIGNAL_DELAY,
   STEREO_PANNER,
   CONSTANT,
-  MEDIA_ELEMENT
+  MEDIA_ELEMENT,
+  LINE_IN,
 } from '../../../audioModules/moduleTypes'
 
 function BaseModules() {
   return (
     <Fragment>
-      <DrawerItem fullName='oscillator' id='osc' moduleType={OSCILLATOR}/>
-      <DrawerItem fullName='mp3' id='local' moduleType={MEDIA_ELEMENT} />
+      <DrawerItem fullName='file' id='local' moduleType={MEDIA_ELEMENT} />
+      <DrawerItem fullName='stream' id='stream' moduleType={LINE_IN} />
       <DrawerItem fullName='gain' id='gain' moduleType={GAIN}/>
       <DrawerItem fullName='output' id='out' moduleType={OUTPUT}/>
+      <DrawerItem fullName='oscillator' id='osc' moduleType={OSCILLATOR} />
       <DrawerItem fullName='auto filter' id='filter' moduleType={AUTOFILTER}/>
       <DrawerItem fullName='kompressor' id='komp' moduleType={KOMPRESSOR}/>
       <DrawerItem fullName='stereo panner' id='pan' moduleType={STEREO_PANNER}/>
