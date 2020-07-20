@@ -16,24 +16,33 @@ navigator.mediaDevices.getUserMedia({
     echoCancellation: false,
     autoGainControl: false,
     noiseSuppression: false,
-    latency: 0
+    latency: 0,
+    channelCount: 3,
   }
 }).then(stream => {
   const src = audioCtx.createMediaStreamSource(stream)
-  const gain = audioCtx.createGain()
-  const merger = audioCtx.createChannelMerger(2)
-  const dly = audioCtx.createDelay(); dly.delayTime.value = .18
-  const dlyFdbk = audioCtx.createGain(); dlyFdbk.gain.value = .6
-  dly.connect(dlyFdbk); dlyFdbk.connect(dly)
+  const splitter = audioCtx.createChannelSplitter(3)
+  const gain0 = audioCtx.createGain()
+  const gain1 = audioCtx.createGain()
+  const gain2 = audioCtx.createGain()
+  const merger = audioCtx.createChannelMerger(3)
+  //const dly = audioCtx.createDelay(); dly.delayTime.value = .18
+  //const dlyFdbk = audioCtx.createGain(); dlyFdbk.gain.value = .6
+  //dly.connect(dlyFdbk); dlyFdbk.connect(dly)
   const master = audioCtx.createGain(); master.gain.value = 1
 
-  gain.gain.value = 5.5
-  src.connect(gain, 0, 0)
-  gain.connect(merger, 0, 0)
-  gain.connect(merger, 0, 1)
-  merger.connect(dly)
-  dly.connect(master)
-  merger.connect(master)
+  console.log(stream.getAudioTracks()[0].getCapabilities())
+
+  master.gain.value = 1
+
+  src.connect(splitter)
+  splitter.connect(gain0, 0)
+  splitter.connect(gain1, 1)
+  splitter.connect(gain2, 2)
+  gain0.connect(master)
+  gain1.connect(master)
+  gain2.connect(master)
+  //merger.connect(master)
   master.connect(audioCtx.destination)
 })
 

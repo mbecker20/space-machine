@@ -41,10 +41,12 @@ export const TYPE = 'TYPE'
 export const VALUE = 'VALUE'
 export const BUTTON = 'BUTTON'
 export const FILE = 'FILE'
+export const INFO = 'INFO'
+export const SWITCH = 'SWITCH'
 
-export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE'
-type Value = number | string
-type SetFunc = (arg: string) => void
+export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH'
+type Value = number | string | boolean
+export type SetFunc = (arg: string) => void
 type Range = [number, number, number?] // min / max / step
 
 export interface ControlDataPacket {

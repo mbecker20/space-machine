@@ -129,7 +129,7 @@ function LeftDrawer() {
                       setFunc(e.target.value)
                       window.reRenderLeftDrawer()
                     }}
-                    value={value ? value : audioNode.type as string}
+                    value={value as string ? value as string : audioNode.type as string}
                   >
                     {(audioModule as AudioModuleWithTypes).typeTypes.map(type => {
                       return (
