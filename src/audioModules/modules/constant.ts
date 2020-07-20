@@ -63,7 +63,7 @@ function makeConstantSource(): ConstantModule {
 
   constantSource.start()
 
-  return { 
+  return {
     audioNode: constantSource, 
     connectingParamIDs,
     controlData,

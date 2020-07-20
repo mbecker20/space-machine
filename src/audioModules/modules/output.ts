@@ -38,7 +38,7 @@ function makeOutput(): OutputModule {
     connectingParamIDs: [],
     controlData,
     controlSetFuncs,
-    outputs: ['none']
+    outputs: []
   }
 }
 

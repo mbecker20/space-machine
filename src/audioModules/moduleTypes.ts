@@ -11,7 +11,6 @@ import { LineInputModule } from './modules/lineInput'
 
 // module types
 
-export const CONTAINER = 'CONTAINER'
 export const GAIN = 'GAIN'
 export const OSCILLATOR = 'OSCILLATOR'
 export const OUTPUT = 'OUTPUT'
@@ -22,8 +21,11 @@ export const SIGNAL_DELAY = 'SIGNAL_DELAY'
 export const CONSTANT = 'CONSTANT'
 export const MEDIA_ELEMENT = 'MEDIA_ELEMENT'
 export const LINE_IN = 'LINE_IN'
+export const CONTAINER = 'CONTAINER'
+export const CONTAINER_INPUT = 'CONTAINER_INPUT'
+export const CONTAINER_OUTPUT = 'CONTAINER_OUTPUT'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'CONTAINER_INPUT' | 'CONTAINER_OUTPUT'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 

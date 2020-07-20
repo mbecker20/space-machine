@@ -41,7 +41,7 @@ function makeGain(gainAmount = 0): GainModule {
     },
   }
   
-  return { 
+  return {
     audioNode: gain,
     connectingParamIDs,
     controlData,

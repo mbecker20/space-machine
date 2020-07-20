@@ -111,19 +111,21 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           }
         }}
       >
-        {mod.moduleType !== OUTPUT ? 
+        {window.audioModules[mod.id].outputs.length === 0 ? null
+        :
         <div className={classes.IconConnector}
           draggable={true}
           onDragStart={(e) => {
             e.stopPropagation()
             e.dataTransfer.setData('fromID', mod.id)
           }}
-        /> : <div style={{ width: '1vmin', height: '1vmin' }}/>}
+        />}
         <div className={classes.IconName}>
           {mod.name}
         </div>
       </div>
-      {!cmState.isOpen ? null :
+      {!cmState.isOpen ? null
+      :
       <ConnectionMenu fromID={cmState.fromID} toID={mod.id} toType={mod.moduleType}
         onClose={() => {
           setCMState({
