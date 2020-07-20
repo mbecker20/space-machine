@@ -5,7 +5,7 @@ import { useSpring, animated } from 'react-spring'
 
 interface Props {
   text: string,
-  onSwitch: (state: boolean) => void,
+  onSwitch: (newState: boolean) => void,
   initState: boolean,
   style?: object,
 }
@@ -13,10 +13,6 @@ interface Props {
 function Switch({ text, onSwitch, initState, style }: Props) {
   const [state, setState] = useState(initState)
   const classes = useJSS()
-  function onClick() {
-    onSwitch(!state)
-    setState(!state)
-  }
   const spring = useSpring({
     cx: state ? '65' : '25',
     fill: state ? 'green' : 'red',
@@ -27,7 +23,7 @@ function Switch({ text, onSwitch, initState, style }: Props) {
   return (
     <div className={classes.Bounder} style={style}>
       {text}
-      <svg onClick={onClick} width={'90'} height={'30'}>
+      <svg onClick={() => { onSwitch(!state); setState(!state) }} width={'90'} height={'30'}>
         <rect width='50' height='20' x='20' y='5' rx='10' ry='10'/>
         <animated.circle cx={spring.cx} cy={'15'} r={'15'} fill={spring.fill}/>
       </svg>

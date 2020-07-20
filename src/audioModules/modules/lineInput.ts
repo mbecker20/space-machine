@@ -19,9 +19,10 @@ function makeLineInput(id: string) {
     lineInput.connect(channelSplitter)
 
     const controlData: ControlData = {
-      'number of channels': {
+      'number of channels: ': {
         controlType: INFO,
         paramID: 'n/a',
+        value: 0,
       },
       'mute': {
         controlType: SWITCH,
@@ -31,12 +32,13 @@ function makeLineInput(id: string) {
     }
 
     const controlSetFuncs: ControlSetFuncs = {
-      'number of channels': (arg: string) => {
-        return lineInput.channelCount
+      'number of channels: ': (arg: string) => {
+        controlData['number of channels: '].value = lineInput.channelCount
       },
       'mute': (arg: string) => {
-        controlData['mute'].value = !controlData['mute'].value
-        stream.getAudioTracks()[0].enabled = controlData['mute'].value
+        const isMuted = arg === 'true'
+        controlData['mute'].value = isMuted
+        stream.getAudioTracks()[0].enabled = isMuted
       }
     }
 

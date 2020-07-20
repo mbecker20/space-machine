@@ -1,14 +1,14 @@
 import React, { useState, Fragment } from 'react'
 import { animated, useSpring } from 'react-spring'
 import useJSS from './style'
-import { colors, sizes } from '../../theme/theme'
+import { sizes } from '../../theme/theme'
 import { useSelector } from 'react-redux'
-import { HorizontalScrollDiv, Button } from '../all'
-import RenameMenu from './RenameMenu'
+import { HorizontalScrollDiv } from '../all'
+import RenameMenu from '../RenameMenu/RenameMenu'
 import { RootState } from '../../redux/stateTSTypes'
-import { TYPE, BUTTON, VALUE, FILE } from '../../audioModules/moduleTypes'
+import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
 import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
-import { FileControl, TypeControl, ValueControl } from './controls/all'
+import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
 import DeleteButton from './DeleteButton'
 import InputOutputView from './InputOutputView'
 
@@ -64,15 +64,7 @@ function LeftDrawer() {
                 :
                 controlType === BUTTON
                 ?
-                <Button style={{
-                    //backgroundColor: colors.fillModule,
-                    borderColor: colors.deleteButton,
-                    width: '50%',
-                  }}
-                  onClick={() => {
-                    setFunc('')
-                  }}
-                >{controlID}</Button>
+                <ButtonControl setFunc={setFunc} controlID={controlID} />
                 :
                 controlType === TYPE
                 ?
@@ -81,6 +73,10 @@ function LeftDrawer() {
                 controlType === FILE
                 ?
                 <FileControl controlID={controlID} setFunc={setFunc} />
+                :
+                controlType === SWITCH
+                ?
+                <SwitchControl controlID={controlID} setFunc={setFunc} />
                 :
                 null
                 }
