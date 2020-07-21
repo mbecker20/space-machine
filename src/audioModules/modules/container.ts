@@ -16,7 +16,8 @@ function makeContainer(): ContainerModule {
     connectingParamIDs: [],
     controlData,
     controlSetFuncs,
-    
+    connectionInputs: [],
+    connectionOutputs: [],
   }
 }
 
