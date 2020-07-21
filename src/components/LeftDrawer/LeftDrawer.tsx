@@ -10,6 +10,7 @@ import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
 import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
 import DeleteButton from './DeleteButton'
 import InputOutputView from './InputOutputView'
+import MarkContainerIO from './MarkContainerIO'
 
 declare global {
   interface Window {
@@ -31,7 +32,7 @@ function LeftDrawer() {
     }
   })
   const [isRenameMenuOpen, setRMOpen] = useState(false)
-  const modules = useSelector((state: RootState) => state.modules)
+  const [ modules, baseContainerID ] = useSelector((state: RootState) => [state.modules, state.baseContainerID])
   const selectedModule = modules[window.highlightedID]
   const am = window.audioModules
   const audioModule = am[window.highlightedID]
@@ -84,6 +85,7 @@ function LeftDrawer() {
           }) : null}
         </div>
         <div className={classes.BottomItems}>
+          <MarkContainerIO baseContainerID={baseContainerID} selectedModule={selectedModule}/>
           <DeleteButton selectedModule={selectedModule} audioModule={audioModule} />
         </div>
       </animated.div>
