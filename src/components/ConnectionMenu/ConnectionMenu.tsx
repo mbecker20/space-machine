@@ -28,12 +28,9 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   const [outputIndex, setOutputIndex] = useState(0)
   const [inputIndex, setInputIndex] = useState(0)
   const dispatch = useDispatch()
-  const [ fromMod, toMod ] = useSelector((state: RootState) => {
-    return [ 
-      state.modules[fromID], 
-      state.modules[toID],
-    ]
-  })
+  const modules = useSelector((state: RootState) => state.modules)
+  const fromMod = modules[fromID]
+  const toMod = modules[toID]
   const initMenu = fromMod.connectionOutputs.length > 1 ? CHOOSE_OUTPUT :
     toMod.connectionInputs.length > 1 ? CHOOSE_INPUT : CONNECT_TO
     
@@ -82,7 +79,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
       openMenu === CONNECT_TO
       ?
       <CenterMenu header={`connect ${fromMod.name} to ${toMod.name}`} onClose={onClose}>
-        {toType === OSCILLATOR || toType === CONSTANT ? null :
+        {!(isToContainer ? ) ? null :
         <Button style={buttonStyle}
           onClick={() => {
             if (isFromContainer) {
@@ -98,7 +95,6 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
                 connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, '', outputIndex)
               }
             }
-            
             dispatch(addConnection(fromID, toID))
             onClose()
           }}
