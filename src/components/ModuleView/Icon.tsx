@@ -93,10 +93,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
               window.highlightedID = ''
               window.currSetHighlighted = (setHighlighted) => {}
             } else {
-              window.setLeftDrawerOpen(true)
-              window.reRenderLeftDrawer()
               setHighlighted(true)
               window.highlightedID = mod.id
+              window.setLeftDrawerOpen(true)
+              window.reRenderLeftDrawer()
               window.currSetHighlighted(false)
               window.currSetHighlighted = setHighlighted
             }

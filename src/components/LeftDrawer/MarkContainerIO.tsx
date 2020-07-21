@@ -13,7 +13,7 @@ interface Props {
 
 const switchStyle: CSS.Properties = {
   fontSize: sizes.text.xsmall,
-  padding: '1vmin'
+  padding: '1vmin',
 }
 
 function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
@@ -25,6 +25,7 @@ function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
       window.fillContainerID === baseContainerID ? null :
       selectedModule.connectionInputs.length === 0 ? null :
       <Switch style={switchStyle}
+        key={selectedModule.id + 'inputSwitch'}
         text={'mark as container input'} 
         initState={selectedModule.isContainerInput}
         onSwitch={(newState) => {
@@ -40,6 +41,7 @@ function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
       window.fillContainerID === baseContainerID ? null :
       selectedModule.connectionOutputs.length === 0 ? null :
       <Switch style={switchStyle}
+        key={selectedModule.id + 'outputSwitch'}
         text={'mark as container output'}
         initState={selectedModule.isContainerOutput}
         onSwitch={(newState) => {

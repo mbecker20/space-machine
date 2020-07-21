@@ -76,7 +76,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
       :
       openMenu === CONNECT_TO
       ?
-            <CenterMenu header={`connect ${isFromContainer ? fromMod.name + ' - ' + modules[fromMod.connectionOutputs[outputIndex]].name : fromMod.name} to ${isToContainer ? toMod.name + ' - ' + modules[toMod.connectionInputs[inputIndex]].name : toMod.name}`} onClose={onClose}>
+      <CenterMenu header={`connect ${isFromContainer ? fromMod.name + ' - ' + modules[fromMod.connectionOutputs[outputIndex]].name : fromMod.name} to ${isToContainer ? toMod.name + ' - ' + modules[toMod.connectionInputs[inputIndex]].name : toMod.name}`} onClose={onClose}>
         {(isToContainer ? modules[toMod.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod.connectionInputs.length === 0) ? null :
         <Button style={buttonStyle}
           onClick={() => {
