@@ -13,7 +13,7 @@ const useJSS = createUseStyles({
 
   FillHeaderBounder: {
     display: 'flex',
-    
+    justifyContent: 'space-between',
   },
 
   FillHeader: {
