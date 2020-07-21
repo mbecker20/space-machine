@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
 import { connect } from '../../audioModules/connection'
 import { useDispatch, useSelector } from 'react-redux'
-import { ConnectingAudioModule, OSCILLATOR, CONSTANT } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, OSCILLATOR, CONSTANT, CONTAINER } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
 import CSS from 'csstype'
 import { RootState } from '../../redux/stateTSTypes'
@@ -17,6 +17,7 @@ interface Props {
 export const CHOOSE_OUTPUT = 'CHOOSE_OUTPUT'
 export const CONNECT_TO = 'CONNECT_TO'
 export const CHOOSE_PARAM = 'CHOOSE_PARAM'
+export const CHOOSE_INPUT = 'CHOOSE_INPUT'
 
 const buttonStyle: CSS.Properties = {
   
@@ -24,7 +25,8 @@ const buttonStyle: CSS.Properties = {
 
 function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   const am = window.audioModules
-  const [output, setOutput] = useState(0)
+  const [outputIndex, setOutputIndex] = useState(0)
+  const [inputIndex, setInputIndex] = useState(0)
   const dispatch = useDispatch()
   const [ fromMod, toMod ] = useSelector((state: RootState) => {
     return [ 
@@ -32,19 +34,72 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
       state.modules[toID],
     ]
   })
-  const initMenu = fromMod.connectionOutputs.length === 1 ? CONNECT_TO : CHOOSE_OUTPUT
+  const initMenu = fromMod.connectionOutputs.length > 1 ? CHOOSE_OUTPUT :
+    toMod.connectionInputs.length > 1 ? CHOOSE_INPUT : CONNECT_TO
+    
+
   const [openMenu, setOpenMenu] = useState(initMenu)
+  const isFromContainer = fromMod.moduleType === CONTAINER
+  const isToContainer = toMod.moduleType === CONTAINER
   return (
     <Fragment>
-      {openMenu === CONNECT_TO
+      {openMenu === CHOOSE_OUTPUT
+      ?
+      <CenterMenu header={'choose output'} onClose={onClose}>
+        {fromMod.connectionOutputs.map((outputID, index) => {
+          return (
+            <Button key={fromID + toID + outputID}
+              onClick={(e) => {
+                e.stopPropagation()
+                setOutputIndex(index)
+                if (toMod.connectionInputs.length > 1) {
+                  setOpenMenu(CHOOSE_INPUT)
+                } else {
+                  setOpenMenu(CONNECT_TO)
+                }
+              }}
+            >{outputID}</Button>
+          )
+        })}
+      </CenterMenu>
+      :
+      openMenu === CHOOSE_INPUT
+      ?
+      <CenterMenu header={'choose input'} onClose={onClose}>
+        {toMod.connectionInputs.map((inputID, index) => {
+          return (
+            <Button key={fromID + toID + inputID}
+              onClick={(e) => {
+                e.stopPropagation()
+                setInputIndex(index)
+                setOpenMenu(CONNECT_TO)
+              }}
+            >{inputID}</Button>
+          )
+        })}
+      </CenterMenu>
+      :
+      openMenu === CONNECT_TO
       ?
       <CenterMenu header={`connect ${fromMod.name} to ${toMod.name}`} onClose={onClose}>
         {toType === OSCILLATOR || toType === CONSTANT ? null :
         <Button style={buttonStyle}
           onClick={() => {
-            connect(am[fromID] as ConnectingAudioModule, am[toID] as ConnectingAudioModule, '', output)
+            if (isFromContainer) {
+              if (isToContainer) {
+                connect(am[fromMod.connectionOutputs[outputIndex]] as ConnectingAudioModule, am[toMod.connectionInputs[inputIndex]] as ConnectingAudioModule)
+              } else {
+                connect(am[fromMod.connectionOutputs[outputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule)
+              }
+            } else {
+              if (isToContainer) {
+                connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[inputIndex]] as ConnectingAudioModule)
+              } else {
+                connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, '', outputIndex)
+              }
+            }
+            
             dispatch(addConnection(fromID, toID))
-            console.log(output)
             onClose()
           }}
         >module</Button>}
@@ -64,27 +119,11 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
           return (
           <Button key={fromID + toID + key}
             onClick={() => {
-              connect(am[fromID] as ConnectingAudioModule, am[toID] as ConnectingAudioModule, paramID, output)
+              connect(am[fromID] as ConnectingAudioModule, am[toID] as ConnectingAudioModule, paramID, outputIndex)
               dispatch(addConnection(fromID, toID, paramID))
               onClose()
             }}
           >{paramID}</Button>
-          )
-        })}
-      </CenterMenu>
-      :
-      openMenu === CHOOSE_OUTPUT
-      ?
-      <CenterMenu header={'choose output'} onClose={onClose}>
-        {fromMod.connectionOutputs.map((outputID, index) => {
-          return (
-            <Button key={fromID + toID + outputID}
-              onClick={(e) => {
-                e.stopPropagation()
-                setOutput(index)
-                setOpenMenu(CONNECT_TO)
-              }}
-            >{outputID}</Button>
           )
         })}
       </CenterMenu>

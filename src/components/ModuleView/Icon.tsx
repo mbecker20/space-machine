@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-window.currSetHighlighted = (setHighlighted) => {}
+window.currSetHighlighted = () => {}
 
 interface Props {
   mod: Module
@@ -58,12 +58,16 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
               window.setTimeout(window.refreshArcherContainer, 500)
             }
           } else {
-            const fromID = e.dataTransfer.getData('fromID')
-            if (fromID) {
-              setCMState({
-                isOpen: true,
-                fromID,
-              })
+            if (mod.connectionInputs.length === 0 && window.audioModules[mod.id].connectingParamIDs.length === 0) {
+              alert('mod cannot accept input')
+            } else {
+              const fromID = e.dataTransfer.getData('fromID')
+              if (fromID) {
+                setCMState({
+                  isOpen: true,
+                  fromID,
+                })
+              }
             }
           }
           setHighlighted(false)

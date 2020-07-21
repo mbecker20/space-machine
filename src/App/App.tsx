@@ -1,8 +1,6 @@
 import React from 'react'
 import useJSS from './style'
 import { RightDrawer, LeftDrawer, ModuleViewFill, AudioTags } from '../components/all'
-import { useSelector } from 'react-redux'
-import { RootState, ContainerModule } from '../redux/stateTSTypes'
 import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
 import { Dispatch } from 'redux'
@@ -30,14 +28,11 @@ window.addModule = makeAddModule()
 
 function App() {
   const classes = useJSS()
-  const modules = useSelector((state: RootState) => {
-    return state.modules
-  })
   return (
     <div className={classes.Bounder}>
       <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
-        <ModuleViewFill containerModule={modules[window.fillContainerID] as ContainerModule}/>
+        <ModuleViewFill />
       </div>
       <RightDrawer />
       <AudioTags />

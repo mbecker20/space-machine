@@ -3,13 +3,13 @@ import useJSS from './style'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
 import ModuleViewIcon from './Icon'
-import { ContainerModule } from '../../redux/stateTSTypes'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../redux/stateTSTypes'
+import { RootState, ContainerModule } from '../../redux/stateTSTypes'
 import { getGridRange } from './helpers'
 import { range } from '../../helpers/genFuncs'
 import DropSquare from '../DropSquare/DropSquare'
 import { ArcherContainer, ArcherElement } from 'react-archer'
+import { Button } from '../all'
 
 declare global {
   interface Window { 
@@ -19,24 +19,22 @@ declare global {
   }
 }
 
-interface Props {
-  containerModule: ContainerModule
-}
-
 const iconGridSize = sizes.moduleView.iconGrid
 const gutterGridSize = sizes.moduleView.gutterGrid
 
-function ModuleViewFill({ containerModule }: Props) {
+function ModuleViewFill() {
   const classes = useJSS()
   const [isExpanded, setIsExpanded] = useState(false)
   window.setFillIsExpanded = setIsExpanded
   const [reRender, toReRender] = useState(false)
   window.reRenderFillContainer = () => { toReRender(!reRender) }
-  const { modules } = useSelector((state: RootState) => {
+  const { modules, baseContainerID } = useSelector((state: RootState) => {
     return {
       modules: state.modules,
+      baseContainerID: state.baseContainerID
     }
   })
+  const containerModule = modules[window.fillContainerID] as ContainerModule
   const { maxRow, maxCol } = getGridRange(containerModule.childModules, modules)
   let gridStyle: CSS.Properties
   const isEmpty = containerModule.childModules.length === 0
@@ -55,18 +53,32 @@ function ModuleViewFill({ containerModule }: Props) {
   window.refreshArcherContainer = () => {archerContainerRef.current?.refreshScreen()}
   return (
     <div className={classes.FillBounder}>
-      <div className={classes.FillHeader}
-        style={{ width: `${containerModule.name.length / 2}em` }}
-        onClick={(e) => {
-          e.stopPropagation()
-          window.highlightedID = containerModule.id // need to add cases to on rename reducer to rename fill/base containers
-          window.setLeftDrawerOpen(true)
+      <div className={classes.FillHeaderBounder}>
+        <div className={classes.FillHeader}
+          style={{ width: `${containerModule.name.length / 2}em` }}
+          onClick={(e) => {
+            e.stopPropagation()
+            window.highlightedID = containerModule.id // need to add cases to on rename reducer to rename fill/base containers
+            window.setLeftDrawerOpen(true)
+          }}
+        >
+          {containerModule.name}
+        </div>
+        {containerModule.id === baseContainerID ? null :
+        <Button style={{ height: '.7em' }}
+          onClick={() => {
+            window.fillContainerID = containerModule.parentID as string
+            window.reRenderFillContainer()
         }}
-      >{containerModule.name}</div>
+        >
+          <div>back</div>
+        </Button>
+        }
+      </div>
       <div className={classes.Fill} style={gridStyle} onClick={() => {
         window.highlightedID = ''
         window.currSetHighlighted(false)
-        window.currSetHighlighted = (setHighlighted) => {}
+        window.currSetHighlighted = () => {}
         window.setLeftDrawerOpen(false)
       }}>
         {!isExpanded ? null : 
