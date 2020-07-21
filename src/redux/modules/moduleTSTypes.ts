@@ -8,6 +8,8 @@ export interface AddModuleAction {
   parentID: string
   row: number
   col: number
+  connectionInputs: string[]
+  connectionOutputs: string[]
 }
 
 export interface RemoveModuleAction {
@@ -42,4 +44,25 @@ export interface RemoveConnectionAction {
   param: string
 }
 
-export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | RemoveConnectionAction
+export interface ConnectInputModuleAction {
+  type: string
+  id: string
+}
+
+export interface DisconnectInputModuleAction {
+  type: string
+}
+
+export interface ConnectOutputModuleAction {
+  type: string
+  id: string
+}
+
+export interface DisconnectOutputModuleAction {
+  type: string
+}
+
+export type ModuleAction = AddModuleAction | 
+RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | 
+RemoveConnectionAction | ConnectInputModuleAction | DisconnectInputModuleAction |
+ConnectOutputModuleAction | ConnectInputModuleAction

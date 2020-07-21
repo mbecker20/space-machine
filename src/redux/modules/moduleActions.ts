@@ -4,7 +4,11 @@ import {
   MOVE_MODULE, 
   RENAME_MODULE,
   ADD_CONNECTION,
-  REMOVE_CONNECTION
+  REMOVE_CONNECTION,
+  CONNECT_INPUT_MODULE,
+  DISCONNECT_INPUT_MODULE,
+  DISCONNECT_OUTPUT_MODULE,
+  CONNECT_OUTPUT_MODULE
 } from './moduleActionTypes'
 import { ModuleType } from '../../audioModules/moduleTypes'
 
@@ -59,5 +63,31 @@ export const removeConnection = (fromID: string, toID: string, param = '') => {
     fromID,
     toID,
     param,
+  }
+}
+
+export const connectInputModule = (id: string) => {
+  return {
+    type: CONNECT_INPUT_MODULE,
+    id
+  }
+}
+
+export const disconnectInputModule = () => {
+  return {
+    type: DISCONNECT_INPUT_MODULE,
+  }
+}
+
+export const connectOutputModule = (id: string) => {
+  return {
+    type: CONNECT_OUTPUT_MODULE,
+    id
+  }
+}
+
+export const disconnectOutputModule = () => {
+  return {
+    type: DISCONNECT_OUTPUT_MODULE,
   }
 }

@@ -1,34 +1,78 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, VALUE } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE, TYPE, BUTTON } from '../moduleTypes'
 
 export interface ConstantModule extends BaseAM {
   audioNode: ConstantSourceNode
-  controls: BaseControls
+  typeTypes: string[]
 }
 
-function makeConstant(value = 0): ConstantModule {
+interface SetValFuncs {
+  [index: string]: (arg: string) => void
+}
 
-  const constant = audioCtx.createConstantSource()
-  constant.offset.setValueAtTime(value, audioCtx.currentTime)
+const constantSourceTypes = ['no ramp', 'linear', 'exponential']
 
-  function linRampValue(newValue: string) {
-    constant.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime)
+function makeConstantSource(): ConstantModule {
+  const constantSource = audioCtx.createConstantSource()
+  constantSource.offset.value = 0
+
+  const connectingParamIDs = ['offset']
+
+  const controlData: ControlData = {
+    'set value': {
+      controlType: VALUE,
+      paramID: 'offset',
+      value: 0,
+    },
+    'set ramp': {
+      controlType: TYPE,
+      paramID: 'n/a',
+      value: 'no ramp',
+    },
+    'set ramp length': {
+      controlType: VALUE,
+      paramID: 'n/a',
+      value: 1,
+      range: [0, 10000, 0.01],
+    },
+    'kill': {
+      controlType: BUTTON,
+      paramID: 'n/a',
+    }
   }
 
-  function expRampValue(newValue: string) {
-    constant.offset.exponentialRampToValueAtTime(Number(newValue), audioCtx.currentTime)
+  const setValFuncs: SetValFuncs = {
+    'no ramp': (newValue: string) => {
+      controlData['set value'].value = Number(newValue)
+      constantSource.offset.value = Number(newValue) 
+    },
+    'linear': (newValue: string) => {
+      controlData['set value'].value = Number(newValue)
+      constantSource.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))},
+    'exponential': (newValue: string) => {
+      controlData['set value'].value = Number(newValue)
+      constantSource.offset.exponentialRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))}
   }
 
-  const controls = {
-    'set value': (newValue: string) => {constant.offset.value = Number(newValue)},
+  const controlSetFuncs: ControlSetFuncs = {
+    'set value': (newValue: string) => { setValFuncs[controlData['set ramp'].value as string](newValue) },
+    'set ramp': (newType: string) => { controlData['set ramp'].value = newType },
+    'set ramp length': (newValue: string) => { controlData['set ramp length'].value = Number(newValue) },
+    'kill': (arg = '') => { constantSource.stop() }
   }
-  
-  return { 
-    audioNode: constant, 
-    paramIDs: [['value', VALUE], ],
-    controls
+
+  constantSource.start()
+
+  return {
+    audioNode: constantSource, 
+    connectingParamIDs,
+    controlData,
+    controlSetFuncs,
+    typeTypes: constantSourceTypes,
+    connectionInputs: [],
+    connectionOutputs: ['0'],
   }
 
 }
 
-export default makeConstant
+export default makeConstantSource

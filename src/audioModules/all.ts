@@ -5,3 +5,11 @@ export { default as makeAutoFilter } from './modules/autoFilter'
 export { default as makeKompressor } from './modules/kompressor'
 export { default as makeStereoPanner } from './modules/stereoPanner'
 export { default as makeSignalDelay } from './modules/signalDelay'
+export { default as makeConstantSource } from './modules/constant'
+export { default as makeMediaElement } from './modules/mediaElement'
+export { default as makeLineInput } from './modules/lineInput'
+export { default as makeContainer } from './modules/container'
+export { default as makeContainerInput } from './modules/container/containerInput'
+export { default as makeContainerOutput } from './modules/container/containerOutput'
+
+

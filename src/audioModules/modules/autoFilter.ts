@@ -1,32 +1,58 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, TYPE, VALUE } from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE, TYPE } from '../moduleTypes'
 
 export interface AutoFilterModule extends BaseAM {
   audioNode: BiquadFilterNode
-  controls: BaseControls
   typeTypes: string[]
 }
 
 const filterTypes = ['lowpass', 'lowshelf', 'highpass', 'highshelf', 'allpass', 'bandpass', 'notch', 'peaking']
 
 function makeAutoFilter (): AutoFilterModule {
-  
   const autoFilter = audioCtx.createBiquadFilter()
 
-  const controls = {
-    'set type': (newType: string) => {autoFilter.type = newType as BiquadFilterType},
-    'set frequency': (newFrequency: string) => {autoFilter.frequency.value = Number(newFrequency)},
-    'set detune': (newDetune: string) => {autoFilter.detune.value = Number(newDetune)},
-    'set Q': (newQ: string) => {autoFilter.Q.value = Number(newQ)},
-    'set gain': (newGain: string) => {autoFilter.gain.value = Number(newGain)},
+  const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
+
+  const controlData: ControlData = {
+    'set type': {
+      controlType: TYPE,
+      paramID: 'type',
+    },
+    'set frequency': {
+      controlType: VALUE,
+      paramID: 'frequency'
+    },
+    'set detune': {
+      controlType: VALUE,
+      paramID: 'detune'
+    },
+    'set Q': {
+      controlType: VALUE,
+      paramID: 'Q'
+    },
+    'set gain': {
+      controlType: VALUE,
+      paramID: 'gain'
+    }
   }
 
-  return { 
-    audioNode: autoFilter, 
-    paramIDs: [['type', TYPE], ['frequency', VALUE], ['detune', VALUE], ['Q', VALUE], ['gain', VALUE]],
-    typeTypes: filterTypes,
-    controls,
+  const controlSetFuncs: ControlSetFuncs = {
+    'set type': (newType: string) => { autoFilter.type = newType as BiquadFilterType},
+    'set frequency': (newFrequency: string) => { autoFilter.frequency.value = Number(newFrequency) },
+    'set detune': (newDetune: string) => { autoFilter.detune.value = Number(newDetune) },
+    'set Q': (newQ: string) => { autoFilter.Q.value = Number(newQ) },
+    'set gain': (newGain: string) => { autoFilter.gain.value = Number(newGain) },
   }
+
+  return {
+    audioNode: autoFilter,
+    typeTypes: filterTypes,
+    connectingParamIDs,
+    controlData,
+    controlSetFuncs,
+    connectionInputs: ['0'],
+    connectionOutputs: ['0'],
+  }  
 }
 
 export default makeAutoFilter

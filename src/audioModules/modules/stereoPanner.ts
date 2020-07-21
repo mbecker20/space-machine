@@ -1,22 +1,33 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, VALUE} from '../moduleTypes'
+import { BaseAM, ControlData, ControlSetFuncs, VALUE} from '../moduleTypes'
 
 export interface StereoPannerModule extends BaseAM {
   audioNode: StereoPannerNode
-  controls: BaseControls
 }
 
 function makeStereoPanner(): StereoPannerModule {
   const stereoPanner = audioCtx.createStereoPanner()
 
-  const controls = {
+  const connectingParamIDs = ['pan']
+
+  const controlData: ControlData = {
+    'set pan': {
+      controlType: VALUE,
+      paramID: 'pan'
+    }
+  }
+
+  const controlSetFuncs: ControlSetFuncs = {
     'set pan': (newPan: string) => {stereoPanner.pan.value = Number(newPan)}
   }
 
   return {
     audioNode: stereoPanner,
-    paramIDs: [['pan', VALUE]],
-    controls,
+    connectingParamIDs,
+    controlData,
+    controlSetFuncs,
+    connectionInputs: ['0'],
+    connectionOutputs: ['0'],
   }
 
 }

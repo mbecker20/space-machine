@@ -7,3 +7,7 @@ export { default as HorizontalScrollDiv } from './HorizontalScrollDiv/Horizontal
 export { default as CenterMenu } from './CenterMenu/CenterMenu'
 export { default as MrTesterr } from './MrTesterr/MrTesterr'
 export { default as Button } from './Button/Button'
+export { default as AudioTags } from './AudioTags/AudioTags'
+export { default as Switch } from './Switch/Switch'
+export { default as ConnectionMenu } from './ConnectionMenu/ConnectionMenu'
+export { default as RenameMenu } from './RenameMenu/RenameMenu'

@@ -2,7 +2,7 @@ import { Modules, ContainerModule } from '../../stateTSTypes'
 import { AddModuleAction } from '../moduleTSTypes'
 import { CONTAINER } from '../../../audioModules/moduleTypes'
 
-const addModule = (state: Modules, { id, name, moduleType, row, col, parentID }: AddModuleAction) => {
+const addModule = (state: Modules, { id, name, moduleType, row, col, parentID, connectionInputs, connectionOutputs }: AddModuleAction) => {
   switch(moduleType) {
     case CONTAINER: return Object.assign({}, state, {
       [id]: {
@@ -12,6 +12,8 @@ const addModule = (state: Modules, { id, name, moduleType, row, col, parentID }:
         col,
         parentID,
         moduleType,
+        connectionInputs,
+        connectionOutputs,
         inputs: [],
         outputs: [],
         childModules: [],
@@ -33,6 +35,8 @@ const addModule = (state: Modules, { id, name, moduleType, row, col, parentID }:
         col,
         parentID,
         moduleType,
+        connectionInputs,
+        connectionOutputs,
         inputs: [],
         outputs: [],
       },

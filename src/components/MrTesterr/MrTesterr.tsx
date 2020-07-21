@@ -1,20 +1,50 @@
 import React from 'react'
 import useJSS from './style'
-//import { makeOscillator, makeGain, makeOutput, makeAutoFilter } from '../../audioModules/all'
-//import { connect } from '../../audioModules/connection'
-
-// Successful FM Synth implementation!
-// done using new dynamic module connect function
+import audioCtx from '../../audioCtx'
 
 /*
-const osc = makeOscillator('sine', 440, 0)
-const oscGain = makeGain (1)
-const lpf = makeAutoFilter('lowpass', 300, 0, 0, 1)
-const output = makeOutput()
+var splitter = audioCtx.createChannelSplitter(2)
 
-connect(osc, oscGain)
-connect(oscGain, lpf)
-connect(lpf, output)
+var lpf = audioCtx.createBiquadFilter()
+  lpf.type = "lowpass"
+  lpf.frequency.value = 440
+  lpf.Q.value = 10
+
+
+navigator.mediaDevices.getUserMedia({
+  audio: {
+    echoCancellation: false,
+    autoGainControl: false,
+    noiseSuppression: false,
+    latency: 0,
+    channelCount: 3,
+  }
+}).then(stream => {
+  const src = audioCtx.createMediaStreamSource(stream)
+  const splitter = audioCtx.createChannelSplitter(3)
+  const gain0 = audioCtx.createGain()
+  const gain1 = audioCtx.createGain()
+  const gain2 = audioCtx.createGain()
+  //const merger = audioCtx.createChannelMerger(3)
+  //const dly = audioCtx.createDelay(); dly.delayTime.value = .18
+  //const dlyFdbk = audioCtx.createGain(); dlyFdbk.gain.value = .6
+  //dly.connect(dlyFdbk); dlyFdbk.connect(dly)
+  const master = audioCtx.createGain(); master.gain.value = 1
+
+  console.log(stream.getAudioTracks()[0].getCapabilities())
+
+  master.gain.value = 1
+
+  src.connect(splitter)
+  splitter.connect(gain0, 0)
+  splitter.connect(gain1, 1)
+  splitter.connect(gain2, 2)
+  gain0.connect(master)
+  gain1.connect(master)
+  gain2.connect(master)
+  //merger.connect(master)
+  master.connect(audioCtx.destination)
+})
 */
 
 function MrTesterr() {
@@ -26,44 +56,19 @@ function MrTesterr() {
         <div className={classes.Button}
           style={{ backgroundColor: 'green' }}
           onClick={() => {
-            //output.controls.resume('')
+            audioCtx.resume()
           }}
         >start ctx</div>
       </div>
       <div className={classes.ButtonDiv}>
         <div className={classes.Button}
-          style={{ backgroundColor: 'blue' }}
-        >
-          {'osc freq'}
-          <input style={{ height: '2em' }}
-            
-            onChange={(e) => {
-              //osc.controls['set frequency'](e.target.value)
-            }}
-          />
-        </div>
-      </div>
-      <div className={classes.ButtonDiv}>
-        <div className={classes.Button}
-          style={{ backgroundColor: 'blue' }}
-        >
-          {'lpf freq'}
-          <input style={{ height: '2em' }}
-            
-            onChange={(e) => {
-              //lpf.controls['set frequency'](e.target.value)
-            }}
-          />
-        </div>
-      </div>
-      <div className={classes.ButtonDiv}>
-        <div className={classes.Button}
           style={{ backgroundColor: 'red' }}
           onClick={() => {
-            //output.controls.suspend('')
+            audioCtx.suspend()
           }}
         >stop ctx</div>
       </div>
+
     </div>
   );
 }

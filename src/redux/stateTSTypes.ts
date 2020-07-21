@@ -22,12 +22,16 @@ export interface Module { // the base of the Module types
   col: number
   inputs: ConnectionData[]
   outputs: ConnectionData[]
+  connectionInputs: string[]
+  connectionOutputs: string[]
   parentID: string | null // id of parent ContainerModule
 }
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 
   childModules: string[]
   isBaseContainer: boolean
+  inputModuleID?: string
+  outputModuleID?: string
 }
 
 export interface Modules {

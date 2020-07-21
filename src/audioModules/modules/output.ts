@@ -1,26 +1,45 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, BaseControls, BUTTON } from '../moduleTypes'
+import { BaseAM, ControlData, BUTTON, VALUE } from '../moduleTypes'
 
 export interface OutputModule extends BaseAM {
-  audioNode: AudioNode
-  controls: BaseControls
+  audioNode: GainNode
 }
 
 function makeOutput(): OutputModule {
-  function resume(arg = '') {
-    console.log('resuming')
-    audioCtx.resume()
-  }
-
-  function suspend(arg = '') {
-    audioCtx.suspend()
-  }
-
   audioCtx.resume()
+
+  const masterGain = audioCtx.createGain(); masterGain.connect(audioCtx.destination)
+
+  const controlData: ControlData = {
+    'set master gain': {
+      controlType: VALUE,
+      paramID: 'gain',
+      value: 1,
+      range: [0, 5, .1],
+    },
+    'resume': {
+      controlType: BUTTON,
+      paramID: 'n/a'
+    },
+    'suspend': {
+      controlType: BUTTON,
+      paramID: 'n/a'
+    }
+  }
+
+  const controlSetFuncs = {
+    'set master gain': (arg: string) => { masterGain.gain.value = Number(arg) },
+    'resume': (arg: string) => { audioCtx.resume() },
+    'suspend': (arg: string) => { audioCtx.suspend() }
+  }
+
   return { 
-    audioNode: audioCtx.destination, 
-    paramIDs: [['resume', BUTTON], ['suspend', BUTTON]], 
-    controls: { 'resume': resume, 'suspend': suspend },
+    audioNode: masterGain,
+    connectingParamIDs: [],
+    controlData,
+    controlSetFuncs,
+    connectionInputs: ['0'],
+    connectionOutputs: [],
   }
 }
 

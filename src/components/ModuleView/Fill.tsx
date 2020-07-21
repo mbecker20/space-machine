@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { getGridRange } from './helpers'
 import { range } from '../../helpers/genFuncs'
-import DropSquare from './DropSquare'
+import DropSquare from '../DropSquare/DropSquare'
 import { ArcherContainer, ArcherElement } from 'react-archer'
 
 declare global {
@@ -104,10 +104,10 @@ function ModuleViewFill({ containerModule }: Props) {
             gridTemplateRows: `repeat(${maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
             gridTemplateColumns: `repeat(${maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
           }}>
-          {containerModule.childModules.map((moduleID, index) => {
+          {containerModule.childModules.map(moduleID => {
             const mod = modules[moduleID]
             return (
-              <Fragment key={mod.id + index}>
+              <Fragment key={mod.id}>
                 <div style={{
                   gridColumn: `${mod.col * 2 + 1} / span 1`,
                   gridRow: `${mod.row * 2 + 1} / span 1`,
@@ -122,7 +122,7 @@ function ModuleViewFill({ containerModule }: Props) {
                     <div style={{ 
                       width: '10px', 
                       height: '10px', 
-                      backgroundColor: 'blue',
+                      //backgroundColor: 'blue',
                     }}></div>
                   </ArcherElement>
                 </div>
@@ -140,7 +140,7 @@ function ModuleViewFill({ containerModule }: Props) {
                     <div style={{
                       width: '10px',
                       height: '10px',
-                      backgroundColor: 'yellow',
+                      //backgroundColor: 'yellow',
                     }}></div>
                   </ArcherElement>
                 </div>
@@ -169,7 +169,7 @@ function ModuleViewFill({ containerModule }: Props) {
                     <div style={{
                       width: '10px',
                       height: '10px',
-                      backgroundColor: 'red',
+                      //backgroundColor: 'red',
                     }}></div>
                   </ArcherElement>
                 </div>
