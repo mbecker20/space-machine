@@ -2,10 +2,8 @@ Inspired by vcv rack and ableton live, the goal of this project is to create a f
 
 [link to live preview](http://mbecker20.github.io/space-machine)
 
-# API
+## Screenshots
 
-## State
+![](https://i.imgur.com/paXMmVl.png)
 
-### ModuleView
-
-### Control
+![](https://i.imgur.com/W9o0lKy.png)
