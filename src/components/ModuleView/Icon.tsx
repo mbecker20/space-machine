@@ -4,8 +4,7 @@ import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
-import ConnectionMenu from '../ConnectionMenu/ConnectionMenu'
-import { OUTPUT } from '../../audioModules/moduleTypes'
+import { ConnectionMenu } from '../all'
 
 declare global {
   interface Window {
@@ -105,7 +104,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           }
         }}
       >
-        {window.audioModules[mod.id].outputs.length === 0 ? null
+        {mod.connectionOutputs.length === 0 ? null
         :
         <div className={classes.IconConnector}
           draggable={true}

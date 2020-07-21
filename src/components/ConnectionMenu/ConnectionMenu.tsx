@@ -24,8 +24,6 @@ const buttonStyle: CSS.Properties = {
 
 function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   const am = window.audioModules
-  const initMenu = am[fromID].connectionOutputs.length === 1 ? CONNECT_TO : CHOOSE_OUTPUT
-  const [openMenu, setOpenMenu] = useState(initMenu)
   const [output, setOutput] = useState(0)
   const dispatch = useDispatch()
   const [ fromMod, toMod ] = useSelector((state: RootState) => {
@@ -34,6 +32,8 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
       state.modules[toID],
     ]
   })
+  const initMenu = fromMod.connectionOutputs.length === 1 ? CONNECT_TO : CHOOSE_OUTPUT
+  const [openMenu, setOpenMenu] = useState(initMenu)
   return (
     <Fragment>
       {openMenu === CONNECT_TO
@@ -42,8 +42,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
         {toType === OSCILLATOR || toType === CONSTANT ? null :
         <Button style={buttonStyle}
           onClick={() => {
-            if (am[fromID])
-            connect(am[fromID] as ConnectingAudioModule, am[toID], '', output)
+            connect(am[fromID] as ConnectingAudioModule, am[toID] as ConnectingAudioModule, '', output)
             dispatch(addConnection(fromID, toID))
             console.log(output)
             onClose()
@@ -65,7 +64,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
           return (
           <Button key={fromID + toID + key}
             onClick={() => {
-              connect(am[fromID] as ConnectingAudioModule, am[toID], paramID, output)
+              connect(am[fromID] as ConnectingAudioModule, am[toID] as ConnectingAudioModule, paramID, output)
               dispatch(addConnection(fromID, toID, paramID))
               onClose()
             }}
@@ -77,7 +76,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
       openMenu === CHOOSE_OUTPUT
       ?
       <CenterMenu header={'choose output'} onClose={onClose}>
-        {am[fromID].outputs.map((outputID, index) => {
+        {fromMod.connectionOutputs.map((outputID, index) => {
           return (
             <Button key={fromID + toID + outputID}
               onClick={(e) => {

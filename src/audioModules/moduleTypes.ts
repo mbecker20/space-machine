@@ -8,7 +8,7 @@ import { SignalDelayModule } from './modules/signalDelay'
 import { ConstantModule } from './modules/constant'
 import { MediaElementModule } from './modules/mediaElement'
 import { LineInputModule } from './modules/lineInput'
-import { ContainerModule } from '../redux/stateTSTypes'
+import { ContainerModule } from './modules/container'
 
 // module types
 
@@ -28,9 +28,9 @@ export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOF
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule
 
-export type AudioModule = ConnectingAudioModule | OutputModule | ContainerModule
+export type AudioModule = ConnectingAudioModule | ContainerModule
 
 export interface AudioModules {
   [index: string]: AudioModule

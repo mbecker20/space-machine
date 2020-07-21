@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import useJSS from './style'
-import { Value, Range, AudioModule, SetFunc } from '../../../audioModules/moduleTypes'
+import { Value, Range, AudioModule, SetFunc, ConnectingAudioModule } from '../../../audioModules/moduleTypes'
 
 interface Props {
   controlID: string
@@ -12,7 +12,7 @@ interface Props {
 }
 
 function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }: Props) {
-  const { audioNode } = audioModule
+  const { audioNode } = audioModule as ConnectingAudioModule
   const classes = useJSS()
   return (
     <Fragment>

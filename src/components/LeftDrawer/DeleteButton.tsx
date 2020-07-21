@@ -24,11 +24,11 @@ function DeleteButton({ selectedModule, audioModule }: Props) {
     }}
       onClick={() => {
         selectedModule.inputs.forEach(inputData => {
-          disconnect(am[inputData[0]] as ConnectingAudioModule, audioModule, inputData[1])
+          disconnect(am[inputData[0]] as ConnectingAudioModule, audioModule as ConnectingAudioModule, inputData[1])
           dispatch(removeConnection(inputData[0], selectedModule.id, inputData[1]))
         })
         selectedModule.outputs.forEach(outputData => {
-          disconnect(audioModule as ConnectingAudioModule, am[outputData[0]], outputData[1])
+          disconnect(audioModule as ConnectingAudioModule, am[outputData[0]] as ConnectingAudioModule, outputData[1])
           dispatch(removeConnection(selectedModule.id, outputData[0], outputData[1]))
         })
         dispatch(removeModule(window.highlightedID))

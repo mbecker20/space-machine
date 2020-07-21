@@ -27,7 +27,7 @@ function InputOutputView({ selectedModule, modules }: Props) {
             key={inputData[0] + key}
             onClick={() => {
               dispatch(removeConnection(inputData[0], selectedModule.id, inputData[1]))
-              disconnect(am[inputData[0]] as ConnectingAudioModule, am[selectedModule.id], inputData[1])
+              disconnect(am[inputData[0]] as ConnectingAudioModule, am[selectedModule.id] as ConnectingAudioModule, inputData[1])
             }}
           >
             {inputData[1].length === 0 ? name : `${name} - ${inputData[1]}`}
@@ -44,7 +44,7 @@ function InputOutputView({ selectedModule, modules }: Props) {
             key={outputData[0] + key}
             onClick={() => {
               dispatch(removeConnection(selectedModule.id, outputData[0], outputData[1]))
-              disconnect(am[selectedModule.id] as ConnectingAudioModule, am[outputData[0]], outputData[1])
+              disconnect(am[selectedModule.id] as ConnectingAudioModule, am[outputData[0]] as ConnectingAudioModule, outputData[1])
             }}
           >{outputData[1].length === 0 ? name : `${name} - ${outputData[1]}`}</div>
         )
