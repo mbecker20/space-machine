@@ -3,8 +3,12 @@ import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import DrawerRouteLink from './DrawerRouteLink'
-import BaseModules from './ModuleIcons/BaseModules'
+import { SourceModules, EffectModules, UtilityModules } from './ModuleIcons/all'
 import { HorizontalScrollDiv } from '../all'
+
+const SOURCES = 'sources'
+const EFFECTS = 'effects'
+const UTILITY = 'utility'
 
 function RightDrawer() {
   const classes = useJSS()
@@ -17,7 +21,7 @@ function RightDrawer() {
       clamp: true,
     }
   })
-  const [selectedRoute, setSR] = useState('base modules')
+  const [selectedRoute, setSR] = useState(SOURCES)
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring}>
       <div className={classes.Toggle} onClick={() => {setOpen(!open)}}>
@@ -27,31 +31,37 @@ function RightDrawer() {
         <HorizontalScrollDiv className={classes.DrawerHeader}>
           <DrawerRouteLink
             className={classes.DrawerHeaderItem} 
-            text='base modules'
-            onClick={() => {setSR('base modules')}}
+            text={SOURCES}
+            onClick={() => {setSR(SOURCES)}}
             selectedRoute={selectedRoute}
           />
           <DrawerRouteLink
             className={classes.DrawerHeaderItem} 
-            text='higher order' 
-            onClick={() => {setSR('higher order')}}
+            text={EFFECTS} 
+            onClick={() => {setSR(EFFECTS)}}
             selectedRoute={selectedRoute}
           />
           <DrawerRouteLink 
             className={classes.DrawerHeaderItem} 
-            text='settings' 
-            onClick={() => {setSR('settings')}}
+            text={UTILITY} 
+            onClick={() => {setSR(UTILITY)}}
             selectedRoute={selectedRoute}
           />
         </HorizontalScrollDiv>
         <div className={classes.ItemRouter}>
           {
-            selectedRoute === 'base modules' ?
-            <BaseModules /> :
-            selectedRoute === 'higher order' ?
-            <div/> :
-            selectedRoute === 'settings' ?
-            <div/> :
+            selectedRoute === SOURCES
+            ?
+            <SourceModules />
+            :
+            selectedRoute === EFFECTS
+            ?
+            <EffectModules />
+            :
+            selectedRoute === UTILITY
+            ?
+            <UtilityModules />
+            :
             null
           }
         </div>

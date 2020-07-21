@@ -43,7 +43,7 @@ const useJSS = createUseStyles({
   },
 
   DrawerHeaderItem: {
-    fontSize: sizes.text.large,
+    fontSize: sizes.text.medium,
     padding: '1vmin 1.5vmin',
     color: colors.text,
     textDecoration: 'none',
