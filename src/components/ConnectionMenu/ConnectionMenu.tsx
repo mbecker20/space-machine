@@ -24,24 +24,25 @@ const buttonStyle: CSS.Properties = {
 
 function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
   const am = window.audioModules
-  const initMenu = am[fromID].outputs.length === 1 ? CONNECT_TO : CHOOSE_OUTPUT
+  const initMenu = am[fromID].connectionOutputs.length === 1 ? CONNECT_TO : CHOOSE_OUTPUT
   const [openMenu, setOpenMenu] = useState(initMenu)
   const [output, setOutput] = useState(0)
   const dispatch = useDispatch()
-  const [ fromName, toName ] = useSelector((state: RootState) => {
+  const [ fromMod, toMod ] = useSelector((state: RootState) => {
     return [ 
-      state.modules[fromID].name, 
-      state.modules[toID].name,
+      state.modules[fromID], 
+      state.modules[toID],
     ]
   })
   return (
     <Fragment>
       {openMenu === CONNECT_TO
       ?
-      <CenterMenu header={`connect ${fromName} to ${toName}`} onClose={onClose}>
+      <CenterMenu header={`connect ${fromMod.name} to ${toMod.name}`} onClose={onClose}>
         {toType === OSCILLATOR || toType === CONSTANT ? null :
         <Button style={buttonStyle}
           onClick={() => {
+            if (am[fromID])
             connect(am[fromID] as ConnectingAudioModule, am[toID], '', output)
             dispatch(addConnection(fromID, toID))
             console.log(output)

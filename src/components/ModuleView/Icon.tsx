@@ -63,7 +63,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             if (fromID) {
               setCMState({
                 isOpen: true,
-                fromID
+                fromID,
               })
             }
           }

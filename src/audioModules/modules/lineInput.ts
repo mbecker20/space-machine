@@ -47,7 +47,8 @@ function makeLineInput(id: string) {
       connectingParamIDs: [],
       controlData,
       controlSetFuncs,
-      outputs: ['0 (L)', '1 (R)']
+      connectionInputs: [],
+      connectionOutputs: ['0 (L)', '1 (R)'],
     }
 
     window.audioModules = {

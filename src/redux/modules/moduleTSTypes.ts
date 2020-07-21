@@ -8,6 +8,8 @@ export interface AddModuleAction {
   parentID: string
   row: number
   col: number
+  connectionInputs: string[]
+  connectionOutputs: string[]
 }
 
 export interface RemoveModuleAction {

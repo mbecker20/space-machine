@@ -22,6 +22,8 @@ export interface Module { // the base of the Module types
   col: number
   inputs: ConnectionData[]
   outputs: ConnectionData[]
+  connectionInputs: string[]
+  connectionOutputs: string[]
   parentID: string | null // id of parent ContainerModule
 }
 
