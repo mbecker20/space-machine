@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { getGridRange } from './helpers'
 import { range } from '../../helpers/genFuncs'
-import DropSquare from './DropSquare'
+import DropSquare from '../DropSquare/DropSquare'
 import { ArcherContainer, ArcherElement } from 'react-archer'
 
 declare global {

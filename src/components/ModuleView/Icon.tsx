@@ -46,12 +46,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         onDragOver={event => {
           event.preventDefault()
         }}
-        onDragEnter={() => {
-          setHighlighted(true)
-        }}
-        onDragLeave={() => {
-          setHighlighted(false)
-        }}
         onDrop={e => {
           const id = e.dataTransfer.getData('id')
           if (id) {

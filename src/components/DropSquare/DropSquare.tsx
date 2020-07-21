@@ -4,8 +4,8 @@ import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { addModule } from '../../redux/allActions'
 import { RootState, ContainerModule } from '../../redux/stateTSTypes'
-import { moveModule } from '../../redux/modules/moduleActions'
-import { isOccupied } from './helpers'
+import { moveModule, connectOutputModule, connectInputModule } from '../../redux/modules/moduleActions'
+import { isOccupied } from '../ModuleView/helpers'
 import { ModuleType, CONTAINER_INPUT, CONTAINER_OUTPUT } from '../../audioModules/moduleTypes'
 
 interface Props {
@@ -56,10 +56,22 @@ function DropSquare({ row, col }: Props) {
               if (fc.inputModuleID) {
                 alert('container already has input module')
               } else {
-                dispatch()
+                setHL(false)
+                dispatch(connectInputModule(id))
+                dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
+                window.addModule(id, moduleType)
+                window.setFillIsExpanded(false)
               }
             } else if (moduleType === CONTAINER_OUTPUT) {
-
+              if (fc.outputModuleID) {
+                alert('container already has output module')
+              } else {
+                setHL(false)
+                dispatch(connectOutputModule(id))
+                dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
+                window.addModule(id, moduleType)
+                window.setFillIsExpanded(false)
+              }
             } else {
               setHL(false)
               dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
