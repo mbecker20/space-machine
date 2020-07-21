@@ -16,6 +16,8 @@ function makeContainer(id: string): ContainerModule {
     'open': () => {
       window.fillContainerID = id
       window.reRenderFillContainer()
+      window.highlightedID = ''
+      window.setLeftDrawerOpen(false)
     }
   }
   return {

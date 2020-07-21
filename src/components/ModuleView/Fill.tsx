@@ -69,6 +69,8 @@ function ModuleViewFill() {
           onClick={() => {
             window.fillContainerID = containerModule.parentID as string
             window.reRenderFillContainer()
+            window.highlightedID = ''
+            window.setLeftDrawerOpen(false)
         }}
         >
           <div>back</div>

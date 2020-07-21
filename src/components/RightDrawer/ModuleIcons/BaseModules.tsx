@@ -17,6 +17,7 @@ import {
 function BaseModules() {
   return (
     <Fragment>
+      <DrawerItem fullName='container' id='cntnr' moduleType={CONTAINER} />
       <DrawerItem fullName='file' id='local' moduleType={MEDIA_ELEMENT} />
       <DrawerItem fullName='stream' id='stream' moduleType={LINE_IN} />
       <DrawerItem fullName='gain' id='gain' moduleType={GAIN}/>
@@ -27,7 +28,6 @@ function BaseModules() {
       <DrawerItem fullName='stereo panner' id='pan' moduleType={STEREO_PANNER}/>
       <DrawerItem fullName='signal delay' id='dly' moduleType={SIGNAL_DELAY}/>
       <DrawerItem fullName='constant' id='const' moduleType={CONSTANT} />
-      <DrawerItem fullName='container' id='cntnr' moduleType={CONTAINER} />
     </Fragment>
   )
 }

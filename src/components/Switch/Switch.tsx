@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useJSS from './style'
 import { useSpring, animated } from 'react-spring'
+import { colors } from '../../theme/theme'
 
 
 interface Props {
@@ -24,7 +25,7 @@ function Switch({ text, onSwitch, initState, style }: Props) {
     <div className={classes.Bounder} style={style}>
       {text}
       <svg onClick={() => { onSwitch(!state); setState(!state) }} width={'90'} height={'30'}>
-        <rect width='50' height='20' x='20' y='5' rx='10' ry='10'/>
+        <rect width='50' height='20' x='20' y='5' rx='10' ry='10' fill={colors.grey}/>
         <animated.circle cx={spring.cx} cy={'15'} r={'15'} fill={spring.fill}/>
       </svg>
     </div>
