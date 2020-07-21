@@ -48,7 +48,8 @@ function makeOscillator(): OscillatorModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
-    outputs: ['0'],
+    connectionInputs: [],
+    connectionOutputs: ['0'],
   }
 }
 

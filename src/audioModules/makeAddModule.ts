@@ -14,6 +14,7 @@ function makeAddModule() {
       case CONSTANT: window.audioModules = { ...window.audioModules, [id]: makeConstantSource() }; break
       case MEDIA_ELEMENT: window.addAudioTag(id); window.reRenderAudioTags(); break
       case LINE_IN: makeLineInput(id); break
+      ///case CONTAINER: makeContainer(); break
     }
   }
 }

@@ -1,4 +1,4 @@
-import { BaseAM, ControlData, ControlSetFuncs } from "../../moduleTypes"
+import { BaseAM, ControlData, ControlSetFuncs } from "../moduleTypes"
 
 export interface ContainerModule extends BaseAM {
   inputModuleID?: string
