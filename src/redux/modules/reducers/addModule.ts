@@ -18,6 +18,8 @@ const addModule = (state: Modules, { id, name, moduleType, row, col, parentID, c
         outputs: [],
         childModules: [],
         isBaseContainer: false,
+        isContainerInput: false,
+        isContainerOutput: false,
       },
       [parentID]: {
         ...state[parentID],
@@ -37,6 +39,8 @@ const addModule = (state: Modules, { id, name, moduleType, row, col, parentID, c
         moduleType,
         connectionInputs,
         connectionOutputs,
+        isContainerInput: false,
+        isContainerOutput: false,
         inputs: [],
         outputs: [],
       },

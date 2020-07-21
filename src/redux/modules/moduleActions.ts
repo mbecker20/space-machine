@@ -5,10 +5,10 @@ import {
   RENAME_MODULE,
   ADD_CONNECTION,
   REMOVE_CONNECTION,
-  CONNECT_INPUT_MODULE,
-  DISCONNECT_INPUT_MODULE,
-  DISCONNECT_OUTPUT_MODULE,
-  CONNECT_OUTPUT_MODULE
+  MARK_CONTAINER_INPUT,
+  UNMARK_CONTAINER_INPUT,
+  MARK_CONTAINER_OUTPUT,
+  UNMARK_CONTAINER_OUTPUT,
 } from './moduleActionTypes'
 import { ModuleType } from '../../audioModules/moduleTypes'
 
@@ -66,28 +66,29 @@ export const removeConnection = (fromID: string, toID: string, param = '') => {
   }
 }
 
-export const MarkContainerInput = (id: string) => {
+export const markContainerInput = (id: string) => {
   return {
     type: MARK_CONTAINER_INPUT,
     id,
   }
 }
 
-export const disconnectInputModule = () => {
+export const unmarkContainerInput = (id: string) => {
   return {
-    type: DISCONNECT_INPUT_MODULE,
+    type: UNMARK_CONTAINER_INPUT,
+    id,
+  }
+}
+export const markContainerOutput = (id: string) => {
+  return {
+    type: MARK_CONTAINER_OUTPUT,
+    id,
   }
 }
 
-export const connectOutputModule = (id: string) => {
+export const unmarkContainerOutput = (id: string) => {
   return {
-    type: CONNECT_OUTPUT_MODULE,
-    id
-  }
-}
-
-export const disconnectOutputModule = () => {
-  return {
-    type: DISCONNECT_OUTPUT_MODULE,
+    type: UNMARK_CONTAINER_OUTPUT,
+    id,
   }
 }
