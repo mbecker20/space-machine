@@ -50,8 +50,6 @@ function makeAutoFilter (): AutoFilterModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
-    connectionInputs: ['0'],
-    connectionOutputs: ['0'],
   }  
 }
 

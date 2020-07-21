@@ -38,8 +38,6 @@ function makeOutput(): OutputModule {
     connectingParamIDs: [],
     controlData,
     controlSetFuncs,
-    connectionInputs: ['0'],
-    connectionOutputs: [],
   }
 }
 

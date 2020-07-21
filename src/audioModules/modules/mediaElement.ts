@@ -30,8 +30,6 @@ function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementMo
       connectingParamIDs: [],
       controlData,
       controlSetFuncs,
-      connectionInputs: [],
-      connectionOutputs: ['0'],
     }
   } else {
     return null

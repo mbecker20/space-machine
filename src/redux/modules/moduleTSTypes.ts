@@ -44,25 +44,11 @@ export interface RemoveConnectionAction {
   param: string
 }
 
-export interface ConnectInputModuleAction {
+export interface MarkContainerIOAction {
   type: string
   id: string
-}
-
-export interface DisconnectInputModuleAction {
-  type: string
-}
-
-export interface ConnectOutputModuleAction {
-  type: string
-  id: string
-}
-
-export interface DisconnectOutputModuleAction {
-  type: string
 }
 
 export type ModuleAction = AddModuleAction | 
 RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | 
-RemoveConnectionAction | ConnectInputModuleAction | DisconnectInputModuleAction |
-ConnectOutputModuleAction | ConnectInputModuleAction
+RemoveConnectionAction | MarkContainerIOAction

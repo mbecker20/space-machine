@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { RootState, ContainerModule } from '../redux/stateTSTypes'
 import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
+import { Dispatch } from 'redux'
 
 declare global {
   interface Window { 
@@ -12,7 +13,7 @@ declare global {
     fillContainerID: string
     linkToOutputID: string
     audioModules: AudioModules
-    addModule: (id: string, moduleType: ModuleType) => void
+    addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
   }
 
   interface AudioNode {

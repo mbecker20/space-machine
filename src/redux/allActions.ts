@@ -6,8 +6,8 @@ export {
   renameModule, 
   addConnection, 
   removeConnection,
-  connectInputModule,
-  disconnectInputModule,
-  connectOutputModule,
-  disconnectOutputModule
+  markContainerInput,
+  unmarkContainerInput,
+  markContainerOutput,
+  unmarkContainerOutput
 } from './modules/moduleActions'
