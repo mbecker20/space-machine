@@ -66,10 +66,10 @@ export const removeConnection = (fromID: string, toID: string, param = '') => {
   }
 }
 
-export const connectInputModule = (id: string) => {
+export const MarkContainerInput = (id: string) => {
   return {
-    type: CONNECT_INPUT_MODULE,
-    id
+    type: MARK_CONTAINER_INPUT,
+    id,
   }
 }
 
