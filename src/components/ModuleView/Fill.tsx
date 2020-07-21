@@ -30,6 +30,8 @@ function ModuleViewFill({ containerModule }: Props) {
   const classes = useJSS()
   const [isExpanded, setIsExpanded] = useState(false)
   window.setFillIsExpanded = setIsExpanded
+  const [reRender, toReRender] = useState(false)
+  window.reRenderFillContainer = () => { toReRender(!reRender) }
   const { modules } = useSelector((state: RootState) => {
     return {
       modules: state.modules,

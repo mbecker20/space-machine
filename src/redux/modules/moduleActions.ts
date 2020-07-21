@@ -12,7 +12,7 @@ import {
 } from './moduleActionTypes'
 import { ModuleType } from '../../audioModules/moduleTypes'
 
-export const addModule = (id: string, name: string, moduleType: ModuleType, parentID: string, row: number, col: number) => {
+export const addModule = (id: string, name: string, moduleType: ModuleType, parentID: string, row: number, col: number, connectionInputs: string[], connectionOutputs: string[]) => {
   return {
     type: ADD_MODULE,
     moduleType,
@@ -21,6 +21,8 @@ export const addModule = (id: string, name: string, moduleType: ModuleType, pare
     row,
     col,
     parentID,
+    connectionInputs,
+    connectionOutputs,
   }
 }
 

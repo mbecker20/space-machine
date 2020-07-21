@@ -4,7 +4,7 @@ import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { addModule } from '../../redux/allActions'
 import { RootState, ContainerModule } from '../../redux/stateTSTypes'
-import { moveModule, connectOutputModule, connectInputModule } from '../../redux/modules/moduleActions'
+import { moveModule } from '../../redux/modules/moduleActions'
 import { isOccupied } from '../ModuleView/helpers'
 import { ModuleType, CONTAINER_INPUT, CONTAINER_OUTPUT } from '../../audioModules/moduleTypes'
 
@@ -52,32 +52,10 @@ function DropSquare({ row, col }: Props) {
           if (!possiblyOccupyingID) {
             const moduleType = event.dataTransfer.getData('moduleType') as ModuleType
             const name = event.dataTransfer.getData('name')
-            if (moduleType === CONTAINER_INPUT) {
-              if (fc.inputModuleID) {
-                alert('container already has input module')
-              } else {
-                setHL(false)
-                dispatch(connectInputModule(id))
-                dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
-                window.addModule(id, moduleType)
-                window.setFillIsExpanded(false)
-              }
-            } else if (moduleType === CONTAINER_OUTPUT) {
-              if (fc.outputModuleID) {
-                alert('container already has output module')
-              } else {
-                setHL(false)
-                dispatch(connectOutputModule(id))
-                dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
-                window.addModule(id, moduleType)
-                window.setFillIsExpanded(false)
-              }
-            } else {
-              setHL(false)
-              dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
-              window.addModule(id, moduleType)
-              window.setFillIsExpanded(false)
-            }
+            setHL(false)
+            dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
+            window.addModule(id, moduleType)
+            window.setFillIsExpanded(false)
           }
         } else if (possiblyOccupyingID) {
           const fromRow = event.dataTransfer.getData('fromRow')

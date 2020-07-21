@@ -8,6 +8,7 @@ import { SignalDelayModule } from './modules/signalDelay'
 import { ConstantModule } from './modules/constant'
 import { MediaElementModule } from './modules/mediaElement'
 import { LineInputModule } from './modules/lineInput'
+import { ContainerModule } from '../redux/stateTSTypes'
 
 // module types
 
@@ -22,16 +23,14 @@ export const CONSTANT = 'CONSTANT'
 export const MEDIA_ELEMENT = 'MEDIA_ELEMENT'
 export const LINE_IN = 'LINE_IN'
 export const CONTAINER = 'CONTAINER'
-export const CONTAINER_INPUT = 'CONTAINER_INPUT'
-export const CONTAINER_OUTPUT = 'CONTAINER_OUTPUT'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'CONTAINER_INPUT' | 'CONTAINER_OUTPUT'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
 export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule
 
-export type AudioModule = ConnectingAudioModule | OutputModule
+export type AudioModule = ConnectingAudioModule | OutputModule | ContainerModule
 
 export interface AudioModules {
   [index: string]: AudioModule
@@ -70,8 +69,6 @@ export interface BaseAM {
   connectingParamIDs: string[]
   controlData: ControlData
   controlSetFuncs: ControlSetFuncs
-  connectionInputs: string[]
-  connectionOutputs: string[]
 }
 
 

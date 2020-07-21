@@ -46,8 +46,6 @@ function makeGain(gainAmount = 0): GainModule {
     connectingParamIDs,
     controlData,
     controlSetFuncs,
-    connectionInputs: ['0'],
-    connectionOutputs: ['0'],
   }
 }
 

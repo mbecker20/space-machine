@@ -69,8 +69,6 @@ function makeConstantSource(): ConstantModule {
     controlData,
     controlSetFuncs,
     typeTypes: constantSourceTypes,
-    connectionInputs: [],
-    connectionOutputs: ['0'],
   }
 
 }
