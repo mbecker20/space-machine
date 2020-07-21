@@ -53,7 +53,7 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
                   setOpenMenu(CONNECT_TO)
                 }
               }}
-            >{outputID}</Button>
+            >{isFromContainer ? modules[outputID].name : outputID}</Button>
           )
         })}
       </CenterMenu>
@@ -69,14 +69,14 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
                 setInputIndex(index)
                 setOpenMenu(CONNECT_TO)
               }}
-            >{inputID}</Button>
+            >{isToContainer ? modules[inputID].name : inputID}</Button>
           )
         })}
       </CenterMenu>
       :
       openMenu === CONNECT_TO
       ?
-      <CenterMenu header={`connect ${fromMod.name} to ${toMod.name}`} onClose={onClose}>
+            <CenterMenu header={`connect ${isFromContainer ? fromMod.name + ' - ' + modules[fromMod.connectionOutputs[outputIndex]].name : fromMod.name} to ${isToContainer ? toMod.name + ' - ' + modules[toMod.connectionInputs[inputIndex]].name : toMod.name}`} onClose={onClose}>
         {(isToContainer ? modules[toMod.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod.connectionInputs.length === 0) ? null :
         <Button style={buttonStyle}
           onClick={() => {
@@ -97,19 +97,29 @@ function ConnectionMenu({ fromID, toID, toType, onClose }: Props) {
             onClose()
           }}
         >module</Button>}
-        {am[toID].connectingParamIDs.length === 0 ? null :
+        {
+        !isToContainer ? (am[toID].connectingParamIDs.length === 0 ? null :
         <Button style={buttonStyle}
           onClick={(e) => {
             e.stopPropagation()
             setOpenMenu(CHOOSE_PARAM)
           }}
-        >params</Button>}
+        >params</Button>)
+        :
+        am[toMod.connectionInputs[inputIndex]].connectingParamIDs.length === 0 ? null :
+        <Button style={buttonStyle}
+          onClick={(e) => {
+            e.stopPropagation()
+            setOpenMenu(CHOOSE_PARAM)
+          }}
+        >params</Button>
+        }
       </CenterMenu>
       :
       openMenu === CHOOSE_PARAM
       ?
       <CenterMenu header={'props'} onClose={onClose}>
-        {am[toID].connectingParamIDs.map((paramID, key) => {
+        {(isToContainer ? am[toMod.connectionInputs[inputIndex]] : am[toID]).connectingParamIDs.map((paramID, key) => {
           return (
           <Button key={fromID + toID + key}
             onClick={() => {
