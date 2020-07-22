@@ -14,9 +14,11 @@ interface Props {
 }
 
 export const CHOOSE_OUTPUT = 'CHOOSE_OUTPUT'
+export const CHOOSE_CONTAINER_OUTPUT = 'CHOOSE_CONTAINER_OUTPUT'
 export const CONNECT_TO = 'CONNECT_TO'
 export const CHOOSE_PARAM = 'CHOOSE_PARAM'
 export const CHOOSE_INPUT = 'CHOOSE_INPUT'
+export const CHOOSE_CONTAINER_INPUT = 'CHOOSE_CONTAINER_INPUT' // todo
 
 const buttonStyle: CSS.Properties = {
   
@@ -44,7 +46,8 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       <CenterMenu header={'choose output'} onClose={onClose}>
         {fromMod.connectionOutputs.map((outputID, index) => {
           return (
-            <Button key={fromID + toID + outputID}
+            <Button style={buttonStyle}
+              key={fromID + toID + outputID}
               onClick={(e) => {
                 e.stopPropagation()
                 if (isFromContainer) {
@@ -68,7 +71,8 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       <CenterMenu header={'choose input'} onClose={onClose}>
         {toMod.connectionInputs.map((inputID, index) => {
           return (
-            <Button key={fromID + toID + inputID}
+            <Button style={buttonStyle}
+              key={fromID + toID + inputID}
               onClick={(e) => {
                 e.stopPropagation()
                 if (isToContainer) {
@@ -138,33 +142,34 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       <CenterMenu header={'props'} onClose={onClose}>
         {(isToContainer ? am[toMod.connectionInputs[containerInputIndex]] : am[toID]).connectingParamIDs.map((paramID, key) => {
           return (
-          <Button key={fromID + toID + key}
-            onClick={() => {
-              if (isFromContainer) {
-                if (isToContainer) {
-                  connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+            <Button style={buttonStyle}
+              key={fromID + toID + key}
+              onClick={() => {
+                if (isFromContainer) {
+                  if (isToContainer) {
+                    connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  } else {
+                    connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  }
                 } else {
-                  connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  if (isToContainer) {
+                    connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  } else {
+                    connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  }
                 }
-              } else {
-                if (isToContainer) {
-                  connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
-                } else {
-                  connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
-                }
-              }
-              dispatch(addConnection(
-                fromID,
-                toID,
-                paramID,
-                outputIndex,
-                inputIndex,
-                isFromContainer ? fromMod.connectionOutputs[containerOutputIndex] : undefined,
-                isToContainer ? toMod.connectionInputs[containerInputIndex] : undefined,
-              ))
-              onClose()
-            }}
-          >{paramID}</Button>
+                dispatch(addConnection(
+                  fromID,
+                  toID,
+                  paramID,
+                  outputIndex,
+                  inputIndex,
+                  isFromContainer ? fromMod.connectionOutputs[containerOutputIndex] : undefined,
+                  isToContainer ? toMod.connectionInputs[containerInputIndex] : undefined,
+                ))
+                onClose()
+              }}
+            >{paramID}</Button>
           )
         })}
       </CenterMenu>

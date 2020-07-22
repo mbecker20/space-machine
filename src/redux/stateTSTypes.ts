@@ -11,7 +11,8 @@ export interface RootState {
 // Module related state
 // --------------------
 export interface ConnectionData {
-  connectedID: string
+  connectionID: string // stored on both from and to objected
+  connectedID: string // id of module connection is to
   param: string
   outputIndex: number
   inputIndex: number
