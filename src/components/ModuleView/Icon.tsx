@@ -123,7 +123,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
       </div>
       {!cmState.isOpen ? null
       :
-      <ConnectionMenu fromID={cmState.fromID} toID={mod.id} toType={mod.moduleType}
+      <ConnectionMenu fromID={cmState.fromID} toID={mod.id}
         onClose={() => {
           setCMState({
             isOpen: false,

@@ -10,9 +10,14 @@ export interface RootState {
 
 // Module related state
 // --------------------
-
-
-export type ConnectionData = [string, string]
+export interface ConnectionData {
+  connectedID: string
+  param: string
+  outputIndex: number
+  inputIndex: number
+  containerOutputChildID?: string
+  containerInputChildID?: string
+}
 
 export interface Module { // the base of the Module types
   id: string
@@ -22,7 +27,7 @@ export interface Module { // the base of the Module types
   col: number
   inputs: ConnectionData[]
   outputs: ConnectionData[]
-  connectionInputs: string[]
+  connectionInputs: string[] // these are the audionode i/o ports/channels, or in the case of containers, ids referencing 
   connectionOutputs: string[]
   isContainerInput: boolean
   isContainerOutput: boolean
