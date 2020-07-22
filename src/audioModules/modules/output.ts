@@ -28,7 +28,10 @@ function makeOutput(): OutputModule {
   }
 
   const controlSetFuncs = {
-    'set master gain': (arg: string) => { masterGain.gain.value = Number(arg) },
+    'set master gain': (arg: string) => {
+      controlData['set master gain'].value = Number(arg)
+      masterGain.gain.value = Number(arg)
+    },
     'resume': (arg: string) => { audioCtx.resume() },
     'suspend': (arg: string) => { audioCtx.suspend() }
   }
