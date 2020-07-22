@@ -136,7 +136,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       openMenu === CHOOSE_PARAM
       ?
       <CenterMenu header={'props'} onClose={onClose}>
-        {(isToContainer ? am[toMod.connectionInputs[containerInputIndex]] : am[toID]).connectingParamIDs.map((paramID: string, key: number) => {
+        {(isToContainer ? am[toMod.connectionInputs[containerInputIndex]] : am[toID]).connectingParamIDs.map((paramID, key) => {
           return (
           <Button key={fromID + toID + key}
             onClick={() => {
