@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react'
 import { CenterMenu, Button } from '../all'
 import { connect } from '../../audioModules/connection'
 import { useDispatch, useSelector } from 'react-redux'
-import { ConnectingAudioModule, CONTAINER } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule, CONTAINER, AudioModule } from '../../audioModules/moduleTypes'
 import { addConnection } from '../../redux/allActions'
 import CSS from 'csstype'
 import { RootState } from '../../redux/stateTSTypes'
@@ -136,7 +136,7 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       openMenu === CHOOSE_PARAM
       ?
       <CenterMenu header={'props'} onClose={onClose}>
-        {(isToContainer ? am[toMod.connectionInputs[inputIndex]] : am[toID]).connectingParamIDs.map((paramID, key) => {
+        {(isToContainer ? am[toMod.connectionInputs[containerInputIndex]] : am[toID]).connectingParamIDs.map((paramID: string, key: number) => {
           return (
           <Button key={fromID + toID + key}
             onClick={() => {
