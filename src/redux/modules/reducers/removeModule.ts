@@ -7,8 +7,8 @@ const removeModule = (state: Modules, { id }: RemoveModuleAction) => {
   return Object.assign({}, trimmedState, Object.fromEntries(Object.entries(trimmedState).map(entry => {
     return [entry[0], { 
         ...entry[1],
-        inputs: entry[1].inputs.filter(inputData => inputData[0] !== id),
-        outputs: entry[1].outputs.filter(outputData => outputData[0] !== id)
+        inputs: entry[1].inputs.filter(inputData => inputData.connectedID !== id),
+        outputs: entry[1].outputs.filter(outputData => outputData.connectedID !== id)
       }]
     })), {
     [parentID]: {

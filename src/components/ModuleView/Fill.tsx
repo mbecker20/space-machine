@@ -171,13 +171,14 @@ function ModuleViewFill() {
                   <ArcherElement
                     id={mod.id + ' output'}
                     relations={mod.outputs.map(outputData => {
+                      const { connectedID, param } = outputData
                       return {
-                        targetId: outputData[1] === '' ? outputData[0] + ' input' : outputData[0] + ' controls',
+                        targetId: param === '' ? connectedID + ' input' : connectedID + ' controls',
                         targetAnchor: 'left',
                         sourceAnchor: 'right',
                         style: {
-                          strokeColor: outputData[1] === '' ? 'red' : 'blue',
-                          strokeWidth: outputData[1] === '' ? 1 : 1,
+                          strokeColor: param === '' ? 'red' : 'blue',
+                          strokeWidth: param === '' ? 1 : 1,
                         }
                       }
                     })}
@@ -185,8 +186,7 @@ function ModuleViewFill() {
                     <div style={{
                       width: '10px',
                       height: '10px',
-                      //backgroundColor: 'red',
-                    }}></div>
+                    }}/>
                   </ArcherElement>
                 </div>
               </Fragment>
