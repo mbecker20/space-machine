@@ -93,19 +93,13 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
         {(isToContainer ? modules[toMod.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod.connectionInputs.length === 0) ? null :
         <Button style={buttonStyle}
           onClick={() => {
-            if (isFromContainer) {
-              if (isToContainer) {
-                connect(am[fromMod.connectionOutputs[outputIndex]] as ConnectingAudioModule, am[toMod.connectionInputs[inputIndex]] as ConnectingAudioModule)
-              } else {
-                connect(am[fromMod.connectionOutputs[outputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule)
-              }
-            } else {
-              if (isToContainer) {
-                connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[inputIndex]] as ConnectingAudioModule)
-              } else {
-                connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, '', outputIndex)
-              }
-            }
+            connect(
+              (isFromContainer ? am[fromMod.connectionOutputs[containerOutputIndex]] : am[fromMod.id]) as ConnectingAudioModule, 
+              (isToContainer ? am[toMod.connectionInputs[containerInputIndex]] : am[toMod.id]) as ConnectingAudioModule,
+              '',
+              outputIndex,
+              inputIndex,
+            )
             dispatch(addConnection(
               fromID, 
               toID, 
@@ -145,19 +139,13 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
             <Button style={buttonStyle}
               key={fromID + toID + key}
               onClick={() => {
-                if (isFromContainer) {
-                  if (isToContainer) {
-                    connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
-                  } else {
-                    connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
-                  }
-                } else {
-                  if (isToContainer) {
-                    connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
-                  } else {
-                    connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
-                  }
-                }
+                connect(
+                  (isFromContainer ? am[fromMod.connectionOutputs[containerOutputIndex]] : am[fromMod.id]) as ConnectingAudioModule,
+                  (isToContainer ? am[toMod.connectionInputs[containerInputIndex]] : am[toMod.id]) as ConnectingAudioModule,
+                  paramID,
+                  outputIndex,
+                  inputIndex,
+                )
                 dispatch(addConnection(
                   fromID,
                   toID,
