@@ -144,11 +144,11 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
                 if (isToContainer) {
                   connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
                 } else {
-                  connect(am[fromMod.connectionOutputs[outputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  connect(am[fromMod.connectionOutputs[containerOutputIndex]] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
                 }
               } else {
                 if (isToContainer) {
-                  connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[inputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
+                  connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.connectionInputs[containerInputIndex]] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
                 } else {
                   connect(am[fromMod.id] as ConnectingAudioModule, am[toMod.id] as ConnectingAudioModule, paramID, outputIndex, inputIndex)
                 }
