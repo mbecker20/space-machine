@@ -18,18 +18,19 @@ function DeleteButton({ selectedModule, audioModule }: Props) {
   return (
     <Button style={{
       borderColor: colors.deleteButton,
-      //backgroundColor: colors.fillModule,
       width: '50%',
       fontSize: sizes.text.small
     }}
       onClick={() => {
         selectedModule.inputs.forEach(inputData => {
-          disconnect(am[inputData[0]] as ConnectingAudioModule, audioModule as ConnectingAudioModule, inputData[1])
-          dispatch(removeConnection(inputData[0], selectedModule.id, inputData[1]))
+          const { connectionID, connectedID, param, outputIndex, containerOutputChildID, containerInputChildID } = inputData
+          dispatch(removeConnection(connectedID, selectedModule.id, connectionID))
+          disconnect(am[containerOutputChildID ? containerOutputChildID : connectedID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : selectedModule.id] as ConnectingAudioModule, param, outputIndex)
         })
         selectedModule.outputs.forEach(outputData => {
-          disconnect(audioModule as ConnectingAudioModule, am[outputData[0]] as ConnectingAudioModule, outputData[1])
-          dispatch(removeConnection(selectedModule.id, outputData[0], outputData[1]))
+          const { connectionID, connectedID, param, outputIndex, containerOutputChildID, containerInputChildID } = outputData
+          dispatch(removeConnection(selectedModule.id, connectedID, connectionID))
+          disconnect(am[containerOutputChildID ? containerOutputChildID : selectedModule.id] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : connectedID] as ConnectingAudioModule, param, outputIndex)
         })
         dispatch(removeModule(window.highlightedID))
         window.setLeftDrawerOpen(false)
