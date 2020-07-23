@@ -32,8 +32,10 @@ const useJSS = createUseStyles({
     minHeight: sizes.moduleView.iconGrid,
     //alignItems: 'center',
     //justifyItems: 'center',
-    padding: '2vmin',
+    padding: '4vmin',
     zIndex: 1,
+    rowGap: sizes.moduleView.gutterGrid,
+    columnGap: sizes.moduleView.gutterGrid,
   },
 
   ArcherContainer: {
@@ -64,6 +66,14 @@ const useJSS = createUseStyles({
       borderStyle: 'solid',
     },
     zIndex: 2,
+  },
+
+  ArcherElement: {
+    zIndex: 1,
+    display: 'grid',
+    gridTemplateRows: '10px auto 10px',
+    gridTemplateColumns: '10px auto 10px',
+    padding: '1vmin'
   },
 
   IconName: {

@@ -24,8 +24,8 @@ function DropSquare({ row, col }: Props) {
   })
   const [isHL, setHL] = useState(false) // to highlight on drag enter
   const dsStyle: CSS.Properties = {
-    gridColumn: `${col * 2 + 1} / span 1`,
-    gridRow: `${row * 2 + 1} / span 1`,
+    gridColumn: `${col + 1} / span 1`,
+    gridRow: `${row + 1} / span 1`,
     borderStyle: isHL ? 'solid' : 'none',
   }
   return (

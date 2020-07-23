@@ -7,6 +7,7 @@ import { moveModule } from '../../redux/allActions'
 import { ConnectionMenu } from '../all'
 import { animated } from 'react-spring'
 import { sizes } from '../../theme/theme'
+import { ArcherElement } from 'react-archer' 
 
 declare global {
   interface Window {
@@ -32,6 +33,12 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none',
+    width: sizes.moduleView.icon,
+    height: sizes.moduleView.icon,
+  }
+  const archerElementStyle: CSS.Properties = {
+    gridColumn: `${gridCol} / span 1`,
+    gridRow: `${gridRow} / span 1`,
     width: sizes.moduleView.icon,
     height: sizes.moduleView.icon,
   }
@@ -130,6 +137,63 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         />}
         <div className={classes.IconName}>
           {mod.name}
+        </div>
+      </animated.div>
+      <animated.div className={classes.ArcherElement}
+        style={archerElementStyle}
+      >
+        <div style={{
+          gridColumn: `${1} / span 1`,
+          gridRow: `${1} / span 1`,
+        }}>
+          <ArcherElement
+            id={mod.id + ' input'}
+          >
+            <div style={{
+              width: '10px',
+              height: '10px',
+              //backgroundColor: 'blue',
+            }}></div>
+          </ArcherElement>
+        </div>
+        <div style={{
+          gridColumn: `${1} / span 1`,
+          gridRow: `${3} / span 1`,
+        }}>
+          <ArcherElement
+            id={mod.id + ' controls'}
+          >
+            <div style={{
+              width: '10px',
+              height: '10px',
+              //backgroundColor: 'yellow',
+            }}></div>
+          </ArcherElement>
+        </div>
+        <div style={{
+          gridColumn: `${3} / span 1`,
+          gridRow: `${1} / span 1`,
+        }}>
+          <ArcherElement
+            id={mod.id + ' output'}
+            relations={mod.outputs.map(outputData => {
+              const { connectedID, param } = outputData
+              return {
+                targetId: param === '' ? connectedID + ' input' : connectedID + ' controls',
+                targetAnchor: 'left',
+                sourceAnchor: 'right',
+                style: {
+                  strokeColor: param === '' ? 'red' : 'blue',
+                  strokeWidth: param === '' ? 1 : 1,
+                }
+              }
+            })}
+          >
+            <div style={{
+              width: '10px',
+              height: '10px',
+            }} />
+          </ArcherElement>
         </div>
       </animated.div>
       {!cmState.isOpen ? null
