@@ -4,7 +4,6 @@ import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
-import { ConnectionMenu } from '../all'
 import { animated } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer' 
@@ -57,10 +56,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   */
   const modules = useSelector((state: RootState) => state.modules)
   const dispatch = useDispatch()
-  const [cmState, setCMState] = useState({ // connectionMenuState
-    isOpen: false,
-    fromID: '',
-  })
   return (
     <Fragment>
       <animated.div 
@@ -87,10 +82,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             } else {
               const fromID = e.dataTransfer.getData('fromID')
               if (fromID) {
-                setCMState({
-                  isOpen: true,
-                  fromID,
-                })
+                window.openConnectionMenu(fromID, mod.id)
               }
             }
           }
@@ -196,17 +188,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           </ArcherElement>
         </div>
       </animated.div>
-      {!cmState.isOpen ? null
-      :
-      <ConnectionMenu fromID={cmState.fromID} toID={mod.id}
-        onClose={() => {
-          setCMState({
-            isOpen: false,
-            fromID: '',
-          })
-          window.linkToOutputID = ''
-        }}
-      />}
     </Fragment>
   )
 }
