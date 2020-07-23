@@ -9,15 +9,15 @@ export const colors: Colors = {
   secondary: secondary,
   tertiary: tertiary,
 
-  rightDrawer: 'black',
+  rightDrawer: '#0000009e',
   drawerToggle: '#00347d',
   drawerToggleLine: '#001b40',
 
-  leftDrawer: 'black',
+  leftDrawer: '#0000009e',
 
   centerMenu: 'black',
 
-  fillModule: '#1b1e24',
+  fillModule: '#c0c0c038',
   module: '#37538a',
 
   text: 'white',
@@ -26,7 +26,7 @@ export const colors: Colors = {
   dropSquareHL: 'white',
 
   defaultButton: 'black',
-  deleteButton: '#cc0000',
+  deleteButton: '#cc00006e',
   deleteButtonText: 'white',
 
   errorBackground: '#cc0000',

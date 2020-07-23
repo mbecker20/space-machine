@@ -17,7 +17,7 @@ function DeleteButton({ selectedModule, audioModule }: Props) {
   const dispatch = useDispatch()
   return (
     <Button style={{
-      borderColor: colors.deleteButton,
+      backgroundColor: colors.deleteButton,
       width: '50%',
       fontSize: sizes.text.small
     }}

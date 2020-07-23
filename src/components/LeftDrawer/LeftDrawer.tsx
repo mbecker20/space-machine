@@ -5,12 +5,10 @@ import { sizes } from '../../theme/theme'
 import { useSelector } from 'react-redux'
 import { HorizontalScrollDiv, RenameMenu } from '../all'
 import { RootState } from '../../redux/stateTSTypes'
-import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
-import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
-import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
 import DeleteButton from './DeleteButton'
 import InputOutputView from './InputOutputView'
 import MarkContainerIO from './MarkContainerIO'
+import ControlMenu from './ControlMenu'
 
 declare global {
   interface Window {
@@ -51,39 +49,7 @@ function LeftDrawer() {
           </HorizontalScrollDiv>
           <InputOutputView selectedModule={selectedModule} modules={modules}/>
         </div>
-        <div className={classes.ControlMenu}>
-          <div className={classes.MenuHeader}>controls</div>
-          {audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
-            const { controlType, paramID, value, range } = audioModule.controlData[controlID]
-            const setFunc = audioModule.controlSetFuncs[controlID]
-            return (
-              <div className={classes.ControlBounder} key={selectedModule.id + index}>
-                {controlType === VALUE
-                ?
-                <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range} paramID={paramID} setFunc={setFunc}/>
-                :
-                controlType === BUTTON
-                ?
-                <ButtonControl setFunc={setFunc} controlID={controlID} />
-                :
-                controlType === TYPE
-                ?
-                <TypeControl setFunc={setFunc} audioModule={audioModule as AudioModuleWithTypes} value={value} selectedModule={selectedModule} />
-                :
-                controlType === FILE
-                ?
-                <FileControl controlID={controlID} setFunc={setFunc} />
-                :
-                controlType === SWITCH
-                ?
-                <SwitchControl controlID={controlID} setFunc={setFunc} />
-                :
-                null
-                }
-              </div>
-            )
-          }) : null}
-        </div>
+        <ControlMenu audioModule={audioModule} selectedModule={selectedModule} key={selectedModule.id}/>
         <div className={classes.BottomItems}>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={selectedModule}/>
           <DeleteButton selectedModule={selectedModule} audioModule={audioModule} />
