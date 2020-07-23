@@ -7,6 +7,7 @@ import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
+import { Knob } from '../all'
 
 declare global {
   interface Window {
@@ -43,6 +44,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     height: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
     config: {
       tension: 550,
+      clamp: true,
     },
     onFrame: window.refreshArcherContainer
   })
@@ -126,6 +128,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <div className={classes.IconName}>
           {mod.name}
         </div>
+        {isHighlighted ? <Knob initValue={25} range={[-50, 50]} /> : null}
       </animated.div>
       <animated.div className={classes.ArcherElement}
         style={Object.assign({}, iconSpring0, archerElementStyle)}

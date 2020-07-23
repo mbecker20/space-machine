@@ -6,6 +6,7 @@ import { RootState, ContainerModule } from '../../redux/stateTSTypes'
 import { moveModule } from '../../redux/modules/moduleActions'
 import { isOccupied } from '../ModuleView/helpers'
 import { ModuleType } from '../../audioModules/moduleTypes'
+import { colors } from '../../theme/theme'
 
 interface Props {
   row: number
@@ -26,7 +27,7 @@ function DropSquare({ row, col }: Props) {
   const dsStyle: CSS.Properties = {
     gridColumn: `${col + 1} / span 1`,
     gridRow: `${row + 1} / span 1`,
-    borderStyle: isHL ? 'solid' : 'none',
+    borderColor: isHL ? colors.dropSquareHL : 'transparent',
   }
   return (
     <div 
