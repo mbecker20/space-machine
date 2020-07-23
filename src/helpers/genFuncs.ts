@@ -53,3 +53,6 @@ export function range(start: number, stop: number) {
 	return out
 }
 
+export function clamp(val: number, range: [number, number]) {
+	return Math.min(range[1], Math.max(range[0], val))
+}
