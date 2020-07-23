@@ -5,7 +5,7 @@ import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
 import { ConnectionMenu } from '../all'
-import { animated, useSpring } from 'react-spring'
+import { animated } from 'react-spring'
 import { sizes } from '../../theme/theme'
 
 declare global {
@@ -31,8 +31,11 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const iconStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
-    borderStyle: isHighlighted ? 'solid' : 'none'
+    borderStyle: isHighlighted ? 'solid' : 'none',
+    width: sizes.moduleView.icon,
+    height: sizes.moduleView.icon,
   }
+  /*
   const iconSpring0 = useSpring({
     width: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
     height: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
@@ -44,6 +47,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     zIndex: isHighlighted ? 3 : 2,
     config: { duration: 0 }
   })
+  */
   const modules = useSelector((state: RootState) => state.modules)
   const dispatch = useDispatch()
   const [cmState, setCMState] = useState({ // connectionMenuState
@@ -54,7 +58,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     <Fragment>
       <animated.div 
         className={classes.Icon} 
-        style={Object.assign(iconSpring0, iconSpring1, iconStyle)}
+        style={iconStyle}
         onDragOver={event => {
           event.preventDefault()
         }}
