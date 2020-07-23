@@ -4,9 +4,9 @@ import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
-import { animated } from 'react-spring'
+import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
-import { ArcherElement } from 'react-archer' 
+import { ArcherElement } from 'react-archer'
 
 declare global {
   interface Window {
@@ -32,35 +32,36 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none',
-    width: sizes.moduleView.icon,
-    height: sizes.moduleView.icon,
+    //width: sizes.moduleView.icon,
+    //height: sizes.moduleView.icon,
   }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
-    width: sizes.moduleView.icon,
-    height: sizes.moduleView.icon,
+    //width: sizes.moduleView.icon,
+    //height: sizes.moduleView.icon,
   }
-  /*
+  
   const iconSpring0 = useSpring({
     width: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
     height: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
     config: {
       tension: 550,
-    }
+    },
+    onFrame: window.refreshArcherContainer
   })
   const iconSpring1 = useSpring({
     zIndex: isHighlighted ? 3 : 2,
     config: { duration: 0 }
   })
-  */
+  
   const modules = useSelector((state: RootState) => state.modules)
   const dispatch = useDispatch()
   return (
     <Fragment>
       <animated.div 
         className={classes.Icon} 
-        style={iconStyle}
+        style={Object.assign(iconSpring1, iconSpring0, iconStyle)}
         onDragOver={event => {
           event.preventDefault()
         }}
@@ -74,7 +75,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
               window.setFillIsExpanded(false)
               dispatch(moveModule(id, mod.row, mod.col))
               dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
-              window.setTimeout(window.refreshArcherContainer, 500)
+              window.setTimeout(window.refreshArcherContainer, 100)
             }
           } else {
             if (mod.connectionInputs.length === 0 && window.audioModules[mod.id].connectingParamIDs.length === 0) {
@@ -115,7 +116,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             window.currSetHighlighted(false)
             window.currSetHighlighted = setHighlighted
           }
-          window.setTimeout(() => { window.refreshArcherContainer() }, 10)
         }}
       >
         {mod.connectionOutputs.length === 0 ? null
@@ -132,7 +132,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         </div>
       </animated.div>
       <animated.div className={classes.ArcherElement}
-        style={archerElementStyle}
+        style={Object.assign({}, iconSpring0, archerElementStyle)}
       >
         <div style={{
           gridColumn: `${1} / span 1`,
