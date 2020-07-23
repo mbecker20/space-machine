@@ -32,14 +32,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none',
-    //width: sizes.moduleView.icon,
-    //height: sizes.moduleView.icon,
   }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
-    //width: sizes.moduleView.icon,
-    //height: sizes.moduleView.icon,
   }
   
   const iconSpring0 = useSpring({
@@ -111,7 +107,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           } else {
             setHighlighted(true)
             window.highlightedID = mod.id
-            window.setLeftDrawerOpen(true)
+            //window.setLeftDrawerOpen(true)
             window.reRenderLeftDrawer()
             window.currSetHighlighted(false)
             window.currSetHighlighted = setHighlighted

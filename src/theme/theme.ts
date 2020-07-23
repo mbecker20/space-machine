@@ -49,7 +49,7 @@ export const sizes: Sizes = {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
     icon: '9vmin',
-    bigIcon: '18vmin',
+    bigIcon: '27vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
