@@ -5,6 +5,7 @@ import { Module } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
 import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
 import { Button } from '../all'
+import { colors } from '../../theme/theme'
 
 interface Props {
   audioModule: AudioModule
@@ -18,7 +19,7 @@ function ControlMenu({ audioModule, selectedModule }: Props) {
     <div className={classes.ControlMenu}>
       <Button style={{
         width: '70%',
-        backgroundColor: '',
+        backgroundColor: colors.controlMenuButton,
       }}
         onClick={() => {
           setControlsOpen(!controlsOpen)

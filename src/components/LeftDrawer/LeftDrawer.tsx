@@ -49,7 +49,7 @@ function LeftDrawer() {
           </HorizontalScrollDiv>
           <InputOutputView selectedModule={selectedModule} modules={modules}/>
         </div>
-        <ControlMenu audioModule={audioModule} selectedModule={selectedModule} key={selectedModule.id}/>
+        {selectedModule ? <ControlMenu audioModule={audioModule} selectedModule={selectedModule} key={selectedModule.id}/> : null}
         <div className={classes.BottomItems}>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={selectedModule}/>
           <DeleteButton selectedModule={selectedModule} audioModule={audioModule} />

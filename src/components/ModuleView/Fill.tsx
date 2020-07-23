@@ -40,13 +40,13 @@ function ModuleViewFill() {
   const isEmpty = containerModule.childModules.length === 0
   if (isEmpty) {
     gridStyle = {
-      gridTemplateRows: `repeat(${1}, ${iconGridSize} ${gutterGridSize})`,
-      gridTemplateColumns: `repeat(${1}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${1}, ${'auto'} ${gutterGridSize})`,
+      gridTemplateColumns: `repeat(${1}, ${'auto'} ${gutterGridSize})`,
     }
   } else {
     gridStyle = {
-      gridTemplateRows: `repeat(${isExpanded ? maxRow + 2 : maxRow + 1}, ${iconGridSize} ${gutterGridSize})`,
-      gridTemplateColumns: `repeat(${isExpanded ? maxCol + 2 : maxCol + 1}, ${iconGridSize} ${gutterGridSize})`,
+      gridTemplateRows: `repeat(${isExpanded ? maxRow + 2 : maxRow + 1}, ${'auto'} ${gutterGridSize})`,
+      gridTemplateColumns: `repeat(${isExpanded ? maxCol + 2 : maxCol + 1}, ${'auto'} ${gutterGridSize})`,
     }
   }
   const archerContainerRef = useRef<ArcherContainer>(null)

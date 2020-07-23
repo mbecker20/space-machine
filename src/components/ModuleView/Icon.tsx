@@ -5,6 +5,8 @@ import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
 import { ConnectionMenu } from '../all'
+import { animated, useSpring } from 'react-spring'
+import { sizes } from '../../theme/theme'
 
 declare global {
   interface Window {
@@ -31,6 +33,17 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none'
   }
+  const iconSpring0 = useSpring({
+    width: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
+    height: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
+    config: {
+      tension: 550,
+    }
+  })
+  const iconSpring1 = useSpring({
+    zIndex: isHighlighted ? 3 : 2,
+    config: { duration: 0 }
+  })
   const modules = useSelector((state: RootState) => state.modules)
   const dispatch = useDispatch()
   const [cmState, setCMState] = useState({ // connectionMenuState
@@ -39,9 +52,9 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   })
   return (
     <Fragment>
-      <div 
+      <animated.div 
         className={classes.Icon} 
-        style={iconStyle}
+        style={Object.assign(iconSpring0, iconSpring1, iconStyle)}
         onDragOver={event => {
           event.preventDefault()
         }}
@@ -86,26 +99,20 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           if (e.stopPropagation) {
             e.stopPropagation()
           }
-          if (window.linkToOutputID.length === 0) {
-            if (mod.id === window.highlightedID) {
-              window.setLeftDrawerOpen(false)
-              setHighlighted(false)
-              window.highlightedID = ''
-              window.currSetHighlighted = (setHighlighted) => {}
-            } else {
-              setHighlighted(true)
-              window.highlightedID = mod.id
-              window.setLeftDrawerOpen(true)
-              window.reRenderLeftDrawer()
-              window.currSetHighlighted(false)
-              window.currSetHighlighted = setHighlighted
-            }
+          if (mod.id === window.highlightedID) {
+            window.setLeftDrawerOpen(false)
+            setHighlighted(false)
+            window.highlightedID = ''
+            window.currSetHighlighted = (setHighlighted) => {}
           } else {
-            setCMState({
-              isOpen: true,
-              fromID: window.linkToOutputID
-            })
+            setHighlighted(true)
+            window.highlightedID = mod.id
+            window.setLeftDrawerOpen(true)
+            window.reRenderLeftDrawer()
+            window.currSetHighlighted(false)
+            window.currSetHighlighted = setHighlighted
           }
+          window.setTimeout(() => { window.refreshArcherContainer() }, 10)
         }}
       >
         {mod.connectionOutputs.length === 0 ? null
@@ -120,7 +127,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <div className={classes.IconName}>
           {mod.name}
         </div>
-      </div>
+      </animated.div>
       {!cmState.isOpen ? null
       :
       <ConnectionMenu fromID={cmState.fromID} toID={mod.id}

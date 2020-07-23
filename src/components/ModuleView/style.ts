@@ -30,8 +30,8 @@ const useJSS = createUseStyles({
     display: 'grid',
     minWidth: sizes.moduleView.iconGrid,
     minHeight: sizes.moduleView.iconGrid,
-    alignItems: 'center',
-    justifyItems: 'center',
+    //alignItems: 'center',
+    //justifyItems: 'center',
     padding: '2vmin',
     zIndex: 1,
   },
@@ -45,8 +45,8 @@ const useJSS = createUseStyles({
 
   Icon: {
     backgroundColor: colors.module,
-    width: sizes.moduleView.icon,
-    height: sizes.moduleView.icon,
+    //width: sizes.moduleView.icon,
+    //height: sizes.moduleView.icon,
     borderRadius: '1.5vmin',
     borderStyle: 'none',
     borderColor: 'white',

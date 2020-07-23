@@ -32,6 +32,8 @@ export const colors: Colors = {
   errorBackground: '#cc0000',
 
   outputConnector: 'red',
+
+  controlMenuButton: '#3b3b3b94'
 }
 
 export const sizes: Sizes = {
@@ -47,6 +49,7 @@ export const sizes: Sizes = {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
     icon: '9vmin',
+    bigIcon: '18vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
