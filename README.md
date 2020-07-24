@@ -6,4 +6,4 @@ Inspired by vcv rack and ableton live, the goal of this project is to create a f
 
 ![](https://i.imgur.com/paXMmVl.png)
 
-![](https://i.imgur.com/W9o0lKy.png)
+![](https://i.imgur.com/FtUBQF0.png)
