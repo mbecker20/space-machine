@@ -9,9 +9,10 @@ interface Props {
   range: Range | undefined
   paramID: string
   setFunc: SetFunc
+  reRenderIcon: () => void
 }
 
-function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }: Props) {
+function ValueControl({ controlID, value, audioModule, range, paramID, setFunc, reRenderIcon }: Props) {
   const { audioNode } = audioModule as ConnectingAudioModule
   const classes = useJSS()
   return (
@@ -25,7 +26,7 @@ function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }
         step={!range ? undefined : range[2] ? range[2] : undefined}
         onChange={(e) => {
           setFunc(e.target.value)
-          window.reRenderLeftDrawer()
+          reRenderIcon()
         }}
       />
     </Fragment>

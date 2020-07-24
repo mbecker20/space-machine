@@ -8,9 +8,10 @@ interface Props {
   audioModule: AudioModuleWithTypes
   value: Value | undefined
   selectedModule: Module | ContainerModule
+  reRenderIcon: () => void
 }
 
-function Type({ setFunc, audioModule, value, selectedModule}: Props) {
+function Type({ setFunc, audioModule, value, selectedModule, reRenderIcon }: Props) {
   const classes = useJSS()
   const { audioNode } = audioModule
   return (
@@ -20,7 +21,7 @@ function Type({ setFunc, audioModule, value, selectedModule}: Props) {
         name='type' id='type'
         onChange={(e) => {
           setFunc(e.target.value)
-          window.reRenderLeftDrawer()
+          reRenderIcon()
         }}
         value={value as string ? value as string : audioNode.type as string}
       >

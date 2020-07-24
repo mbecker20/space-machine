@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useJSS from './style'
-import { RightDrawer, LeftDrawer, ModuleViewFill, AudioTags, ConnectionMenu, PointerLayer } from '../components/all'
+import { RightDrawer, ModuleViewFill, AudioTags, ConnectionMenu, PointerLayer, RenameMenu } from '../components/all'
 import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
 import { Dispatch } from 'redux'
@@ -15,6 +15,7 @@ declare global {
     addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
     openConnectionMenu: (fromID: string, toID: string) => void
     openPointerLayer: (pointerId: number, onPointerMove: PointerEventCallback, onPointerUp: PointerEventCallback) => void
+    openRenameMenu: () => void
   }
 
   interface AudioNode {
@@ -35,9 +36,10 @@ function App() {
   const [ pointerLayerData, setPointerLayerData ] = useState(makePointerLayerData(false))
   window.openPointerLayer = (pointerId, onPointerMove, onPointerUp) => { setPointerLayerData(makePointerLayerData(true, pointerId, onPointerMove, onPointerUp)) }
   const resetPointerLayerData = () => { setPointerLayerData(makePointerLayerData(false)) }
+  const [ renameMenuOpen, setRMOpen ] = useState(false)
+  window.openRenameMenu = () => { setRMOpen(true) }
   return (
     <div className={classes.Bounder}>
-      <LeftDrawer />
       <div className={classes.ModuleViewBounder}>
         <ModuleViewFill />
       </div>
@@ -54,6 +56,10 @@ function App() {
       {
         !pointerLayerData.isOpen ? null :
         <PointerLayer pointerLayerData={ pointerLayerData } resetPointerLayerData={resetPointerLayerData}/>
+      }
+      {
+        !renameMenuOpen ? null :
+        <RenameMenu onClose={() => {setRMOpen(false)}} />
       }
     </div>
   )

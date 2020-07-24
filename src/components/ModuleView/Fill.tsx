@@ -55,7 +55,6 @@ function ModuleViewFill() {
           onClick={(e) => {
             e.stopPropagation()
             window.highlightedID = containerModule.id // need to add cases to on rename reducer to rename fill/base containers
-            window.setLeftDrawerOpen(true)
           }}
         >
           {containerModule.name}
@@ -66,7 +65,6 @@ function ModuleViewFill() {
             window.fillContainerID = containerModule.parentID as string
             window.reRenderFillContainer()
             window.highlightedID = ''
-            window.setLeftDrawerOpen(false)
         }}
         >
           <div>back</div>
@@ -82,7 +80,6 @@ function ModuleViewFill() {
           window.highlightedID = ''
           window.currSetHighlighted(false)
           window.currSetHighlighted = () => {}
-          window.setLeftDrawerOpen(false)
         }}>
           {isEmpty ? <DropSquare row={0} col={0}/> :
           range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {

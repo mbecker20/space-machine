@@ -7,10 +7,10 @@ import { renameModule } from '../../redux/allActions'
 
 
 interface Props {
-  setRMOpen: (bool: boolean) => void
+  onClose: () => void
 }
 
-function RenameMenu({ setRMOpen }: Props) {
+function RenameMenu({ onClose }: Props) {
   const classes = useJSS()
   const renameInputRef = useRef<HTMLInputElement>(null)
   const modules = useSelector((state: RootState) => state.modules)
@@ -23,21 +23,20 @@ function RenameMenu({ setRMOpen }: Props) {
         setSubmitState(true)
       } else {
         dispatch(renameModule(window.highlightedID, newName))
-        window.reRenderLeftDrawer()
-        setRMOpen(false)
+        onClose()
       } 
     }
   }
   return (
-    <CenterMenu header='rename' onClose={() => {setRMOpen(false)}}>
+    <CenterMenu header='rename' onClose={onClose}>
         <div className={classes.CMInputBounder}>
           <input className={classes.CenterMenuInput}
-            placeholder={modules[window.highlightedID].name}
+            placeholder={modules[window.highlightedID]?.name}
             onKeyUp={event => {
               if (event.keyCode === 13) {
                 submitNewName()
               } else if (event.keyCode === 27) {
-                setRMOpen(false)
+                onClose()
               }
             }}
             ref={renameInputRef}

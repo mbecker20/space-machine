@@ -3,16 +3,15 @@ import { Button } from '../all'
 import { colors, sizes } from '../../theme/theme'
 import { ContainerModule, Module } from '../../redux/stateTSTypes'
 import { disconnect } from '../../audioModules/connection'
-import { ConnectingAudioModule, AudioModule } from '../../audioModules/moduleTypes'
+import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
 import { useDispatch } from 'react-redux'
 import { removeConnection, removeModule } from '../../redux/allActions'
 
 interface Props {
   selectedModule: Module | ContainerModule
-  audioModule: AudioModule
 }
 
-function DeleteButton({ selectedModule, audioModule }: Props) {
+function DeleteButton({ selectedModule }: Props) {
   const am = window.audioModules
   const dispatch = useDispatch()
   return (
@@ -33,7 +32,6 @@ function DeleteButton({ selectedModule, audioModule }: Props) {
           disconnect(am[containerOutputChildID ? containerOutputChildID : selectedModule.id] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : connectedID] as ConnectingAudioModule, param, outputIndex)
         })
         dispatch(removeModule(window.highlightedID))
-        window.setLeftDrawerOpen(false)
         window.highlightedID = ''
       }}
     >delete</Button>

@@ -76,6 +76,9 @@ const useJSS = createUseStyles({
 
   IconName: {
     fontSize: sizes.text.small,
+    '&:hover': {
+      cursor: 'pointer',
+    }
   },
 
   IconConnector: {

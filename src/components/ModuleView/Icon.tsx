@@ -7,10 +7,10 @@ import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
-import ControlMenu from '../LeftDrawer/ControlMenu'
-import InputOutputView from '../LeftDrawer/InputOutputView'
-import MarkContainerIO from '../LeftDrawer/MarkContainerIO'
-import DeleteButton from '../LeftDrawer/DeleteButton'
+import ControlMenu from '../LargeIconInfo/ControlMenu'
+import InputOutputView from '../LargeIconInfo/controls/InputOutputView'
+import MarkContainerIO from '../LargeIconInfo/MarkContainerIO'
+import DeleteButton from '../LargeIconInfo/DeleteButton'
 
 declare global {
   interface Window {
@@ -29,6 +29,10 @@ interface Props {
 function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const classes = useJSS()
   const [isHighlighted, setHighlighted] = useState(mod.id === window.highlightedID)
+  const [reRender, toReRender] = useState(false)
+  function reRenderIcon() {
+    toReRender(!reRender)
+  }
   if (mod.id === window.highlightedID) {
     window.currSetHighlighted = setHighlighted
   }
@@ -54,6 +58,14 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const iconSpring1 = useSpring({
     zIndex: isHighlighted ? 3 : 2,
     config: { duration: 0 }
+  })
+
+  const nameSpring = useSpring({
+    fontSize: isHighlighted ? sizes.text.medium : sizes.text.small,
+    config: {
+      tension: 550,
+      clamp: true
+    }
   })
   
   const [ modules, baseContainerID ] = useSelector((state: RootState) => [ state.modules, state.baseContainerID ])
@@ -105,15 +117,12 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             e.stopPropagation()
           }
           if (mod.id === window.highlightedID) {
-            window.setLeftDrawerOpen(false)
             setHighlighted(false)
             window.highlightedID = ''
             window.currSetHighlighted = (setHighlighted) => {}
           } else {
             setHighlighted(true)
             window.highlightedID = mod.id
-            //window.setLeftDrawerOpen(true)
-            window.reRenderLeftDrawer()
             window.currSetHighlighted(false)
             window.currSetHighlighted = setHighlighted
           }
@@ -128,14 +137,19 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             e.dataTransfer.setData('fromID', mod.id)
           }}
         />}
-        <div className={classes.IconName}>
+        <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
+          if (isHighlighted) {
+            e.stopPropagation()
+            window.openRenameMenu()
+          }
+        }}>
           {mod.name}
-        </div>
+        </animated.div>
         {isHighlighted ? 
         <div onClick={e => e.stopPropagation()}
           style={{ 
             width: sizes.moduleView.bigIconWidth, 
-            height: sizes.moduleView.bigIconHeight,
+            maxHeight: sizes.moduleView.bigIconHeight,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -145,9 +159,9 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           }}
         >
           <InputOutputView selectedModule={mod} modules={modules} />
-          <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} />
+          <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
-          <DeleteButton audioModule={window.audioModules[mod.id]} selectedModule={mod} />
+          <DeleteButton selectedModule={mod} />
         </div>
         : null}
       </animated.div>

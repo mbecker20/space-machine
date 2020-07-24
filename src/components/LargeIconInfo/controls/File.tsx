@@ -7,9 +7,10 @@ import { SetFunc } from '../../../audioModules/moduleTypes'
 interface Props {
   controlID: string
   setFunc: SetFunc
+  reRenderIcon: () => void
 }
 
-function File({ controlID, setFunc }: Props) {
+function File({ controlID, setFunc, reRenderIcon }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.ControlMenu}>
@@ -30,7 +31,7 @@ function File({ controlID, setFunc }: Props) {
           setFunc(URL.createObjectURL(file))
           window.audioTags[window.highlightedID].srcName = file.name
           window.reRenderAudioTags()
-          window.reRenderLeftDrawer()
+          reRenderIcon()
         }}
       />
       <p style={{

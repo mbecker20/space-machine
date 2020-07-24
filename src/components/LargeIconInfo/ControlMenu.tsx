@@ -10,9 +10,10 @@ import { colors } from '../../theme/theme'
 interface Props {
   audioModule: AudioModule
   selectedModule: Module
+  reRenderIcon: () => void
 }
 
-function ControlMenu({ audioModule, selectedModule }: Props) {
+function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
   const classes = useJSS()
   const [controlsOpen, setControlsOpen] = useState(false)
   return (
@@ -33,7 +34,7 @@ function ControlMenu({ audioModule, selectedModule }: Props) {
           <div className={classes.ControlBounder} key={selectedModule.id + index}>
             {controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range} paramID={paramID} setFunc={setFunc}/>
+            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range} paramID={paramID} setFunc={setFunc} reRenderIcon={reRenderIcon} />
             :
             controlType === BUTTON
             ?
@@ -41,11 +42,11 @@ function ControlMenu({ audioModule, selectedModule }: Props) {
             :
             controlType === TYPE
             ?
-            <TypeControl setFunc={setFunc} audioModule={audioModule as AudioModuleWithTypes} value={value} selectedModule={selectedModule} />
+            <TypeControl setFunc={setFunc} audioModule={audioModule as AudioModuleWithTypes} value={value} selectedModule={selectedModule} reRenderIcon={reRenderIcon} />
             :
             controlType === FILE
             ?
-            <FileControl controlID={controlID} setFunc={setFunc} />
+            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} />
             :
             controlType === SWITCH
             ?

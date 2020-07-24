@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import useJSS from './style'
-import { Module, Modules } from '../../redux/stateTSTypes'
+import useJSS from '../style'
+import { Module, Modules } from '../../../redux/stateTSTypes'
 import { useDispatch } from 'react-redux'
-import { removeConnection } from '../../redux/allActions'
-import { disconnect } from '../../audioModules/connection'
-import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
+import { removeConnection } from '../../../redux/allActions'
+import { disconnect } from '../../../audioModules/connection'
+import { ConnectingAudioModule } from '../../../audioModules/moduleTypes'
 
 interface Props {
   selectedModule: Module
