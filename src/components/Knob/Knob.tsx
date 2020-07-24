@@ -3,6 +3,7 @@ import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
 //import useJSS from './style'
 import { clamp } from '../../helpers/genFuncs'
+import { PointerEventCallback } from '../PointerLayer/PointerLayer'
 
 interface Props {
   initValue: number
@@ -26,39 +27,26 @@ function Knob({ initValue, range, onChange }: Props) {
   const svgRef = useRef<SVGSVGElement>(null)
   const scale = (range[1] - range[0]) / 100
   const [val, setVal] = useState(initValue)
+  const onPointerMove: PointerEventCallback = e => {
+    const dif = e.movementY * scale
+    if (onChange) { onChange(val + dif) }
+    setVal(clamp(val + dif, range))
+  }
+  const onPointerUp: PointerEventCallback = e => {
+
+  }
   return (
     <svg width={'8vmin'} height={'8vmin'} ref={svgRef}
       style={{ transform: `rotate(${getRotation(val, range)}deg)`, zIndex: 100 }}
       onClick={e => e.stopPropagation()}
-      onDragStart={ e => e.stopPropagation() }
+      onDragStart={e => e.stopPropagation() }
+      onPointerDown={e => {
+        window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
+      }}
     >
-      <circle cx='4vmin' cy='4vmin' r='4vmin' stroke='red' fill='white' fontSize={sizes.text.small} color='black'>{`${val}`}</circle>
-      <circle cx='4vmin' cy='4vmin' r='4vmin' stroke='transparent' fill='transparent'
-        onClick={e => e.stopPropagation()}
-        onDragStart={e => e.stopPropagation()}
-        onDrag={ e => e.stopPropagation() }
-        onPointerDown={e => {
-          //e.preventDefault()
-          svgRef.current?.setPointerCapture(e.pointerId)
-          //prevY = e.clientY
-          //capturedID = e.pointerId
-          console.log(e.pointerId)
-          console.log(e.button)
-        }}
-        onPointerMove={e => {
-          //if (e.button === 0) {
-          console.log('meh')
-          console.log(`button ${e.button}`)
-          console.log(e.pointerId)
-          const dif = e.movementY * scale
-          if (onChange) { onChange(val + dif) }
-          //if (svgRef.current) { svgRef.current.style.transform = `rotate(${getRotation(val, range)}deg)` }
-          setVal(clamp(val + dif, range))
-          //}
-        }}
-        onPointerUp={e => svgRef.current?.releasePointerCapture(e.pointerId)}
-        style={{ zIndex: 101 }}
-      />
+      <circle cx='4vmin' cy='4vmin' r='4vmin' stroke='red' fill='white' fontSize={sizes.text.small} color='black'>
+        <div style={{ color: 'black', zIndex: 102 }}>{`${val}`}</div>
+      </circle>
       <rect width='.5vmin' height='2vmin' x='4vmin' y='0px'/>
     </svg>
   )
