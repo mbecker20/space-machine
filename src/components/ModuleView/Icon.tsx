@@ -132,7 +132,16 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           {mod.name}
         </div>
         {isHighlighted ? 
-        <div onClick={e => e.stopPropagation()}>
+        <div onClick={e => e.stopPropagation()}
+          style={{ 
+            width: sizes.moduleView.bigIconWidth, 
+            height: sizes.moduleView.bigIconHeight,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}
+        >
           <InputOutputView selectedModule={mod} modules={modules} />
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} />
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
