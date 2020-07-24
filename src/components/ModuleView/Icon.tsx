@@ -7,7 +7,10 @@ import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
-import { Knob } from '../all'
+import ControlMenu from '../LeftDrawer/ControlMenu'
+import InputOutputView from '../LeftDrawer/InputOutputView'
+import MarkContainerIO from '../LeftDrawer/MarkContainerIO'
+import DeleteButton from '../LeftDrawer/DeleteButton'
 
 declare global {
   interface Window {
@@ -40,8 +43,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   }
   
   const iconSpring0 = useSpring({
-    width: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
-    height: isHighlighted ? sizes.moduleView.bigIcon : sizes.moduleView.icon,
+    width: isHighlighted ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
+    height: isHighlighted ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
     config: {
       tension: 550,
       clamp: true,
@@ -53,7 +56,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     config: { duration: 0 }
   })
   
-  const modules = useSelector((state: RootState) => state.modules)
+  const [ modules, baseContainerID ] = useSelector((state: RootState) => [ state.modules, state.baseContainerID ])
   const dispatch = useDispatch()
   return (
     <Fragment>
@@ -128,7 +131,14 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <div className={classes.IconName}>
           {mod.name}
         </div>
-        {isHighlighted ? <Knob initValue={25} range={[-50, 50]} /> : null}
+        {isHighlighted ? 
+        <div onClick={e => e.stopPropagation()}>
+          <InputOutputView selectedModule={mod} modules={modules} />
+          <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} />
+          <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
+          <DeleteButton audioModule={window.audioModules[mod.id]} selectedModule={mod} />
+        </div>
+        : null}
       </animated.div>
       <animated.div className={classes.ArcherElement}
         style={Object.assign({}, iconSpring0, archerElementStyle)}

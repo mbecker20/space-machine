@@ -50,6 +50,8 @@ export const sizes: Sizes = {
     gutterGrid: '6vmin',
     icon: '9vmin',
     bigIcon: '27vmin',
+    bigIconWidth: '35vmin',
+    bigIconHeight: '70vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',

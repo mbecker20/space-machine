@@ -21,7 +21,8 @@ function ControlMenu({ audioModule, selectedModule }: Props) {
         width: '70%',
         backgroundColor: colors.controlMenuButton,
       }}
-        onClick={() => {
+        onClick={e => {
+          e.stopPropagation()
           setControlsOpen(!controlsOpen)
         }}
       >{'controls'}</Button>
