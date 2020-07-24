@@ -140,6 +140,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'flex-start',
+            overflowY: 'scroll',
+            overflowX: 'hidden'
           }}
         >
           <InputOutputView selectedModule={mod} modules={modules} />

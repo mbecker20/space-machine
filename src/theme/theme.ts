@@ -51,7 +51,7 @@ export const sizes: Sizes = {
     icon: '9vmin',
     bigIcon: '27vmin',
     bigIconWidth: '35vmin',
-    bigIconHeight: '70vmin',
+    bigIconHeight: '60vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
