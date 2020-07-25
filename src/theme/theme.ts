@@ -38,12 +38,9 @@ export const colors: Colors = {
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '21vw',
-    toggleWidth: '1.5vmin',
-    item: '10vmin'
-  },
-  leftDrawer: {
-    width: '20vw',
+    width: '400px',
+    toggleWidth: '2vmin',
+    item: '12vmin',
   },
   moduleView: {
     iconGrid: '12vmin',

@@ -24,7 +24,6 @@ interface Connector {
 
 export interface Sizes {
   rightDrawer: Drawer
-  leftDrawer: Drawer
   moduleView: ModuleView
   text: Text
   connector: Connector

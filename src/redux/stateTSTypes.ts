@@ -33,6 +33,7 @@ export interface Module { // the base of the Module types
   isContainerInput: boolean
   isContainerOutput: boolean
   parentID: string | null // id of parent ContainerModule
+  
 }
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 

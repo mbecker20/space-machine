@@ -3,26 +3,33 @@ import { colors, sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   DrawerBounder: {
-    backgroundColor: colors.rightDrawer,
+    //backgroundColor: colors.rightDrawer,
+    width: '0px',
     height: '100vh',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
     color: 'white',
     position: 'absolute',
     top: '0px',
+    right: '0px',
     userSelect: 'none',
-    zIndex: '10',
+    zIndex: 10,
   },
 
   Drawer: {
+    backgroundColor: colors.rightDrawer,
     height: '100vh',
     width: sizes.rightDrawer.width,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'flex-start',
+    position: 'absolute',
+    top: '0px',
+    right: '0px',
+    //overflow: 'hidden',
   },
 
   // header
@@ -32,8 +39,9 @@ const useJSS = createUseStyles({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: sizes.rightDrawer.width,
+    width: 'inherit',
     overflowX: 'scroll',
+    overflowY: 'hidden',
     '&::-webkit-scrollbar': {
       height: '3px',
     },
@@ -59,11 +67,11 @@ const useJSS = createUseStyles({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     alignContent: 'flex-start',
-    width: sizes.rightDrawer.width,
+    //width: 'inherit',
     height: 'calc(100% - 60px)',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
-      width: '1px',
+      width: '0px',
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'white',
@@ -106,6 +114,7 @@ const useJSS = createUseStyles({
   Toggle: {
     backgroundColor: colors.drawerToggle,
     width: sizes.rightDrawer.toggleWidth,
+    zIndex: 10,
     height: '100%',
     display: 'flex',
     alignItems: 'center',
@@ -113,6 +122,9 @@ const useJSS = createUseStyles({
     '&:hover': {
       cursor: 'pointer',
     },
+    position: 'absolute',
+    top: '0px',
+    right: sizes.rightDrawer.width,
   },
 
   ToggleLine: {

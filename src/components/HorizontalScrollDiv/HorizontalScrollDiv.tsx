@@ -1,10 +1,11 @@
-import React, { ReactNode, useRef, WheelEvent } from 'react'
+import React, { ReactNode, WheelEvent, RefObject } from 'react'
 import CSS from 'csstype'
 
 interface Props {
   children: ReactNode
   className?: string
   style?: CSS.Properties
+  ref: RefObject<HTMLDivElement>
 }
 
 const baseStyle = {
@@ -13,18 +14,14 @@ const baseStyle = {
   display: 'flex',
 }
 
-function HorizontalScrollDiv({ children, className, style }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
-
+function HorizontalScrollDiv({ children, className, style, ref }: Props) {
   function onWheel(event: WheelEvent) {
     if(ref && ref.current) {
       ref.current.scrollLeft += event.deltaY
     } 
   }
-
-  const baseStyleCopy = Object.assign({}, baseStyle)
   return (
-    <div ref={ref} className={className} style={Object.assign(baseStyleCopy, style)} onWheel={onWheel}>
+    <div ref={ref} className={className} style={Object.assign({}, baseStyle, style)} onWheel={onWheel}>
       {children}
     </div>
   )
