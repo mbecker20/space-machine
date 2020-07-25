@@ -3,8 +3,9 @@ import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import ModuleGroup from './DrawerRouteLink'
-import { SourceModules, EffectModules, UtilityModules } from './ModuleIcons/all'
+import { sourceModuleData, effectModuleData, utilityModuleData } from './ModuleIcons/moduleData'
 import { clamp } from '../../helpers/genFuncs'
+import ModuleIcons from './ModuleIcons/ModuleIcons'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
@@ -44,7 +45,7 @@ function RightDrawer() {
         }}
         onPointerMove={e => {
           if (adjusting) {
-            drawerWidth = `${clamp(vw - e.clientX, [200, 700] )}px`
+            drawerWidth = `${clamp(vw - e.clientX, [150, 700] )}px`
             if (drawerRef.current) { drawerRef.current.style.width = drawerWidth }
             if (drawerHeaderRef.current) { drawerHeaderRef.current.style.width = drawerWidth }
             if (itemRouterRef.current) { itemRouterRef.current.style.width = drawerWidth }
@@ -92,15 +93,15 @@ function RightDrawer() {
           {
             selectedRoute === SOURCES
             ?
-            <SourceModules />
+            <ModuleIcons moduleData={sourceModuleData} />
             :
             selectedRoute === EFFECTS
             ?
-            <EffectModules />
+            <ModuleIcons moduleData={effectModuleData} />
             :
             selectedRoute === UTILITY
             ?
-            <UtilityModules />
+            <ModuleIcons moduleData={utilityModuleData} />
             :
             null
           }

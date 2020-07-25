@@ -62,12 +62,12 @@ const useJSS = createUseStyles({
   },
 
   ItemRouter: {
+    width: sizes.rightDrawer.width,
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     alignContent: 'flex-start',
-    //width: 'inherit',
     height: 'calc(100% - 60px)',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
@@ -87,7 +87,7 @@ const useJSS = createUseStyles({
     justifyContent: 'space-evenly',
     borderRadius: '10px',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    margin: '4vmin',
+    margin: '3vmin',
   },
 
   DrawerIcon: {

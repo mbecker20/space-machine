@@ -40,7 +40,7 @@ export const sizes: Sizes = {
   rightDrawer: {
     width: '400px',
     toggleWidth: '2vmin',
-    item: '12vmin',
+    item: '9vmin',
   },
   moduleView: {
     iconGrid: '12vmin',
@@ -53,7 +53,7 @@ export const sizes: Sizes = {
   text: {
     large: 'calc(25px + 2.8vmin)',
     medium: 'calc(20px + 2.4vmin)',
-    small: 'calc(12px + 1.4vmin)',
+    small: 'calc(12px + 1.2vmin)',
     xsmall: 'calc(8px + 1vmin)',
   },
   connector: {
