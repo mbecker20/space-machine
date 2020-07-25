@@ -32,17 +32,19 @@ function RightDrawer() {
   let adjusting = false
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring}>
-      <div className={classes.Toggle} onClick={(e) => {if (!e.shiftKey) setOpen(!open) }}
+      <div className={classes.Toggle}
         ref={toggleRef}
         onPointerDown={e => {
-          if (e.shiftKey) {
+          if (open && e.shiftKey) {
             adjusting = true
             toggleRef.current?.setPointerCapture(e.pointerId)
+          } else {
+            setOpen(!open)
           }
         }}
         onPointerMove={e => {
           if (adjusting) {
-            drawerWidth = `${clamp(vw - e.clientX, [0, 700] )}px`
+            drawerWidth = `${clamp(vw - e.clientX, [200, 700] )}px`
             if (drawerRef.current) { drawerRef.current.style.width = drawerWidth }
             if (drawerHeaderRef.current) { drawerHeaderRef.current.style.width = drawerWidth }
             if (itemRouterRef.current) { itemRouterRef.current.style.width = drawerWidth }
