@@ -1,5 +1,6 @@
 import { createUseStyles } from 'react-jss'
 import { colors, sizes } from '../../theme/theme'
+//import sineSVG from '../../icons/oscIcons/sine2.svg'
 
 const useJSS = createUseStyles({
   FillBounder: {
@@ -47,6 +48,8 @@ const useJSS = createUseStyles({
 
   Icon: {
     backgroundColor: colors.module,
+    //backgroundImage: `url(${sineSVG})`,
+    //backgroundSize: 'contain',
     borderRadius: '1.5vmin',
     borderStyle: 'none',
     borderColor: 'white',
