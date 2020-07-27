@@ -142,7 +142,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
           if (isHighlighted) {
             e.stopPropagation()
-            window.openRenameMenu()
+            window.openRenameMenu(mod.id)
           }
         }}>
           {mod.name}

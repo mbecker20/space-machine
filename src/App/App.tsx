@@ -15,7 +15,7 @@ declare global {
     addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
     openConnectionMenu: (fromID: string, toID: string) => void
     openPointerLayer: (pointerId: number, onPointerMove: PointerEventCallback, onPointerUp: PointerEventCallback) => void
-    openRenameMenu: () => void
+    openRenameMenu: (toRenameID: string) => void
   }
 
   interface AudioNode {
@@ -36,8 +36,8 @@ function App() {
   const [ pointerLayerData, setPointerLayerData ] = useState(makePointerLayerData(false))
   window.openPointerLayer = (pointerId, onPointerMove, onPointerUp) => { setPointerLayerData(makePointerLayerData(true, pointerId, onPointerMove, onPointerUp)) }
   const resetPointerLayerData = () => { setPointerLayerData(makePointerLayerData(false)) }
-  const [ renameMenuOpen, setRMOpen ] = useState(false)
-  window.openRenameMenu = () => { setRMOpen(true) }
+  const [ renameMenuData, setRenameMenuData ] = useState({ isOpen: false, toRenameID: '' })
+  window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   return (
     <div className={classes.Bounder}>
       <div className={classes.ModuleViewBounder}>
@@ -58,8 +58,8 @@ function App() {
         <PointerLayer pointerLayerData={ pointerLayerData } resetPointerLayerData={resetPointerLayerData}/>
       }
       {
-        !renameMenuOpen ? null :
-        <RenameMenu onClose={() => {setRMOpen(false)}} />
+        !renameMenuData.isOpen ? null :
+        <RenameMenu toRenameID={renameMenuData.toRenameID} onClose={() => {setRenameMenuData({ isOpen: false, toRenameID: '' })}} />
       }
     </div>
   )
