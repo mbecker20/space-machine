@@ -11,6 +11,7 @@ import ControlMenu from '../LargeIconInfo/ControlMenu'
 import InputOutputView from '../LargeIconInfo/controls/InputOutputView'
 import MarkContainerIO from '../LargeIconInfo/MarkContainerIO'
 import DeleteButton from '../LargeIconInfo/DeleteButton'
+import Knob from '../Knob/Knob'
 
 declare global {
   interface Window {
@@ -70,6 +71,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   
   const [ modules, baseContainerID ] = useSelector((state: RootState) => [ state.modules, state.baseContainerID ])
   const dispatch = useDispatch()
+  const [ knobVal, setKnobVal ] = useState(20)
   return (
     <Fragment>
       <animated.div 
@@ -158,6 +160,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             overflowX: 'hidden'
           }}
         >
+          <Knob initValue={knobVal} range={[0, 50]} onChange={(newVal) => { setKnobVal(newVal) }}/>
           <InputOutputView selectedModule={mod} modules={modules} />
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />

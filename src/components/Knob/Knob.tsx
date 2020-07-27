@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
-//import useJSS from './style'
+import useJSS from './style'
 import { clamp } from '../../helpers/genFuncs'
 import { PointerEventCallback } from '../PointerLayer/PointerLayer'
 
@@ -13,42 +13,57 @@ interface Props {
   onChange?: (newVal: number) => void
 }
 
-const rotRange = [-160, 160]
-
 function getRotation(val: number, range: [number, number]) {
-  return ( ( val - range[0] ) / ( range[1] - range[0] ) ) * ( rotRange[1] - rotRange[0] ) + rotRange[0]
+  return ((val - range[0]) / (range[1] - range[0])) * (sizes.knob.rotRange[1] - sizes.knob.rotRange[0]) + sizes.knob.rotRange[0]
 }
 
-//let prevY = 0
-//let capturedID = -1
-
 function Knob({ initValue, range, onChange }: Props) {
-  //const classes = useJSS()
+  const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
-  const scale = (range[1] - range[0]) / 100
-  const [val, setVal] = useState(initValue)
+  const scale = (range[1] - range[0]) / 150
+  let tempVal = initValue
+  const textRef = useRef<HTMLDivElement>(null)
   const onPointerMove: PointerEventCallback = e => {
-    const dif = e.movementY * scale
-    if (onChange) { onChange(val + dif) }
-    setVal(clamp(val + dif, range))
+    tempVal = clamp(tempVal - e.movementY * scale, range)
+    if (svgRef.current) { svgRef.current.style.transform = `rotate(${getRotation(tempVal, range)}deg)` }
+    if (textRef.current) { textRef.current.innerText = `${Math.floor(tempVal * 10) / 10}` }
   }
   const onPointerUp: PointerEventCallback = e => {
-
+    if (onChange) { onChange(tempVal) }
   }
   return (
-    <svg width={'8vmin'} height={'8vmin'} ref={svgRef}
-      style={{ transform: `rotate(${getRotation(val, range)}deg)`, zIndex: 100 }}
-      onClick={e => e.stopPropagation()}
-      onDragStart={e => e.stopPropagation() }
-      onPointerDown={e => {
-        window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
-      }}
-    >
-      <circle cx='4vmin' cy='4vmin' r='4vmin' stroke='red' fill='white' fontSize={sizes.text.small} color='black'>
-        <div style={{ color: 'black', zIndex: 102 }}>{`${val}`}</div>
-      </circle>
-      <rect width='.5vmin' height='2vmin' x='4vmin' y='0px'/>
-    </svg>
+    <div className={classes.KnobContainer}>
+      <svg className={classes.KnobSVG} width={`${sizes.knob.size}vmin`} height={`${sizes.knob.size}vmin`} ref={svgRef}
+        style={{ transform: `rotate(${getRotation(initValue, range)}deg)` }}
+        onClick={e => e.stopPropagation()}
+        onDragStart={e => e.stopPropagation() }
+        onPointerDown={e => {
+          window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
+        }}
+      >
+
+        <circle cx={`${sizes.knob.size / 2}vmin`} cy={`${sizes.knob.size / 2}vmin`} r={`${sizes.knob.size / 2}vmin`} 
+        stroke='red' fill='white' fontSize={sizes.text.small} color='black'/>
+
+        <rect width={`${sizes.knob.markerWidth}vmin`} height={`${sizes.knob.markerHeight}vmin`} 
+        x={`${sizes.knob.size / 2 - sizes.knob.markerWidth / 2}vmin`} y='0px'/>
+
+      </svg>
+      <div className={classes.KnobText}
+        onClick={e => e.stopPropagation()}
+        onDragStart={e => e.stopPropagation()}
+        onPointerDown={e => {
+          if (e.shiftKey) {
+            
+          } else {
+            window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
+          }
+        }}
+        ref={textRef}
+      >
+        {`${Math.floor(tempVal * 10) / 10}`}
+      </div>
+    </div>
   )
 }
 

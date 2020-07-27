@@ -60,4 +60,10 @@ export const sizes: Sizes = {
     size: '3vmin',
     borderRadius: '1.5vmin'
   },
+  knob: {
+    size: 7, // converted to vmin in knob
+    markerWidth: .5,
+    markerHeight: 1.3,
+    rotRange: [-160, 160] // in degrees
+  }
 }
