@@ -46,6 +46,9 @@ const useJSS = createUseStyles({
     zIndex: 11,
     width: `${sizes.knob.size}vmin`,
     height: `${sizes.knob.size}vmin`,
+    '&:title': {
+      fontsize: sizes.text.medium
+    }
   }
 })
 

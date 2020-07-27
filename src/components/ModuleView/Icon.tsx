@@ -160,7 +160,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             overflowX: 'hidden'
           }}
         >
-          <Knob initValue={knobVal} range={[0, 20]} onChange={(newVal) => { setKnobVal(newVal) }}/>
+          <Knob initValue={knobVal} range={[0, 20]} onChange={newVal => { setKnobVal(newVal); console.log(newVal) }}/>
           <InputOutputView selectedModule={mod} modules={modules} />
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />

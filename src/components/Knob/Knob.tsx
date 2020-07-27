@@ -14,22 +14,22 @@ interface Props {
   onChange?: (newVal: number) => void
 }
 
-
-
 function Knob({ initValue, range, onChange }: Props) {
   const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
   const scale = (range[1] - range[0]) / 150
-  const [ val, setVal ] = useState(initValue)
-  let tempVal = val
+  let tempVal = clamp(initValue, range)
+  const [inputVal, setInputVal] = useState(makeValString(tempVal))
   const textRef = useRef<HTMLInputElement>(null)
+
   const onPointerMove: PointerEventCallback = e => {
     tempVal = clamp(tempVal - e.movementY * scale, range)
     if (svgRef.current) { svgRef.current.style.transform = `rotate(${getRotation(tempVal, range)}deg)` }
     if (textRef.current) { textRef.current.value = `${makeValString(tempVal)}` }
   }
-  const onPointerUp: PointerEventCallback = e => {
+  const onPointerUp: PointerEventCallback = () => {
     if (onChange) { onChange(tempVal) }
+    setInputVal(makeValString(tempVal))
   }
   return (
     <div className={classes.KnobContainer}>
@@ -47,23 +47,35 @@ function Knob({ initValue, range, onChange }: Props) {
       <input className={classes.KnobText}
         ref={textRef}
         onChange={e => {
-          if (onChange) { 
-            onChange(clamp(Number(e.target.value), range))
+          setInputVal(e.target.value)
+        }}
+        onBlur={e => {
+          const newVal = clamp(Number(e.target.value), range)
+          if (onChange) {
+            onChange(newVal)
           }
-          setVal(Number(e.target.value))
+          setInputVal(makeValString(newVal))
+        }}
+        onKeyDown={e => {
+          if (e.keyCode === 13) {
+            textRef.current?.blur()
+          }
         }}
         type='number'
-        value={makeValString(val)}
+        value={inputVal}
       />
       <div className={classes.InteractionLayer}
+        title={`${initValue}`}
         onClick={e => e.stopPropagation()}
         onDragStart={e => e.stopPropagation()}
         onPointerDown={e => {
           e.stopPropagation()
+          e.preventDefault()
           if (e.shiftKey) {
             if (textRef.current) {
-              textRef.current?.focus()
+              textRef.current.placeholder = textRef.current.value
               textRef.current.value = ''
+              textRef.current.focus()
             }
           } else {
             window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
