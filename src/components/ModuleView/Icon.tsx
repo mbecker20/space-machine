@@ -71,7 +71,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   
   const [ modules, baseContainerID ] = useSelector((state: RootState) => [ state.modules, state.baseContainerID ])
   const dispatch = useDispatch()
-  const [ knobVal, setKnobVal ] = useState(20)
+  const [ knobVal, setKnobVal ] = useState(.5)
   return (
     <Fragment>
       <animated.div 
@@ -160,7 +160,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             overflowX: 'hidden'
           }}
         >
-          <Knob initValue={knobVal} range={[0, 50]} onChange={(newVal) => { setKnobVal(newVal) }}/>
+          <Knob initValue={knobVal} range={[0, 20]} onChange={(newVal) => { setKnobVal(newVal) }}/>
           <InputOutputView selectedModule={mod} modules={modules} />
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />

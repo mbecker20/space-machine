@@ -20,12 +20,32 @@ const useJSS = createUseStyles({
   KnobText: {
     gridRow: '1',
     gridColumn: '1',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    //display: 'flex',
+    //alignItems: 'center',
+    //justifyContent: 'center',
     fontSize: sizes.text.xsmall,
+    textAlign: 'center',
     color: 'black',
     zIndex: 10,
+    width: '2em',
+    borderStyle: 'none',
+    backgroundColor: 'transparent',
+    '&::-webkit-outer-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0,
+    },
+    '&::-webkit-inner-spin-button': {
+      '-webkit-appearance': 'none',
+      margin: 0,
+    }
+  },
+
+  InteractionLayer: {
+    gridRow: '1',
+    gridColumn: '1',
+    zIndex: 11,
+    width: `${sizes.knob.size}vmin`,
+    height: `${sizes.knob.size}vmin`,
   }
 })
 
