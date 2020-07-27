@@ -57,7 +57,7 @@ export const sizes: Sizes = {
     xsmall: 'calc(8px + 1vmin)',
   },
   connector: {
-    size: '3vmin',
+    size: '2.5vmin',
     borderRadius: '1.5vmin'
   },
   knob: {

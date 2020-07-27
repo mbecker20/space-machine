@@ -11,15 +11,14 @@ import ControlMenu from '../LargeIconInfo/ControlMenu'
 import InputOutputView from '../LargeIconInfo/controls/InputOutputView'
 import MarkContainerIO from '../LargeIconInfo/MarkContainerIO'
 import DeleteButton from '../LargeIconInfo/DeleteButton'
-import Knob from '../Knob/Knob'
 
 declare global {
   interface Window {
-    currSetHighlighted: (setHighlighted: boolean) => void
+    currUnHighlight: () => void
   }
 }
 
-window.currSetHighlighted = () => {}
+window.currUnHighlight = () => {}
 
 interface Props {
   mod: Module
@@ -30,13 +29,12 @@ interface Props {
 function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const classes = useJSS()
   const [isHighlighted, setHighlighted] = useState(mod.id === window.highlightedID)
+  const [controlMenuOpen, setControlMenuOpen] = useState(false)
   const [reRender, toReRender] = useState(false)
   function reRenderIcon() {
     toReRender(!reRender)
   }
-  if (mod.id === window.highlightedID) {
-    window.currSetHighlighted = setHighlighted
-  }
+
   const iconStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
@@ -47,36 +45,32 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridRow: `${gridRow} / span 1`,
   }
   
-  const iconSpring0 = useSpring({
+  const iconSpring = useSpring({
     width: isHighlighted ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
     height: isHighlighted ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
     config: {
-      tension: 550,
+      tension: 350,
       clamp: true,
     },
-    onFrame: window.refreshArcherContainer
-  })
-  const iconSpring1 = useSpring({
-    zIndex: isHighlighted ? 3 : 2,
-    config: { duration: 0 }
+    onFrame: window.refreshArcherContainer,
+    onRest: () => { setControlMenuOpen(isHighlighted) }
   })
 
   const nameSpring = useSpring({
     fontSize: isHighlighted ? sizes.text.medium : sizes.text.small,
     config: {
-      tension: 550,
+      tension: 350,
       clamp: true
     }
   })
-  
+
   const [ modules, baseContainerID ] = useSelector((state: RootState) => [ state.modules, state.baseContainerID ])
   const dispatch = useDispatch()
-  const [ knobVal, setKnobVal ] = useState(.5)
   return (
     <Fragment>
       <animated.div 
         className={classes.Icon} 
-        style={Object.assign(iconSpring1, iconSpring0, iconStyle)}
+        style={Object.assign(iconSpring, iconStyle)}
         onDragOver={event => {
           event.preventDefault()
         }}
@@ -119,18 +113,22 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             e.stopPropagation()
           }
           if (mod.id === window.highlightedID) {
-            setHighlighted(false)
-            window.highlightedID = ''
-            window.currSetHighlighted = (setHighlighted) => {}
+            window.currUnHighlight()
+            window.currUnHighlight = () => {}
           } else {
+            window.currUnHighlight()
             setHighlighted(true)
             window.highlightedID = mod.id
-            window.currSetHighlighted(false)
-            window.currSetHighlighted = setHighlighted
+            window.currUnHighlight = () => {
+              window.highlightedID = ''
+              setControlMenuOpen(false)
+              setHighlighted(false)
+            }
           }
         }}
       >
-        {mod.connectionOutputs.length === 0 ? null
+        {
+        mod.connectionOutputs.length === 0 ? null
         :
         <div className={classes.IconConnector}
           draggable={true}
@@ -138,7 +136,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             e.stopPropagation()
             e.dataTransfer.setData('fromID', mod.id)
           }}
-        />}
+        />
+        }
         <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
           if (isHighlighted) {
             e.stopPropagation()
@@ -147,29 +146,20 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }}>
           {mod.name}
         </animated.div>
-        {isHighlighted ? 
-        <div onClick={e => e.stopPropagation()}
-          style={{ 
-            width: sizes.moduleView.bigIconWidth, 
-            maxHeight: sizes.moduleView.bigIconHeight,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            overflowY: 'scroll',
-            overflowX: 'hidden'
-          }}
+        {
+        !controlMenuOpen ? null :
+        <div className={classes.IconControlContainer} 
+          onClick={e => e.stopPropagation()}
         >
-          <Knob initValue={knobVal} range={[0, 20]} onChange={newVal => { setKnobVal(newVal); console.log(newVal) }}/>
           <InputOutputView selectedModule={mod} modules={modules} />
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
           <DeleteButton selectedModule={mod} />
         </div>
-        : null}
+        }
       </animated.div>
       <animated.div className={classes.ArcherElement}
-        style={Object.assign({}, iconSpring0, archerElementStyle)}
+        style={Object.assign({}, iconSpring, archerElementStyle)}
       >
         <div style={{
           gridColumn: `${1} / span 1`,

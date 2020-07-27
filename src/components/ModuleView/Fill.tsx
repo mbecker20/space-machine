@@ -63,8 +63,8 @@ function ModuleViewFill() {
         <Button style={{ height: '.7em' }}
           onClick={() => {
             window.fillContainerID = containerModule.parentID as string
+            window.currUnHighlight()
             window.reRenderFillContainer()
-            window.highlightedID = ''
         }}
         >
           <div>back</div>
@@ -77,9 +77,8 @@ function ModuleViewFill() {
         arrowLength={0}
       >
         <div className={classes.Fill} style={gridStyle} onClick={() => {
-          window.highlightedID = ''
-          window.currSetHighlighted(false)
-          window.currSetHighlighted = () => {}
+          window.currUnHighlight()
+          window.currUnHighlight = () => {}
         }}>
           {isEmpty ? <DropSquare row={0} col={0}/> :
           range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {

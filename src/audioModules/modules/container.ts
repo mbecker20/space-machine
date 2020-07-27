@@ -16,7 +16,7 @@ function makeContainer(id: string): ContainerModule {
     'open': () => {
       window.fillContainerID = id
       window.highlightedID = ''
-      window.currSetHighlighted = () => {}
+      window.currUnHighlight = () => {}
       window.reRenderFillContainer()
       
     }

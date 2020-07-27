@@ -67,6 +67,19 @@ const useJSS = createUseStyles({
       borderStyle: 'solid',
     },
     zIndex: 2,
+    position: 'absolute',
+  },
+
+  IconControlContainer: {
+    width: sizes.moduleView.bigIconWidth,
+    maxHeight: sizes.moduleView.bigIconHeight,
+    justifySelf: 'flex-end',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
   },
 
   ArcherElement: {
@@ -90,12 +103,14 @@ const useJSS = createUseStyles({
     height: sizes.connector.size,
     borderRadius: sizes.connector.borderRadius,
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    borderStyle: 'none',
-    borderColor: 'white',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
     '&:hover': {
       cursor: 'pointer',
-      borderStyle: 'solid',
+      borderColor: 'white',
     },
+    justifySelf: 'flex-start',
+    alignSelf: 'flex-end',
   },
 })
 
