@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
@@ -31,6 +31,12 @@ function RightDrawer() {
   const itemRouterRef = useRef<HTMLDivElement>(null)
   const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   let adjusting = false
+  const [, toReRender ] = useState({})
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      window.setTimeout(() => { toReRender({}) }, 500) 
+    })
+  })
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring}>
       <div className={classes.Toggle}
