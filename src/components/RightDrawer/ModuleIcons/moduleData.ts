@@ -18,6 +18,6 @@ export const sourceModuleData: DrawerModuleData = [
 ]
 
 export const utilityModuleData: DrawerModuleData = [
-  ['container', 'cntnt', CONTAINER],
+  ['container', 'cntnr', CONTAINER],
   ['output', 'out', OUTPUT],
 ]
