@@ -151,8 +151,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <div className={classes.IconControlContainer} 
           onClick={e => e.stopPropagation()}
         >
-          <InputOutputView selectedModule={mod} modules={modules} />
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
+          <InputOutputView selectedModule={mod} modules={modules} />
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
           <DeleteButton selectedModule={mod} />
         </div>

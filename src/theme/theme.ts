@@ -35,7 +35,8 @@ export const colors: Colors = {
 
   controlMenuButton: '#3b3b3b94',
 
-  knob: '#ffffffa3',
+  //knob: '#ffffffa3',
+  knob: 'white',
   knobBorder: 'red',
   knobMarker: 'black',
 }
