@@ -11,16 +11,17 @@ function makeStereoPanner(): StereoPannerModule {
   const connectingParamIDs = ['pan']
 
   const controlData: ControlData = {
-    'set pan': {
+    'pan': {
       controlType: VALUE,
       paramID: 'pan',
       value: stereoPanner.pan.value,
-      range: [-1, 1]
+      range: [-1, 1],
+      maxRange: [-1, 1],
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = {
-    'set pan': (newPan: string) => {
+    'pan': (newPan: string) => {
       controlData['pan'].value = Number(newPan)
       stereoPanner.pan.value = Number(newPan)
     }
