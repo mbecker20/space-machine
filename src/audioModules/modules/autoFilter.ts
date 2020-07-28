@@ -43,12 +43,11 @@ function makeAutoFilter (): AutoFilterModule {
       paramID: 'gain',
       value: autoFilter.gain.value,
       range: [-20000, 20000]
-    }
+    },
   }
 
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { autoFilter.type = newType as BiquadFilterType},
-
     'frequency': (newFrequency: string) => { 
       controlData['frequency'].value = Number(newFrequency)
       autoFilter.frequency.value = Number(newFrequency) 
@@ -63,7 +62,8 @@ function makeAutoFilter (): AutoFilterModule {
     },
     'gain': (newGain: string) => {
       controlData['gain'].value = Number(newGain) 
-      autoFilter.gain.value = Number(newGain) },
+      autoFilter.gain.value = Number(newGain)
+    },
   }
 
   return {

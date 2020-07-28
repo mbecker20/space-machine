@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss'
-import { sizes } from '../../theme/theme'
+import { sizes, colors } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   KnobContainer: {
@@ -7,7 +7,7 @@ const useJSS = createUseStyles({
     gridTemplateRows: 'auto',
     gridTemplateColumns: 'auto',
     placeItems: 'center',
-    margin: '1vmin'
+    margin: '1vmin',
   },
 
   KnobSVG: {
@@ -16,6 +16,7 @@ const useJSS = createUseStyles({
     width: `${sizes.knob.size + 1}vmin`,
     height: `${sizes.knob.size + 1}vmin`,
     zIndex: 9,
+    //boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
   },
 
   KnobText: {
@@ -26,7 +27,7 @@ const useJSS = createUseStyles({
     //justifyContent: 'center',
     fontSize: sizes.text.xxsmall,
     textAlign: 'center',
-    color: 'black',
+    color: colors.knobText,
     zIndex: 10,
     width: '4em',
     borderStyle: 'none',

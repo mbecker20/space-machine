@@ -1,12 +1,15 @@
 import { createUseStyles } from 'react-jss'
-import { sizes } from '../../../theme/theme'
+import { sizes, colors } from '../../../theme/theme'
 
 const useJSS = createUseStyles({
   ControlTypeSelect: {
     minWidth: '9vmin',
     maxWidth: '5em',
     margin: '1vmin',
-    fontSize: sizes.text.small
+    fontSize: sizes.text.small,
+    backgroundColor: colors.knob,
+    color: colors.knobText,
+    textAlign: 'center',
   },
 
   ControlInput: {

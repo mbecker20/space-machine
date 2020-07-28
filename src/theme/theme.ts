@@ -13,8 +13,6 @@ export const colors: Colors = {
   drawerToggle: '#00347d',
   drawerToggleLine: '#001b40',
 
-  leftDrawer: '#0000009e',
-
   centerMenu: 'black',
 
   fillModule: '#c0c0c038',
@@ -36,9 +34,10 @@ export const colors: Colors = {
   controlMenuButton: '#3b3b3b94',
 
   //knob: '#ffffffa3',
-  knob: 'white',
-  knobBorder: 'red',
-  knobMarker: 'black',
+  knob: '#0000009e',
+  knobText: 'white',
+  knobBorder: '#cc00006e',
+  knobMarker: 'white',
 }
 
 export const sizes: Sizes = {
@@ -50,10 +49,10 @@ export const sizes: Sizes = {
   moduleView: {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
-    icon: '9vmin',
+    icon: '8vmin',
     bigIcon: '27vmin',
-    bigIconWidth: '35vmin',
-    bigIconHeight: '60vmin',
+    bigIconWidth: '30vmin',
+    bigIconHeight: '50vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
@@ -72,6 +71,6 @@ export const sizes: Sizes = {
     markerHeight: 1.3,
     rotRange: [-150, 150], // in degrees
     sensitivity: 1,
-    borderWidth: 2,
+    borderWidth: 8,
   }
 }

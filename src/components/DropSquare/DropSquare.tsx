@@ -36,11 +36,15 @@ function DropSquare({ row, col }: Props) {
       onDragOver={event => {
         event.preventDefault()
       }}
-      onDragEnter={() => {
-        setHL(true)
+      onDragEnter={e => {
+        if (e.dataTransfer.types.length === 3) {
+          setHL(true)
+        }
       }}
-      onDragLeave={() => {
-        setHL(false)
+      onDragLeave={e => {
+        if (e.dataTransfer.types.length === 3) {
+          setHL(false)
+        }
       }}
       onDrop={event => {
         const id = event.dataTransfer.getData('id')
