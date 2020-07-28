@@ -7,10 +7,10 @@ import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
-import ControlMenu from '../LargeIconInfo/ControlMenu'
-import InputOutputView from '../LargeIconInfo/controls/InputOutputView'
-import MarkContainerIO from '../LargeIconInfo/MarkContainerIO'
-import DeleteButton from '../LargeIconInfo/DeleteButton'
+import ControlMenu from '../LargeIcon/ControlMenu'
+import InputOutputView from '../LargeIcon/controls/InputOutputView'
+import MarkContainerIO from '../LargeIcon/MarkContainerIO'
+import DeleteButton from '../LargeIcon/DeleteButton'
 
 declare global {
   interface Window {
