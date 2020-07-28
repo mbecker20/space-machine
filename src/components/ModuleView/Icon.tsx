@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { Module, RootState } from '../../redux/stateTSTypes'
+import { Module, RootState, ContainerModule } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +11,8 @@ import ControlMenu from '../LargeIcon/ControlMenu'
 import InputOutputView from '../LargeIcon/controls/InputOutputView'
 import MarkContainerIO from '../LargeIcon/MarkContainerIO'
 import DeleteButton from '../LargeIcon/DeleteButton'
+import { CONTAINER } from '../../audioModules/moduleTypes'
+import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
 
 declare global {
   interface Window {
@@ -151,7 +153,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <div className={classes.IconControlContainer} 
           onClick={e => e.stopPropagation()}
         >
-          <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon}/>
+          {mod.moduleType === CONTAINER ? <ContainerControlMenu selectedModule={mod as ContainerModule} reRenderIcon={reRenderIcon} /> : null}
+          <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} />
           <InputOutputView selectedModule={mod} modules={modules} />
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
           <DeleteButton selectedModule={mod} />

@@ -49,7 +49,7 @@ export const sizes: Sizes = {
   moduleView: {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
-    icon: '8vmin',
+    icon: '10vmin',
     bigIcon: '27vmin',
     bigIconWidth: '30vmin',
     bigIconHeight: '50vmin',

@@ -48,6 +48,7 @@ const initBaseCM: ContainerModule = {
   moduleType: CONTAINER,
   connectionInputs: [],
   connectionOutputs: [],
+  toContainerControls: [],
   inputs: [],
   outputs: [],
   parentID: null,

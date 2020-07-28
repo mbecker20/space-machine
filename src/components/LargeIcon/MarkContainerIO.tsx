@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { markContainerInput, unmarkContainerInput, markContainerOutput, unmarkContainerOutput } from '../../redux/allActions'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
+import MarkContainerControls from './MarkContainerControls'
 
 interface Props {
   baseContainerID: string
@@ -19,10 +20,13 @@ const switchStyle: CSS.Properties = {
 function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
   const dispatch = useDispatch()
   return (
-    selectedModule ?
+    (selectedModule && window.fillContainerID !== baseContainerID) ?
     <Fragment>
       {
-      window.fillContainerID === baseContainerID ? null :
+      Object.keys(window.audioModules[selectedModule.id]).length === 0 ? null :
+      <MarkContainerControls selectedModule={selectedModule} />
+      }
+      {
       selectedModule.connectionInputs.length === 0 ? null :
       <Switch style={switchStyle}
         key={selectedModule.id + 'inputSwitch'}
@@ -38,7 +42,6 @@ function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
       />
       }
       {
-      window.fillContainerID === baseContainerID ? null :
       selectedModule.connectionOutputs.length === 0 ? null :
       <Switch style={switchStyle}
         key={selectedModule.id + 'outputSwitch'}
