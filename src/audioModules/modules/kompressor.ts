@@ -11,31 +11,31 @@ function makeKompressor(): KompressorModule {
   const connectingParamIDs = ['threshold', 'knee', 'ratio', 'attack', 'release']
 
   const controlData: ControlData = {
-    'set threshold': {
+    'threshold': {
       controlType: VALUE,
       paramID: 'threshold',
       value: kompressor.threshold.value, 
       range: [-100, 0]
     },
-    'set knee': {
+    'knee': {
       controlType: VALUE,
       paramID: 'knee',
       value: kompressor.knee.value,
       range: [0, 40]
     },
-    'set ratio': {
+    'ratio': {
       controlType: VALUE,
       paramID: 'ratio',
       value: kompressor.ratio.value,
       range: [1, 20]
     },
-    'set attack': {
+    'attack': {
       controlType: VALUE,
       paramID: 'attack',
       value: kompressor.attack.value,
       range: [0, 1]
     },
-    'set release': {
+    'release': {
       controlType: VALUE,
       paramID: 'release',
       value: kompressor.release.value,
@@ -52,15 +52,15 @@ function makeKompressor(): KompressorModule {
       controlData['knee'].value = Number(newKnee)
       kompressor.knee.value = Number(newKnee) 
     },
-    'set ratio': (newRatio: string) => { 
+    'ratio': (newRatio: string) => { 
       controlData['ratio'].value = Number(newRatio)
       kompressor.ratio.value = Number(newRatio) 
     },
-    'set attack': (newAttack: string) => { 
+    'attack': (newAttack: string) => { 
       controlData['attack'].value = Number(newAttack)
       kompressor.attack.value = Number(newAttack)
     },
-    'set release': (newRelease: string) => { 
+    'release': (newRelease: string) => { 
       controlData['release'].value = Number(newRelease)
       kompressor.release.value = Number(newRelease) 
     },

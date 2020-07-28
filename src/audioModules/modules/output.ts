@@ -11,11 +11,12 @@ function makeOutput(): OutputModule {
   const masterGain = audioCtx.createGain(); masterGain.connect(audioCtx.destination)
 
   const controlData: ControlData = {
-    'set master gain': {
+    'master gain': {
       controlType: VALUE,
       paramID: 'gain',
       value: 1,
-      range: [0, 5, .1],
+      range: [0, 5],
+      maxRange: [0, 20],
     },
     'resume': {
       controlType: BUTTON,
@@ -28,8 +29,8 @@ function makeOutput(): OutputModule {
   }
 
   const controlSetFuncs = {
-    'set master gain': (arg: string) => {
-      controlData['set master gain'].value = Number(arg)
+    'master gain': (arg: string) => {
+      controlData['master gain'].value = Number(arg)
       masterGain.gain.value = Number(arg)
     },
     'resume': (arg: string) => { audioCtx.resume() },

@@ -15,27 +15,16 @@ interface Props {
 
 function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
   const classes = useJSS()
-  const [controlsOpen, setControlsOpen] = useState(true)
   return (
     <div className={classes.ControlMenu}>
-      <Button style={{
-        width: '70%',
-        backgroundColor: colors.controlMenuButton,
-        fontSize: sizes.text.small,
-      }}
-        onClick={e => {
-          e.stopPropagation()
-          setControlsOpen(!controlsOpen)
-        }}
-      >{'controls'}</Button>
-      {!controlsOpen ? null : audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
+      {audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
         const { controlType, paramID, value, range } = audioModule.controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         return (
           <div className={classes.ControlBounder} key={selectedModule.id + index}>
             {controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range as [number, number]} paramID={paramID} setFunc={setFunc} reRenderIcon={reRenderIcon} />
+            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range as [number, number]} paramID={paramID} setFunc={setFunc} />
             :
             controlType === BUTTON
             ?

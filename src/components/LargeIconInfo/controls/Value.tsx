@@ -10,10 +10,9 @@ interface Props {
   range: Range
   paramID: string
   setFunc: SetFunc
-  reRenderIcon: () => void
 }
 
-function ValueControl({ controlID, value, audioModule, range, paramID, setFunc, reRenderIcon }: Props) {
+function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }: Props) {
   const { audioNode } = audioModule as ConnectingAudioModule
   //const classes = useJSS()
   return (
@@ -22,13 +21,17 @@ function ValueControl({ controlID, value, audioModule, range, paramID, setFunc, 
       flexDirection: 'column',
       alignItems: 'center',
     }}>
-      <Knob
-        initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}
-        range={range}
-        onEveryChange={newVal => {
-          setFunc(newVal.toString())
-        }}
-      />
+      <div onContextMenu={e => {
+        
+      }}>
+        <Knob
+          initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}
+          range={range}
+          onEveryChange={newVal => {
+            setFunc(newVal.toString())
+          }}
+        />
+      </div>
       <div>{controlID}</div>
     </div>
   )
