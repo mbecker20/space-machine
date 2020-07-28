@@ -20,7 +20,9 @@ function makeAutoFilter (): AutoFilterModule {
     },
     'set frequency': {
       controlType: VALUE,
-      paramID: 'frequency'
+      paramID: 'frequency',
+      value: autoFilter.frequency.value,
+      range: []
     },
     'set detune': {
       controlType: VALUE,
