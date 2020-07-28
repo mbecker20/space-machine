@@ -1,12 +1,13 @@
-import React, { Fragment } from 'react'
-import useJSS from './style'
+import React from 'react'
+//import useJSS from './style'
 import { Value, Range, AudioModule, SetFunc, ConnectingAudioModule } from '../../../audioModules/moduleTypes'
+import { Knob } from '../../all'
 
 interface Props {
   controlID: string
   value: Value | undefined
   audioModule: AudioModule
-  range: Range | undefined
+  range: Range
   paramID: string
   setFunc: SetFunc
   reRenderIcon: () => void
@@ -14,22 +15,22 @@ interface Props {
 
 function ValueControl({ controlID, value, audioModule, range, paramID, setFunc, reRenderIcon }: Props) {
   const { audioNode } = audioModule as ConnectingAudioModule
-  const classes = useJSS()
+  //const classes = useJSS()
   return (
-    <Fragment>
-      <div>{controlID}</div>
-      <input className={classes.ControlInput}
-        type='number'
-        value={typeof(value) === 'number' ? value : audioNode[paramID].value}
-        min={range ? range[0] : undefined}
-        max={range ? range[1] : undefined}
-        step={!range ? undefined : range[2] ? range[2] : undefined}
-        onChange={(e) => {
-          setFunc(e.target.value)
-          reRenderIcon()
+    <div style={{ 
+      display: 'flex', 
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}>
+      <Knob
+        initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}
+        range={range.slice(0, 2) as [number, number]}
+        onEveryChange={newVal => {
+          setFunc(newVal.toString())
         }}
       />
-    </Fragment>
+      <div>{controlID}</div>
+    </div>
   )
 }
 

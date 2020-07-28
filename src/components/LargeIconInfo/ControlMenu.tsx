@@ -35,7 +35,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
           <div className={classes.ControlBounder} key={selectedModule.id + index}>
             {controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range} paramID={paramID} setFunc={setFunc} reRenderIcon={reRenderIcon} />
+            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range as [number, number]} paramID={paramID} setFunc={setFunc} reRenderIcon={reRenderIcon} />
             :
             controlType === BUTTON
             ?

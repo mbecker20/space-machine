@@ -7,6 +7,7 @@ const useJSS = createUseStyles({
     gridTemplateRows: 'auto',
     gridTemplateColumns: 'auto',
     placeItems: 'center',
+    margin: '1vmin'
   },
 
   KnobSVG: {
@@ -23,11 +24,11 @@ const useJSS = createUseStyles({
     //display: 'flex',
     //alignItems: 'center',
     //justifyContent: 'center',
-    fontSize: sizes.text.xsmall,
+    fontSize: sizes.text.xxsmall,
     textAlign: 'center',
     color: 'black',
     zIndex: 10,
-    width: '2em',
+    width: '4em',
     borderStyle: 'none',
     backgroundColor: 'transparent',
     '&::-webkit-outer-spin-button': {

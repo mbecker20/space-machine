@@ -12,9 +12,10 @@ interface Props {
   svgStyle?: CSS.Properties
   circleStyle?: CSS.Properties
   onChange?: (newVal: number) => void
+  onEveryChange?: (newVal: number) => void
 }
 
-function StatelessKnob({ initValue, range, onChange }: Props) {
+function StatelessKnob({ initValue, range, onChange, onEveryChange }: Props) {
   const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
   const scale = (range[1] - range[0]) / 150
@@ -26,6 +27,7 @@ function StatelessKnob({ initValue, range, onChange }: Props) {
     tempVal = clamp(tempVal - e.movementY * scale, range)
     if (svgRef.current) { svgRef.current.style.transform = `rotate(${getRotation(tempVal, range)}deg)` }
     if (textRef.current) { textRef.current.value = `${makeValString(tempVal)}` }
+    if (onEveryChange) { onEveryChange(tempVal) }
   }
   const onPointerUp: PointerEventCallback = () => {
     if (onChange) { onChange(tempVal) }
@@ -48,6 +50,7 @@ function StatelessKnob({ initValue, range, onChange }: Props) {
         ref={textRef}
         onChange={e => {
           setInputVal(e.target.value)
+          if (onEveryChange) { onEveryChange(clamp(Number(e.target.value), range)) }
         }}
         onBlur={e => {
           const newVal = clamp(Number(e.target.value), range)

@@ -15,6 +15,7 @@ interface Text {
   medium: string
   small: string
   xsmall: string
+  xxsmall: string
 }
 
 interface Connector {

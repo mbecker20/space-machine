@@ -67,7 +67,6 @@ const useJSS = createUseStyles({
       borderStyle: 'solid',
     },
     zIndex: 2,
-    position: 'absolute',
   },
 
   IconControlContainer: {

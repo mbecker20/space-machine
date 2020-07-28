@@ -6,5 +6,6 @@ export function getRotation(val: number, range: [number, number]) {
 
 export function makeValString(val: number) {
   const roundedNumString = (Math.floor(val * 10) / 10).toString()
-  return roundedNumString.length > 2 ? roundedNumString : roundedNumString + '.0'
+
+  return roundedNumString.slice(roundedNumString.length - 2, roundedNumString.length - 1) === '.' ? roundedNumString : roundedNumString + '.0'
 }
