@@ -6,22 +6,23 @@ export interface SignalDelayModule extends BaseAM {
 }
 
 function makeSignalDelay(): SignalDelayModule {
-  const signalDelay = audioCtx.createDelay()
+  const signalDelay = audioCtx.createDelay(60)
 
   const connectingParamIDs = ['delayTime']
 
   const controlData: ControlData = {
-    'set delay time': {
+    'delay time': {
       controlType: VALUE,
       paramID: 'delayTime',
       value: signalDelay.delayTime.value,
-      range: [0, 1, .01]
+      range: [0, 2],
+      maxRange: [0, 60],
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = { 
-    'set delay time': (newDelayTime: string) => {
-      controlData['set delay time'].value = Number(newDelayTime)
+    'delay time': (newDelayTime: string) => {
+      controlData['delay time'].value = Number(newDelayTime)
       signalDelay.delayTime.value = Number(newDelayTime)
     }
   }

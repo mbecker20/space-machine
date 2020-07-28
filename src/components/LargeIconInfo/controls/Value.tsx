@@ -24,7 +24,7 @@ function ValueControl({ controlID, value, audioModule, range, paramID, setFunc, 
     }}>
       <Knob
         initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}
-        range={range.slice(0, 2) as [number, number]}
+        range={range}
         onEveryChange={newVal => {
           setFunc(newVal.toString())
         }}

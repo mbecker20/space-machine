@@ -23,17 +23,19 @@ function makeConstantSource(): ConstantModule {
       controlType: VALUE,
       paramID: 'offset',
       value: 0,
+      range: [-100, 100],
     },
-    'set ramp': {
+    'set ramp type': {
       controlType: TYPE,
       paramID: 'n/a',
       value: 'no ramp',
     },
-    'set ramp length': {
+    'ramp length': {
       controlType: VALUE,
       paramID: 'n/a',
       value: 1,
-      range: [0, 10000, 0.01],
+      range: [0, 100],
+      maxRange: [0, 10000],
     },
     'kill': {
       controlType: BUTTON,
@@ -56,7 +58,7 @@ function makeConstantSource(): ConstantModule {
 
   const controlSetFuncs: ControlSetFuncs = {
     'set value': (newValue: string) => { setValFuncs[controlData['set ramp'].value as string](newValue) },
-    'set ramp': (newType: string) => { controlData['set ramp'].value = newType },
+    'set ramp type': (newType: string) => { controlData['set ramp type'].value = newType },
     'set ramp length': (newValue: string) => { controlData['set ramp length'].value = Number(newValue) },
     'kill': (arg = '') => { constantSource.stop() }
   }
