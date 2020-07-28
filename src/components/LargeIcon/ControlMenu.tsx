@@ -16,13 +16,13 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
   return (
     <div className={classes.ControlMenu}>
       {audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
-        const { controlType, paramID, value, range } = audioModule.controlData[controlID]
+        const { controlType, value, range } = audioModule.controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         return (
           <div className={classes.ControlBounder} key={selectedModule.id + index}>
             {controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} audioModule={audioModule} range={range as [number, number]} paramID={paramID} setFunc={setFunc} />
+            <ValueControl controlID={controlID} value={value} range={range as [number, number]} setFunc={setFunc} />
             :
             controlType === BUTTON
             ?

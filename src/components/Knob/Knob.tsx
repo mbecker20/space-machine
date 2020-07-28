@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import StatelessKnob from './StatelessKnob'
 import { clamp } from '../../helpers/genFuncs'
+import { makeValString } from './helpers'
 
 interface Props {
   initValue: number
@@ -12,6 +13,7 @@ interface Props {
 
 function Knob({ initValue, range, onChange, onEveryChange, onSettingsClick }: Props) {
   const [val, setVal] = useState(clamp(initValue, range))
+  const [inputVal, setInputVal] = useState(makeValString(val))
   return (
     <StatelessKnob
       initValue={val}
@@ -22,6 +24,8 @@ function Knob({ initValue, range, onChange, onEveryChange, onSettingsClick }: Pr
       }}
       onEveryChange={onEveryChange}
       onSettingsClick={onSettingsClick}
+      inputVal={inputVal}
+      setInputVal={setInputVal}
     />
   )
 }

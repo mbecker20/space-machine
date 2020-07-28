@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import CSS from 'csstype'
 import { sizes, colors } from '../../theme/theme'
 import useJSS from './style'
@@ -15,16 +15,16 @@ interface Props {
   onChange?: (newVal: number) => void
   onEveryChange?: (newVal: number) => void
   onSettingsClick?: () => void
+  inputVal: string
+  setInputVal: (newValString: string) => void
 }
 
-function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsClick }: Props) {
+function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsClick, inputVal, setInputVal }: Props) {
   const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
   const scale = (range[1] - range[0]) * sizes.knob.sensitivity / 200
   let tempVal = clamp(initValue, range)
-  const [inputVal, setInputVal] = useState(makeValString(tempVal))
   const textRef = useRef<HTMLInputElement>(null)
-
   const onPointerMove: PointerEventCallback = e => {
     tempVal = clamp(tempVal - e.movementY * scale, range)
     if (svgRef.current) { svgRef.current.style.transform = `rotate(${getRotation(tempVal, range)}deg)` }

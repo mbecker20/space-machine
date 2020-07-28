@@ -12,7 +12,7 @@ interface Props {
 }
 
 function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
-  const { maxRange, range } = window.audioModules[modID].controlData[dataKey]
+  const { maxRange, range, value } = window.audioModules[modID].controlData[dataKey]
   const [min, setMin] = useState((range as [number, number])[0])
   const [max, setMax] = useState((range as [number, number])[1])
   const classes = useJSS()
@@ -55,6 +55,7 @@ function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
       <Button onClick={() => {
         (window.audioModules[modID].controlData[dataKey].range as [number, number])[0] = min;
         (window.audioModules[modID].controlData[dataKey].range as [number, number])[1] = max;
+        window.audioModules[modID].controlSetFuncs[dataKey](clamp(value as number, [min, max]).toString())
         onChangeSubmit([min, max])
         onClose()
       }}>
