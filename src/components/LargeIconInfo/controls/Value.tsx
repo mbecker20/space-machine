@@ -29,7 +29,9 @@ function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }
           setFunc(newVal.toString())
         }}
         onSettingsClick={() => {
-          
+          window.openRangeSetMenu(window.highlightedID, controlID, (newRange) => {
+            setCurrRange(newRange)
+          })
         }}
       />
       <div>{controlID}</div>
