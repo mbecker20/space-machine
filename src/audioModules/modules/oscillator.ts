@@ -22,7 +22,7 @@ function makeOscillator(): OscillatorModule {
       controlType: VALUE,
       paramID: 'frequency',
       value: oscillator.frequency.value,
-      range: [0, 20000, 1]
+      range: [0, 20000]
     },
     'detune': {
       controlType: VALUE,
