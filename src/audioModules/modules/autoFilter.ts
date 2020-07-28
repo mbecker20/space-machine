@@ -42,7 +42,8 @@ function makeAutoFilter (): AutoFilterModule {
       controlType: VALUE,
       paramID: 'gain',
       value: autoFilter.gain.value,
-      range: [-20000, 20000]
+      range: [-20000, 1400],
+      maxRange: [-20000, 1400],
     },
   }
 
