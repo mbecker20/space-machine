@@ -48,7 +48,7 @@ export const SWITCH = 'SWITCH'
 export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH'
 export type Value = number | string | boolean
 export type SetFunc = (arg: string) => void
-export type Range = [number, number, number?] // min / max / step
+export type Range = [number, number] // min / max
 
 export interface ControlDataPacket {
   controlType: ControlType

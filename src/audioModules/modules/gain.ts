@@ -12,31 +12,31 @@ function makeGain(gainAmount = 0): GainModule {
   const connectingParamIDs = ['gain']
 
   const controlData: ControlData = {
-    'set gain': {
+    'gain': {
       controlType: VALUE,
       paramID: 'gain',
       value: 0,
-      range: [-10000, 10000, 1]
+      range: [-20000, 20000]
     },
-    'set fine gain': {
+    'fine gain': {
       controlType: VALUE,
       paramID: 'gain',
       value: 0,
-      range: [-1, 1, .01]
+      range: [-1, 1]
     }
   }
 
   function updateGain() {
-    gain.gain.value = (controlData['set gain'].value as number) + (controlData['set fine gain'].value as number)
+    gain.gain.value = (controlData['gain'].value as number) + (controlData['fine gain'].value as number)
   }
 
   const controlSetFuncs: ControlSetFuncs = {
-    'set gain': (newGain: string) => {
-      controlData['set gain'].value = Number(newGain)
+    'gain': (newGain: string) => {
+      controlData['gain'].value = Number(newGain)
       updateGain()
     },
-    'set fine gain': (newFineGain: string) => {
-      controlData['set fine gain'].value = Number(newFineGain)
+    'fine gain': (newFineGain: string) => {
+      controlData['fine gain'].value = Number(newFineGain)
       updateGain()
     },
   }
