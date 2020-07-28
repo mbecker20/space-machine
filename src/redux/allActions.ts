@@ -9,5 +9,7 @@ export {
   markContainerInput,
   unmarkContainerInput,
   markContainerOutput,
-  unmarkContainerOutput
+  unmarkContainerOutput,
+  markContainerControl,
+  unmarkContainerControl,
 } from './modules/moduleActions'

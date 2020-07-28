@@ -10,6 +10,8 @@ import {
   UNMARK_CONTAINER_INPUT,
   MARK_CONTAINER_OUTPUT,
   UNMARK_CONTAINER_OUTPUT,
+  MARK_CONTAINER_CONTROL,
+  UNMARK_CONTAINER_CONTROL,
 } from './moduleActionTypes'
 import { 
   ModuleAction, 
@@ -20,6 +22,7 @@ import {
   AddConnectionAction, 
   RemoveConnectionAction,
   MarkContainerIOAction,
+  MarkContainerControlAction,
 } from './moduleTSTypes'
 import { 
   removeModuleReducer, 
@@ -32,6 +35,8 @@ import {
   unmarkContainerInputReducer,
   markContainerOutputReducer,
   unmarkContainerOutputReducer,
+  markContainerControlReducer,
+  unmarkContainerControlReducer,
 } from "./reducers/allModuleReducers"
 import { CONTAINER } from "../../audioModules/moduleTypes"
 
@@ -50,6 +55,7 @@ const initBaseCM: ContainerModule = {
   isBaseContainer: true,
   isContainerInput: false,
   isContainerOutput: false,
+  containerControls: [],
 }
 
 const initState: Modules = {
@@ -68,6 +74,8 @@ const moduleReducer = (state = initState, action: ModuleAction) => {
     case UNMARK_CONTAINER_INPUT: return unmarkContainerInputReducer(state, action as MarkContainerIOAction)
     case MARK_CONTAINER_OUTPUT: return markContainerOutputReducer(state, action as MarkContainerIOAction)
     case UNMARK_CONTAINER_OUTPUT: return unmarkContainerOutputReducer(state, action as MarkContainerIOAction)
+    case MARK_CONTAINER_CONTROL: return markContainerControlReducer(state, action as MarkContainerControlAction)
+    case UNMARK_CONTAINER_CONTROL: return unmarkContainerControlReducer(state, action as MarkContainerControlAction)
     default: return state
   }
 }

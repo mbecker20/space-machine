@@ -9,9 +9,11 @@ import {
   UNMARK_CONTAINER_INPUT,
   MARK_CONTAINER_OUTPUT,
   UNMARK_CONTAINER_OUTPUT,
+  MARK_CONTAINER_CONTROL,
+  UNMARK_CONTAINER_CONTROL,
 } from './moduleActionTypes'
 import { ModuleType } from '../../audioModules/moduleTypes'
-import { AddModuleAction, RemoveModuleAction, MoveModuleAction, RenameModuleAction, AddConnectionAction, RemoveConnectionAction, MarkContainerIOAction } from './moduleTSTypes'
+import { AddModuleAction, RemoveModuleAction, MoveModuleAction, RenameModuleAction, AddConnectionAction, RemoveConnectionAction, MarkContainerIOAction, MarkContainerControlAction } from './moduleTSTypes'
 
 export const addModule = (id: string, name: string, moduleType: ModuleType, parentID: string, row: number, col: number, connectionInputs: string[], connectionOutputs: string[]): AddModuleAction => {
   return {
@@ -97,5 +99,21 @@ export const unmarkContainerOutput = (id: string): MarkContainerIOAction => {
   return {
     type: UNMARK_CONTAINER_OUTPUT,
     id,
+  }
+}
+
+export const markContainerControl = (modID: string, controlID: string): MarkContainerControlAction => {
+  return {
+    type: MARK_CONTAINER_CONTROL,
+    modID,
+    controlID,
+  }
+}
+
+export const unmarkContainerControl = (modID: string, controlID: string): MarkContainerControlAction => {
+  return {
+    type: UNMARK_CONTAINER_CONTROL,
+    modID,
+    controlID,
   }
 }

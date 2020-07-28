@@ -53,6 +53,12 @@ export interface MarkContainerIOAction {
   id: string
 }
 
+export interface MarkContainerControlAction {
+  type: string
+  modID: string
+  controlID: string
+}
+
 export type ModuleAction = AddModuleAction | 
 RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | 
-RemoveConnectionAction | MarkContainerIOAction
+RemoveConnectionAction | MarkContainerIOAction | MarkContainerControlAction
