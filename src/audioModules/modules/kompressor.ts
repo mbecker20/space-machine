@@ -48,22 +48,18 @@ function makeKompressor(): KompressorModule {
       controlData['threshold'].value = Number(newThreshold)
       kompressor.threshold.value = Number(newThreshold) 
     },
-
     'knee': (newKnee: string) => { 
       controlData['knee'].value = Number(newKnee)
       kompressor.knee.value = Number(newKnee) 
     },
-
     'set ratio': (newRatio: string) => { 
       controlData['ratio'].value = Number(newRatio)
       kompressor.ratio.value = Number(newRatio) 
     },
-
     'set attack': (newAttack: string) => { 
       controlData['attack'].value = Number(newAttack)
       kompressor.attack.value = Number(newAttack)
     },
-
     'set release': (newRelease: string) => { 
       controlData['release'].value = Number(newRelease)
       kompressor.release.value = Number(newRelease) 

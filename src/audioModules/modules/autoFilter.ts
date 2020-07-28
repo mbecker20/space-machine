@@ -18,32 +18,52 @@ function makeAutoFilter (): AutoFilterModule {
       controlType: TYPE,
       paramID: 'type',
     },
-    'set frequency': {
+    'frequency': {
       controlType: VALUE,
       paramID: 'frequency',
       value: autoFilter.frequency.value,
-      range: []
+      range: [0, audioCtx.sampleRate / 2],
+      maxRange: [0, audioCtx.sampleRate / 2]
     },
-    'set detune': {
+    'detune': {
       controlType: VALUE,
-      paramID: 'detune'
+      paramID: 'detune',
+      value: autoFilter.detune.value,
+      range: [-50, 50],
+      maxRange: [-153600, 153600]
     },
-    'set Q': {
+    'Q': {
       controlType: VALUE,
-      paramID: 'Q'
+      paramID: 'Q',
+      value: autoFilter.Q.value,
+      range: [-30, 30]
     },
-    'set gain': {
+    'gain': {
       controlType: VALUE,
-      paramID: 'gain'
+      paramID: 'gain',
+      value: autoFilter.gain.value,
+      range: [-20000, 20000]
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { autoFilter.type = newType as BiquadFilterType},
-    'set frequency': (newFrequency: string) => { autoFilter.frequency.value = Number(newFrequency) },
-    'set detune': (newDetune: string) => { autoFilter.detune.value = Number(newDetune) },
-    'set Q': (newQ: string) => { autoFilter.Q.value = Number(newQ) },
-    'set gain': (newGain: string) => { autoFilter.gain.value = Number(newGain) },
+
+    'frequency': (newFrequency: string) => { 
+      controlData['frequency'].value = Number(newFrequency)
+      autoFilter.frequency.value = Number(newFrequency) 
+    },
+    'detune': (newDetune: string) => { 
+      controlData['detune'].value = Number(newDetune)
+      autoFilter.detune.value = Number(newDetune) 
+    },
+    'Q': (newQ: string) => { 
+      controlData['Q'].value = Number(newQ)
+      autoFilter.Q.value = Number(newQ) 
+    },
+    'gain': (newGain: string) => {
+      controlData['gain'].value = Number(newGain) 
+      autoFilter.gain.value = Number(newGain) },
   }
 
   return {
