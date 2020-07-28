@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import CSS from 'csstype'
-import { sizes } from '../../theme/theme'
+import { sizes, colors } from '../../theme/theme'
 import useJSS from './style'
 import { clamp } from '../../helpers/genFuncs'
 import { PointerEventCallback } from '../PointerLayer/PointerLayer'
@@ -18,7 +18,7 @@ interface Props {
 function StatelessKnob({ initValue, range, onChange, onEveryChange }: Props) {
   const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
-  const scale = (range[1] - range[0]) / 150
+  const scale = (range[1] - range[0]) * sizes.knob.sensitivity / 200
   let tempVal = clamp(initValue, range)
   const [inputVal, setInputVal] = useState(makeValString(tempVal))
   const textRef = useRef<HTMLInputElement>(null)
@@ -35,15 +35,15 @@ function StatelessKnob({ initValue, range, onChange, onEveryChange }: Props) {
   }
   return (
     <div className={classes.KnobContainer}>
-      <svg className={classes.KnobSVG} width={`${sizes.knob.size}vmin`} height={`${sizes.knob.size}vmin`} ref={svgRef}
+      <svg className={classes.KnobSVG} width={`${sizes.knob.size + 1}vmin`} height={`${sizes.knob.size + 1}vmin`} ref={svgRef}
         style={{ transform: `rotate(${getRotation(initValue, range)}deg)` }}
       >
 
-        <circle cx={`${sizes.knob.size / 2}vmin`} cy={`${sizes.knob.size / 2}vmin`} r={`${sizes.knob.size / 2}vmin`} 
-        stroke='red' fill='white' fontSize={sizes.text.small} color='black'/>
+        <circle cx={`${(sizes.knob.size + 1) / 2}vmin`} cy={`${(sizes.knob.size + 1) / 2}vmin`} r={`${sizes.knob.size / 2}vmin`} 
+        stroke={colors.knobBorder} strokeWidth={sizes.knob.borderWidth} fill={colors.knob}/>
 
         <rect width={`${sizes.knob.markerWidth}vmin`} height={`${sizes.knob.markerHeight}vmin`} 
-        x={`${sizes.knob.size / 2 - sizes.knob.markerWidth / 2}vmin`} y='0px'/>
+          x={`${(sizes.knob.size + 1) / 2 - sizes.knob.markerWidth / 2}vmin`} y='.5vmin' fill={colors.knobMarker}/>
 
       </svg>
       <input className={classes.KnobText}

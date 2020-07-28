@@ -28,6 +28,8 @@ interface Knob {
   markerWidth: number
   markerHeight: number
   rotRange: [number, number] // in degrees
+  sensitivity: number
+  borderWidth: number
 }
 
 export interface Sizes {

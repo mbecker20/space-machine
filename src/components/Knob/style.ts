@@ -13,8 +13,8 @@ const useJSS = createUseStyles({
   KnobSVG: {
     gridRow: '1',
     gridColumn: '1',
-    width: `${sizes.knob.size}vmin`,
-    height: `${sizes.knob.size}vmin`,
+    width: `${sizes.knob.size + 1}vmin`,
+    height: `${sizes.knob.size + 1}vmin`,
     zIndex: 9,
   },
 

@@ -33,7 +33,11 @@ export const colors: Colors = {
 
   outputConnector: 'red',
 
-  controlMenuButton: '#3b3b3b94'
+  controlMenuButton: '#3b3b3b94',
+
+  knob: '#ffffffa3',
+  knobBorder: 'red',
+  knobMarker: 'black',
 }
 
 export const sizes: Sizes = {
@@ -55,16 +59,18 @@ export const sizes: Sizes = {
     medium: 'calc(20px + 2.4vmin)',
     small: 'calc(12px + 1.2vmin)',
     xsmall: 'calc(8px + 1vmin)',
-    xxsmall: 'calc(4px + .7vmin)',
+    xxsmall: 'calc(7px + .8vmin)',
   },
   connector: {
     size: '2.5vmin',
     borderRadius: '1.5vmin'
   },
   knob: {
-    size: 7, // converted to vmin in knob
+    size: 9, // converted to vmin in knob
     markerWidth: .5,
     markerHeight: 1.3,
-    rotRange: [-160, 160] // in degrees
+    rotRange: [-150, 150], // in degrees
+    sensitivity: 1,
+    borderWidth: 2,
   }
 }

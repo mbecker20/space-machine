@@ -22,7 +22,7 @@ function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }
       alignItems: 'center',
     }}>
       <div onContextMenu={e => {
-        
+        e.preventDefault()
       }}>
         <Knob
           initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}

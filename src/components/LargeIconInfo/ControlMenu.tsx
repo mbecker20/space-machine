@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useJSS from './style'
 import { AudioModule, AudioModuleWithTypes } from '../../audioModules/moduleTypes'
 import { Module } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
 import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
-import { Button } from '../all'
-import { colors, sizes } from '../../theme/theme'
 
 interface Props {
   audioModule: AudioModule
