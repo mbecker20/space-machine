@@ -3,6 +3,7 @@ import { CenterMenu, Button } from '../../all'
 import useJSS from './style'
 import { Range } from '../../../audioModules/moduleTypes'
 import { clamp } from '../../../helpers/genFuncs'
+import { sizes } from '../../../theme/theme'
 
 interface Props {
   onClose: () => void
@@ -18,10 +19,12 @@ function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
   const classes = useJSS()
   return (
     <CenterMenu header='set range' onClose={onClose}>
-      {!maxRange ? null 
-      :
-      `max range from ${maxRange[0]} to ${maxRange[1]}`
-      }
+      <div style={{ fontSize: sizes.text.small }}>
+        {!maxRange ? null 
+        :
+        `max range from ${maxRange[0]} to ${maxRange[1]}`
+        }
+      </div>
       <div className={classes.CMInputBounder}
         onKeyDown={e => {
           if (e.keyCode === 27) {
