@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 //import useJSS from './style'
 import { Value, Range, AudioModule, SetFunc, ConnectingAudioModule } from '../../../audioModules/moduleTypes'
 import { Knob } from '../../all'
@@ -14,6 +14,7 @@ interface Props {
 
 function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }: Props) {
   const { audioNode } = audioModule as ConnectingAudioModule
+  const [currRange, setCurrRange] = useState(range)
   //const classes = useJSS()
   return (
     <div style={{ 
@@ -21,17 +22,16 @@ function ValueControl({ controlID, value, audioModule, range, paramID, setFunc }
       flexDirection: 'column',
       alignItems: 'center',
     }}>
-      <div onContextMenu={e => {
-        e.preventDefault()
-      }}>
-        <Knob
-          initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}
-          range={range}
-          onEveryChange={newVal => {
-            setFunc(newVal.toString())
-          }}
-        />
-      </div>
+      <Knob
+        initValue={typeof (value) === 'number' ? value : audioNode[paramID].value}
+        range={currRange}
+        onEveryChange={newVal => {
+          setFunc(newVal.toString())
+        }}
+        onSettingsClick={() => {
+          
+        }}
+      />
       <div>{controlID}</div>
     </div>
   )

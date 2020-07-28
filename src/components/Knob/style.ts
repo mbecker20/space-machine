@@ -48,6 +48,15 @@ const useJSS = createUseStyles({
     zIndex: 11,
     width: `${sizes.knob.size}vmin`,
     height: `${sizes.knob.size}vmin`,
+  },
+
+  SettingsButton: {
+    width: `${sizes.knob.size / 6}vmin`,
+    height: `${sizes.knob.size / 6}vmin`,
+    gridRow: '1',
+    gridColumn: '1',
+    placeSelf: 'end',
+    zIndex: 12,
   }
 })
 

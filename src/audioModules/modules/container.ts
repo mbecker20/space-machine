@@ -18,7 +18,6 @@ function makeContainer(id: string): ContainerModule {
       window.highlightedID = ''
       window.currUnHighlight = () => {}
       window.reRenderFillContainer()
-      
     }
   }
   return {

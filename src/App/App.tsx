@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import useJSS from './style'
-import { RightDrawer, ModuleViewFill, AudioTags, ConnectionMenu, PointerLayer, RenameMenu } from '../components/all'
+import { RightDrawer, ModuleViewFill, AudioTags, CenterMenus, PointerLayer } from '../components/all'
 import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
 import { Dispatch } from 'redux'
-import { makeConnectionMenuData, makePointerLayerData } from './makeData'
+import { makePointerLayerData } from '../components/PointerLayer/makeData'
 import { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
 
 declare global {
@@ -13,9 +13,7 @@ declare global {
     fillContainerID: string
     audioModules: AudioModules
     addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
-    openConnectionMenu: (fromID: string, toID: string) => void
     openPointerLayer: (pointerId: number, onPointerMove: PointerEventCallback, onPointerUp: PointerEventCallback) => void
-    openRenameMenu: (toRenameID: string) => void
   }
 
   interface AudioNode {
@@ -31,13 +29,9 @@ window.addModule = makeAddModule()
 
 function App() {
   const classes = useJSS()
-  const [connectionMenuData, setConnectionMenuData] = useState(makeConnectionMenuData(false))
-  window.openConnectionMenu = (fromID, toID) => { setConnectionMenuData(makeConnectionMenuData(true, fromID, toID)) }
   const [ pointerLayerData, setPointerLayerData ] = useState(makePointerLayerData(false))
   window.openPointerLayer = (pointerId, onPointerMove, onPointerUp) => { setPointerLayerData(makePointerLayerData(true, pointerId, onPointerMove, onPointerUp)) }
   const resetPointerLayerData = () => { setPointerLayerData(makePointerLayerData(false)) }
-  const [ renameMenuData, setRenameMenuData ] = useState({ isOpen: false, toRenameID: '' })
-  window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   return (
     <div className={classes.Bounder}>
       <div className={classes.ModuleViewBounder}>
@@ -46,21 +40,10 @@ function App() {
       <RightDrawer />
       <AudioTags />
       {
-        !connectionMenuData.isOpen ? null :
-        <ConnectionMenu fromID={connectionMenuData.fromID} toID={connectionMenuData.toID} 
-          onClose={() => {
-            setConnectionMenuData(makeConnectionMenuData(false))
-          }}
-        />
-      }
-      {
         !pointerLayerData.isOpen ? null :
         <PointerLayer pointerLayerData={ pointerLayerData } resetPointerLayerData={resetPointerLayerData}/>
       }
-      {
-        !renameMenuData.isOpen ? null :
-        <RenameMenu toRenameID={renameMenuData.toRenameID} onClose={() => {setRenameMenuData({ isOpen: false, toRenameID: '' })}} />
-      }
+      <CenterMenus />
     </div>
   )
 }

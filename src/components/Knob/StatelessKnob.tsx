@@ -5,6 +5,7 @@ import useJSS from './style'
 import { clamp } from '../../helpers/genFuncs'
 import { PointerEventCallback } from '../PointerLayer/PointerLayer'
 import { getRotation, makeValString } from './helpers'
+import settingsSVG from '../../icons/settings.svg'
 
 interface Props {
   initValue: number
@@ -13,9 +14,10 @@ interface Props {
   circleStyle?: CSS.Properties
   onChange?: (newVal: number) => void
   onEveryChange?: (newVal: number) => void
+  onSettingsClick?: () => void
 }
 
-function StatelessKnob({ initValue, range, onChange, onEveryChange }: Props) {
+function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsClick }: Props) {
   const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
   const scale = (range[1] - range[0]) * sizes.knob.sensitivity / 200
@@ -82,6 +84,14 @@ function StatelessKnob({ initValue, range, onChange, onEveryChange }: Props) {
           }
         }}
       />
+      {!onSettingsClick ? null
+      :
+      <img className={classes.SettingsButton}
+        src={settingsSVG}
+        alt='settings'
+        onClick={onSettingsClick}
+      />
+      }
     </div>
   )
 }

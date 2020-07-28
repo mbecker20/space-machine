@@ -1,11 +1,11 @@
 import React, { Fragment, useState } from 'react'
-import { CenterMenu, Button } from '../all'
-import { connect } from '../../audioModules/connection'
+import { CenterMenu, Button } from '../../all'
+import { connect } from '../../../audioModules/connection'
 import { useDispatch, useSelector } from 'react-redux'
-import { ConnectingAudioModule, CONTAINER } from '../../audioModules/moduleTypes'
-import { addConnection } from '../../redux/allActions'
+import { ConnectingAudioModule, CONTAINER } from '../../../audioModules/moduleTypes'
+import { addConnection } from '../../../redux/allActions'
 import CSS from 'csstype'
-import { RootState } from '../../redux/stateTSTypes'
+import { RootState } from '../../../redux/stateTSTypes'
 
 interface Props {
   fromID: string

@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
-import { CenterMenu } from '../all'
+import { CenterMenu } from '../../all'
 import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../redux/stateTSTypes'
-import { renameModule } from '../../redux/allActions'
+import { RootState } from '../../../redux/stateTSTypes'
+import { renameModule } from '../../../redux/allActions'
 
 
 interface Props {

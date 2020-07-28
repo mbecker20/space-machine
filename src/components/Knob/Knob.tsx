@@ -7,9 +7,10 @@ interface Props {
   onChange?: (newVal: number) => void
   onEveryChange: (newVal: number) => void
   range: [number, number]
+  onSettingsClick?: () => void
 }
 
-function Knob({ initValue, range, onChange, onEveryChange }: Props) {
+function Knob({ initValue, range, onChange, onEveryChange, onSettingsClick }: Props) {
   const [val, setVal] = useState(clamp(initValue, range))
   return (
     <StatelessKnob
@@ -20,6 +21,7 @@ function Knob({ initValue, range, onChange, onEveryChange }: Props) {
         setVal(newVal)
       }}
       onEveryChange={onEveryChange}
+      onSettingsClick={onSettingsClick}
     />
   )
 }
