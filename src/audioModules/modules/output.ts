@@ -15,7 +15,7 @@ function makeOutput(): OutputModule {
       controlType: VALUE,
       paramID: 'gain',
       value: 1,
-      range: [0, 5],
+      range: [0, 1],
       maxRange: [0, 20],
     },
     'resume': {
