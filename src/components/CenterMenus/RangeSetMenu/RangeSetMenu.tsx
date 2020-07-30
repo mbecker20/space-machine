@@ -4,8 +4,6 @@ import useJSS from './style'
 import { Range } from '../../../audioModules/moduleTypes'
 import { clamp, inRange } from '../../../helpers/genFuncs'
 import { sizes } from '../../../theme/theme'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/stateTSTypes'
 
 interface Props {
   onClose: () => void
