@@ -29,7 +29,7 @@ function MarkContainerControls({ selectedModule }: Props) {
         !open ? null :
         Object.keys(audioModule.controlData).map((controlID, index) => {
           return (
-            <Switch initState={stringIn(controlID, selectedModule.toContainerControls)} text={controlID}
+            <Switch initState={stringIn(selectedModule.id + controlID, selectedModule.toContainerControls)} text={controlID}
               style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
               key={controlID + index}
               onSwitch={isMarked => {
@@ -48,7 +48,7 @@ function MarkContainerControls({ selectedModule }: Props) {
           (selectedModule as ContainerModule).containerControls.map(({ modID, controlID, actualModID }, index) => {
             const name = modules[modID].name
             return (
-              <Switch initState={stringIn(controlID, selectedModule.toContainerControls)} text={`${name} - ${controlID}`}
+              <Switch initState={stringIn(actualModID + controlID, selectedModule.toContainerControls)} text={`${name} - ${controlID}`}
                 style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
                 key={modID + index}
                 onSwitch={isMarked => {
