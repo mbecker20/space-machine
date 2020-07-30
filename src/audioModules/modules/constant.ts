@@ -19,13 +19,13 @@ function makeConstantSource(): ConstantModule {
   const connectingParamIDs = ['offset']
 
   const controlData: ControlData = {
-    'set value': {
+    'value': {
       controlType: VALUE,
       paramID: 'offset',
       value: 0,
       range: [-100, 100],
     },
-    'set ramp type': {
+    'ramp type': {
       controlType: TYPE,
       paramID: 'n/a',
       value: 'no ramp',
@@ -45,21 +45,23 @@ function makeConstantSource(): ConstantModule {
 
   const setValFuncs: SetValFuncs = {
     'no ramp': (newValue: string) => {
-      controlData['set value'].value = Number(newValue)
+      controlData['value'].value = Number(newValue)
       constantSource.offset.value = Number(newValue) 
     },
     'linear': (newValue: string) => {
-      controlData['set value'].value = Number(newValue)
-      constantSource.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))},
+      controlData['value'].value = Number(newValue)
+      constantSource.offset.linearRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['ramp length'].value as number))
+    },
     'exponential': (newValue: string) => {
-      controlData['set value'].value = Number(newValue)
-      constantSource.offset.exponentialRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['set ramp length'].value as number))}
+      controlData['value'].value = Number(newValue)
+      constantSource.offset.exponentialRampToValueAtTime(Number(newValue), audioCtx.currentTime + (controlData['ramp length'].value as number))
+    },
   }
 
   const controlSetFuncs: ControlSetFuncs = {
-    'set value': (newValue: string) => { setValFuncs[controlData['set ramp'].value as string](newValue) },
-    'set ramp type': (newType: string) => { controlData['set ramp type'].value = newType },
-    'set ramp length': (newValue: string) => { controlData['set ramp length'].value = Number(newValue) },
+    'value': (newValue: string) => { setValFuncs[controlData['ramp type'].value as string](newValue) },
+    'ramp type': (newType: string) => { controlData['ramp type'].value = newType },
+    'ramp length': (newValue: string) => { controlData['ramp length'].value = Number(newValue) },
     'kill': (arg = '') => { constantSource.stop() }
   }
 
