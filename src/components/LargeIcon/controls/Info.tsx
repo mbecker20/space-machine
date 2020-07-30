@@ -13,7 +13,6 @@ function Info({ controlID, setFunc, audioModule, modName }: Props) {
   return (
     <Fragment>
       <div>{modName ? `${modName} - ${controlID}` : controlID}</div>
-      <div>{audioModule.controlData[controlID].value}</div>
     </Fragment>
   )
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Switch } from '../../all'
 import { SetFunc } from '../../../audioModules/moduleTypes'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../redux/stateTSTypes'
 
 interface Props {
   controlID: string
@@ -10,9 +12,10 @@ interface Props {
 }
 
 function SwitchControl({ controlID, setFunc, actualModID, modName }: Props) {
+  const initState = useSelector((state: RootState) => state.modules[actualModID].controlData[controlID].value as boolean)
   return (
     <Switch text={modName ? `${modName} - ${controlID}` : controlID} 
-      initState={window.audioModules[actualModID].controlData[controlID].value as boolean} 
+      initState={initState} 
       onSwitch={(newState) => {
         setFunc(newState ? 'true' : 'false')
       }}
