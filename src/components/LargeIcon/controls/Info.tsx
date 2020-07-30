@@ -5,14 +5,14 @@ interface Props {
   controlID: string
   setFunc: SetFunc
   audioModule: AudioModule
-  modID?: string
+  modName?: string
 }
 
-function Info({ controlID, setFunc, audioModule, modID }: Props) {
+function Info({ controlID, setFunc, audioModule, modName }: Props) {
   setFunc('')
   return (
     <Fragment>
-      <div>{modID ? `${modID} - ${controlID}` : controlID}</div>
+      <div>{modName ? `${modName} - ${controlID}` : controlID}</div>
       <div>{audioModule.controlData[controlID].value}</div>
     </Fragment>
   )

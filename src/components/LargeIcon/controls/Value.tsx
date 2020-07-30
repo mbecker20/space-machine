@@ -10,10 +10,10 @@ interface Props {
   range: Range
   setFunc: SetFunc
   actualModID?: string
-  displayModID?: string
+  displayModName?: string
 }
 
-function ValueControl({ controlID, value, range, setFunc, actualModID, displayModID }: Props) {
+function ValueControl({ controlID, value, range, setFunc, actualModID, displayModName }: Props) {
   const [currRange, setCurrRange] = useState(range)
   const [val, setVal] = useState(value as number)
   const [inputVal, setInputVal] = useState(makeValString(val))
@@ -44,7 +44,7 @@ function ValueControl({ controlID, value, range, setFunc, actualModID, displayMo
           })
         }}
       />
-      <div>{displayModID ? `${displayModID} - ${controlID}` : controlID}</div>
+      <div>{displayModName ? `${displayModName} - ${controlID}` : controlID}</div>
     </div>
   )
 }

@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import { Button, Switch } from '../all'
 import { sizes } from '../../theme/theme'
-import { Module, ContainerModule } from '../../redux/stateTSTypes'
-import { useDispatch } from 'react-redux'
+import { Module, ContainerModule, RootState } from '../../redux/stateTSTypes'
+import { useDispatch, useSelector } from 'react-redux'
 import { markContainerControl, unmarkContainerControl } from '../../redux/allActions'
 import { stringIn } from '../../helpers/genFuncs'
 import { CONTAINER } from '../../audioModules/moduleTypes'
@@ -16,6 +16,7 @@ function MarkContainerControls({ selectedModule }: Props) {
   const [open, setOpen] = useState(false)
   const audioModule = window.audioModules[selectedModule.id]
   const dispatch = useDispatch()
+  const modules = useSelector((state: RootState) => state.modules)
   return (
     <Fragment>
       <Button style={{ fontSize: sizes.text.xsmall, marginTop: '2vmin' }}
@@ -43,10 +44,11 @@ function MarkContainerControls({ selectedModule }: Props) {
         })
         }
         {
-        !open && selectedModule.moduleType === CONTAINER ? null :
+        open && selectedModule.moduleType === CONTAINER ?
           (selectedModule as ContainerModule).containerControls.map(({ modID, controlID, actualModID }, index) => {
+            const name = modules[modID].name
             return (
-              <Switch initState={stringIn(controlID, selectedModule.toContainerControls)} text={`${modID} - ${controlID}`}
+              <Switch initState={stringIn(controlID, selectedModule.toContainerControls)} text={`${name} - ${controlID}`}
                 style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
                 key={modID + index}
                 onSwitch={isMarked => {
@@ -58,7 +60,7 @@ function MarkContainerControls({ selectedModule }: Props) {
                 }}
               />
             )
-          })
+          }) : null
         }
 
       </div>

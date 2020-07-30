@@ -8,10 +8,10 @@ interface Props {
   controlID: string
   setFunc: SetFunc
   reRenderIcon: () => void
-  modID?: string
+  modName?: string
 }
 
-function File({ controlID, setFunc, reRenderIcon, modID }: Props) {
+function File({ controlID, setFunc, reRenderIcon, modName }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.ControlMenu}>
@@ -22,7 +22,7 @@ function File({ controlID, setFunc, reRenderIcon, modID }: Props) {
           //backgroundColor: colors.fillModule,
           borderColor: colors.deleteButton,
         }}
-        >{modID ? `${modID} - ${controlID}` : controlID}</Button>
+        >{modName ? `${modName} - ${controlID}` : controlID}</Button>
       </label>
       <input style={{ width: 0, height: 0, opacity: 0 }}
         type='file'
