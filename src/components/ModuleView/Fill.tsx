@@ -62,11 +62,11 @@ function ModuleViewFill() {
         </div>
         {containerModule.id === baseContainerID ? null :
         <Button style={{ height: '.7em' }}
-          onClick={() => {
+          onPointerDown={() => {
             window.fillContainerID = containerModule.parentID as string
             window.currUnHighlight()
             window.reRenderFillContainer()
-        }}
+          }}
         >
           <div>back</div>
         </Button>

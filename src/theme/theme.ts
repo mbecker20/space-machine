@@ -38,6 +38,10 @@ export const colors: Colors = {
   knobText: 'white',
   knobBorder: '#cc00006e',
   knobMarker: 'white',
+
+  // connection menu
+  connectableName: 'white',
+  expandableName: '#85adad'
 }
 
 export const sizes: Sizes = {

@@ -6,13 +6,15 @@ interface Props {
   children?: React.ReactNode
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   style?: CSS.Properties
+  onPointerDown?: (e: React.PointerEvent<HTMLDivElement>) => void
 }
 
-function Button({ onClick, children, style }: Props) {
+function Button({ onClick, children, style, onPointerDown }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.Button}
       onClick={onClick}
+      onPointerDown={onPointerDown}
       style={style}
     >
       {children}
