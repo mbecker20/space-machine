@@ -4,6 +4,8 @@ import useJSS from './style'
 import { Range } from '../../../audioModules/moduleTypes'
 import { clamp, inRange } from '../../../helpers/genFuncs'
 import { sizes } from '../../../theme/theme'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../redux/stateTSTypes'
 
 interface Props {
   onClose: () => void
@@ -18,7 +20,7 @@ function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
   const [max, setMax] = useState((range as [number, number])[1])
   const classes = useJSS()
   return (
-    <CenterMenu header='set range' onClose={onClose}>
+    <CenterMenu header={`set ${dataKey} range`} onClose={onClose}>
       <div style={{ fontSize: sizes.text.small }}>
         {!maxRange ? null 
         :
