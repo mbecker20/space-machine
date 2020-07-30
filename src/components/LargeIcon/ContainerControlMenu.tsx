@@ -42,7 +42,7 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             :
             controlType === SWITCH
             ?
-            <SwitchControl controlID={controlID} setFunc={setFunc} modName={name} />
+            <SwitchControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} modName={name} />
             :
             null
             }

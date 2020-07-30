@@ -5,13 +5,14 @@ import { SetFunc } from '../../../audioModules/moduleTypes'
 interface Props {
   controlID: string
   setFunc: SetFunc
+  actualModID: string
   modName?: string
 }
 
-function SwitchControl({ controlID, setFunc, modName }: Props) {
+function SwitchControl({ controlID, setFunc, actualModID, modName }: Props) {
   return (
     <Switch text={modName ? `${modName} - ${controlID}` : controlID} 
-      initState={false} 
+      initState={window.audioModules[actualModID].controlData[controlID].value as boolean} 
       onSwitch={(newState) => {
         setFunc(newState ? 'true' : 'false')
       }}

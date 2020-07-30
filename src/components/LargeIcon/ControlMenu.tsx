@@ -38,7 +38,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             :
             controlType === SWITCH
             ?
-            <SwitchControl controlID={controlID} setFunc={setFunc} />
+            <SwitchControl controlID={controlID} setFunc={setFunc} actualModID={selectedModule.id} />
             :
             null
             }
