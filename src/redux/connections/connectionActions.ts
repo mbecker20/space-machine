@@ -1,5 +1,5 @@
-import { ADD_CONNECTION, REMOVE_CONNECTION } from "./connectionActionTypes"
-import { AddConnectionAction, RemoveConnectionAction } from "./connectionTSTypes"
+import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE } from "./connectionActionTypes"
+import { AddConnectionAction, RemoveConnectionAction, RemoveModuleAction } from "./connectionTSTypes"
 
 export const addConnection = (fromID: string, toID: string, param: string, outputIndex: number, inputIndex: number, containerOutputChildID?: string, containerInputChildID?: string): AddConnectionAction => {
   return {
@@ -14,11 +14,16 @@ export const addConnection = (fromID: string, toID: string, param: string, outpu
   }
 }
 
-export const removeConnection = (fromID: string, toID: string, connectionID: string): RemoveConnectionAction => {
+export const removeConnection = (connectionID: string): RemoveConnectionAction => {
   return {
     type: REMOVE_CONNECTION,
-    fromID,
-    toID,
     connectionID,
+  }
+}
+
+export const removeModule = (id: string): RemoveModuleAction => {
+  return {
+    type: REMOVE_MODULE,
+    id,
   }
 }

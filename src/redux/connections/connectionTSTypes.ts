@@ -13,9 +13,12 @@ export interface AddConnectionAction {
 
 export interface RemoveConnectionAction {
   type: string
-  fromID: string
-  toID: string
   connectionID: string
+}
+
+export interface RemoveModuleAction {
+  type: string
+  id: string
 }
 
 export interface ConnectionReducerReturn {
@@ -23,4 +26,4 @@ export interface ConnectionReducerReturn {
   newConnections: Connections
 }
 
-export type ConnectionAction = AddConnectionAction | RemoveConnectionAction
+export type ConnectionAction = AddConnectionAction | RemoveConnectionAction | RemoveModuleAction

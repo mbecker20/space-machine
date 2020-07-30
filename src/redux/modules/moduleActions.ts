@@ -1,10 +1,7 @@
 import { 
   ADD_MODULE,
-  REMOVE_MODULE,
   MOVE_MODULE, 
   RENAME_MODULE,
-  ADD_CONNECTION,
-  REMOVE_CONNECTION,
   MARK_CONTAINER_INPUT,
   UNMARK_CONTAINER_INPUT,
   MARK_CONTAINER_OUTPUT,
@@ -13,7 +10,7 @@ import {
   UNMARK_CONTAINER_CONTROL,
 } from './moduleActionTypes'
 import { ModuleType } from '../../audioModules/moduleTypes'
-import { AddModuleAction, RemoveModuleAction, MoveModuleAction, RenameModuleAction, AddConnectionAction, RemoveConnectionAction, MarkContainerIOAction, MarkContainerControlAction } from './moduleTSTypes'
+import { AddModuleAction, MoveModuleAction, RenameModuleAction, MarkContainerIOAction, MarkContainerControlAction } from './moduleTSTypes'
 
 export const addModule = (id: string, name: string, moduleType: ModuleType, parentID: string, row: number, col: number, connectionInputs: string[], connectionOutputs: string[]): AddModuleAction => {
   return {
@@ -26,13 +23,6 @@ export const addModule = (id: string, name: string, moduleType: ModuleType, pare
     parentID,
     connectionInputs,
     connectionOutputs,
-  }
-}
-
-export const removeModule = (id: string): RemoveModuleAction => {
-  return {
-    type: REMOVE_MODULE,
-    id,
   }
 }
 

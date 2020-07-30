@@ -12,11 +12,6 @@ export interface AddModuleAction {
   connectionOutputs: string[]
 }
 
-export interface RemoveModuleAction {
-  type: string
-  id: string
-}
-
 export interface MoveModuleAction {
   type: string
   id: string
@@ -41,5 +36,5 @@ export interface MarkContainerControlAction {
   controlID: string
 }
 
-export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | 
+export type ModuleAction = AddModuleAction | MoveModuleAction | 
 RenameModuleAction | MarkContainerIOAction | MarkContainerControlAction

@@ -18,8 +18,8 @@ export interface Module { // the base of the Module types
   moduleType: string
   row: number // modules row/col relative to parent container
   col: number
-  inputs: ConnectionData[]
-  outputs: ConnectionData[]
+  inputs: string[]
+  outputs: string[]
   connectionInputs: string[] // these are the audionode i/o ports/channels, or in the case of containers, ids referencing 
   connectionOutputs: string[]
   toContainerControls: string[]

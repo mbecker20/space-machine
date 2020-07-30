@@ -4,8 +4,6 @@ export {
   removeModule, 
   moveModule, 
   renameModule, 
-  addConnection, 
-  removeConnection,
   markContainerInput,
   unmarkContainerInput,
   markContainerOutput,
@@ -13,3 +11,7 @@ export {
   markContainerControl,
   unmarkContainerControl,
 } from './modules/moduleActions'
+export {
+  addConnection,
+  removeConnection,
+} from './connections/connectionActions'
