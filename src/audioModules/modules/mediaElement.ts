@@ -12,14 +12,14 @@ function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementMo
     const mediaElement = audioCtx.createMediaElementSource(audioRef.current)
 
     const controlData: ControlData = {
-      'set file': {
+      'choose file': {
         controlType: FILE,
         paramID: 'n/a'
       }
     }
 
     const controlSetFuncs: ControlSetFuncs = {
-      'set file': (url: string) => {
+      'choose file': (url: string) => {
         (audioRef.current as HTMLAudioElement).src = url
       }
     }

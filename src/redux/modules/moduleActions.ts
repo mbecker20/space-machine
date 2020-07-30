@@ -70,18 +70,20 @@ export const unmarkContainerOutput = (id: string): MarkContainerIOAction => {
   }
 }
 
-export const markContainerControl = (modID: string, controlID: string): MarkContainerControlAction => {
+export const markContainerControl = (modID: string, controlID: string, actualModID: string): MarkContainerControlAction => {
   return {
     type: MARK_CONTAINER_CONTROL,
     modID,
     controlID,
+    actualModID,
   }
 }
 
-export const unmarkContainerControl = (modID: string, controlID: string): MarkContainerControlAction => {
+export const unmarkContainerControl = (modID: string, controlID: string, actualModID: string): MarkContainerControlAction => {
   return {
     type: UNMARK_CONTAINER_CONTROL,
     modID,
     controlID,
+    actualModID,
   }
 }

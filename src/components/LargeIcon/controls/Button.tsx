@@ -6,9 +6,10 @@ import { colors } from '../../../theme/theme'
 interface Props {
   setFunc: SetFunc
   controlID: string
+  modID?: string
 }
 
-function ButtonControl({ setFunc, controlID }: Props) {
+function ButtonControl({ setFunc, controlID, modID }: Props) {
   return (
     <Button style={{
       //backgroundColor: colors.fillModule,
@@ -18,7 +19,7 @@ function ButtonControl({ setFunc, controlID }: Props) {
       onClick={() => {
         setFunc('')
       }}
-    >{controlID}</Button>
+    >{modID ? `${modID} - ${controlID}` : controlID}</Button>
   )
 }
 

@@ -9,14 +9,15 @@ interface Props {
   value: Value | undefined
   selectedModule: Module | ContainerModule
   reRenderIcon: () => void
+  modID?: string
 }
 
-function Type({ setFunc, audioModule, value, selectedModule, reRenderIcon }: Props) {
+function Type({ setFunc, audioModule, value, selectedModule, reRenderIcon, modID }: Props) {
   const classes = useJSS()
   const { audioNode } = audioModule
   return (
     <Fragment>
-      <label htmlFor={'type'}>choose type</label>
+      <label htmlFor={'type'}>{modID ? `set type - ${modID}` : 'set type'}</label>
       <select className={classes.ControlTypeSelect}
         name='type' id='type'
         onChange={(e) => {

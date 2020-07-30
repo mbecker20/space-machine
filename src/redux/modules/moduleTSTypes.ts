@@ -34,6 +34,7 @@ export interface MarkContainerControlAction {
   type: string
   modID: string
   controlID: string
+  actualModID: string
 }
 
 export type ModuleAction = AddModuleAction | MoveModuleAction | 
