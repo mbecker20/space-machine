@@ -8,7 +8,7 @@ export interface AutoFilterModule extends BaseAM {
 
 const filterTypes = ['lowpass', 'lowshelf', 'highpass', 'highshelf', 'allpass', 'bandpass', 'notch', 'peaking']
 
-function makeAutoFilter (): AutoFilterModule {
+function makeAutoFilter (): [ AutoFilterModule, ControlData ] {
   const autoFilter = audioCtx.createBiquadFilter()
 
   const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
@@ -50,30 +50,28 @@ function makeAutoFilter (): AutoFilterModule {
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { autoFilter.type = newType as BiquadFilterType},
     'frequency': (newFrequency: string) => { 
-      controlData['frequency'].value = Number(newFrequency)
       autoFilter.frequency.value = Number(newFrequency) 
     },
     'detune': (newDetune: string) => { 
-      controlData['detune'].value = Number(newDetune)
       autoFilter.detune.value = Number(newDetune) 
     },
     'Q': (newQ: string) => { 
-      controlData['Q'].value = Number(newQ)
       autoFilter.Q.value = Number(newQ) 
     },
     'gain': (newGain: string) => {
-      controlData['gain'].value = Number(newGain) 
       autoFilter.gain.value = Number(newGain)
     },
   }
 
-  return {
-    audioNode: autoFilter,
-    typeTypes: filterTypes,
-    connectingParamIDs,
+  return [
+    {
+      audioNode: autoFilter,
+      typeTypes: filterTypes,
+      connectingParamIDs,
+      controlSetFuncs,
+    },
     controlData,
-    controlSetFuncs,
-  }  
+  ] 
 }
 
 export default makeAutoFilter

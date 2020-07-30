@@ -8,16 +8,18 @@ import {
   UNMARK_CONTAINER_OUTPUT,
   MARK_CONTAINER_CONTROL,
   UNMARK_CONTAINER_CONTROL,
+  UPDATE_CONTROL_VALUE,
 } from './moduleActionTypes'
-import { ModuleType } from '../../audioModules/moduleTypes'
-import { AddModuleAction, MoveModuleAction, RenameModuleAction, MarkContainerIOAction, MarkContainerControlAction } from './moduleTSTypes'
+import { ModuleType, ControlData, Range } from '../../audioModules/moduleTypes'
+import { AddModuleAction, MoveModuleAction, RenameModuleAction, MarkContainerIOAction, MarkContainerControlAction, UpdateControlValueAction, UpdateControlRangeAction } from './moduleTSTypes'
 
-export const addModule = (id: string, name: string, moduleType: ModuleType, parentID: string, row: number, col: number, connectionInputs: string[], connectionOutputs: string[]): AddModuleAction => {
+export const addModule = (id: string, name: string, moduleType: ModuleType, controlData: ControlData, parentID: string, row: number, col: number, connectionInputs: string[], connectionOutputs: string[]): AddModuleAction => {
   return {
     type: ADD_MODULE,
     moduleType,
     id,
     name,
+    controlData,
     row,
     col,
     parentID,
@@ -85,5 +87,23 @@ export const unmarkContainerControl = (modID: string, controlID: string, actualM
     modID,
     controlID,
     actualModID,
+  }
+}
+
+export const updateControlValue = (modID: string, controlID: string, newValue: number): UpdateControlValueAction => {
+  return {
+    type: UPDATE_CONTROL_VALUE,
+    modID,
+    controlID,
+    newValue,
+  }
+}
+
+export const updateControlRange = (modID: string, controlID: string, newRange: Range): UpdateControlRangeAction => {
+  return {
+    type: UPDATE_CONTROL_VALUE,
+    modID,
+    controlID,
+    newRange,
   }
 }

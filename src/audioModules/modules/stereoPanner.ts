@@ -5,7 +5,7 @@ export interface StereoPannerModule extends BaseAM {
   audioNode: StereoPannerNode
 }
 
-function makeStereoPanner(): StereoPannerModule {
+function makeStereoPanner(): [ StereoPannerModule, ControlData ] {
   const stereoPanner = audioCtx.createStereoPanner()
 
   const connectingParamIDs = ['pan']
@@ -27,12 +27,14 @@ function makeStereoPanner(): StereoPannerModule {
     }
   }
 
-  return {
-    audioNode: stereoPanner,
-    connectingParamIDs,
+  return [
+    {
+      audioNode: stereoPanner,
+      connectingParamIDs,
+      controlSetFuncs,
+    },
     controlData,
-    controlSetFuncs,
-  }
+  ]
 
 }
 

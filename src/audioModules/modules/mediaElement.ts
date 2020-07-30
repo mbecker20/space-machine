@@ -1,6 +1,6 @@
 import audioCtx from "../../audioCtx"
 import { RefObject } from 'react'
-import { BaseAM, ControlData, ControlSetFuncs, FILE } from "../moduleTypes"
+import { BaseAM, ControlSetFuncs } from "../moduleTypes"
 
 export interface MediaElementModule extends BaseAM {
   audioNode: MediaElementAudioSourceNode
@@ -11,12 +11,7 @@ function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementMo
   if (audioRef.current) {
     const mediaElement = audioCtx.createMediaElementSource(audioRef.current)
 
-    const controlData: ControlData = {
-      'choose file': {
-        controlType: FILE,
-        paramID: 'n/a'
-      }
-    }
+    // control data is in makeAddModules
 
     const controlSetFuncs: ControlSetFuncs = {
       'choose file': (url: string) => {
@@ -28,7 +23,6 @@ function makeMediaElement(audioRef: RefObject<HTMLAudioElement>): MediaElementMo
       audioNode: mediaElement,
       ref: audioRef,
       connectingParamIDs: [],
-      controlData,
       controlSetFuncs,
     }
   } else {

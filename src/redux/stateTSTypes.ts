@@ -1,3 +1,5 @@
+import { ControlData } from "../audioModules/moduleTypes";
+
 // base state object
 // -----------------
 
@@ -20,6 +22,7 @@ export interface Module { // the base of the Module types
   col: number
   inputs: string[]
   outputs: string[]
+  controlData: ControlData
   connectionInputs: string[] // these are the audionode i/o ports/channels, or in the case of containers, ids referencing 
   connectionOutputs: string[]
   toContainerControls: string[]

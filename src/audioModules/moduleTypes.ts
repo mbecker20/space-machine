@@ -59,16 +59,15 @@ export interface ControlDataPacket {
 }
 
 export interface ControlData {
-  [name: string]: ControlDataPacket
+  [controlID: string]: ControlDataPacket
 }
 
 export interface ControlSetFuncs {
-  [name: string]: SetFunc
+  [controlID: string]: SetFunc
 }
 
 export interface BaseAM {
   connectingParamIDs: string[]
-  controlData: ControlData
   controlSetFuncs: ControlSetFuncs
 }
 

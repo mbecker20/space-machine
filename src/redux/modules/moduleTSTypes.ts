@@ -1,9 +1,10 @@
-import { ModuleType } from "../../audioModules/moduleTypes";
+import { ModuleType, ControlData, Value, Range } from "../../audioModules/moduleTypes";
 
 export interface AddModuleAction {
   type: string
   name: string
   moduleType: ModuleType
+  controlData: ControlData
   id: string
   parentID: string
   row: number
@@ -37,5 +38,20 @@ export interface MarkContainerControlAction {
   actualModID: string
 }
 
+export interface UpdateControlValueAction {
+  type: string
+  modID: string
+  controlID: string
+  newValue: Value
+}
+
+export interface UpdateControlRangeAction {
+  type: string
+  modID: string
+  controlID: string
+  newRange: Range
+}
+
 export type ModuleAction = AddModuleAction | MoveModuleAction | 
-RenameModuleAction | MarkContainerIOAction | MarkContainerControlAction
+RenameModuleAction | MarkContainerIOAction | MarkContainerControlAction |
+UpdateControlValueAction | UpdateControlRangeAction

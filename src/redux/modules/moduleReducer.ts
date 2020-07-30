@@ -9,6 +9,8 @@ import {
   UNMARK_CONTAINER_OUTPUT,
   MARK_CONTAINER_CONTROL,
   UNMARK_CONTAINER_CONTROL,
+  UPDATE_CONTROL_VALUE,
+  UPDATE_CONTROL_RANGE,
 } from './moduleActionTypes'
 import { 
   ModuleAction, 
@@ -17,6 +19,8 @@ import {
   RenameModuleAction, 
   MarkContainerIOAction,
   MarkContainerControlAction,
+  UpdateControlValueAction,
+  UpdateControlRangeAction,
 } from './moduleTSTypes'
 import { 
   addModuleReducer, 
@@ -28,6 +32,8 @@ import {
   unmarkContainerOutputReducer,
   markContainerControlReducer,
   unmarkContainerControlReducer,
+  updateControlValueReducer,
+  updateControlRangeReducer,
 } from "./reducers/allModuleReducers"
 import { CONTAINER } from "../../audioModules/moduleTypes"
 
@@ -66,6 +72,8 @@ const moduleReducer = (state = initState, action?: ModuleAction) => {
       case UNMARK_CONTAINER_OUTPUT: return unmarkContainerOutputReducer(state, action as MarkContainerIOAction)
       case MARK_CONTAINER_CONTROL: return markContainerControlReducer(state, action as MarkContainerControlAction)
       case UNMARK_CONTAINER_CONTROL: return unmarkContainerControlReducer(state, action as MarkContainerControlAction)
+      case UPDATE_CONTROL_VALUE: return updateControlValueReducer(state, action as UpdateControlValueAction)
+      case UPDATE_CONTROL_RANGE: return updateControlRangeReducer(state, action as UpdateControlRangeAction)
       default: return state
     }
   } else {

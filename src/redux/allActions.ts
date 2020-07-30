@@ -9,6 +9,8 @@ export {
   unmarkContainerOutput,
   markContainerControl,
   unmarkContainerControl,
+  updateControlRange,
+  updateControlValue,
 } from './modules/moduleActions'
 export {
   addConnection,
