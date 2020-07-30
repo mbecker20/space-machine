@@ -4,8 +4,6 @@ import {
   REMOVE_MODULE,
   MOVE_MODULE, 
   RENAME_MODULE, 
-  ADD_CONNECTION, 
-  REMOVE_CONNECTION, 
   MARK_CONTAINER_INPUT,
   UNMARK_CONTAINER_INPUT,
   MARK_CONTAINER_OUTPUT,
@@ -19,8 +17,6 @@ import {
   RemoveModuleAction, 
   MoveModuleAction, 
   RenameModuleAction, 
-  AddConnectionAction, 
-  RemoveConnectionAction,
   MarkContainerIOAction,
   MarkContainerControlAction,
 } from './moduleTSTypes'
@@ -29,8 +25,6 @@ import {
   addModuleReducer, 
   moveModuleReducer, 
   renameModuleReducer, 
-  addConnectionReducer, 
-  removeConnectionReducer,
   markContainerInputReducer,
   unmarkContainerInputReducer,
   markContainerOutputReducer,
@@ -70,8 +64,6 @@ const moduleReducer = (state = initState, action?: ModuleAction) => {
       case REMOVE_MODULE: return removeModuleReducer(state, action as RemoveModuleAction)
       case MOVE_MODULE: return moveModuleReducer(state, action as MoveModuleAction)
       case RENAME_MODULE: return renameModuleReducer(state, action as RenameModuleAction)
-      case ADD_CONNECTION: return addConnectionReducer(state, action as AddConnectionAction)
-      case REMOVE_CONNECTION: return removeConnectionReducer(state, action as RemoveConnectionAction)
       case MARK_CONTAINER_INPUT: return markContainerInputReducer(state, action as MarkContainerIOAction)
       case UNMARK_CONTAINER_INPUT: return unmarkContainerInputReducer(state, action as MarkContainerIOAction)
       case MARK_CONTAINER_OUTPUT: return markContainerOutputReducer(state, action as MarkContainerIOAction)

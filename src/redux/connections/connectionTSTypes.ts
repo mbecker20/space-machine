@@ -1,3 +1,5 @@
+import { Modules, Connections } from "../stateTSTypes";
+
 export interface AddConnectionAction {
   type: string
   fromID: string
@@ -14,6 +16,11 @@ export interface RemoveConnectionAction {
   fromID: string
   toID: string
   connectionID: string
+}
+
+export interface ConnectionReducerReturn {
+  newModules: Modules
+  newConnections: Connections
 }
 
 export type ConnectionAction = AddConnectionAction | RemoveConnectionAction

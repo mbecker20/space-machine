@@ -53,28 +53,6 @@ export const renameModule = (id: string, newName: string): RenameModuleAction =>
   }
 }
 
-export const addConnection = (fromID: string, toID: string, param: string, outputIndex: number, inputIndex: number, containerOutputChildID?: string, containerInputChildID?: string): AddConnectionAction => {
-  return {
-    type: ADD_CONNECTION,
-    fromID,
-    toID,
-    param,
-    outputIndex,
-    inputIndex,
-    containerOutputChildID,
-    containerInputChildID,
-  }
-}
-
-export const removeConnection = (fromID: string, toID: string, connectionID: string): RemoveConnectionAction => {
-  return {
-    type: REMOVE_CONNECTION,
-    fromID,
-    toID,
-    connectionID,
-  }
-}
-
 export const markContainerInput = (id: string): MarkContainerIOAction => {
   return {
     type: MARK_CONTAINER_INPUT,
