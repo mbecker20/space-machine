@@ -101,7 +101,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           }
           setHighlighted(false)
         }}
-        draggable={true}
+        draggable={!isHighlighted}
         onDragStart={event => {
           event.dataTransfer.setData('id', mod.id)
           event.dataTransfer.setData('fromRow', `${mod.row}`)
