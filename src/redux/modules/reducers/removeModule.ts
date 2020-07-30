@@ -13,7 +13,10 @@ const removeModule = (state: Modules, { id }: RemoveModuleAction) => {
     })), {
     [parentID]: {
       ...state[parentID],
-      childModules: (state[parentID] as ContainerModule).childModules.filter(childID => childID !== id)
+      childModules: (state[parentID] as ContainerModule).childModules.filter(childID => childID !== id),
+      connectionInputs: (state[parentID]).connectionInputs.filter(inputID => inputID !== id),
+      connectionOutputs: (state[parentID]).connectionOutputs.filter(outputID => outputID !== id),
+      containerControls: (state[parentID] as ContainerModule).containerControls.filter(({ modID }) => modID !== id),
     }
   },)
 }

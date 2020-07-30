@@ -38,7 +38,23 @@ const addConnection = (state: Modules, { fromID, toID, param, outputIndex, input
         },
       ],
     }
-  })
+  }, containerInputChildID && containerInputChildID.length !== 0 ? {
+    [containerInputChildID]: {
+      ...state[containerInputChildID],
+      inputs: [
+        ...state[containerInputChildID].inputs,
+        {
+          connectionID,
+          connectedID: fromID,
+          param,
+          outputIndex,
+          inputIndex,
+          containerOutputChildID,
+          undefined,
+        }
+      ]
+    }
+  } : {})
 }
 
 export default addConnection

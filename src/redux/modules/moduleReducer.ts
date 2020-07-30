@@ -63,21 +63,25 @@ const initState: Modules = {
   'project': initBaseCM
 }
 
-const moduleReducer = (state = initState, action: ModuleAction) => {
-  switch (action.type) {
-    case ADD_MODULE: return addModuleReducer(state, action as AddModuleAction)
-    case REMOVE_MODULE: return removeModuleReducer(state, action as RemoveModuleAction)
-    case MOVE_MODULE: return moveModuleReducer(state, action as MoveModuleAction)
-    case RENAME_MODULE: return renameModuleReducer(state, action as RenameModuleAction)
-    case ADD_CONNECTION: return addConnectionReducer(state, action as AddConnectionAction)
-    case REMOVE_CONNECTION: return removeConnectionReducer(state, action as RemoveConnectionAction)
-    case MARK_CONTAINER_INPUT: return markContainerInputReducer(state, action as MarkContainerIOAction)
-    case UNMARK_CONTAINER_INPUT: return unmarkContainerInputReducer(state, action as MarkContainerIOAction)
-    case MARK_CONTAINER_OUTPUT: return markContainerOutputReducer(state, action as MarkContainerIOAction)
-    case UNMARK_CONTAINER_OUTPUT: return unmarkContainerOutputReducer(state, action as MarkContainerIOAction)
-    case MARK_CONTAINER_CONTROL: return markContainerControlReducer(state, action as MarkContainerControlAction)
-    case UNMARK_CONTAINER_CONTROL: return unmarkContainerControlReducer(state, action as MarkContainerControlAction)
-    default: return state
+const moduleReducer = (state = initState, action?: ModuleAction) => {
+  if (action) {
+    switch (action.type) {
+      case ADD_MODULE: return addModuleReducer(state, action as AddModuleAction)
+      case REMOVE_MODULE: return removeModuleReducer(state, action as RemoveModuleAction)
+      case MOVE_MODULE: return moveModuleReducer(state, action as MoveModuleAction)
+      case RENAME_MODULE: return renameModuleReducer(state, action as RenameModuleAction)
+      case ADD_CONNECTION: return addConnectionReducer(state, action as AddConnectionAction)
+      case REMOVE_CONNECTION: return removeConnectionReducer(state, action as RemoveConnectionAction)
+      case MARK_CONTAINER_INPUT: return markContainerInputReducer(state, action as MarkContainerIOAction)
+      case UNMARK_CONTAINER_INPUT: return unmarkContainerInputReducer(state, action as MarkContainerIOAction)
+      case MARK_CONTAINER_OUTPUT: return markContainerOutputReducer(state, action as MarkContainerIOAction)
+      case UNMARK_CONTAINER_OUTPUT: return unmarkContainerOutputReducer(state, action as MarkContainerIOAction)
+      case MARK_CONTAINER_CONTROL: return markContainerControlReducer(state, action as MarkContainerControlAction)
+      case UNMARK_CONTAINER_CONTROL: return unmarkContainerControlReducer(state, action as MarkContainerControlAction)
+      default: return state
+    }
+  } else {
+    return state
   }
 }
 

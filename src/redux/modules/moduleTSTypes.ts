@@ -30,24 +30,6 @@ export interface RenameModuleAction {
   newName: string
 }
 
-export interface AddConnectionAction {
-  type: string
-  fromID: string
-  toID: string
-  param: string
-  outputIndex: number // audioNode i/o index (audioNode.connect(otherAudioNode, outputIndex))
-  inputIndex: number
-  containerOutputChildID?: string
-  containerInputChildID?: string
-}
-
-export interface RemoveConnectionAction {
-  type: string
-  fromID: string
-  toID: string
-  connectionID: string
-}
-
 export interface MarkContainerIOAction {
   type: string
   id: string
@@ -59,6 +41,5 @@ export interface MarkContainerControlAction {
   controlID: string
 }
 
-export type ModuleAction = AddModuleAction | 
-RemoveModuleAction | MoveModuleAction | RenameModuleAction | AddConnectionAction | 
-RemoveConnectionAction | MarkContainerIOAction | MarkContainerControlAction
+export type ModuleAction = AddModuleAction | RemoveModuleAction | MoveModuleAction | 
+RenameModuleAction | MarkContainerIOAction | MarkContainerControlAction

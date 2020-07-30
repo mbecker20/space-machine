@@ -3,22 +3,14 @@
 
 
 export interface RootState {
-  baseContainerID: string
   modules: Modules
+  connections: Connections
+  baseContainerID: string
 }
 
 
 // Module related state
 // --------------------
-export interface ConnectionData {
-  connectionID: string // stored on both from and to objected
-  connectedID: string // id of module connection is to
-  param: string
-  outputIndex: number
-  inputIndex: number
-  containerOutputChildID?: string
-  containerInputChildID?: string
-}
 
 export interface Module { // the base of the Module types
   id: string
@@ -50,4 +42,21 @@ export interface ContainerModule extends Module { // modules composing other mod
 
 export interface Modules {
   [index: string]: Module | ContainerModule
+}
+
+// connection related state
+
+export interface ConnectionData {
+  connectionID: string // stored on both from and to objected
+  fromID: string
+  toID: string
+  param: string
+  outputIndex: number
+  inputIndex: number
+  containerOutputChildID?: string
+  containerInputChildID?: string
+}
+
+export interface Connections {
+  [connectionID: string]: ConnectionData
 }

@@ -17,7 +17,7 @@ function MarkContainerControls({ selectedModule }: Props) {
   const dispatch = useDispatch()
   return (
     <Fragment>
-      <Button style={{ fontSize: sizes.text.xsmall, marginTop: '1vmin' }}
+      <Button style={{ fontSize: sizes.text.xsmall, marginTop: '2vmin' }}
         onClick={() => {
           setOpen(!open)
         }}
