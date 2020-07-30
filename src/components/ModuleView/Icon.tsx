@@ -8,7 +8,7 @@ import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
-import InputOutputView from '../LargeIcon/controls/InputOutputView'
+import InputOutputView from '../LargeIcon/InputOutputView'
 import MarkContainerIO from '../LargeIcon/MarkContainerIO'
 import DeleteButton from '../LargeIcon/DeleteButton'
 import { CONTAINER } from '../../audioModules/moduleTypes'
@@ -66,7 +66,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     }
   })
 
-  const [ modules, baseContainerID ] = useSelector((state: RootState) => [ state.modules, state.baseContainerID ])
+  const { modules, baseContainerID, connections } = useSelector((state: RootState) => state)
   const dispatch = useDispatch()
   return (
     <Fragment>
@@ -198,15 +198,14 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }}>
           <ArcherElement
             id={mod.id + ' output'}
-            relations={mod.outputs.map(outputData => {
-              const { connectedID, param } = outputData
+            relations={mod.outputs.map(connectionID => {
+              const { toID, param } = connections[connectionID]
               return {
-                targetId: param === '' ? connectedID + ' input' : connectedID + ' controls',
+                targetId: param === '' ? toID + ' input' : toID + ' controls',
                 targetAnchor: 'left',
                 sourceAnchor: 'right',
                 style: {
                   strokeColor: param === '' ? 'red' : 'blue',
-                  strokeWidth: param === '' ? 1 : 1,
                 }
               }
             })}

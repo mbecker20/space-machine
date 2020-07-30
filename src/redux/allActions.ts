@@ -1,7 +1,6 @@
 export { down1Base, changeBase } from './baseContainerID/bcidActions'
 export { 
   addModule, 
-  removeModule, 
   moveModule, 
   renameModule, 
   markContainerInput,
@@ -14,4 +13,5 @@ export {
 export {
   addConnection,
   removeConnection,
+  removeModule,
 } from './connections/connectionActions'

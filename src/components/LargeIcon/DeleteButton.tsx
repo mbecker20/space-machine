@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button } from '../all'
 import { colors, sizes } from '../../theme/theme'
-import { ContainerModule, Module } from '../../redux/stateTSTypes'
+import { ContainerModule, Module, RootState } from '../../redux/stateTSTypes'
 import { disconnect } from '../../audioModules/connection'
 import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
 import { useDispatch } from 'react-redux'
-import { removeConnection, removeModule } from '../../redux/allActions'
+import { removeModule } from '../../redux/allActions'
+import { useSelector } from 'react-redux'
 
 interface Props {
   selectedModule: Module | ContainerModule
@@ -14,6 +15,7 @@ interface Props {
 function DeleteButton({ selectedModule }: Props) {
   const am = window.audioModules
   const dispatch = useDispatch()
+  const connections = useSelector((state: RootState) => state.connections)
   return (
     <Button style={{
       backgroundColor: colors.deleteButton,
@@ -22,16 +24,14 @@ function DeleteButton({ selectedModule }: Props) {
     }}
       onClick={() => {
         selectedModule.inputs.forEach(inputData => {
-          const { connectionID, connectedID, param, outputIndex, containerOutputChildID, containerInputChildID } = inputData
-          dispatch(removeConnection(connectedID, selectedModule.id, connectionID))
-          disconnect(am[containerOutputChildID ? containerOutputChildID : connectedID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : selectedModule.id] as ConnectingAudioModule, param, outputIndex)
+          const { fromID, toID, param, outputIndex, containerOutputChildID, containerInputChildID } = connections[inputData]
+          disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
         })
         selectedModule.outputs.forEach(outputData => {
-          const { connectionID, connectedID, param, outputIndex, containerOutputChildID, containerInputChildID } = outputData
-          dispatch(removeConnection(selectedModule.id, connectedID, connectionID))
-          disconnect(am[containerOutputChildID ? containerOutputChildID : selectedModule.id] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : connectedID] as ConnectingAudioModule, param, outputIndex)
+          const { fromID, toID, param, outputIndex, containerOutputChildID, containerInputChildID } = connections[outputData]
+          disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
         })
-        dispatch(removeModule(window.highlightedID))
+        dispatch(removeModule(window.highlightedID)) // should remove all connections
         window.highlightedID = ''
       }}
     >delete</Button>

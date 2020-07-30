@@ -1,7 +1,6 @@
 import { ContainerModule, Modules } from "../stateTSTypes"
 import { 
   ADD_MODULE,
-  REMOVE_MODULE,
   MOVE_MODULE, 
   RENAME_MODULE, 
   MARK_CONTAINER_INPUT,
@@ -14,14 +13,12 @@ import {
 import { 
   ModuleAction, 
   AddModuleAction, 
-  RemoveModuleAction, 
   MoveModuleAction, 
   RenameModuleAction, 
   MarkContainerIOAction,
   MarkContainerControlAction,
 } from './moduleTSTypes'
 import { 
-  removeModuleReducer, 
   addModuleReducer, 
   moveModuleReducer, 
   renameModuleReducer, 
@@ -61,7 +58,6 @@ const moduleReducer = (state = initState, action?: ModuleAction) => {
   if (action) {
     switch (action.type) {
       case ADD_MODULE: return addModuleReducer(state, action as AddModuleAction)
-      case REMOVE_MODULE: return removeModuleReducer(state, action as RemoveModuleAction)
       case MOVE_MODULE: return moveModuleReducer(state, action as MoveModuleAction)
       case RENAME_MODULE: return renameModuleReducer(state, action as RenameModuleAction)
       case MARK_CONTAINER_INPUT: return markContainerInputReducer(state, action as MarkContainerIOAction)
