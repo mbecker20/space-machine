@@ -38,7 +38,7 @@ function RightDrawer() {
     })
   })
   return (
-    <animated.div className={classes.DrawerBounder} style={drawerSpring}>
+    <animated.div className={classes.DrawerBounder} style={drawerSpring} onPointerDown={e => e.stopPropagation()}>
       <div className={classes.Toggle}
         ref={toggleRef}
         onPointerDown={e => {

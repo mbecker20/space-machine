@@ -9,12 +9,14 @@ interface Props {
   value: Value | undefined
   range: Range
   setFunc: SetFunc
+  actualModID?: string
 }
 
-function ValueControl({ controlID, value, range, setFunc }: Props) {
+function ValueControl({ controlID, value, range, setFunc, actualModID }: Props) {
   const [currRange, setCurrRange] = useState(range)
   const [val, setVal] = useState(value as number)
   const [inputVal, setInputVal] = useState(makeValString(val))
+  const modID = actualModID ? actualModID : window.highlightedID
   return (
     <div style={{ 
       display: 'flex', 
@@ -34,7 +36,7 @@ function ValueControl({ controlID, value, range, setFunc }: Props) {
           setVal(newVal)
         }}
         onSettingsClick={() => {
-          window.openRangeSetMenu(window.highlightedID, controlID, (newRange) => {
+          window.openRangeSetMenu(modID, controlID, (newRange) => {
             setCurrRange(newRange)
             setVal(clamp(val, newRange))
             setInputVal(makeValString(clamp(val, newRange)))

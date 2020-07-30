@@ -23,7 +23,7 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             {
             controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} range={range as [number, number]} setFunc={setFunc} />
+            <ValueControl controlID={controlID} value={value} range={range as [number, number]} setFunc={setFunc} actualModID={modID} />
             :
             controlType === BUTTON
             ?

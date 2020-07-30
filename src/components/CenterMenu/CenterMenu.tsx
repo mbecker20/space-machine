@@ -15,6 +15,7 @@ function CenterMenu({ children, header, onClose }: Props) {
         e.stopPropagation()
         onClose()
       }}
+      onPointerDown={e => e.stopPropagation()}
     >
       <div className={classes.CenterMenu}
         onClick={(e) => {e.stopPropagation()}} 

@@ -73,6 +73,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
       <animated.div 
         className={classes.Icon} 
         style={Object.assign(iconSpring, iconStyle)}
+        onPointerDown={e => e.stopPropagation()}
         onDragOver={event => {
           event.preventDefault()
         }}

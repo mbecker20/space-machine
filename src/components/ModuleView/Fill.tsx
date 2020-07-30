@@ -56,6 +56,7 @@ function ModuleViewFill() {
             e.stopPropagation()
             window.openRenameMenu(window.fillContainerID)
           }}
+          onPointerDown={e => e.stopPropagation()}
         >
           {containerModule.name}
         </div>
@@ -76,10 +77,7 @@ function ModuleViewFill() {
         strokeWidth={4}
         arrowLength={0}
       >
-        <div className={classes.Fill} style={gridStyle} onClick={() => {
-          window.currUnHighlight()
-          window.currUnHighlight = () => {}
-        }}>
+        <div className={classes.Fill} style={gridStyle}>
           {isEmpty ? <DropSquare row={0} col={0}/> :
           range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {
             return range(0, isExpanded ? maxCol + 2 : maxCol + 1).map(col => {
