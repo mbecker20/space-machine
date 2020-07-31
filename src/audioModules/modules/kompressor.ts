@@ -5,10 +5,18 @@ export interface KompressorModule extends BaseAM {
   audioNode: DynamicsCompressorNode
 }
 
-function makeKompressor(): [ KompressorModule, ControlData ] {
+const connectingParamIDs = ['threshold', 'knee', 'ratio', 'attack', 'release']
+
+function makeKompressor(prevControlData?: ControlData): [ KompressorModule, ControlData ] {
   const kompressor = audioCtx.createDynamicsCompressor()
 
-  const connectingParamIDs = ['threshold', 'knee', 'ratio', 'attack', 'release']
+  if (prevControlData) {
+    kompressor.threshold.value = prevControlData['threshold'].value as number
+    kompressor.knee.value = prevControlData['knee'].value as number
+    kompressor.ratio.value = prevControlData['ratio'].value as number
+    kompressor.attack.value = prevControlData['attack'].value as number
+    kompressor.release.value = prevControlData['release'].value as number
+  }
 
   const controlData: ControlData = {
     'threshold': {

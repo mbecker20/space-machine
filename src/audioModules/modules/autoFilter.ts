@@ -7,42 +7,50 @@ export interface AutoFilterModule extends BaseAM {
 }
 
 const filterTypes = ['lowpass', 'lowshelf', 'highpass', 'highshelf', 'allpass', 'bandpass', 'notch', 'peaking']
+const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
 
-function makeAutoFilter (): [ AutoFilterModule, ControlData ] {
+function makeAutoFilter (prevControlData?: ControlData): [ AutoFilterModule, ControlData ] {
   const autoFilter = audioCtx.createBiquadFilter()
 
-  const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
+  if (prevControlData) {
+    autoFilter.type = prevControlData['set type'].value as BiquadFilterType
+    autoFilter.frequency.value = prevControlData['frequency'].value as number
+    autoFilter.detune.value = prevControlData['detune'].value as number
+    autoFilter.Q.value = prevControlData['Q'].value as number
+    autoFilter.gain.value = prevControlData['gain'].value as number
+  }
 
   const controlData: ControlData = {
     'set type': {
       controlType: TYPE,
       paramID: 'type',
+      value: autoFilter.type
     },
     'frequency': {
       controlType: VALUE,
       paramID: 'frequency',
       value: autoFilter.frequency.value,
-      range: [0, audioCtx.sampleRate / 2],
+      range: prevControlData ? prevControlData['frequency'].range : [0, audioCtx.sampleRate / 2],
       maxRange: [0, audioCtx.sampleRate / 2]
     },
     'detune': {
       controlType: VALUE,
       paramID: 'detune',
       value: autoFilter.detune.value,
-      range: [-50, 50],
+      range: prevControlData ? prevControlData['detune'].range : [-50, 50],
       maxRange: [-153600, 153600]
     },
     'Q': {
       controlType: VALUE,
       paramID: 'Q',
       value: autoFilter.Q.value,
-      range: [-30, 30]
+      range: prevControlData ? prevControlData['Q'].range : [-30, 30]
     },
     'gain': {
       controlType: VALUE,
       paramID: 'gain',
       value: autoFilter.gain.value,
-      range: [-20000, 1400],
+      range: prevControlData ? prevControlData['gain'].range : [-20000, 1400],
       maxRange: [-20000, 1400],
     },
   }
