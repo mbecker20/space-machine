@@ -23,31 +23,31 @@ function makeKompressor(prevControlData?: ControlData): [ KompressorModule, Cont
       controlType: VALUE,
       paramID: 'threshold',
       value: kompressor.threshold.value, 
-      range: [-100, 0]
+      range: prevControlData ? prevControlData['threshold'].range : [-100, 0]
     },
     'knee': {
       controlType: VALUE,
       paramID: 'knee',
       value: kompressor.knee.value,
-      range: [0, 40]
+      range: prevControlData ? prevControlData['knee'].range : [0, 40]
     },
     'ratio': {
       controlType: VALUE,
       paramID: 'ratio',
       value: kompressor.ratio.value,
-      range: [1, 20]
+      range: prevControlData ? prevControlData['ratio'].range : [1, 20]
     },
     'attack': {
       controlType: VALUE,
       paramID: 'attack',
       value: kompressor.attack.value,
-      range: [0, 1]
+      range: prevControlData ? prevControlData['attack'].range : [0, 1]
     },
     'release': {
       controlType: VALUE,
       paramID: 'release',
       value: kompressor.release.value,
-      range: [0, 1]
+      range: prevControlData ? prevControlData['release'].range : [0, 1]
     }
   }
 
