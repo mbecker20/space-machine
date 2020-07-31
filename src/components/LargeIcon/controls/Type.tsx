@@ -1,20 +1,22 @@
 import React, { Fragment } from 'react'
 import useJSS from './style'
 import { SetFunc, Value, AudioModuleWithTypes } from '../../../audioModules/moduleTypes'
-import { Module, ContainerModule } from '../../../redux/stateTSTypes'
+import { useDispatch } from 'react-redux'
+import { updateControlValue } from '../../../redux/allActions'
 
 interface Props {
   setFunc: SetFunc
   audioModule: AudioModuleWithTypes
   value: Value | undefined
-  selectedModule: Module | ContainerModule
-  reRenderIcon: () => void
+  modID: string
   modName?: string
+  controlID: string
 }
 
-function Type({ setFunc, audioModule, value, selectedModule, reRenderIcon, modName }: Props) {
+function Type({ setFunc, audioModule, controlID, value, modID, modName }: Props) {
   const classes = useJSS()
   const { audioNode } = audioModule
+  const dispatch = useDispatch()
   return (
     <Fragment>
       <label htmlFor={'type'}>{modName ? `set type - ${modName}` : 'set type'}</label>
@@ -22,13 +24,13 @@ function Type({ setFunc, audioModule, value, selectedModule, reRenderIcon, modNa
         name='type' id='type'
         onChange={(e) => {
           setFunc(e.target.value)
-          reRenderIcon()
+          dispatch(updateControlValue(modID, controlID, e.target.value))
         }}
         value={value as string ? value as string : audioNode.type as string}
       >
         {(audioModule as AudioModuleWithTypes).typeTypes.map(type => {
           return (
-            <option value={type} key={selectedModule.id + type}>{type}</option>
+            <option value={type} key={modID + type}>{type}</option>
           )
         })}
       </select>

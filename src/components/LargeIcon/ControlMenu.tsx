@@ -30,7 +30,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             :
             controlType === TYPE
             ?
-            <TypeControl setFunc={setFunc} audioModule={audioModule as AudioModuleWithTypes} value={value} selectedModule={selectedModule} reRenderIcon={reRenderIcon} />
+            <TypeControl setFunc={setFunc} audioModule={audioModule as AudioModuleWithTypes} controlID={controlID} value={value} modID={selectedModule.id} />
             :
             controlType === FILE
             ?

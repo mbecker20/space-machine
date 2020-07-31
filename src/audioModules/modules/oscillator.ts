@@ -17,6 +17,7 @@ function makeOscillator(): [ OscillatorModule, ControlData ] {
     'set type': {
       controlType: TYPE,
       paramID: 'type',
+      value: oscillator.type
     },
     'frequency': {
       controlType: VALUE,
