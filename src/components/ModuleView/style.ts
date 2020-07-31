@@ -1,14 +1,20 @@
 import { createUseStyles } from 'react-jss'
 import { colors, sizes } from '../../theme/theme'
+//import sineSVG from '../../icons/oscIcons/sine2.svg'
 
 const useJSS = createUseStyles({
   FillBounder: {
     backgroundColor: colors.fillModule,
     display: 'flex',
     flexDirection: 'column',
-    margin: '10vmin',
+    margin: '5vmin',
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
     borderRadius: '2vmin',
+  },
+
+  FillHeaderBounder: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
 
   FillHeader: {
@@ -25,10 +31,12 @@ const useJSS = createUseStyles({
     display: 'grid',
     minWidth: sizes.moduleView.iconGrid,
     minHeight: sizes.moduleView.iconGrid,
-    alignItems: 'center',
-    justifyItems: 'center',
-    padding: '2vmin',
+    //alignItems: 'center',
+    //justifyItems: 'center',
+    padding: '4vmin',
     zIndex: 1,
+    rowGap: sizes.moduleView.gutterGrid,
+    columnGap: sizes.moduleView.gutterGrid,
   },
 
   ArcherContainer: {
@@ -40,8 +48,8 @@ const useJSS = createUseStyles({
 
   Icon: {
     backgroundColor: colors.module,
-    width: sizes.moduleView.icon,
-    height: sizes.moduleView.icon,
+    //backgroundImage: `url(${sineSVG})`,
+    //backgroundSize: 'contain',
     borderRadius: '1.5vmin',
     borderStyle: 'none',
     borderColor: 'white',
@@ -61,8 +69,31 @@ const useJSS = createUseStyles({
     zIndex: 2,
   },
 
+  IconControlContainer: {
+    width: sizes.moduleView.bigIconWidth,
+    maxHeight: sizes.moduleView.bigIconHeight,
+    justifySelf: 'flex-end',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    overflowY: 'scroll',
+    overflowX: 'hidden',
+  },
+
+  ArcherElement: {
+    zIndex: 1,
+    display: 'grid',
+    gridTemplateRows: '10px auto 10px',
+    gridTemplateColumns: '10px auto 10px',
+    padding: '1vmin'
+  },
+
   IconName: {
     fontSize: sizes.text.small,
+    '&:hover': {
+      cursor: 'pointer',
+    }
   },
 
   IconConnector: {
@@ -71,12 +102,14 @@ const useJSS = createUseStyles({
     height: sizes.connector.size,
     borderRadius: sizes.connector.borderRadius,
     boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    borderStyle: 'none',
-    borderColor: 'white',
+    borderStyle: 'solid',
+    borderColor: 'transparent',
     '&:hover': {
       cursor: 'pointer',
-      borderStyle: 'solid',
+      borderColor: 'white',
     },
+    justifySelf: 'flex-start',
+    alignSelf: 'flex-end',
   },
 })
 

@@ -5,48 +5,70 @@ export interface KompressorModule extends BaseAM {
   audioNode: DynamicsCompressorNode
 }
 
-function makeKompressor(): KompressorModule {
+function makeKompressor(): [ KompressorModule, ControlData ] {
   const kompressor = audioCtx.createDynamicsCompressor()
 
   const connectingParamIDs = ['threshold', 'knee', 'ratio', 'attack', 'release']
 
   const controlData: ControlData = {
-    'set threshold': {
+    'threshold': {
       controlType: VALUE,
       paramID: 'threshold',
+      value: kompressor.threshold.value, 
+      range: [-100, 0]
     },
-    'set knee': {
+    'knee': {
       controlType: VALUE,
-      paramID: 'knee'
+      paramID: 'knee',
+      value: kompressor.knee.value,
+      range: [0, 40]
     },
-    'set ratio': {
+    'ratio': {
       controlType: VALUE,
-      paramID: 'ratio'
+      paramID: 'ratio',
+      value: kompressor.ratio.value,
+      range: [1, 20]
     },
-    'set attack': {
+    'attack': {
       controlType: VALUE,
-      paramID: 'attack'
+      paramID: 'attack',
+      value: kompressor.attack.value,
+      range: [0, 1]
     },
-    'set release': {
+    'release': {
       controlType: VALUE,
-      paramID: 'release'
+      paramID: 'release',
+      value: kompressor.release.value,
+      range: [0, 1]
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = {
-    'set threshold': (newThreshold: string) => { kompressor.threshold.value = Number(newThreshold) },
-    'set knee': (newKnee: string) => { kompressor.knee.value = Number(newKnee) },
-    'set ratio': (newRatio: string) => { kompressor.ratio.value = Number(newRatio) },
-    'set attack': (newAttack: string) => { kompressor.attack.value = Number(newAttack)},
-    'set release': (newRelease: string) => { kompressor.release.value = Number(newRelease) },
+    'threshold': (newThreshold: string) => { 
+      kompressor.threshold.value = Number(newThreshold) 
+    },
+    'knee': (newKnee: string) => { 
+      kompressor.knee.value = Number(newKnee) 
+    },
+    'ratio': (newRatio: string) => { 
+      kompressor.ratio.value = Number(newRatio) 
+    },
+    'attack': (newAttack: string) => { 
+      kompressor.attack.value = Number(newAttack)
+    },
+    'release': (newRelease: string) => { 
+      kompressor.release.value = Number(newRelease) 
+    },
   }
 
-  return {
-    audioNode: kompressor,
-    connectingParamIDs,
+  return [
+    {
+      audioNode: kompressor,
+      connectingParamIDs,
+      controlSetFuncs,
+    },
     controlData,
-    controlSetFuncs,
-  }
+  ]
 }
 
 export default makeKompressor

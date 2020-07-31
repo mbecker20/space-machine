@@ -1,11 +1,11 @@
 import audioCtx from '../../audioCtx'
-import { BaseAM, INFO, SWITCH, ControlData, ControlSetFuncs } from '../moduleTypes'
+import { BaseAM, SWITCH, ControlData, ControlSetFuncs } from '../moduleTypes'
 
 export interface LineInputModule extends BaseAM {
   audioNode: ChannelSplitterNode
 }
 
-function makeLineInput(id: string) {
+function makeLineInput(id: string): ControlData {
   navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: false,
@@ -18,34 +18,17 @@ function makeLineInput(id: string) {
     const channelSplitter = audioCtx.createChannelSplitter(2)
     lineInput.connect(channelSplitter)
 
-    const controlData: ControlData = {
-      'number of channels: ': {
-        controlType: INFO,
-        paramID: 'n/a',
-        value: 0,
-      },
-      'mute': {
-        controlType: SWITCH,
-        paramID: 'n/a',
-        value: false,
-      }
-    }
+    
 
     const controlSetFuncs: ControlSetFuncs = {
-      'number of channels: ': (arg: string) => {
-        controlData['number of channels: '].value = lineInput.channelCount
-      },
       'mute': (arg: string) => {
-        const isMuted = arg === 'true'
-        controlData['mute'].value = isMuted
-        stream.getAudioTracks()[0].enabled = isMuted
+        stream.getAudioTracks()[0].enabled = arg === 'true'
       }
     }
 
     const lineInputModule: LineInputModule = {
       audioNode: channelSplitter,
       connectingParamIDs: [],
-      controlData,
       controlSetFuncs,
     }
 
@@ -54,6 +37,13 @@ function makeLineInput(id: string) {
       [id]: lineInputModule
     }
   })
+  return {
+    'mute': {
+      controlType: SWITCH,
+      paramID: 'n/a',
+      value: false,
+    }
+  }
 }
 
 export default makeLineInput

@@ -15,6 +15,7 @@ interface Text {
   medium: string
   small: string
   xsmall: string
+  xxsmall: string
 }
 
 interface Connector {
@@ -22,10 +23,19 @@ interface Connector {
   borderRadius: string
 }
 
+interface Knob {
+  size: number // converted to vmin
+  markerWidth: number
+  markerHeight: number
+  rotRange: [number, number] // in degrees
+  sensitivity: number
+  borderWidth: number
+}
+
 export interface Sizes {
   rightDrawer: Drawer
-  leftDrawer: Drawer
   moduleView: ModuleView
   text: Text
   connector: Connector
+  knob: Knob
 }

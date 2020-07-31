@@ -1,9 +1,10 @@
 import { createUseStyles } from 'react-jss'
-import { colors } from '../theme/theme'
+//import { colors } from '../theme/theme'
 
 const useJSS = createUseStyles({
   Bounder: {
-    backgroundColor: colors.grey,
+    //backgroundColor: colors.grey,
+    backgroundImage: 'url(https://media.wired.com/photos/5a593a7ff11e325008172bc2/master/pass/pulsar-831502910.jpg)',
     width: '100vw',
     height: '100vh',
     display: 'flex',

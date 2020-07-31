@@ -8,7 +8,7 @@ import { SignalDelayModule } from './modules/signalDelay'
 import { ConstantModule } from './modules/constant'
 import { MediaElementModule } from './modules/mediaElement'
 import { LineInputModule } from './modules/lineInput'
-import { ContainerModule } from '../redux/stateTSTypes'
+import { ContainerModule } from './modules/container'
 
 // module types
 
@@ -28,9 +28,9 @@ export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOF
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule
 
-export type AudioModule = ConnectingAudioModule | OutputModule | ContainerModule
+export type AudioModule = ConnectingAudioModule | ContainerModule
 
 export interface AudioModules {
   [index: string]: AudioModule
@@ -48,26 +48,26 @@ export const SWITCH = 'SWITCH'
 export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH'
 export type Value = number | string | boolean
 export type SetFunc = (arg: string) => void
-export type Range = [number, number, number?] // min / max / step
+export type Range = [number, number] // min / max
 
 export interface ControlDataPacket {
   controlType: ControlType
   paramID: string
   value?: Value // need either paramID or value
   range?: Range
+  maxRange?: Range // the max the range can be set to be
 }
 
 export interface ControlData {
-  [name: string]: ControlDataPacket
+  [controlID: string]: ControlDataPacket
 }
 
 export interface ControlSetFuncs {
-  [name: string]: SetFunc
+  [controlID: string]: SetFunc
 }
 
 export interface BaseAM {
   connectingParamIDs: string[]
-  controlData: ControlData
   controlSetFuncs: ControlSetFuncs
 }
 

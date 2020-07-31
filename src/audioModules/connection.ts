@@ -1,6 +1,6 @@
-import { ConnectingAudioModule, AudioModule } from "./moduleTypes";
+import { ConnectingAudioModule } from "./moduleTypes";
 
-export function connect(fromMod: ConnectingAudioModule, toMod: AudioModule, param = '', outputIndex?: number, inputIndex?: number) {
+export function connect(fromMod: ConnectingAudioModule, toMod: ConnectingAudioModule, param = '', outputIndex?: number, inputIndex?: number) {
   if (param.length === 0) {
     fromMod.audioNode.connect(toMod.audioNode, outputIndex, inputIndex)
   } else {
@@ -12,7 +12,7 @@ export function connect(fromMod: ConnectingAudioModule, toMod: AudioModule, para
   }
 }
 
-export function disconnect(fromMod: ConnectingAudioModule, toMod: AudioModule, param = '', outputIndex?: number) {
+export function disconnect(fromMod: ConnectingAudioModule, toMod: ConnectingAudioModule, param = '', outputIndex?: number) {
   if (param.length === 0) {
     if (typeof(outputIndex) === 'number') {
       fromMod.audioNode.disconnect(toMod.audioNode, outputIndex)

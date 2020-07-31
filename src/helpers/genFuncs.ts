@@ -9,6 +9,15 @@ export function stringIn(str: string, ar: any[]) {
 	return false
 }
 
+export function allStringsIn(strings: string[], ar: any[]) {
+	for (var i = 0; i < strings.length; i++) {
+		if (!stringIn(strings[i], ar)) {
+			return false
+		}
+	}
+	return true
+}
+
 export function bothStringsIn(str1: string, str2: string, ar: any[]) {
 	return (stringIn(str1, ar) && stringIn(str2, ar))
 }
@@ -51,4 +60,12 @@ export function range(start: number, stop: number) {
 		out.push(i)
 	}
 	return out
+}
+
+export function clamp(val: number, range: [number, number]) {
+	return Math.min(range[1], Math.max(range[0], val))
+}
+
+export function inRange(val: number, range: [number, number]) {
+	return val >= range[0] && val <= range[1] 
 }

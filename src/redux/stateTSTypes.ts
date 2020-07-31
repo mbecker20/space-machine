@@ -1,18 +1,18 @@
+import { ControlData } from "../audioModules/moduleTypes";
+
 // base state object
 // -----------------
 
 
 export interface RootState {
-  baseContainerID: string
   modules: Modules
+  connections: Connections
+  baseContainerID: string
 }
 
 
 // Module related state
 // --------------------
-
-
-export type ConnectionData = [string, string]
 
 export interface Module { // the base of the Module types
   id: string
@@ -20,22 +20,47 @@ export interface Module { // the base of the Module types
   moduleType: string
   row: number // modules row/col relative to parent container
   col: number
-  inputs: ConnectionData[]
-  outputs: ConnectionData[]
-  connectionInputs: string[]
+  inputs: string[]
+  outputs: string[]
+  controlData: ControlData
+  connectionInputs: string[] // these are the audionode i/o ports/channels, or in the case of containers, ids referencing 
   connectionOutputs: string[]
+  toContainerControls: string[]
   isContainerInput: boolean
   isContainerOutput: boolean
   parentID: string | null // id of parent ContainerModule
+  
+}
+
+export interface ContainerControl {
+  modID: string
+  controlID: string
+  actualModID: string
 }
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 
   childModules: string[]
   isBaseContainer: boolean
-  inputModuleID?: string
-  outputModuleID?: string
+  containerControls: ContainerControl[]
 }
 
 export interface Modules {
   [index: string]: Module | ContainerModule
+}
+
+// connection related state
+
+export interface ConnectionData {
+  connectionID: string // stored on both from and to objected
+  fromID: string
+  toID: string
+  param: string
+  outputIndex: number
+  inputIndex: number
+  containerOutputChildID?: string
+  containerInputChildID?: string
+}
+
+export interface Connections {
+  [connectionID: string]: ConnectionData
 }

@@ -8,7 +8,7 @@ export interface OscillatorModule extends BaseAM {
 
 const oscillatorTypes = ['sine', 'square', 'triangle', 'sawtooth']
 
-function makeOscillator(): OscillatorModule {
+function makeOscillator(): [ OscillatorModule, ControlData ] {
   const oscillator = audioCtx.createOscillator()
    
   const connectingParamIDs = ['frequency', 'detune']
@@ -18,37 +18,44 @@ function makeOscillator(): OscillatorModule {
       controlType: TYPE,
       paramID: 'type',
     },
-    'set frequency': {
+    'frequency': {
       controlType: VALUE,
       paramID: 'frequency',
       value: oscillator.frequency.value,
-      range: [0, 20000, 1]
+      range: [0, 20000]
     },
-    'set detune': {
+    'detune': {
       controlType: VALUE,
-      paramID: 'detune'
+      paramID: 'detune',
+      value: oscillator.detune.value,
+      range: [-100, 100],
     }
   }
 
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { oscillator.type = newType as OscillatorType },
-    'set frequency': (newFrequency: string) => {
-      controlData['set frequency'].value = Number(newFrequency)
+    'frequency': (newFrequency: string) => {
+      controlData['frequency'].value = Number(newFrequency)
       oscillator.frequency.value = Number(newFrequency)
     },
-    'set detune': (newDetune: string) => { oscillator.detune.value = Number(newDetune) },
+    'detune': (newDetune: string) => { 
+      controlData['detune'].value = Number(newDetune)
+      oscillator.detune.value = Number(newDetune)
+    },
     'kill': (arg = '') => { oscillator.stop() }
   }
 
   oscillator.start()
   
-  return { 
-    audioNode: oscillator,
-    typeTypes: oscillatorTypes,
-    connectingParamIDs,
+  return [
+    {
+      audioNode: oscillator,
+      typeTypes: oscillatorTypes,
+      connectingParamIDs,
+      controlSetFuncs,
+    },
     controlData,
-    controlSetFuncs,
-  }
+  ]
 }
 
 export default makeOscillator

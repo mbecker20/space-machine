@@ -5,7 +5,7 @@ export interface ContainerModule extends BaseAM {
   outputModuleID?: string
 }
 
-function makeContainer(id: string): ContainerModule {
+function makeContainer(id: string): [ ContainerModule, ControlData ] {
   const controlData: ControlData = {
     'open': {
       controlType: BUTTON,
@@ -15,14 +15,18 @@ function makeContainer(id: string): ContainerModule {
   const controlSetFuncs: ControlSetFuncs = {
     'open': () => {
       window.fillContainerID = id
+      window.highlightedID = ''
+      window.currUnHighlight = () => {}
       window.reRenderFillContainer()
     }
   }
-  return {
-    connectingParamIDs: [],
+  return [
+    {
+      connectingParamIDs: [],
+      controlSetFuncs,
+    },
     controlData,
-    controlSetFuncs,
-  }
+  ]
 }
 
 export default makeContainer

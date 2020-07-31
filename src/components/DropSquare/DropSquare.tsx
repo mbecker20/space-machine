@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import CSS from 'csstype'
 import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
-import { addModule } from '../../redux/allActions'
 import { RootState, ContainerModule } from '../../redux/stateTSTypes'
 import { moveModule } from '../../redux/modules/moduleActions'
 import { isOccupied } from '../ModuleView/helpers'
-import { ModuleType, CONTAINER_INPUT, CONTAINER_OUTPUT } from '../../audioModules/moduleTypes'
+import { ModuleType } from '../../audioModules/moduleTypes'
+import { colors } from '../../theme/theme'
 
 interface Props {
   row: number
@@ -25,9 +25,9 @@ function DropSquare({ row, col }: Props) {
   })
   const [isHL, setHL] = useState(false) // to highlight on drag enter
   const dsStyle: CSS.Properties = {
-    gridColumn: `${col * 2 + 1} / span 1`,
-    gridRow: `${row * 2 + 1} / span 1`,
-    borderStyle: isHL ? 'solid' : 'none',
+    gridColumn: `${col + 1} / span 1`,
+    gridRow: `${row + 1} / span 1`,
+    borderColor: isHL ? colors.dropSquareHL : 'transparent',
   }
   return (
     <div 
@@ -36,11 +36,15 @@ function DropSquare({ row, col }: Props) {
       onDragOver={event => {
         event.preventDefault()
       }}
-      onDragEnter={() => {
-        setHL(true)
+      onDragEnter={e => {
+        if (e.dataTransfer.types.length === 3) {
+          setHL(true)
+        }
       }}
-      onDragLeave={() => {
-        setHL(false)
+      onDragLeave={e => {
+        if (e.dataTransfer.types.length === 3) {
+          setHL(false)
+        }
       }}
       onDrop={event => {
         const id = event.dataTransfer.getData('id')
@@ -53,8 +57,7 @@ function DropSquare({ row, col }: Props) {
             const moduleType = event.dataTransfer.getData('moduleType') as ModuleType
             const name = event.dataTransfer.getData('name')
             setHL(false)
-            dispatch(addModule(id, name, moduleType, window.fillContainerID, row, col))
-            window.addModule(id, moduleType)
+            window.addModule(id, name, window.fillContainerID, moduleType, dispatch, row, col)
             window.setFillIsExpanded(false)
           }
         } else if (possiblyOccupyingID) {

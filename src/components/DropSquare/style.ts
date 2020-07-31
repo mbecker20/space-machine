@@ -1,12 +1,11 @@
 import { createUseStyles } from 'react-jss'
-import { colors, sizes } from '../../theme/theme'
+import { sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   DropSquare: {
     width: sizes.moduleView.iconGrid,
     height: sizes.moduleView.iconGrid,
-    borderStyle: 'none',
-    borderColor: colors.dropSquareHL,
+    borderStyle: 'solid',
     borderRadius: '10px',
     zIndex: 1,
   },

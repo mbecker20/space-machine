@@ -9,15 +9,13 @@ export const colors: Colors = {
   secondary: secondary,
   tertiary: tertiary,
 
-  rightDrawer: 'black',
+  rightDrawer: '#0000009e',
   drawerToggle: '#00347d',
   drawerToggleLine: '#001b40',
 
-  leftDrawer: 'black',
-
   centerMenu: 'black',
 
-  fillModule: '#1b1e24',
+  fillModule: '#c0c0c038',
   module: '#37538a',
 
   text: 'white',
@@ -26,36 +24,57 @@ export const colors: Colors = {
   dropSquareHL: 'white',
 
   defaultButton: 'black',
-  deleteButton: '#cc0000',
+  deleteButton: '#cc00006e',
   deleteButtonText: 'white',
 
   errorBackground: '#cc0000',
 
   outputConnector: 'red',
+
+  controlMenuButton: '#3b3b3b94',
+
+  //knob: '#ffffffa3',
+  knob: '#0000009e',
+  knobText: 'white',
+  knobBorder: '#cc00006e',
+  knobMarker: 'white',
+
+  // connection menu
+  connectableName: 'white',
+  expandableName: '#85adad'
 }
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '21vw',
-    toggleWidth: '1.5vmin',
-    item: '10vmin'
-  },
-  leftDrawer: {
-    width: '20vw',
+    width: '400px',
+    toggleWidth: '2vmin',
+    item: '9vmin',
   },
   moduleView: {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
-    icon: '9vmin',
+    icon: '10vmin',
+    bigIcon: '27vmin',
+    bigIconWidth: '30vmin',
+    bigIconHeight: '50vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
     medium: 'calc(20px + 2.4vmin)',
-    small: 'calc(12px + 1.4vmin)',
+    small: 'calc(12px + 1.2vmin)',
     xsmall: 'calc(8px + 1vmin)',
+    xxsmall: 'calc(7px + .8vmin)',
   },
   connector: {
-    size: '3vmin',
+    size: '2.5vmin',
     borderRadius: '1.5vmin'
   },
+  knob: {
+    size: 9, // converted to vmin in knob
+    markerWidth: .5,
+    markerHeight: 1.3,
+    rotRange: [-150, 150], // in degrees
+    sensitivity: 1,
+    borderWidth: 8,
+  }
 }
