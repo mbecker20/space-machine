@@ -8,9 +8,15 @@ export interface OscillatorModule extends BaseAM {
 
 const oscillatorTypes = ['sine', 'square', 'triangle', 'sawtooth']
 
-function makeOscillator(): [ OscillatorModule, ControlData ] {
+function makeOscillator(prevControlData?: ControlData): [ OscillatorModule, ControlData ] {
   const oscillator = audioCtx.createOscillator()
    
+  if (prevControlData) {
+    oscillator.type = prevControlData ['set type'].value as OscillatorType
+    oscillator.frequency.value = prevControlData ['frequency'].value as number
+    oscillator.detune.value = prevControlData ['detune'].value as number 
+  }
+
   const connectingParamIDs = ['frequency', 'detune']
 
   const controlData: ControlData = {
@@ -23,13 +29,13 @@ function makeOscillator(): [ OscillatorModule, ControlData ] {
       controlType: VALUE,
       paramID: 'frequency',
       value: oscillator.frequency.value,
-      range: [0, 20000]
+      range: prevControlData ? prevControlData['frequency'].range : [0, 20000]
     },
     'detune': {
       controlType: VALUE,
       paramID: 'detune',
       value: oscillator.detune.value,
-      range: [-100, 100],
+      range: prevControlData ? prevControlData['detune'].range : [-50, 50],
     }
   }
 
