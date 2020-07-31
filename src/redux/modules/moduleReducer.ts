@@ -35,7 +35,7 @@ import {
   updateControlValueReducer,
   updateControlRangeReducer,
 } from "./reducers/allModuleReducers"
-import { CONTAINER } from "../../audioModules/moduleTypes"
+import { CONTAINER, BUTTON } from "../../audioModules/moduleTypes"
 
 const initBaseCM: ContainerModule = {
   id: 'project',
@@ -43,6 +43,12 @@ const initBaseCM: ContainerModule = {
   row: 0,
   col: 0,
   moduleType: CONTAINER,
+  controlData: {
+    'open': {
+      controlType: BUTTON,
+      paramID: 'n/a',
+    }
+  },
   connectionInputs: [],
   connectionOutputs: [],
   toContainerControls: [],

@@ -2,23 +2,25 @@ import React, { useState } from 'react'
 import { CenterMenu, Button } from '../../all'
 import useJSS from './style'
 import { Range } from '../../../audioModules/moduleTypes'
-import { clamp, inRange } from '../../../helpers/genFuncs'
+import { inRange } from '../../../helpers/genFuncs'
 import { sizes } from '../../../theme/theme'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../redux/stateTSTypes'
 
 interface Props {
   onClose: () => void
   onChangeSubmit: (newRange: Range) => void
   modID: string
-  dataKey: string
+  controlID: string
 }
 
-function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
-  const { maxRange, range, value } = window.audioModules[modID].controlData[dataKey]
+function RangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) {
+  const { maxRange, range } = useSelector((state: RootState) => state.modules[modID].controlData[controlID])
   const [min, setMin] = useState((range as [number, number])[0])
   const [max, setMax] = useState((range as [number, number])[1])
   const classes = useJSS()
   return (
-    <CenterMenu header={`set ${dataKey} range`} onClose={onClose}>
+    <CenterMenu header={`set ${controlID} range`} onClose={onClose}>
       <div style={{ fontSize: sizes.text.small }}>
         {!maxRange ? null 
         :
@@ -28,6 +30,9 @@ function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
       <div className={classes.CMInputBounder}
         onKeyDown={e => {
           if (e.keyCode === 27) {
+            onClose()
+          } else if (e.keyCode === 13) {
+            onChangeSubmit([min, max])
             onClose()
           }
         }}
@@ -51,9 +56,6 @@ function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
         if (maxRange) {
           if (inRange(min, maxRange) && inRange(max, maxRange)) {
             if (max > min) {
-              (window.audioModules[modID].controlData[dataKey].range as [number, number])[0] = min;
-              (window.audioModules[modID].controlData[dataKey].range as [number, number])[1] = max;
-              window.audioModules[modID].controlSetFuncs[dataKey](clamp(value as number, [min, max]).toString())
               onChangeSubmit([min, max])
               onClose()
             } else {
@@ -64,9 +66,6 @@ function RangeSetMenu({ onClose, modID, dataKey, onChangeSubmit }: Props) {
           }
         } else {
           if (max > min) {
-            (window.audioModules[modID].controlData[dataKey].range as [number, number])[0] = min;
-            (window.audioModules[modID].controlData[dataKey].range as [number, number])[1] = max;
-            window.audioModules[modID].controlSetFuncs[dataKey](clamp(value as number, [min, max]).toString())
             onChangeSubmit([min, max])
             onClose()
           } else {

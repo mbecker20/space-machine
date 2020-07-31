@@ -9,6 +9,7 @@ import {
   MARK_CONTAINER_CONTROL,
   UNMARK_CONTAINER_CONTROL,
   UPDATE_CONTROL_VALUE,
+  UPDATE_CONTROL_RANGE,
 } from './moduleActionTypes'
 import { ModuleType, ControlData, Range } from '../../audioModules/moduleTypes'
 import { AddModuleAction, MoveModuleAction, RenameModuleAction, MarkContainerIOAction, MarkContainerControlAction, UpdateControlValueAction, UpdateControlRangeAction } from './moduleTSTypes'
@@ -101,7 +102,7 @@ export const updateControlValue = (modID: string, controlID: string, newValue: n
 
 export const updateControlRange = (modID: string, controlID: string, newRange: Range): UpdateControlRangeAction => {
   return {
-    type: UPDATE_CONTROL_VALUE,
+    type: UPDATE_CONTROL_RANGE,
     modID,
     controlID,
     newRange,

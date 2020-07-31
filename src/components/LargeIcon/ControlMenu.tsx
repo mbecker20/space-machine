@@ -15,14 +15,14 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.ControlMenu}>
-      {audioModule ? Object.keys(audioModule.controlData).map((controlID, index) => {
-        const { controlType, value, range } = audioModule.controlData[controlID]
+      {Object.keys(selectedModule.controlData).map((controlID, index) => {
+        const { controlType, value } = selectedModule.controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         return (
-          <div className={classes.ControlBounder} key={selectedModule.id + index}>
+          <div className={classes.ControlBounder} key={selectedModule.id + controlID + index}>
             {controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} range={range as [number, number]} setFunc={setFunc} />
+            <ValueControl controlID={controlID} setFunc={setFunc} />
             :
             controlType === BUTTON
             ?
@@ -44,7 +44,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             }
           </div>
         )
-      }) : null}
+      })}
     </div>
   )
 }

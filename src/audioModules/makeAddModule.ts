@@ -12,6 +12,7 @@ import {
   CONTAINER,
   ControlData,
   ControlType,
+  FILE,
 } from './moduleTypes'
 import { 
   makeOscillator, 
@@ -26,7 +27,6 @@ import {
 } from './all'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
-import { FILE } from 'dns'
 
 function makeAddModule() {
   return function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {

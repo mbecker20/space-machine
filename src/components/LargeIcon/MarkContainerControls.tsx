@@ -14,7 +14,6 @@ interface Props {
 
 function MarkContainerControls({ selectedModule }: Props) {
   const [open, setOpen] = useState(false)
-  const audioModule = window.audioModules[selectedModule.id]
   const dispatch = useDispatch()
   const modules = useSelector((state: RootState) => state.modules)
   return (
@@ -27,7 +26,7 @@ function MarkContainerControls({ selectedModule }: Props) {
       <div>
         {
         !open ? null :
-        Object.keys(audioModule.controlData).map((controlID, index) => {
+        Object.keys(selectedModule.controlData).map((controlID, index) => {
           return (
             <Switch initState={stringIn(selectedModule.id + controlID, selectedModule.toContainerControls)} text={controlID}
               style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}

@@ -18,15 +18,15 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
     <div className={classes.ControlMenu}>
       {selectedModule.containerControls.map(({ modID, controlID, actualModID }, index) => {
         const audioModule = window.audioModules[actualModID]
-        const { controlType, value, range } = audioModule.controlData[controlID]
+        const { controlType, value } = modules[modID].controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         const name = modules[modID].name
         return (
-          <div className={classes.ControlBounder} key={selectedModule.id + index}>
+          <div className={classes.ControlBounder} key={modID + controlID + index}>
             {
             controlType === VALUE
             ?
-            <ValueControl controlID={controlID} value={value} range={range as [number, number]} setFunc={setFunc} actualModID={actualModID} displayModName={name}/>
+            <ValueControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} displayModName={name}/>
             :
             controlType === BUTTON
             ?

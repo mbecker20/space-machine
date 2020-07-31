@@ -8,11 +8,11 @@ export function makeConnectionMenuData(isOpen: boolean, fromID = '', toID = '') 
   }
 }
 
-export function makeRangeSetMenuData(isOpen: boolean, modID = '', dataKey = '', onChangeSubmit: (newRange: Range) => void = () => {}) {
+export function makeRangeSetMenuData(isOpen: boolean, modID = '', controlID = '', onChangeSubmit: (newRange: Range) => void = () => {}) {
   return {
     isOpen,
     modID,
-    dataKey,
+    controlID,
     onChangeSubmit,
   }
 }

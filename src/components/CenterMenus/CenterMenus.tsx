@@ -9,7 +9,7 @@ declare global {
   interface Window {
     openConnectionMenu: (fromID: string, toID: string) => void
     openRenameMenu: (toRenameID: string) => void
-    openRangeSetMenu: (modID: string, dataKey: string, onChangeSubmit: (newRange: Range) => void) => void
+    openRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
   }
 }
 
@@ -19,7 +19,7 @@ function CenterMenus() {
   const [renameMenuData, setRenameMenuData] = useState({ isOpen: false, toRenameID: '' })
   window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   const [rangeSetMenuData, setRangeSetMenuData] = useState(makeRangeSetMenuData(false))
-  window.openRangeSetMenu = (modID, dataKey, onChangeSubmit) => { setRangeSetMenuData(makeRangeSetMenuData(true, modID, dataKey, onChangeSubmit)) }
+  window.openRangeSetMenu = (modID, controlID, onChangeSubmit) => { setRangeSetMenuData(makeRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
   return (
     <Fragment>
       {
@@ -37,7 +37,7 @@ function CenterMenus() {
       {
         !rangeSetMenuData.isOpen ? null :
         <RangeSetMenu modID={rangeSetMenuData.modID} 
-          dataKey={rangeSetMenuData.dataKey}
+          controlID={rangeSetMenuData.controlID}
           onClose={() => {
             setRangeSetMenuData(makeRangeSetMenuData(false))
           }}

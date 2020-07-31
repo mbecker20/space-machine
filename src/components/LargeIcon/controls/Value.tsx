@@ -44,9 +44,9 @@ function ValueControl({ controlID, setFunc, actualModID, displayModName }: Props
         }}
         onSettingsClick={() => {
           window.openRangeSetMenu(modID, controlID, (newRange) => {
-            dispatch(updateControlRange(modID, controlID, newRange))
             setFunc(clamp(val, newRange).toString())
             setInputVal(makeValString(clamp(val, newRange)))
+            dispatch(updateControlRange(modID, controlID, newRange))
           })
         }}
       />
