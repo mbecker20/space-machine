@@ -48,8 +48,8 @@ const addConnection = (modules: Modules, connections: Connections, { fromID, toI
         param,
         outputIndex,
         inputIndex,
-        containerOutputChildID,
-        containerInputChildID,
+        actualOutputID: containerOutputChildID,
+        actualInputID: containerInputChildID,
       },
     },
   }

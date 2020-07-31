@@ -2,14 +2,16 @@ import React, { useState, useRef, useEffect } from 'react'
 import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
-import ModuleGroup from './DrawerRouteLink'
+import HeaderItem from './HeaderItem'
 import { sourceModuleData, effectModuleData, utilityModuleData } from './ModuleIcons/moduleData'
 import { clamp } from '../../helpers/genFuncs'
 import ModuleIcons from './ModuleIcons/ModuleIcons'
+import FileMenu from './FileMenu'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
 const UTILITY = 'utility'
+const FILE = 'FILE'
 
 let drawerWidth = sizes.rightDrawer.width
 
@@ -76,22 +78,28 @@ function RightDrawer() {
             }
           }}
         >
-          <ModuleGroup
+          <HeaderItem
             className={classes.DrawerHeaderItem} 
             text={SOURCES}
             onClick={() => {setSR(SOURCES)}}
             selectedRoute={selectedRoute}
           />
-          <ModuleGroup
+          <HeaderItem
             className={classes.DrawerHeaderItem} 
             text={EFFECTS} 
             onClick={() => {setSR(EFFECTS)}}
             selectedRoute={selectedRoute}
           />
-          <ModuleGroup 
+          <HeaderItem 
             className={classes.DrawerHeaderItem} 
             text={UTILITY} 
             onClick={() => {setSR(UTILITY)}}
+            selectedRoute={selectedRoute}
+          />
+          <HeaderItem
+            className={classes.DrawerHeaderItem}
+            text={FILE}
+            onClick={() => { setSR(FILE) }}
             selectedRoute={selectedRoute}
           />
         </div>
@@ -108,6 +116,10 @@ function RightDrawer() {
             selectedRoute === UTILITY
             ?
             <ModuleIcons moduleData={utilityModuleData} />
+            :
+            selectedRoute === FILE
+            ?
+            <FileMenu />
             :
             null
           }

@@ -5,7 +5,17 @@ export interface LineInputModule extends BaseAM {
   audioNode: ChannelSplitterNode
 }
 
-function makeLineInput(id: string): ControlData {
+export function makeLineInControlData(): ControlData {
+  return {
+    'mute': {
+      controlType: SWITCH,
+      paramID: 'n/a',
+      value: false,
+    }
+  }
+}
+
+function makeLineInput(id: string) {
   navigator.mediaDevices.getUserMedia({
     audio: {
       echoCancellation: false,
@@ -37,13 +47,6 @@ function makeLineInput(id: string): ControlData {
       [id]: lineInputModule
     }
   })
-  return {
-    'mute': {
-      controlType: SWITCH,
-      paramID: 'n/a',
-      value: false,
-    }
-  }
 }
 
 export default makeLineInput

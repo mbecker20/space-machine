@@ -8,7 +8,7 @@ interface Props {
   selectedRoute: string
 }
 
-function ModuleGroup({ className, text, onClick, selectedRoute }: Props) {
+function HeaderItem({ className, text, onClick, selectedRoute }: Props) {
   const linkStyle = {
     color: (selectedRoute === text) ? colors.selectedText : colors.text,
   }
@@ -19,4 +19,4 @@ function ModuleGroup({ className, text, onClick, selectedRoute }: Props) {
   )
 }
 
-export default ModuleGroup
+export default HeaderItem

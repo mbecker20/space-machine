@@ -50,7 +50,6 @@ function makeOutput(prevControlData?: ControlData): OutputModule {
     connectingParamIDs: [],
     controlSetFuncs,
   }
-    
 }
 
 export default makeOutput

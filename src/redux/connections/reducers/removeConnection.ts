@@ -3,7 +3,7 @@ import { Modules, Connections } from "../../stateTSTypes"
 import { filterOutFromObj } from "../../helpers"
 
 const removeConnection = (modules: Modules, connections: Connections, { connectionID }: RemoveConnectionAction) => {
-  const { fromID, toID, containerOutputChildID, containerInputChildID } = connections[connectionID]
+  const { fromID, toID, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[connectionID]
   return {
     newModules: Object.assign({}, modules, {
       [fromID]: {

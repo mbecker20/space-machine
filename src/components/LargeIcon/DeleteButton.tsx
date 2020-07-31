@@ -24,11 +24,11 @@ function DeleteButton({ selectedModule }: Props) {
     }}
       onClick={() => {
         selectedModule.inputs.forEach(inputData => {
-          const { fromID, toID, param, outputIndex, containerOutputChildID, containerInputChildID } = connections[inputData]
+          const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[inputData]
           disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
         })
         selectedModule.outputs.forEach(outputData => {
-          const { fromID, toID, param, outputIndex, containerOutputChildID, containerInputChildID } = connections[outputData]
+          const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[outputData]
           disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
         })
         dispatch(removeModule(window.highlightedID)) // should remove all connections

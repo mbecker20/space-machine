@@ -1,0 +1,1 @@
+export const RESTORE_FROM_STATE = 'RESTORE_FROM_STATE'

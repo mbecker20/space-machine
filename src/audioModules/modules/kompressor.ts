@@ -5,7 +5,47 @@ export interface KompressorModule extends BaseAM {
   audioNode: DynamicsCompressorNode
 }
 
-function makeKompressor(prevControlData?: ControlData): [ KompressorModule, ControlData ] {
+export function makeKompControlData(kompressor: DynamicsCompressorNode): ControlData {
+  return {
+    'threshold': {
+      controlType: VALUE,
+      paramID: 'threshold',
+      value: kompressor.threshold.value,
+      range: [-100, 0],
+      maxRange: [-100, 0],
+    },
+    'knee': {
+      controlType: VALUE,
+      paramID: 'knee',
+      value: kompressor.knee.value,
+      range: [0, 40],
+      maxRange: [0, 40],
+    },
+    'ratio': {
+      controlType: VALUE,
+      paramID: 'ratio',
+      value: kompressor.ratio.value,
+      range: [1, 20],
+      maxRange: [1, 20],
+    },
+    'attack': {
+      controlType: VALUE,
+      paramID: 'attack',
+      value: kompressor.attack.value,
+      range: [0, 1],
+      maxRange: [0, 1],
+    },
+    'release': {
+      controlType: VALUE,
+      paramID: 'release',
+      value: kompressor.release.value,
+      range: [0, 1],
+      maxRange: [0, 1],
+    }
+  }
+}
+
+function makeKompressor(prevControlData?: ControlData): KompressorModule {
   const kompressor = audioCtx.createDynamicsCompressor()
 
   const connectingParamIDs = ['threshold', 'knee', 'ratio', 'attack', 'release']
@@ -16,39 +56,6 @@ function makeKompressor(prevControlData?: ControlData): [ KompressorModule, Cont
     kompressor.ratio.value = prevControlData['ratio'].value as number
     kompressor.attack.value = prevControlData['attack'].value as number
     kompressor.release.value = prevControlData['release'].value as number
-  }
-
-  const controlData: ControlData = {
-    'threshold': {
-      controlType: VALUE,
-      paramID: 'threshold',
-      value: kompressor.threshold.value, 
-      range: prevControlData ? prevControlData['threshold'].range : [-100, 0]
-    },
-    'knee': {
-      controlType: VALUE,
-      paramID: 'knee',
-      value: kompressor.knee.value,
-      range: prevControlData ? prevControlData['knee'].range : [0, 40]
-    },
-    'ratio': {
-      controlType: VALUE,
-      paramID: 'ratio',
-      value: kompressor.ratio.value,
-      range: prevControlData ? prevControlData['ratio'].range : [1, 20]
-    },
-    'attack': {
-      controlType: VALUE,
-      paramID: 'attack',
-      value: kompressor.attack.value,
-      range: prevControlData ? prevControlData['attack'].range : [0, 1]
-    },
-    'release': {
-      controlType: VALUE,
-      paramID: 'release',
-      value: kompressor.release.value,
-      range: prevControlData ? prevControlData['release'].range : [0, 1]
-    }
   }
 
   const controlSetFuncs: ControlSetFuncs = {
@@ -69,14 +76,11 @@ function makeKompressor(prevControlData?: ControlData): [ KompressorModule, Cont
     },
   }
 
-  return [
-    {
-      audioNode: kompressor,
-      connectingParamIDs,
-      controlSetFuncs,
-    },
-    controlData,
-  ]
+  return {
+    audioNode: kompressor,
+    connectingParamIDs,
+    controlSetFuncs,
+  }
 }
 
 export default makeKompressor
