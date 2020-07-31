@@ -24,7 +24,7 @@ function InputOutputView({ selectedModule, modules }: Props) {
       }
 
       {!selectedModule ? null : selectedModule.inputs.map((connectionID, index) => {
-        const { fromID, param, outputIndex, containerOutputChildID, containerInputChildID } = connections[connectionID]
+        const { fromID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[connectionID]
         const name = modules[fromID].name
         return (
           <div className={classes.Connection}
@@ -44,7 +44,7 @@ function InputOutputView({ selectedModule, modules }: Props) {
       }
 
       {!selectedModule ? null : selectedModule.outputs.map((connectionID, index) => {
-        const { toID, param, outputIndex, containerOutputChildID, containerInputChildID } = connections[connectionID]
+        const { toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[connectionID]
         const name = modules[toID].name
         return (
           <div className={classes.Connection}

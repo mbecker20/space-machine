@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { makeMediaElement } from '../../audioModules/all'
+import makeMediaElement from '../../audioModules/modules/mediaElement'
 
 interface Props {
   id: string

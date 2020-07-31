@@ -57,8 +57,8 @@ export interface ConnectionData {
   param: string
   outputIndex: number
   inputIndex: number
-  containerOutputChildID?: string
-  containerInputChildID?: string
+  actualOutputID?: string // this is the actual module id
+  actualInputID?: string
 }
 
 export interface Connections {
