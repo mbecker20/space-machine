@@ -9,18 +9,8 @@ export interface AutoFilterModule extends BaseAM {
 const filterTypes = ['lowpass', 'lowshelf', 'highpass', 'highshelf', 'allpass', 'bandpass', 'notch', 'peaking']
 const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
 
-function makeAutoFilter (prevControlData?: ControlData): [ AutoFilterModule, ControlData ] {
-  const autoFilter = audioCtx.createBiquadFilter()
-
-  if (prevControlData) {
-    autoFilter.type = prevControlData['set type'].value as BiquadFilterType
-    autoFilter.frequency.value = prevControlData['frequency'].value as number
-    autoFilter.detune.value = prevControlData['detune'].value as number
-    autoFilter.Q.value = prevControlData['Q'].value as number
-    autoFilter.gain.value = prevControlData['gain'].value as number
-  }
-
-  const controlData: ControlData = {
+export function makeFilterControlData(autoFilter: BiquadFilterNode): ControlData {
+  return {
     'set type': {
       controlType: TYPE,
       paramID: 'type',
@@ -30,29 +20,41 @@ function makeAutoFilter (prevControlData?: ControlData): [ AutoFilterModule, Con
       controlType: VALUE,
       paramID: 'frequency',
       value: autoFilter.frequency.value,
-      range: prevControlData ? prevControlData['frequency'].range : [0, audioCtx.sampleRate / 2],
+      range: [0, audioCtx.sampleRate / 2],
       maxRange: [0, audioCtx.sampleRate / 2]
     },
     'detune': {
       controlType: VALUE,
       paramID: 'detune',
       value: autoFilter.detune.value,
-      range: prevControlData ? prevControlData['detune'].range : [-50, 50],
+      range: [-50, 50],
       maxRange: [-153600, 153600]
     },
     'Q': {
       controlType: VALUE,
       paramID: 'Q',
       value: autoFilter.Q.value,
-      range: prevControlData ? prevControlData['Q'].range : [-30, 30]
+      range: [-30, 30]
     },
     'gain': {
       controlType: VALUE,
       paramID: 'gain',
       value: autoFilter.gain.value,
-      range: prevControlData ? prevControlData['gain'].range : [-20000, 1400],
+      range: [-20000, 1400],
       maxRange: [-20000, 1400],
     },
+  }
+}
+
+function makeAutoFilter (prevControlData?: ControlData): AutoFilterModule {
+  const autoFilter = audioCtx.createBiquadFilter()
+
+  if (prevControlData) {
+    autoFilter.type = prevControlData['set type'].value as BiquadFilterType
+    autoFilter.frequency.value = prevControlData['frequency'].value as number
+    autoFilter.detune.value = prevControlData['detune'].value as number
+    autoFilter.Q.value = prevControlData['Q'].value as number
+    autoFilter.gain.value = prevControlData['gain'].value as number
   }
 
   const controlSetFuncs: ControlSetFuncs = {
@@ -71,15 +73,13 @@ function makeAutoFilter (prevControlData?: ControlData): [ AutoFilterModule, Con
     },
   }
 
-  return [
-    {
-      audioNode: autoFilter,
-      typeTypes: filterTypes,
-      connectingParamIDs,
-      controlSetFuncs,
-    },
-    controlData,
-  ] 
+  return {
+    audioNode: autoFilter,
+    typeTypes: filterTypes,
+    connectingParamIDs,
+    controlSetFuncs,
+  }
+    
 }
 
 export default makeAutoFilter

@@ -27,6 +27,9 @@ import {
 } from './all'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
+import { makeConstantControlData } from './modules/constant'
+import { makeFilterControlData } from './modules/autoFilter'
+import { makeOutputControlData } from './modules/output'
 
 function makeAddModule() {
   return function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
@@ -42,15 +45,17 @@ function makeAddModule() {
         dispatch(addModule(id, name, moduleType, gainControlData, parentID, row, col, ['0'], ['0'])); 
         break;
       case OUTPUT:
-        const [ output, outputControlData ] = makeOutput()
-        window.audioModules = { ...window.audioModules, [id]: output }; 
-        dispatch(addModule(id, name, moduleType, outputControlData, parentID, row, col, ['0'], [])); 
-        break;
+        const output = makeOutput()
+        const outputControlData = makeOutputControlData()
+        window.audioModules = { ...window.audioModules, [id]: output }
+        dispatch(addModule(id, name, moduleType, outputControlData, parentID, row, col, ['0'], []))
+        break
       case AUTOFILTER: 
-        const [ filter, filterControlData ] = makeAutoFilter();
-        window.audioModules = { ...window.audioModules, [id]: filter }; 
-        dispatch(addModule(id, name, moduleType, filterControlData, parentID, row, col, ['0'], ['0'])); 
-        break;
+        const filter = makeAutoFilter()
+        const filterControlData = makeFilterControlData(filter.audioNode)
+        window.audioModules = { ...window.audioModules, [id]: filter }
+        dispatch(addModule(id, name, moduleType, filterControlData, parentID, row, col, ['0'], ['0']))
+        break
       case KOMPRESSOR:
         const [ komp, kompControlData ] = makeKompressor()
         window.audioModules = { ...window.audioModules, [id]: komp }; 
@@ -67,7 +72,8 @@ function makeAddModule() {
         dispatch(addModule(id, name, moduleType, delayControlData, parentID, row, col, ['0'], ['0'])); 
         break;
       case CONSTANT:
-        const [ constant, constantControlData ] = makeConstantSource()
+        const constant = makeConstantSource()
+        const constantControlData = makeConstantControlData()
         window.audioModules = { ...window.audioModules, [id]: constant }; 
         dispatch(addModule(id, name, moduleType, constantControlData, parentID, row, col, [], ['0'])); 
         break;

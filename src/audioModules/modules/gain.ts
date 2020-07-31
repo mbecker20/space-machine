@@ -5,20 +5,22 @@ export interface GainModule extends BaseAM {
   audioNode: GainNode
 }
 
-function makeGain(prevControlData?: ControlData): [ GainModule, ControlData ] {
+export function makeGainControlData(): ControlData {
+  return {
+    'gain': {
+      controlType: VALUE,
+      paramID: 'gain',
+      value: 0,
+      range: [-1, 1],
+    },
+  }
+}
+
+function makeGain(prevControlData?: ControlData): GainModule {
   const gain = audioCtx.createGain()
   gain.gain.value = prevControlData ? prevControlData['gain'].value as number : 0
 
   const connectingParamIDs = ['gain']
-
-  const controlData: ControlData = {
-    'gain': {
-      controlType: VALUE,
-      paramID: 'gain',
-      value: gain.gain.value,
-      range: prevControlData ? prevControlData['gain'].range : [-1, 1]
-    },
-  }
 
   const controlSetFuncs: ControlSetFuncs = {
     'gain': (newGain: string) => {
@@ -26,14 +28,11 @@ function makeGain(prevControlData?: ControlData): [ GainModule, ControlData ] {
     },
   }
   
-  return [
-    {
-      audioNode: gain,
-      connectingParamIDs,
-      controlSetFuncs,
-    },
-    controlData
-  ]
+  return {
+    audioNode: gain,
+    connectingParamIDs,
+    controlSetFuncs,
+  }
 }
 
 export default makeGain

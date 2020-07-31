@@ -25,7 +25,6 @@ import {
   makeLineInput,
   makeContainer
 } from './all'
-import { addModule } from '../redux/allActions'
 import { Module } from '../redux/stateTSTypes'
 
 function makeRestoreModule() {
