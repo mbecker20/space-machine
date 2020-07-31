@@ -12,9 +12,9 @@ function makeOscillator(prevControlData?: ControlData): [ OscillatorModule, Cont
   const oscillator = audioCtx.createOscillator()
    
   if (prevControlData) {
-    oscillator.type = prevControlData ['set type'].value as OscillatorType
-    oscillator.frequency.value = prevControlData ['frequency'].value as number
-    oscillator.detune.value = prevControlData ['detune'].value as number 
+    oscillator.type = prevControlData['set type'].value as OscillatorType
+    oscillator.frequency.value = prevControlData['frequency'].value as number
+    oscillator.detune.value = prevControlData['detune'].value as number 
   }
 
   const connectingParamIDs = ['frequency', 'detune']
@@ -42,11 +42,9 @@ function makeOscillator(prevControlData?: ControlData): [ OscillatorModule, Cont
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { oscillator.type = newType as OscillatorType },
     'frequency': (newFrequency: string) => {
-      controlData['frequency'].value = Number(newFrequency)
       oscillator.frequency.value = Number(newFrequency)
     },
     'detune': (newDetune: string) => { 
-      controlData['detune'].value = Number(newDetune)
       oscillator.detune.value = Number(newDetune)
     },
     'kill': (arg = '') => { oscillator.stop() }
