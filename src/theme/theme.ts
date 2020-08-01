@@ -1,4 +1,4 @@
-import { Colors, Sizes, ModuleColors } from './types'
+import { Colors, Sizes } from './types'
 
 const grey = '#282c34' // grey
 const secondary = '#281c34' //purple
@@ -41,7 +41,20 @@ export const colors: Colors = {
 
   // connection menu
   connectableName: 'white',
-  expandableName: '#85adad'
+  expandableName: '#85adad',
+
+  // module colors
+
+  sourceModuleBG: '#028174',
+  //sourceModuleKnob
+
+  effectsModuleBG: '#7D1551',
+  //effectsModukeKnob
+
+  containerModuleBG: '#4C4141',
+  //container knob magic tricks
+
+  outputModuleBG: '#CA5F3C'
 }
 
 export const sizes: Sizes = {
@@ -77,10 +90,4 @@ export const sizes: Sizes = {
     sensitivity: 1,
     borderWidth: 8,
   }
-}
-
-export const moduleColors: ModuleColors = {
-  source: '#028174',
-  effect: '#5F236B',
-  utility: '#' 
 }

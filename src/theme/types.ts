@@ -40,6 +40,3 @@ export interface Sizes {
   knob: Knob
 }
 
-export interface ModuleColors {
-  [index: string]: string
-}

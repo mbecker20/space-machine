@@ -84,6 +84,7 @@ const useJSS = createUseStyles({
   ArcherElement: {
     zIndex: 1,
     display: 'grid',
+    backgroundColor: 'transparent',
     gridTemplateRows: '10px auto 10px',
     gridTemplateColumns: '10px auto 10px',
     padding: '1vmin'

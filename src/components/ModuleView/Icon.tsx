@@ -5,7 +5,7 @@ import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
-import { sizes, moduleColors } from '../../theme/theme'
+import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
 import InputOutputView from '../LargeIcon/InputOutputView'
@@ -42,7 +42,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none',
-    backgroundColor: getModuleColor(mod.moduleType)
+    backgroundColor: getModuleColor(mod.moduleType),
   }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
@@ -74,7 +74,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     <Fragment>
       <animated.div 
         className={classes.Icon} 
-        style={Object.assign(iconSpring, iconStyle)}
+        style={Object.assign({}, iconSpring, iconStyle)}
         onPointerDown={e => e.stopPropagation()}
         onDragOver={event => {
           event.preventDefault()
