@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import { Button } from '../all'
 import { RootState } from '../../redux/stateTSTypes'
+import feathers from '@feathersjs/feathers'
+import rest from '@feathersjs/rest-client'
 
-declare global {
+/* declare global {
   interface Window {
-    spaceDBConnection: string
+    spaceDBConnection: Application
   }
-}
+} */
 
 export interface Save {
   id: string,
   savedState: RootState,
 }
 
+const spaceDB = feathers()
+const restClient = rest('http://localhost:3030')
 
 function FileMenu() {
   const [ saveList,  ] = useState<string[]>([])
