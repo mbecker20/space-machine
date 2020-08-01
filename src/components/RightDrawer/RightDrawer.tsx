@@ -11,7 +11,7 @@ import FileMenu from './FileMenu'
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
 const UTILITY = 'utility'
-const FILE = 'FILE'
+const FILE = 'file'
 
 let drawerWidth = sizes.rightDrawer.width
 

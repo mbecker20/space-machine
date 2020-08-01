@@ -4,12 +4,14 @@ import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import RenameMenu from './RenameMenu/RenameMenu'
 import RangeSetMenu from './RangeSetMenu/RangeSetMenu'
 import { Range } from '../../audioModules/moduleTypes'
+import SaveMenu from './SaveMenu/SaveMenu'
 
 declare global {
   interface Window {
     openConnectionMenu: (fromID: string, toID: string) => void
     openRenameMenu: (toRenameID: string) => void
     openRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
+    openSaveMenu: (saveList: string[]) => void
   }
 }
 
@@ -20,6 +22,8 @@ function CenterMenus() {
   window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   const [rangeSetMenuData, setRangeSetMenuData] = useState(makeRangeSetMenuData(false))
   window.openRangeSetMenu = (modID, controlID, onChangeSubmit) => { setRangeSetMenuData(makeRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
+  const [saveMenuData, setSaveMenuData] = useState<{ isOpen: boolean, saveList: string[] }>({ isOpen: false, saveList: [] })
+  window.openSaveMenu = (saveList) => { setSaveMenuData({ isOpen: true, saveList }) }
   return (
     <Fragment>
       {
@@ -44,6 +48,12 @@ function CenterMenus() {
           onChangeSubmit={newRange => {
             rangeSetMenuData.onChangeSubmit(newRange)
           }}
+        />
+      }
+      {
+        !saveMenuData.isOpen ? null :
+        <SaveMenu saveList={saveMenuData.saveList} 
+          onClose={() => { setSaveMenuData({ isOpen: false, saveList: [] }) }}
         />
       }
     </Fragment>
