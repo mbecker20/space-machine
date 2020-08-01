@@ -17,3 +17,6 @@ export {
   removeConnection,
   removeModule,
 } from './connections/connectionActions'
+export {
+  restoreFromState,
+} from './root/rootActions'
