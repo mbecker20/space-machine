@@ -15,7 +15,7 @@ export interface Save {
 
 
 function FileMenu() {
-  const [ saveList, setSaveList ] = useState<string[]>([])
+  const [ saveList,  ] = useState<string[]>([])
   if (window.spaceDBConnection) {
     
   }
