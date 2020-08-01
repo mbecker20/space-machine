@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { Button } from '../../all'
 import { stringIn } from '../../../helpers/genFuncs'
-import { db } from 'rethinkdb'
 
 interface Props {
   saveList: string[]
@@ -15,12 +14,10 @@ function SaveMenu({ saveList, onClose }: Props) {
   const [saveName, setSaveName] = useState('')
   const baseContainerID = useSelector((state: RootState) => state.baseContainerID)
   const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
-  const state = useSelector(state => state)
+  //const state = useSelector(state => state)
   return (
     <CenterMenu header='save project' 
-      onClose={() => {
-        
-      }}
+      onClose={onClose}
     >
       <div>
         <input
@@ -35,10 +32,6 @@ function SaveMenu({ saveList, onClose }: Props) {
             if (stringIn(saveName, saveList)) {
               setConfirmSaveData({ isOpen: true, message: 'would you like to overwrite this save?' })
             } else {
-              db('spaceDB').table('saves').insert({
-                id: saveName,
-                savedState: state,
-              }).run(window.spaceDBConnection)
               onClose()
             } 
           }}
