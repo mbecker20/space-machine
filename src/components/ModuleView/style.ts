@@ -19,7 +19,7 @@ const useJSS = createUseStyles({
 
   FillHeader: {
     borderColor: 'white',
-    borderStyle: 'none none solid none',
+    borderStyle: 'none none none none',
     padding: '1vmin',
     marginLeft: '2vmin',
     '&:hover': {

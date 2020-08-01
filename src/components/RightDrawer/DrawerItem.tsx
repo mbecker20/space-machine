@@ -1,5 +1,7 @@
 import React from 'react'
 import useJSS from './style'
+import getModuleColor from '../../theme/moduleColor'
+
 
 interface Props {
   fullName: string
@@ -15,6 +17,7 @@ function DrawerItem({ fullName, id, moduleType }: Props) {
     <div className={classes.DrawerItem}>
       <div 
         className={classes.DrawerIcon}
+        style={{ backgroundColor: getModuleColor(moduleType) }}
         draggable={true}
         onDragStart={event => {
           event.dataTransfer.setData('id', `${id} ${numAdds}`)
