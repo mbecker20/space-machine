@@ -39,3 +39,7 @@ export interface Sizes {
   connector: Connector
   knob: Knob
 }
+
+export interface ModuleColors {
+  [index: string]: string
+}

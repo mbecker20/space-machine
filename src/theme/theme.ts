@@ -1,4 +1,4 @@
-import { Colors, Sizes } from './types'
+import { Colors, Sizes, ModuleColors } from './types'
 
 const grey = '#282c34' // grey
 const secondary = '#281c34' //purple
@@ -77,4 +77,10 @@ export const sizes: Sizes = {
     sensitivity: 1,
     borderWidth: 8,
   }
+}
+
+export const moduleColors: ModuleColors = {
+  source: '#028174',
+  effect: '#5F236B',
+  utility: '#' 
 }

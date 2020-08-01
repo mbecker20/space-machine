@@ -5,7 +5,7 @@ import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
 import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
-import { sizes } from '../../theme/theme'
+import { sizes, moduleColors } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
 import InputOutputView from '../LargeIcon/InputOutputView'
@@ -13,6 +13,7 @@ import MarkContainerIO from '../LargeIcon/MarkContainerIO'
 import DeleteButton from '../LargeIcon/DeleteButton'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
+import getModuleColor from '../../theme/moduleColor'
 
 declare global {
   interface Window {
@@ -41,6 +42,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     borderStyle: isHighlighted ? 'solid' : 'none',
+    backgroundColor: getModuleColor(mod.moduleType)
   }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
