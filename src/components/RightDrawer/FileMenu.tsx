@@ -39,9 +39,9 @@ function FileMenu({ initName }: Props) {
             const path = (file as any).path
             fs.readFile(path, (err: any, data: string) => {
               if (err) throw err;
-              const state = JSON.parse(data)
-              dispatch(restoreFromState(state))
-              restoreAMFromState(state)
+              const newState = JSON.parse(data)
+              restoreAMFromState(state.connections , newState)
+              dispatch(restoreFromState(newState))
             })
           }
         }}

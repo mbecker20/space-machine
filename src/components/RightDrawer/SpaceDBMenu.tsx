@@ -3,7 +3,7 @@ import { Button } from '../all'
 import { RootState } from '../../redux/stateTSTypes'
 import feathers from '@feathersjs/feathers'
 import rest from '@feathersjs/rest-client'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import { colors } from '../../theme/theme'
@@ -34,13 +34,14 @@ const buttonStyle = {
 function SpaceDBMenu() {
   const [ saveList, setSaveList ] = useState<string[]>([])
   const dispatch = useDispatch()
+  const connections = useSelector((state: RootState) => state.connections)
   useEffect(() => {
     window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
   }, [])
   return (
     <div>
       <Button style={buttonStyle}
-        onClick={() => { 
+        onClick={() => {
           window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
         }}
       >
@@ -53,8 +54,8 @@ function SpaceDBMenu() {
               <Button style={buttonStyle}
                 onClick={() => {
                   window.spaceDBSaveService.get(saveName).then((savedState: RootState) => {
+                    restoreAMFromState(connections, savedState)
                     dispatch(restoreFromState(savedState))
-                    restoreAMFromState(savedState)
                   })
                 }}
               >

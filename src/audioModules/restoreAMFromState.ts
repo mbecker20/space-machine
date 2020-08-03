@@ -1,9 +1,18 @@
-import { RootState } from "../redux/stateTSTypes"
+import { RootState, Connections } from "../redux/stateTSTypes"
 import restoreAudioModule from "./restoreAudioModule"
 import { ModuleType, ConnectingAudioModule, MEDIA_ELEMENT, LINE_IN } from "./moduleTypes"
-import { connect } from "./connection"
+import { connect, disconnect } from "./connection"
 
-function restoreAMFromState({ modules, connections }: RootState) {
+function restoreAMFromState(prevConnections: Connections, { modules, connections }: RootState) {
+  Object.keys(prevConnections).forEach(connectionID => {
+    const { fromID, toID, param, outputIndex, actualOutputID, actualInputID } = connections[connectionID]
+    disconnect(
+      window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
+      window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
+      param,
+      outputIndex, // may need to figure out how to pass in inputIndex
+    )
+  })
   window.audioModules = {}
   Object.keys(modules).forEach(modID => {
     const { moduleType, controlData } = modules[modID]
