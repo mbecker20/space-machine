@@ -15,7 +15,6 @@ export function restoreFromState({ modules, connections }: RootState) {
       const fromType = modules[actualOutputID ? actualOutputID : fromID].moduleType
       const needsToWait = toType === MEDIA_ELEMENT || fromType === MEDIA_ELEMENT ||
         toType === LINE_IN || fromType === LINE_IN
-        
       if (!needsToWait) {
         connect(
           window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
