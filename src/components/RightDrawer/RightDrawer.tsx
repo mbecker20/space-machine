@@ -8,6 +8,8 @@ import { clamp } from '../../helpers/genFuncs'
 import ModuleIcons from './ModuleIcons/ModuleIcons'
 import SpaceDBMenu from './SpaceDBMenu'
 import FileMenu from './FileMenu'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/stateTSTypes'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
@@ -41,6 +43,7 @@ function RightDrawer() {
       window.setTimeout(() => { toReRender({}) }, 500) 
     })
   })
+  const baseName = useSelector((state: RootState) => state.modules[state.baseContainerID].name)
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring} onPointerDown={e => e.stopPropagation()}>
       <div className={classes.Toggle}
@@ -131,7 +134,7 @@ function RightDrawer() {
             :
             selectedRoute === FILE
             ?
-            <FileMenu />
+            <FileMenu initName={baseName}/>
             :
             null
           }

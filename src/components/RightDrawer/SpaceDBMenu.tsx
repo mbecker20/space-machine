@@ -4,8 +4,8 @@ import { RootState } from '../../redux/stateTSTypes'
 import feathers from '@feathersjs/feathers'
 import rest from '@feathersjs/rest-client'
 import { useDispatch } from 'react-redux'
-import { restoreFromState as restoreFromStateAction } from '../../redux/allActions'
-import { restoreFromState } from '../../redux/restoreFromState'
+import { restoreFromState } from '../../redux/allActions'
+import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import { colors } from '../../theme/theme'
 
 declare global {
@@ -53,8 +53,8 @@ function SpaceDBMenu() {
               <Button style={buttonStyle}
                 onClick={() => {
                   window.spaceDBSaveService.get(saveName).then((savedState: RootState) => {
-                    dispatch(restoreFromStateAction(savedState))
-                    restoreFromState(savedState)
+                    dispatch(restoreFromState(savedState))
+                    restoreAMFromState(savedState)
                   })
                 }}
               >

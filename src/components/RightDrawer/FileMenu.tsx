@@ -5,12 +5,16 @@ import { Button } from '../all'
 import { getFileDirectory } from './helpers'
 import { sizes } from '../../theme/theme'
 import { restoreFromState } from '../../redux/allActions'
+import restoreAMFromState from '../../audioModules/restoreAMFromState'
 const fs = window.require('fs')
 
-function FileMenu() {
+interface Props {
+  initName: string
+}
+
+function FileMenu({ initName }: Props) {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
-  const initName = state.modules[state.baseContainerID].name
   const [saveName, setSaveName] = useState(initName)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -37,9 +41,8 @@ function FileMenu() {
               if (err) throw err;
               const state = JSON.parse(data)
               dispatch(restoreFromState(state))
-              restoreFromState(state)
+              restoreAMFromState(state)
             })
-            console.log(path)
           }
         }}
       />
