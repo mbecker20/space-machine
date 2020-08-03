@@ -4,16 +4,18 @@ import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import RenameMenu from './RenameMenu/RenameMenu'
 import RangeSetMenu from './RangeSetMenu/RangeSetMenu'
 import { Range } from '../../audioModules/moduleTypes'
-import SaveMenu from './SaveMenu/SaveMenu'
+import SpaceDBSaveMenu from './SaveMenu/SpaceDBSaveMenu'
 import ConfirmDeleteMenu from './ConfirmDeleteMenu/ConfirmDeleteMenu'
+import FileSaveMenu from './SaveMenu/FileSaveMenu'
 
 declare global {
   interface Window {
     openConnectionMenu: (fromID: string, toID: string) => void
     openRenameMenu: (toRenameID: string) => void
     openRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
-    openSaveMenu: (saveList: string[], onClose: () => void) => void
+    openSpaceDBSaveMenu: (saveList: string[], onClose: () => void) => void
     openConfirmDeleteMenu: (saveName: string, onClose: () => void) => void
+    openFileSaveMenu: () => void
   }
 }
 
@@ -24,10 +26,12 @@ function CenterMenus() {
   window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   const [rangeSetMenuData, setRangeSetMenuData] = useState(makeRangeSetMenuData(false))
   window.openRangeSetMenu = (modID, controlID, onChangeSubmit) => { setRangeSetMenuData(makeRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
-  const [saveMenuData, setSaveMenuData] = useState(makeSaveMenuData(false))
-  window.openSaveMenu = (saveList, onClose) => { setSaveMenuData({ isOpen: true, saveList, onClose }) }
+  const [spaceDBSaveMenuData, setSpaceDBSaveMenuData] = useState(makeSaveMenuData(false))
+  window.openSpaceDBSaveMenu = (saveList, onClose) => { setSpaceDBSaveMenuData({ isOpen: true, saveList, onClose }) }
   const [confirmDeleteMenuData, setConfirmDeleteMenuData] = useState(makeConfirmDeleteMenuData(false))
   window.openConfirmDeleteMenu = (saveName, onClose) => { setConfirmDeleteMenuData(makeConfirmDeleteMenuData(true, saveName, onClose)) }
+  const [fileSaveMenuData, setFileSaveMenuData] = useState({ isOpen: false })
+  window.openFileSaveMenu = () => { setFileSaveMenuData({ isOpen: true }) }
   return (
     <Fragment>
       {
@@ -55,11 +59,11 @@ function CenterMenus() {
         />
       }
       {
-        !saveMenuData.isOpen ? null :
-        <SaveMenu saveList={saveMenuData.saveList} 
+        !spaceDBSaveMenuData.isOpen ? null :
+        <SpaceDBSaveMenu saveList={spaceDBSaveMenuData.saveList} 
           onClose={() => {
-            saveMenuData.onClose()
-            setSaveMenuData(makeSaveMenuData(false)) 
+            spaceDBSaveMenuData.onClose()
+            setSpaceDBSaveMenuData(makeSaveMenuData(false)) 
           }}
         />
       }
@@ -69,6 +73,14 @@ function CenterMenus() {
           onClose={() => {
             confirmDeleteMenuData.onClose()
             setConfirmDeleteMenuData(makeConfirmDeleteMenuData(false))
+          }}
+        />
+      }
+      {
+        !fileSaveMenuData.isOpen ? null :
+        <FileSaveMenu
+          onClose={() => {
+            
           }}
         />
       }

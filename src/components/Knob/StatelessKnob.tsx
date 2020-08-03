@@ -87,6 +87,7 @@ function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsCl
       {!onSettingsClick ? null
       :
       <img className={classes.SettingsButton}
+        title='edit knob range'
         src={settingsSVG}
         alt='settings'
         onClick={onSettingsClick}
