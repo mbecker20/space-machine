@@ -1,6 +1,6 @@
 import { RootState } from "./stateTSTypes"
 import restoreAudioModule from "../audioModules/restoreAudioModule"
-import { ModuleType, ConnectingAudioModule, MEDIA_ELEMENT } from "../audioModules/moduleTypes"
+import { ModuleType, ConnectingAudioModule, MEDIA_ELEMENT, LINE_IN } from "../audioModules/moduleTypes"
 import { connect } from "../audioModules/connection"
 
 export function restoreFromState({ modules, connections }: RootState) {
@@ -11,9 +11,12 @@ export function restoreFromState({ modules, connections }: RootState) {
   if (connections) {
     Object.keys(connections).forEach(connectionID => {
       const { fromID, toID, param, outputIndex, inputIndex, actualOutputID, actualInputID } = connections[connectionID]
-      const involvesMediaElement = modules[actualOutputID ? actualOutputID : fromID].moduleType === MEDIA_ELEMENT ||
-        modules[actualInputID ? actualInputID : toID].moduleType === MEDIA_ELEMENT
-      if (!involvesMediaElement) {
+      const toType = modules[actualInputID ? actualInputID : toID].moduleType
+      const fromType = modules[actualOutputID ? actualOutputID : fromID].moduleType
+      const needsToWait = toType === MEDIA_ELEMENT || fromType === MEDIA_ELEMENT ||
+        toType === LINE_IN || fromType === LINE_IN
+        
+      if (!needsToWait) {
         connect(
           window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
           window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
@@ -30,7 +33,7 @@ export function restoreFromState({ modules, connections }: RootState) {
             outputIndex,
             inputIndex,
           )
-        }, 50)
+        }, 200)
       }
     })
   }

@@ -27,6 +27,10 @@ const restClient = rest('http://192.168.1.81:30300') // spaceDB
 spaceDB.configure(restClient.fetch(window.fetch))
 window.spaceDBSaveService = spaceDB.service('spaceDB-save-service')
 
+const buttonStyle = {
+  backgroundColor: 'transparent'
+}
+
 function FileMenu() {
   const [ saveList, setSaveList ] = useState<string[]>([])
   const dispatch = useDispatch()
@@ -35,16 +39,18 @@ function FileMenu() {
   }, [])
   return (
     <div>
-      <Button onClick={() => { 
-        window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
-      }}>
+      <Button style={buttonStyle}
+        onClick={() => { 
+          window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
+        }}
+      >
         refresh saves
       </Button>
       <div>
         {saveList.map(saveName => {
           return (
             <div style={{ display: 'flex', flexDirection: 'row' }} key={saveName}>
-              <Button
+              <Button style={buttonStyle}
                 onClick={() => {
                   window.spaceDBSaveService.get(saveName).then((savedState: RootState) => {
                     dispatch(restoreFromStateAction(savedState))
@@ -56,10 +62,11 @@ function FileMenu() {
               </Button>
               <Button style={{ backgroundColor: colors.deleteButton }}
                 onClick={() => {
-                  window.spaceDBSaveService.remove(saveName)
-                  window.setTimeout(() => {
-                    window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
-                  }, 1000)
+                  window.openConfirmDeleteMenu(saveName, () => {
+                    window.setTimeout(() => {
+                      window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
+                    }, 1000)
+                  })
                 }}
               >
                 delete
@@ -68,7 +75,7 @@ function FileMenu() {
           )
         })}
       </div>
-      <Button
+      <Button style={buttonStyle}
         onClick={() => {
           window.openSaveMenu(saveList, () => {
             window.setTimeout(() => {

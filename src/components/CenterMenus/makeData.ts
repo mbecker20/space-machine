@@ -24,3 +24,11 @@ export function makeSaveMenuData(isOpen: boolean, saveList: string[] = [], onClo
     onClose,
   }
 }
+
+export function makeConfirmDeleteMenuData(isOpen: boolean, saveName = '', onClose = () => {}) {
+  return {
+    isOpen,
+    saveName,
+    onClose
+  }
+}
