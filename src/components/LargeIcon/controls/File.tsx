@@ -31,9 +31,6 @@ function File({ controlID, setFunc, reRenderIcon, modName }: Props) {
           const file = ((e.target as HTMLInputElement).files as FileList)[0]
           setFunc(URL.createObjectURL(file))
           window.audioTags[window.highlightedID].srcName = file.name
-          window.setTimeout(() => {
-            console.log(window.audioModules[window.highlightedID])
-          },500)
           window.reRenderAudioTags()
           reRenderIcon()
         }}

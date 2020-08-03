@@ -9,11 +9,9 @@ function AudioTag({ id }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null)
   useEffect(() => {
     if (!window.audioModules[id]) {
-      console.log(audioRef)
       const possiblyMediaElement = makeMediaElement(audioRef)
       if (possiblyMediaElement) {
         window.audioModules = { ...window.audioModules, [id]: possiblyMediaElement }
-        console.log(possiblyMediaElement)
       }
     }
   })
