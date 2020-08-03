@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { Button } from '../all'
-import { getFileDirectory } from './helpers'
+import { getFileDirectory } from '../CenterMenus/SaveMenu/helpers'
 import { sizes } from '../../theme/theme'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
@@ -63,7 +63,6 @@ function FileMenu({ initName }: Props) {
         onChange={e => {
           const goodDir = getFileDirectory((((e.target as HTMLInputElement).files as FileList)[0] as any).path)
           if (saveName !== '') {
-            console.log(goodDir + saveName + '.sm')
             fs.writeFile(goodDir + saveName + '.sm', JSON.stringify(state), (err: any) => {
               console.log('saved maybe')
               if (err) throw err
