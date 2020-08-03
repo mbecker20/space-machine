@@ -1,6 +1,15 @@
 {
   "name": "space-machine",
+  "description": "space DAW transmitted by Jonny Alaska from deep space",
   "version": "0.1.0",
+  "build": {
+    "appId": "space-machine",
+    "mac": {
+      "category": "audio"
+    }
+  },
+  "main": "electron.ts",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@feathersjs/feathers": "^4.5.7",

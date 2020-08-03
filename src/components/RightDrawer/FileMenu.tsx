@@ -1,91 +1,73 @@
-import React, { useState, useEffect } from 'react'
-import { Button } from '../all'
+import React, { useRef, useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import feathers from '@feathersjs/feathers'
-import rest from '@feathersjs/rest-client'
-import { useDispatch } from 'react-redux'
-import { restoreFromState as restoreFromStateAction } from '../../redux/allActions'
-import { restoreFromState } from '../../redux/restoreFromState'
-import { colors } from '../../theme/theme'
-
-declare global {
-  interface Window {
-    spaceDBSaveService: any
-  }
-}
-
-export interface Save {
-  id: string,
-  savedState: RootState,
-}
-
-const spaceDB = feathers()
-const restClient = rest('http://192.168.1.81:30300') // spaceDB
-// http://192.168.1.79:3030 - yoga
-// http://192.168.1.65:3030 - mac
-
-spaceDB.configure(restClient.fetch(window.fetch))
-window.spaceDBSaveService = spaceDB.service('spaceDB-save-service')
-
-const buttonStyle = {
-  backgroundColor: 'transparent'
-}
+import { Button } from '../all'
+import { getFileDirectory } from './helpers'
+import { sizes } from '../../theme/theme'
+import { restoreFromState } from '../../redux/allActions'
+const fs = window.require('fs')
 
 function FileMenu() {
-  const [ saveList, setSaveList ] = useState<string[]>([])
+  const state = useSelector((state: RootState) => state)
+  const folderRef = useRef<HTMLInputElement>(null)
+  const initName = state.modules[state.baseContainerID].name
+  const [saveName, setSaveName] = useState(initName)
   const dispatch = useDispatch()
   useEffect(() => {
-    window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
+    window.setTimeout(() => {
+      if (folderRef.current) {
+        (folderRef.current as any).webkitdirectory = true
+      }
+    }, 50)
   }, [])
   return (
     <div>
-      <Button style={buttonStyle}
-        onClick={() => { 
-          window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
+      <label htmlFor='chooseFile'>
+        <Button
+        >open file</Button>
+      </label>
+      <input style={{ width: 0, height: 0, opacity: 0 }}
+        id='chooseFile'
+        type='file'
+        onChange={e => {
+          const file = ((e.target as HTMLInputElement).files as FileList)[0]
+          if (file) {
+            const path = (file as any).path
+            fs.readFile(path, (err: any, data: string) => {
+              if (err) throw err;
+              const state = JSON.parse(data)
+              dispatch(restoreFromState(state))
+              restoreFromState(state)
+            })
+            console.log(path)
+          }
         }}
-      >
-        refresh saves
-      </Button>
-      <div>
-        {saveList.map(saveName => {
-          return (
-            <div style={{ display: 'flex', flexDirection: 'row' }} key={saveName}>
-              <Button style={buttonStyle}
-                onClick={() => {
-                  window.spaceDBSaveService.get(saveName).then((savedState: RootState) => {
-                    dispatch(restoreFromStateAction(savedState))
-                    restoreFromState(savedState)
-                  })
-                }}
-              >
-                {saveName}
-              </Button>
-              <Button style={{ backgroundColor: colors.deleteButton }}
-                onClick={() => {
-                  window.openConfirmDeleteMenu(saveName, () => {
-                    window.setTimeout(() => {
-                      window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
-                    }, 1000)
-                  })
-                }}
-              >
-                delete
-              </Button>
-            </div>
-          )
-        })}
-      </div>
-      <Button style={buttonStyle}
-        onClick={() => {
-          window.openSaveMenu(saveList, () => {
-            window.setTimeout(() => {
-              window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
-            }, 1000)
-          })
+      />
+      <input style={{ fontSize: sizes.text.small }}
+        placeholder={initName}
+        value={saveName}
+        onChange={e => {
+          setSaveName(e.target.value)
         }}
-      >
-        save project
-      </Button>
+      />
+      <label htmlFor='chooseFolder'>
+        <Button>save (select folder)</Button>
+      </label>
+      <input style={{ width: 0, height: 0, opacity: 0 }}
+        id='chooseFolder'
+        type='file'
+        ref={folderRef}
+        onChange={e => {
+          const goodDir = getFileDirectory((((e.target as HTMLInputElement).files as FileList)[0] as any).path)
+          if (saveName !== '') {
+            console.log(goodDir + saveName + '.sm')
+            fs.writeFile(goodDir + saveName + '.sm', JSON.stringify(state), (err: any) => {
+              console.log('saved maybe')
+              if (err) throw err
+            })
+          }
+        }}
+      />
     </div>
   )
 }

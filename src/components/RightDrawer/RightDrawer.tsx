@@ -6,11 +6,13 @@ import HeaderItem from './HeaderItem'
 import { sourceModuleData, effectModuleData, utilityModuleData } from './ModuleIcons/moduleData'
 import { clamp } from '../../helpers/genFuncs'
 import ModuleIcons from './ModuleIcons/ModuleIcons'
+import SpaceDBMenu from './SpaceDBMenu'
 import FileMenu from './FileMenu'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
 const UTILITY = 'utility'
+const SPACEDB = 'spaceDB'
 const FILE = 'file'
 
 let drawerWidth = sizes.rightDrawer.width
@@ -98,6 +100,12 @@ function RightDrawer() {
           />
           <HeaderItem
             className={classes.DrawerHeaderItem}
+            text={SPACEDB}
+            onClick={() => { setSR(SPACEDB) }}
+            selectedRoute={selectedRoute}
+          />
+          <HeaderItem
+            className={classes.DrawerHeaderItem}
             text={FILE}
             onClick={() => { setSR(FILE) }}
             selectedRoute={selectedRoute}
@@ -116,6 +124,10 @@ function RightDrawer() {
             selectedRoute === UTILITY
             ?
             <ModuleIcons moduleData={utilityModuleData} />
+            :
+            selectedRoute === SPACEDB
+            ?
+            <SpaceDBMenu />
             :
             selectedRoute === FILE
             ?
