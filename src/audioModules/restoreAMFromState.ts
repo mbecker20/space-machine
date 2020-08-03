@@ -6,14 +6,17 @@ import { connect, disconnect } from "./connection"
 function restoreAMFromState(prevConnections: Connections, { modules, connections }: RootState) {
   Object.keys(prevConnections).forEach(connectionID => {
     const { fromID, toID, param, outputIndex, actualOutputID, actualInputID } = prevConnections[connectionID]
-    disconnect(
-      window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
-      window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
-      param,
-      outputIndex, // may need to figure out how to pass in inputIndex
-    )
+    if (window.audioModules[actualOutputID ? actualOutputID : fromID] && window.audioModules[actualInputID ? actualInputID : toID]) {
+      disconnect(
+        window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
+        window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
+        param,
+        outputIndex, // may need to figure out how to pass in inputIndex
+      )
+    }
   })
   window.audioModules = {}
+  window.audioTags = {}
   Object.keys(modules).forEach(modID => {
     const { moduleType, controlData } = modules[modID]
     restoreAudioModule(modID, moduleType as ModuleType, controlData)
@@ -46,6 +49,7 @@ function restoreAMFromState(prevConnections: Connections, { modules, connections
       }
     })
   }
+  window.numberRestores++
 }
 
 export default restoreAMFromState

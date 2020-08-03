@@ -16,6 +16,7 @@ declare global {
     audioTags: AudioTags
     addAudioTag: (id: string) => void
     reRenderAudioTags: () => void
+    numberRestores: number
   }
 }
 
@@ -27,6 +28,7 @@ window.addAudioTag = (id: string) => {
 }
 
 window.audioTags = {}
+window.numberRestores = 0
 
 function AudioTags() {
   const [reRender, toReRender] = useState(false)
@@ -37,7 +39,7 @@ function AudioTags() {
       {ids.map((id) => {
         return (
           <AudioTag
-            key={id}
+            key={id + window.numberRestores}
             id={id}
           />
         )

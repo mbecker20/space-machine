@@ -40,8 +40,8 @@ function FileMenu({ initName }: Props) {
             fs.readFile(path, (err: any, data: string) => {
               if (err) throw err;
               const newState = JSON.parse(data)
-              restoreAMFromState(state.connections , newState)
               dispatch(restoreFromState(newState))
+              restoreAMFromState(state.connections , newState)
             })
           }
         }}

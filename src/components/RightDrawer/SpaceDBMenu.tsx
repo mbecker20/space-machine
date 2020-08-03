@@ -54,8 +54,8 @@ function SpaceDBMenu() {
               <Button style={buttonStyle}
                 onClick={() => {
                   window.spaceDBSaveService.get(saveName).then((savedState: RootState) => {
-                    restoreAMFromState(connections, savedState)
                     dispatch(restoreFromState(savedState))
+                    restoreAMFromState(connections, savedState)
                   })
                 }}
               >
