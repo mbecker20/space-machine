@@ -15,6 +15,7 @@ function restoreAMFromState(prevConnections: Connections, { modules, connections
       )
     }
   })
+  window.numberRestores++
   window.audioModules = {}
   window.audioTags = {}
   Object.keys(modules).forEach(modID => {
@@ -49,7 +50,6 @@ function restoreAMFromState(prevConnections: Connections, { modules, connections
       }
     })
   }
-  window.numberRestores++
 }
 
 export default restoreAMFromState
