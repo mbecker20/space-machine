@@ -5,7 +5,7 @@ import { connect, disconnect } from "./connection"
 
 function restoreAMFromState(prevConnections: Connections, { modules, connections }: RootState) {
   Object.keys(prevConnections).forEach(connectionID => {
-    const { fromID, toID, param, outputIndex, actualOutputID, actualInputID } = connections[connectionID]
+    const { fromID, toID, param, outputIndex, actualOutputID, actualInputID } = prevConnections[connectionID]
     disconnect(
       window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
       window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
