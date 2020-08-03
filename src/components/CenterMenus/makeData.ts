@@ -16,3 +16,11 @@ export function makeRangeSetMenuData(isOpen: boolean, modID = '', controlID = ''
     onChangeSubmit,
   }
 }
+
+export function makeSaveMenuData(isOpen: boolean, saveList: string[] = [], onClose = () => {}) {
+  return {
+    isOpen,
+    saveList,
+    onClose,
+  }
+}

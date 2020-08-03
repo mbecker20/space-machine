@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { makeConnectionMenuData, makeRangeSetMenuData } from './makeData'
+import { makeConnectionMenuData, makeRangeSetMenuData, makeSaveMenuData } from './makeData'
 import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import RenameMenu from './RenameMenu/RenameMenu'
 import RangeSetMenu from './RangeSetMenu/RangeSetMenu'
@@ -11,7 +11,7 @@ declare global {
     openConnectionMenu: (fromID: string, toID: string) => void
     openRenameMenu: (toRenameID: string) => void
     openRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
-    openSaveMenu: (saveList: string[]) => void
+    openSaveMenu: (saveList: string[], onClose: () => void) => void
   }
 }
 
@@ -22,8 +22,8 @@ function CenterMenus() {
   window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   const [rangeSetMenuData, setRangeSetMenuData] = useState(makeRangeSetMenuData(false))
   window.openRangeSetMenu = (modID, controlID, onChangeSubmit) => { setRangeSetMenuData(makeRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
-  const [saveMenuData, setSaveMenuData] = useState<{ isOpen: boolean, saveList: string[] }>({ isOpen: false, saveList: [] })
-  window.openSaveMenu = (saveList) => { setSaveMenuData({ isOpen: true, saveList }) }
+  const [saveMenuData, setSaveMenuData] = useState(makeSaveMenuData(false))
+  window.openSaveMenu = (saveList, onClose) => { setSaveMenuData({ isOpen: true, saveList, onClose }) }
   return (
     <Fragment>
       {
@@ -53,7 +53,10 @@ function CenterMenus() {
       {
         !saveMenuData.isOpen ? null :
         <SaveMenu saveList={saveMenuData.saveList} 
-          onClose={() => { setSaveMenuData({ isOpen: false, saveList: [] }) }}
+          onClose={() => {
+            saveMenuData.onClose()
+            setSaveMenuData(makeSaveMenuData(false)) 
+          }}
         />
       }
     </Fragment>

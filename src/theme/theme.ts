@@ -54,7 +54,10 @@ export const colors: Colors = {
   containerModuleBG: '#4C4141',
   //container knob magic tricks
 
-  outputModuleBG: '#CA5F3C'
+  outputModuleBG: '#CA5F3C',
+
+  confirmButton: '#00802da6',
+  denyButton: '#cc00006e',
 }
 
 export const sizes: Sizes = {

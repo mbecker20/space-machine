@@ -8,6 +8,7 @@ import CSS from 'csstype'
 import { RootState } from '../../../redux/stateTSTypes'
 import IORecursion from './IORecursion'
 import useJSS from './style'
+import { connectionExists } from './helpers'
 
 interface Props {
   fromID: string
@@ -27,7 +28,7 @@ const buttonStyle: CSS.Properties = {
 function ConnectionMenu({ fromID, toID, onClose }: Props) {
   const classes = useJSS()
   const am = window.audioModules
-  const modules = useSelector((state: RootState) => state.modules)
+  const [ modules, connections ] = useSelector((state: RootState) => [ state.modules, state.connections ])
   const fromMod = modules[fromID]
   const toMod = modules[toID]
   const [outputIndex, setOutputIndex] = useState(0)
@@ -88,22 +89,26 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
         {(isToContainer ? modules[toMod.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod.connectionInputs.length === 0) ? null :
         <Button style={buttonStyle}
           onClick={() => {
-            connect(
-              am[actualFromID] as ConnectingAudioModule, 
-              am[actualToID] as ConnectingAudioModule,
-              '',
-              outputIndex,
-              inputIndex,
-            )
-            dispatch(addConnection(
-              fromID, 
-              toID, 
-              '', 
-              outputIndex, 
-              inputIndex, 
-              isFromContainer ? actualFromID : undefined, 
-              isToContainer ? actualToID : undefined,
-            ))
+            if (!connectionExists(connections, fromMod, actualToID)) {
+              connect(
+                am[actualFromID] as ConnectingAudioModule,
+                am[actualToID] as ConnectingAudioModule,
+                '',
+                outputIndex,
+                inputIndex,
+              )
+              dispatch(addConnection(
+                fromID,
+                toID,
+                '',
+                outputIndex,
+                inputIndex,
+                isFromContainer ? actualFromID : undefined,
+                isToContainer ? actualToID : undefined,
+              ))
+            } else {
+              alert('modules already connected')
+            }
             onClose()
           }}
         >module</Button>}
@@ -127,22 +132,26 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
             <Button style={buttonStyle}
               key={fromID + toID + key}
               onClick={() => {
-                connect(
-                  am[actualFromID] as ConnectingAudioModule,
-                  am[actualToID] as ConnectingAudioModule,
-                  paramID,
-                  outputIndex,
-                  inputIndex,
-                )
-                dispatch(addConnection(
-                  fromID,
-                  toID,
-                  paramID,
-                  outputIndex,
-                  inputIndex,
-                  isFromContainer ? actualFromID : undefined,
-                  isToContainer ? actualToID : undefined,
-                ))
+                if (!connectionExists(connections, fromMod, actualToID, paramID)) {
+                  connect(
+                    am[actualFromID] as ConnectingAudioModule,
+                    am[actualToID] as ConnectingAudioModule,
+                    paramID,
+                    outputIndex,
+                    inputIndex,
+                  )
+                  dispatch(addConnection(
+                    fromID,
+                    toID,
+                    paramID,
+                    outputIndex,
+                    inputIndex,
+                    isFromContainer ? actualFromID : undefined,
+                    isToContainer ? actualToID : undefined,
+                  ))
+                } else {
+                  alert('modules already connected')
+                }
                 onClose()
               }}
             >{paramID}</Button>

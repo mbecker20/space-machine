@@ -28,7 +28,10 @@ function combinedModuleConnectionReducer(state: RootState, action: ModuleAction 
 
 const rootReducer = (state = initState, action: ModuleAction | BCIDAction | ConnectionAction | RootAction): RootState => {
   if (action.type === RESTORE_FROM_STATE) {
-    return (action as RootAction).state
+    const newState = (action as RootAction).state
+    return Object.assign(newState, newState.connections ? {} : {
+      connections: {}
+    })
   } else {
     const { newModules, newConnections } = combinedModuleConnectionReducer(state, action as ModuleAction | ConnectionAction)
     return {

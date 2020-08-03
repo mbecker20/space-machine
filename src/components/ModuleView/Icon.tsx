@@ -201,7 +201,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }}>
           <ArcherElement
             id={mod.id + ' output'}
-            relations={mod.outputs.map(connectionID => {
+            relations={mod.outputs.filter(connectionID => {
+              const { fromID, actualOutputID } = connections[connectionID]
+              return actualOutputID !== fromID
+            }).map(connectionID => {
               const { toID, param } = connections[connectionID]
               return {
                 targetId: param === '' ? toID + ' input' : toID + ' controls',
