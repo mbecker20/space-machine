@@ -18,7 +18,7 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
     <div className={classes.ControlMenu}>
       {selectedModule.containerControls.map(({ modID, controlID, actualModID }, index) => {
         const audioModule = window.audioModules[actualModID]
-        const { controlType, value } = modules[modID].controlData[controlID]
+        const { controlType, value } = modules[actualModID].controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         const name = modules[modID].name
         return (
