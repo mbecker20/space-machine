@@ -1,9 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { Button } from '../all'
-import { getFileDirectory } from '../CenterMenus/SaveMenu/helpers'
-import { sizes } from '../../theme/theme'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 const fs = window.require('fs')
@@ -15,7 +13,6 @@ interface Props {
 function FileMenu({ initName }: Props) {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
-  const [saveName, setSaveName] = useState(initName)
   const dispatch = useDispatch()
   useEffect(() => {
     window.setTimeout(() => {
@@ -25,7 +22,7 @@ function FileMenu({ initName }: Props) {
     }, 50)
   }, [])
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
       <label htmlFor='chooseFile'>
         <Button
         >open file</Button>
@@ -46,30 +43,11 @@ function FileMenu({ initName }: Props) {
           }
         }}
       />
-      <input style={{ fontSize: sizes.text.small }}
-        placeholder={initName}
-        value={saveName}
-        onChange={e => {
-          setSaveName(e.target.value)
+      <Button
+        onClick={() => {
+          window.openFileSaveMenu()
         }}
-      />
-      <label htmlFor='chooseFolder'>
-        <Button>save (select folder)</Button>
-      </label>
-      <input style={{ width: 0, height: 0, opacity: 0 }}
-        id='chooseFolder'
-        type='file'
-        ref={folderRef}
-        onChange={e => {
-          const goodDir = getFileDirectory((((e.target as HTMLInputElement).files as FileList)[0] as any).path)
-          if (saveName !== '') {
-            fs.writeFile(goodDir + saveName + '.sm', JSON.stringify(state), (err: any) => {
-              console.log('saved maybe')
-              if (err) throw err
-            })
-          }
-        }}
-      />
+      >save</Button>
     </div>
   )
 }

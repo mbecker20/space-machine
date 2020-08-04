@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useJSS from './style'
-import { RightDrawer, ModuleViewFill, AudioTags, CenterMenus, PointerLayer } from '../components/all'
+import { RightDrawer, ModuleViewFill, AudioTags, CenterMenus, PointerLayer, Notification } from '../components/all'
 import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
 import { Dispatch } from 'redux'
@@ -47,6 +47,7 @@ function App() {
         <PointerLayer pointerLayerData={ pointerLayerData } resetPointerLayerData={resetPointerLayerData}/>
       }
       <CenterMenus />
+      <Notification />
     </div>
   )
 }

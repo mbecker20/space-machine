@@ -80,7 +80,7 @@ function CenterMenus() {
         !fileSaveMenuData.isOpen ? null :
         <FileSaveMenu
           onClose={() => {
-            
+            setFileSaveMenuData({ isOpen: false })
           }}
         />
       }

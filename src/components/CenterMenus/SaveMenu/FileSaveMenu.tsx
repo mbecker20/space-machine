@@ -39,7 +39,7 @@ function FileSaveMenu({ onClose }: Props) {
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         {
           window.currentSaveDirectory.length === 0 ?
-          <label htmlFor='chooseDirectory'>
+          <label htmlFor='chooseDirectory' style={{ marginBottom: '1vmin', fontSize: sizes.text.small }}>
             <Button
               onClick={() => {
 
@@ -47,18 +47,26 @@ function FileSaveMenu({ onClose }: Props) {
             >choose save directory</Button>
           </label>
           :
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginBottom: '2vmin' }}>
             <div style={{ fontSize: sizes.text.small }}>
               {currentDirectory}
             </div>
-            <label htmlFor='chooseDirectory'>
+            <label
+              style={{ 
+                backgroundColor: 'blue', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center',
+                marginLeft: '2vmin',
+                borderRadius: '1vmin',
+              }}
+              htmlFor='chooseDirectory'
+            >
               <img
+                style={{ width: '.7em', padding: '.2vmin' }}
                 title='edit directory'
                 src={settingsSVG}
                 alt='edit directory'
-                onClick={() => {
-
-                }}
               >
               </img>
             </label>
@@ -69,12 +77,24 @@ function FileSaveMenu({ onClose }: Props) {
           type='file'
           ref={folderRef}
           onChange={e => {
-            const goodDir = getFileDirectory((((e.target as HTMLInputElement).files as FileList)[0] as any).path)
-            window.currentSaveDirectory = goodDir
-            setCurrentDirectory(goodDir)
+            if (((e.target as HTMLInputElement).files as FileList)[0]) {
+              const goodDir = getFileDirectory((((e.target as HTMLInputElement).files as FileList)[0] as any).path)
+              window.currentSaveDirectory = goodDir
+              setCurrentDirectory(goodDir)
+            }
           }}
         />
-        <input style={{ fontSize: sizes.text.small }}
+        <input 
+          style={{ 
+            fontSize: sizes.text.medium, 
+            backgroundColor: 'transparent', 
+            color: 'white',
+            justifyContent: 'center',
+            borderRadius: '1vmin',
+            textAlign: 'center',
+            padding: '1vmin',
+            width: `${saveName.length}em`
+          }}
           value={saveName}
           onChange={e => {
             setSaveName(e.target.value)
@@ -86,6 +106,7 @@ function FileSaveMenu({ onClose }: Props) {
                   fs.writeFile(currentDirectory + saveName + '.sm', JSON.stringify(state), (err: any) => {
                     //console.log(`saved to ${currentDirectory + saveName + '.sm'}`)
                     if (err) throw err
+                    window.flashNotification('green', 'file saved')
                   })
                   onClose()
                 } else {
@@ -104,10 +125,11 @@ function FileSaveMenu({ onClose }: Props) {
               fs.writeFile(currentDirectory + saveName + '.sm', JSON.stringify(state), (err: any) => {
                 //console.log(`saved to ${currentDirectory + saveName + '.sm'}`)
                 if (err) throw err
+                window.flashNotification('green', 'file saved')
               })
               onClose()
             } else {
-              alert('please enter a save name or choose a save directory')
+              window.flashNotification('red', 'please enter save name or set directory')
             }
           }}
         >save</Button>

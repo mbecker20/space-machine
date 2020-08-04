@@ -4,7 +4,7 @@ export interface NotificationData {
   text: string
 }
 
-export function makeNotificationData(isOpen: boolean, color: string, text: string) {
+export function makeNotificationData(isOpen: boolean, color = '', text = ''): NotificationData {
   return {
     isOpen,
     color,
