@@ -6,11 +6,7 @@ import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 const fs = window.require('fs')
 
-interface Props {
-  initName: string
-}
-
-function FileMenu({ initName }: Props) {
+function FileMenu() {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
@@ -22,7 +18,13 @@ function FileMenu({ initName }: Props) {
     }, 50)
   }, [])
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+    <div 
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+      }}
+    >
       <label htmlFor='chooseFile'>
         <Button
         >open file</Button>

@@ -14,6 +14,7 @@ import DeleteButton from '../LargeIcon/DeleteButton'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
 import getModuleColor from '../../theme/moduleColor'
+import { bothStringsIn } from '../../helpers/genFuncs'
 
 declare global {
   interface Window {
@@ -202,8 +203,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           <ArcherElement
             id={mod.id + ' output'}
             relations={mod.outputs.filter(connectionID => {
-              const { fromID, actualOutputID } = connections[connectionID]
-              return actualOutputID !== fromID
+              const { fromID, actualOutputID, toID, actualInputID } = connections[connectionID]
+              const actualFromID = actualOutputID ? actualOutputID : fromID
+              const actualToID = actualInputID ? actualInputID : toID
+              return bothStringsIn(actualFromID, actualToID, (modules[window.fillContainerID] as ContainerModule).childModules)
             }).map(connectionID => {
               const { toID, param } = connections[connectionID]
               return {

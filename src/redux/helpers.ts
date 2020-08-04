@@ -1,22 +1,14 @@
+import { stringIn } from "../helpers/genFuncs"
+
 export function filterOutFromObj<ObjType>(obj: ObjType, idsToFilterOut: string[]) {
   return Object.fromEntries(Object.entries(obj).filter(entry => {
-    for (var i = 0; i < idsToFilterOut.length; i++) {
-      if (entry[0] === idsToFilterOut[i]) {
-        return false
-      }
-    }
-    return true
+    return !stringIn(entry[0], idsToFilterOut)
   }))
 }
 
 export function keepOnlyIdsInObj<ObjType>(obj: ObjType, idsToKeep: string[]) {
   return Object.fromEntries(Object.entries(obj).filter(entry => {
-    for (var i = 0; i < idsToKeep.length; i++) {
-      if (entry[0] === idsToKeep[i]) {
-        return true
-      }
-    }
-    return false
+    return stringIn(entry[0], idsToKeep)
   }))
 }
 
