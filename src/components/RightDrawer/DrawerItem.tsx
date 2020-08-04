@@ -20,7 +20,7 @@ function DrawerItem({ fullName, id, moduleType }: Props) {
         style={{ backgroundColor: getModuleColor(moduleType) }}
         draggable={true}
         onDragStart={event => {
-          event.dataTransfer.setData('id', `${id} ${numAdds + 500 * Math.sin(window.numberRestores) + 11000 * Math.random()}`.slice(0, 20))
+          event.dataTransfer.setData('id', `${id} ${numAdds + 500 * window.numberRestores *  Math.random() + 11000 * Math.random()}`.slice(0, 20))
           event.dataTransfer.setData('moduleType', moduleType)
           event.dataTransfer.setData('name', id)
           window.setFillIsExpanded(true)
