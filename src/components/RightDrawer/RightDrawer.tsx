@@ -42,7 +42,7 @@ function RightDrawer() {
     window.addEventListener('resize', () => {
       window.setTimeout(() => { toReRender({}) }, 500) 
     })
-  })
+  }, [])
   const baseName = useSelector((state: RootState) => state.modules[state.baseContainerID].name)
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring} onPointerDown={e => e.stopPropagation()}>

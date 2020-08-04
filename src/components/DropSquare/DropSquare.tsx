@@ -13,8 +13,6 @@ interface Props {
   col: number
 }
 
-
-
 function DropSquare({ row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
