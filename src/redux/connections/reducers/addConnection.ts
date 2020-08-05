@@ -22,23 +22,7 @@ const addConnection = (modules: Modules, connections: Connections, { fromID, toI
           connectionID
         ]
       }
-    }, !containerOutputChildID ? {} : {
-      [containerOutputChildID]: {
-        ...modules[containerOutputChildID],
-        outputs: [
-          ...modules[containerOutputChildID].outputs,
-          connectionID,
-        ]
-      }
-    }, !containerInputChildID ? {} : {
-      [containerInputChildID]: {
-        ...modules[containerInputChildID],
-        inputs: [
-          ...modules[containerInputChildID].inputs,
-          connectionID,
-        ]
-      }
-    },),
+    }),
     newConnections: {
       ...connections,
       [connectionID]: {

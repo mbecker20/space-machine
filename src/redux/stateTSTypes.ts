@@ -51,7 +51,7 @@ export interface Modules {
 // connection related state
 
 export interface ConnectionData {
-  connectionID: string // stored on both from and to objected
+  connectionID: string // stored on both from and to modules
   fromID: string
   toID: string
   param: string
