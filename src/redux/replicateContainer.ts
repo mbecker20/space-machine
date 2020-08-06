@@ -80,7 +80,7 @@ function performContainerMerge(dispatch: Dispatch, modulesToMerge: Modules, conn
   dispatch(mergeContainer(newModules, newConnections))
 }
 
-export function replicateContainer(dispatch: Dispatch, state: RootState, containerID: string) {
+export function duplicateContainer(dispatch: Dispatch, state: RootState, containerID: string) {
   const { modules, connections } = getContainerModulesConnections(state, containerID)
   const totNumberModules = Object.keys(state.modules).length
   const totNumberConnections = Object.keys(state.connections).length
