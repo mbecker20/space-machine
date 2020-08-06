@@ -29,10 +29,14 @@ export const removeModule = (id: string): RemoveModuleAction => {
   }
 }
 
-export const mergeContainer = (newModules: Modules, newConnections: Connections): MergeContainerAction => {
+export const mergeContainer = (containerID: string, newModules: Modules, newConnections: Connections, parentID: string, row: number, col: number): MergeContainerAction => {
   return {
     type: MERGE_CONTAINER,
+    containerID,
     newModules,
     newConnections,
+    parentID,
+    row,
+    col,
   }
 }

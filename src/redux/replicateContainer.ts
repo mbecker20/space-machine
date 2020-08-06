@@ -5,6 +5,7 @@ import { CONTAINER } from "../audioModules/moduleTypes"
 import { Dispatch } from 'redux'
 import { mergeContainer } from './allActions'
 import { getContainerModulesConnections } from "./getContainerAsProject"
+import mergeExistingContainerAM from "../audioModules/mergeExistingAM"
 
 
 function genRandomID(index: number, totNumber: number) {
@@ -73,22 +74,24 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
   }
 }
 
-function performContainerMerge(dispatch: Dispatch, modulesToMerge: Modules, connectionsToMerge: Connections, totNumberModules: number, totNumberConnections: number) {
+function performContainerMerge(dispatch: Dispatch, modulesToMerge: Modules, connectionsToMerge: Connections, totNumberModules: number, totNumberConnections: number, parentID: string, containerID: string, row: number, col: number) {
   // this function makes a copy of state with above function, then restores all modules and connections,
   // and dispatches an action to merge the copied state with the full project state 
   const { newModules, newConnections } = getReplicatedState(modulesToMerge, connectionsToMerge, totNumberModules, totNumberConnections)
-  dispatch(mergeContainer(newModules, newConnections))
+  mergeExistingContainerAM(modulesToMerge, connectionsToMerge)
+  dispatch(mergeContainer(containerID, newModules, newConnections, parentID, row, col))
 }
 
-export function duplicateContainer(dispatch: Dispatch, state: RootState, containerID: string) {
+export function duplicateContainer(dispatch: Dispatch, state: RootState, parentID: string, containerID: string, row: number, col: number) {
   const { modules, connections } = getContainerModulesConnections(state, containerID)
   const totNumberModules = Object.keys(state.modules).length
   const totNumberConnections = Object.keys(state.connections).length
-  performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections)
+  performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, parentID, containerID, row, col)
 }
 
-export function loadProjectAsContainer(dispatch: Dispatch, currState: RootState, { modules, connections, baseContainerID }: RootState) {
+export function loadProjectAsContainer(dispatch: Dispatch, currState: RootState, parentID: string, row: number, col: number, stateToRestore: RootState) {
   // used for loading in projects as containers within an existing project
+  const { modules, connections, baseContainerID } = stateToRestore
   const totNumberModules = Object.keys(currState.modules).length
   const totNumberConnections = Object.keys(currState.connections).length
   const { newModules, newConnections } = getReplicatedState(modules, connections, totNumberModules, totNumberConnections)
@@ -97,7 +100,8 @@ export function loadProjectAsContainer(dispatch: Dispatch, currState: RootState,
     [baseContainerID]: {
       ...newModules[baseContainerID],
       isBaseContainer: false,
+      parentID,
     }
   }
-  dispatch(mergeContainer(goodNewModules, newConnections))
+  dispatch(mergeContainer(baseContainerID, goodNewModules, newConnections, parentID, row, col))
 }

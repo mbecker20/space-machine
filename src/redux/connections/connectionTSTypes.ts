@@ -23,8 +23,12 @@ export interface RemoveModuleAction {
 
 export interface MergeContainerAction {
   type: string
+  containerID: string
   newModules: Modules
   newConnections: Connections
+  parentID: string
+  row: number // the new row / col of the merged container within the container it was instantiated
+  col: number
 }
 
 export interface ConnectionReducerReturn {

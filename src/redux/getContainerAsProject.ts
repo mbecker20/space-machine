@@ -49,6 +49,7 @@ export function getContainerAsProject(state: RootState, containerID: string) {
       [containerID]: {
         ...trimmedModules[containerID],
         isBaseContainer: true,
+        parentID: null,
       },
     },
     connections: trimmedConnections
