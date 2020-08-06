@@ -87,7 +87,17 @@ export function replicateContainer(dispatch: Dispatch, state: RootState, contain
   performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections)
 }
 
-export function replicateProjectAsContainer(dispatch: Dispatch, stateToContainerize: RootState) {
+export function loadProjectAsContainer(dispatch: Dispatch, currState: RootState, { modules, connections, baseContainerID }: RootState) {
   // used for loading in projects as containers within an existing project
-  
+  const totNumberModules = Object.keys(currState.modules).length
+  const totNumberConnections = Object.keys(currState.connections).length
+  const { newModules, newConnections } = getReplicatedState(modules, connections, totNumberModules, totNumberConnections)
+  const goodNewModules = {
+    ...newModules,
+    [baseContainerID]: {
+      ...newModules[baseContainerID],
+      isBaseContainer: false,
+    }
+  }
+  dispatch(mergeContainer(goodNewModules, newConnections))
 }
