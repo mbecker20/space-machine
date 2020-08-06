@@ -12,11 +12,11 @@ export function keepOnlyIdsInObj<ObjType>(obj: ObjType, idsToKeep: string[]) {
   }))
 }
 
-export function ObjFrom2Arrays(arr1: string[], arr2: any[]) {
-  if (arr1.length === arr2.length) {
-    return Object.fromEntries(arr1.map((id, index) => {
-      return [id, arr2[index]]
+export function ObjFrom2Arrays(keys: string[], entries: any[]) {
+  if (keys.length === entries.length) {
+    return Object.fromEntries(keys.map((id, index) => {
+      return [id, entries[index]]
     }))
   }
-  return false
+  return {}
 }

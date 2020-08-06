@@ -14,7 +14,7 @@ function getChildrenRecursive(containerID: string, modules: Modules): string[] {
   return [ ...childIDs, ...containerChildIDs ]
 }
 
-function getInternalConnections(trimmedIDs: string[], connections: Connections) {
+function getInternalConnections(connections: Connections, trimmedIDs: string[]) {
   let connectionIDs: string[] = []
   for (const connectionID in Object.keys(connections)) {
     const { fromID, toID, actualOutputID, actualInputID } = connections[connectionID]
@@ -27,10 +27,15 @@ function getInternalConnections(trimmedIDs: string[], connections: Connections) 
   return keepOnlyIdsInObj(connections, connectionIDs) as Connections
 }
 
-function saveContainer(state: RootState, containerID: string) {
+function getContainerAsProject(state: RootState, containerID: string) {
   const trimmedIDs = [ containerID, ...getChildrenRecursive(containerID, state.modules) ]
   const trimmedModules = keepOnlyIdsInObj(state.modules, trimmedIDs)
-  const trimmedConnections = getInternalConnections(trimmedIDs, state.connections)
+  const trimmedConnections = getInternalConnections(state.connections, trimmedIDs)
+  return {
+    baseContainerID: containerID,
+    modules: trimmedModules,
+    connections: trimmedConnections
+  }
 }
 
-export default saveContainer
+export default getContainerAsProject
