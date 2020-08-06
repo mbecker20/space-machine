@@ -27,15 +27,30 @@ function getInternalConnections(connections: Connections, trimmedIDs: string[]) 
   return keepOnlyIdsInObj(connections, connectionIDs) as Connections
 }
 
-function getContainerAsProject(state: RootState, containerID: string) {
+export function getContainerModulesConnections(state: RootState, containerID: string) {
+  const trimmedIDs = [containerID, ...getChildrenRecursive(containerID, state.modules)]
+  const trimmedModules = keepOnlyIdsInObj(state.modules, trimmedIDs)
+  const trimmedConnections = getInternalConnections(state.connections, trimmedIDs)
+  return {
+    modules: trimmedModules,
+    connections: trimmedConnections,
+  }
+}
+
+
+export function getContainerAsProject(state: RootState, containerID: string) {
   const trimmedIDs = [ containerID, ...getChildrenRecursive(containerID, state.modules) ]
   const trimmedModules = keepOnlyIdsInObj(state.modules, trimmedIDs)
   const trimmedConnections = getInternalConnections(state.connections, trimmedIDs)
   return {
     baseContainerID: containerID,
-    modules: trimmedModules,
+    modules: {
+      ...trimmedModules,
+      [containerID]: {
+        ...trimmedModules[containerID],
+        isBaseContainer: true,
+      },
+    },
     connections: trimmedConnections
   }
 }
-
-export default getContainerAsProject
