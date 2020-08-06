@@ -9,8 +9,13 @@ export function makeContainerControlData(): ControlData {
   return {
     'open': {
       controlType: BUTTON,
-      paramID: 'n/a',
-    }
+    },
+    'duplicate': {
+      controlType: BUTTON,
+    },
+    'save container': {
+      controlType: BUTTON,
+    },
   }
 }
 
@@ -21,6 +26,9 @@ function makeContainer(id: string): ContainerModule {
       window.highlightedID = ''
       window.currUnHighlight = () => {}
       window.reRenderFillContainer()
+    },
+    'duplicate': () => {
+      
     }
   }
   return {

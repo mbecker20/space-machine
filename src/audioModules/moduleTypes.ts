@@ -52,7 +52,7 @@ export type Range = [number, number] // min / max
 
 export interface ControlDataPacket {
   controlType: ControlType
-  paramID: string
+  paramID?: string
   value?: Value // need either paramID or value
   range?: Range
   maxRange?: Range // the max the range can be set to be
