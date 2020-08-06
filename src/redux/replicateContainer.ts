@@ -3,6 +3,7 @@ import { ObjFrom2Arrays } from "./helpers"
 import { stringIn } from "../helpers/genFuncs"
 import { CONTAINER } from "../audioModules/moduleTypes"
 import { Dispatch } from 'redux'
+import { mergeContainer } from './allActions'
 
 
 function genRandomID(index: number, totNumber: number) {
@@ -71,10 +72,11 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
   }
 }
 
-function replicateContainer(dispatch: Dispatch, modules: Modules, connections: Connections, totNumberModules: number, totNumberConnections: number) {
+function replicateContainer(dispatch: Dispatch, modulesToMerge: Modules, connectionsToMerge: Connections, totNumberModules: number, totNumberConnections: number) {
   // this function makes a copy of state with above function, then restores all modules and connections,
   // and dispatches an action to merge the copied state with the full project state 
-  const { newModules, newConnections } = getReplicatedState(modules, connections, totNumberModules, totNumberConnections)
+  const { newModules, newConnections } = getReplicatedState(modulesToMerge, connectionsToMerge, totNumberModules, totNumberConnections)
+  dispatch(mergeContainer(newModules, newConnections))
 }
 
 export default replicateContainer

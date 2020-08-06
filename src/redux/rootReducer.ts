@@ -5,7 +5,7 @@ import { RootState } from './stateTSTypes'
 import { ModuleAction } from './modules/moduleTSTypes'
 import { BCIDAction } from './baseContainerID/bcidTSTypes'
 import { ConnectionAction } from './connections/connectionTSTypes'
-import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE } from './connections/connectionActionTypes'
+import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE, MERGE_CONTAINER } from './connections/connectionActionTypes'
 import { RESTORE_FROM_STATE } from './root/rootActionTypes'
 import { RootAction } from './root/rootActionTSTypes'
 
@@ -16,7 +16,7 @@ const initState = {
 }
 
 function combinedModuleConnectionReducer(state: RootState, action: ModuleAction | ConnectionAction) {
-  if (action.type === ADD_CONNECTION || action.type === REMOVE_CONNECTION || action.type === REMOVE_MODULE) {
+  if (action.type === ADD_CONNECTION || action.type === REMOVE_CONNECTION || action.type === REMOVE_MODULE || action.type === MERGE_CONTAINER) {
     return connectionReducer(state.modules, state.connections, action as ConnectionAction)
   } else {
     return {

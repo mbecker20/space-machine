@@ -16,6 +16,7 @@ export {
   addConnection,
   removeConnection,
   removeModule,
+  mergeContainer,
 } from './connections/connectionActions'
 export {
   restoreFromState,
