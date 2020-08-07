@@ -15,6 +15,7 @@ import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
 import getModuleColor from '../../theme/moduleColor'
 import { bothStringsIn } from '../../helpers/genFuncs'
+import { MOVE, COPY } from '../DropSquare/DropSquare'
 
 declare global {
   interface Window {
@@ -81,10 +82,12 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           event.preventDefault()
         }}
         onDrop={e => {
+          e.stopPropagation()
           const id = e.dataTransfer.getData('id')
+          const moduleDragType = e.dataTransfer.getData('type')
           if (id) {
             const possiblyMod = modules[id]
-            if (possiblyMod) {
+            if (possiblyMod && moduleDragType === MOVE) {
               const fromRow = e.dataTransfer.getData('fromRow')
               const fromCol = e.dataTransfer.getData('fromCol')
               window.setFillIsExpanded(false)
@@ -105,10 +108,15 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           setHighlighted(false)
         }}
         draggable={!isHighlighted}
-        onDragStart={event => {
-          event.dataTransfer.setData('id', mod.id)
-          event.dataTransfer.setData('fromRow', `${mod.row}`)
-          event.dataTransfer.setData('fromCol', `${mod.col}`)
+        onDragStart={e => {
+          if (e.shiftKey) {
+            e.dataTransfer.setData('type', COPY)
+          } else {
+            e.dataTransfer.setData('type', MOVE)
+          }
+          e.dataTransfer.setData('id', mod.id)
+          e.dataTransfer.setData('fromRow', `${mod.row}`)
+          e.dataTransfer.setData('fromCol', `${mod.col}`)
           window.setFillIsExpanded(true)
         }}
         onDragEnd={() => {

@@ -2,25 +2,23 @@ import React, { useState } from 'react'
 import CSS from 'csstype'
 import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState, ContainerModule } from '../../redux/stateTSTypes'
-import { moveModule } from '../../redux/modules/moduleActions'
-import { isOccupied } from '../ModuleView/helpers'
-import { ModuleType } from '../../audioModules/moduleTypes'
+import { RootState } from '../../redux/stateTSTypes'
 import { colors } from '../../theme/theme'
+import { onDrop } from './callbacks'
 
 interface Props {
   row: number
   col: number
 }
 
+// drag types
+export const MOVE = 'MOVE'
+export const COPY = 'COPY'
+
 function DropSquare({ row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
-  const { modules } = useSelector((state: RootState) => {
-    return {
-      modules: state.modules
-    }
-  })
+  const state = useSelector((state: RootState) => state)
   const [isHL, setHL] = useState(false) // to highlight on drag enter
   const dsStyle: CSS.Properties = {
     gridColumn: `${col + 1} / span 1`,
@@ -35,43 +33,17 @@ function DropSquare({ row, col }: Props) {
         event.preventDefault()
       }}
       onDragEnter={e => {
-        if (e.dataTransfer.types.length === 3) {
+        if (e.dataTransfer.types.length >= 3) {
           setHL(true)
         }
       }}
       onDragLeave={e => {
-        if (e.dataTransfer.types.length === 3) {
+        if (e.dataTransfer.types.length >= 3) {
           setHL(false)
         }
       }}
-      onDrop={event => {
-        const id = event.dataTransfer.getData('id')
-        const fc = modules[window.fillContainerID] as ContainerModule
-        const currentChildren = fc.childModules.concat(fc.childModules)
-        const possiblyMod = modules[id]
-        const possiblyOccupyingID = isOccupied(row, col, currentChildren, modules)
-        if (!possiblyMod) {
-          if (!possiblyOccupyingID) {
-            const moduleType = event.dataTransfer.getData('moduleType') as ModuleType
-            const name = event.dataTransfer.getData('name')
-            setHL(false)
-            window.addModule(id, name, window.fillContainerID, moduleType, dispatch, row, col)
-            window.setFillIsExpanded(false)
-          }
-        } else if (possiblyOccupyingID) {
-          const fromRow = event.dataTransfer.getData('fromRow')
-          const fromCol = event.dataTransfer.getData('fromCol')
-          setHL(false)
-          window.setFillIsExpanded(false)
-          dispatch(moveModule(id, row, col))
-          dispatch(moveModule(possiblyOccupyingID, Number(fromRow), Number(fromCol)))
-          window.setTimeout(window.refreshArcherContainer, 1)
-        } else {
-          setHL(false)
-          window.setFillIsExpanded(false)
-          dispatch(moveModule(id, row, col))
-          window.setTimeout(window.refreshArcherContainer, 1)
-        }
+      onDrop={e => {
+        onDrop(e, dispatch, state, row, col, setHL)
       }}
     />
   )
