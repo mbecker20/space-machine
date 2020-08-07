@@ -6,11 +6,8 @@ import { Dispatch } from 'redux'
 import { mergeContainer } from './allActions'
 import { getContainerModulesConnections } from "./getContainerAsProject"
 import mergeExistingContainerAM from "../audioModules/mergeExistingAM"
+import genRandomID from "./idGen"
 
-
-function genRandomID(index: number, totNumber: number) {
-  return `${totNumber}${index}${2048 * Math.random()}`
-}
 
 function getReplicatedState(modules: Modules, connections: Connections, totNumberModules: number, totNumberConnections: number) {
   // this function returns a copy of modules and connections, but with all modIDs and connectionIDs replaced.
@@ -69,6 +66,7 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
     }
   }))
   return {
+    modIDConverter,
     newModules,
     newConnections,
   }
@@ -77,9 +75,9 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
 function performContainerMerge(dispatch: Dispatch, modulesToMerge: Modules, connectionsToMerge: Connections, totNumberModules: number, totNumberConnections: number, parentID: string, containerID: string, row: number, col: number) {
   // this function makes a copy of state with above function, then restores all modules and connections,
   // and dispatches an action to merge the copied state with the full project state 
-  const { newModules, newConnections } = getReplicatedState(modulesToMerge, connectionsToMerge, totNumberModules, totNumberConnections)
-  mergeExistingContainerAM(modulesToMerge, connectionsToMerge)
-  dispatch(mergeContainer(containerID, newModules, newConnections, parentID, row, col))
+  const { modIDConverter, newModules, newConnections } = getReplicatedState(modulesToMerge, connectionsToMerge, totNumberModules, totNumberConnections)
+  mergeExistingContainerAM(newModules, newConnections)
+  dispatch(mergeContainer(modIDConverter[containerID], newModules, newConnections, parentID, row, col))
 }
 
 export function duplicateContainer(dispatch: Dispatch, state: RootState, parentID: string, containerID: string, row: number, col: number) {

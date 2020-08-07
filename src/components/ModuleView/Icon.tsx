@@ -55,7 +55,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     width: isHighlighted ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
     height: isHighlighted ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
     config: {
-      tension: 350,
+      tension: 650,
       clamp: true,
     },
     onFrame: window.refreshArcherContainer,
@@ -211,10 +211,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           <ArcherElement
             id={mod.id + ' output'}
             relations={mod.outputs.filter(connectionID => {
-              const { fromID, actualOutputID, toID, actualInputID } = connections[connectionID]
-              const actualFromID = actualOutputID ? actualOutputID : fromID
-              const actualToID = actualInputID ? actualInputID : toID
-              return bothStringsIn(actualFromID, actualToID, (modules[window.fillContainerID] as ContainerModule).childModules)
+              const { fromID, toID } = connections[connectionID]
+              return bothStringsIn(fromID, toID, (modules[window.fillContainerID] as ContainerModule).childModules)
             }).map(connectionID => {
               const { toID, param } = connections[connectionID]
               return {

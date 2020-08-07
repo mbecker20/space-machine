@@ -2,10 +2,11 @@ import { DragEvent } from 'react'
 import { ContainerModule, RootState } from '../../redux/stateTSTypes'
 import { isOccupied } from '../ModuleView/helpers'
 import { Dispatch } from 'redux'
-import { ModuleType } from '../../audioModules/moduleTypes'
+import { ModuleType, CONTAINER } from '../../audioModules/moduleTypes'
 import { moveModule } from '../../redux/allActions'
 import { duplicateContainer } from '../../redux/replicateContainer'
 import { MOVE, COPY } from './DropSquare'
+import duplicateModule from '../../redux/replicateModule'
 
 export function onDrop(e: DragEvent<HTMLDivElement>, dispatch: Dispatch, state: RootState, row: number, col: number, setHL: (isHL: boolean) => void) {
   const id = e.dataTransfer.getData('id')
@@ -38,7 +39,11 @@ export function onDrop(e: DragEvent<HTMLDivElement>, dispatch: Dispatch, state: 
         dispatch(moveModule(id, row, col))
         break
       case COPY:
-        duplicateContainer(dispatch, state, window.fillContainerID, id, row, col)
+        if (state.modules[id].moduleType === CONTAINER) {
+          duplicateContainer(dispatch, state, window.fillContainerID, id, row, col)
+        } else {
+          duplicateModule(dispatch, state, id, row, col)
+        }
         break
     }
     window.setTimeout(window.refreshArcherContainer, 1)

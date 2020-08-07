@@ -6,22 +6,23 @@ import { bothStringsIn } from "../helpers/genFuncs";
 function getChildrenRecursive(containerID: string, modules: Modules): string[] {
   const childIDs = (modules[containerID] as ContainerModule).childModules
   let containerChildIDs: string[] = []
-  for (const childID in childIDs) {
-    if (modules[childID].moduleType === CONTAINER) {
-      containerChildIDs = [...containerChildIDs, ...getChildrenRecursive(childID, modules) ]
+  for (const i in childIDs) {
+    if (modules[childIDs[i]].moduleType === CONTAINER) {
+      containerChildIDs = [...containerChildIDs, ...getChildrenRecursive(childIDs[i], modules) ]
     }
   }
   return [ ...childIDs, ...containerChildIDs ]
 }
 
 function getInternalConnections(connections: Connections, trimmedIDs: string[]) {
+  const allConnectionIDs = Object.keys(connections)
   let connectionIDs: string[] = []
-  for (const connectionID in Object.keys(connections)) {
-    const { fromID, toID, actualOutputID, actualInputID } = connections[connectionID]
+  for (const i in allConnectionIDs) {
+    const { fromID, toID, actualOutputID, actualInputID } = connections[allConnectionIDs[i]]
     const actualFromID = actualOutputID ? actualOutputID : fromID // actualIDs undefined if no containers involved in connection
     const actualToID = actualInputID ? actualInputID : toID
     if (bothStringsIn(actualFromID, actualToID, trimmedIDs)) {
-      connectionIDs = [ ...connectionIDs, connectionID ]
+      connectionIDs = [...connectionIDs, allConnectionIDs[i] ]
     }
   }
   return keepOnlyIdsInObj(connections, connectionIDs) as Connections
