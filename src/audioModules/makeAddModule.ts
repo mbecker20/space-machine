@@ -10,9 +10,6 @@ import {
   MEDIA_ELEMENT, 
   LINE_IN,
   CONTAINER,
-  ControlData,
-  ControlType,
-  FILE,
 } from './moduleTypes'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
