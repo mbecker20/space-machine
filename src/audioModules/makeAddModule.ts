@@ -26,6 +26,7 @@ import makeGain, { makeGainControlData } from './modules/gain'
 import makeOscillator, { makeOscControlData } from './modules/oscillator'
 import makeLineInput, { makeLineInControlData } from './modules/lineInput'
 import makeContainer, { makeContainerControlData } from './modules/container'
+import { makeMediaElementControlData } from './modules/mediaElement'
 
 function makeAddModule() {
   return function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
@@ -79,14 +80,9 @@ function makeAddModule() {
         dispatch(addModule(id, name, moduleType, constantControlData, parentID, row, col, [], ['0'])); 
         break;
       case MEDIA_ELEMENT:
-        const mediaControlData: ControlData = {
-          'choose file': {
-            controlType: FILE as ControlType,
-            paramID: 'n/a'
-          }
-        }
-        window.addAudioTag(id); window.reRenderAudioTags(); 
-        dispatch(addModule(id, name, moduleType, mediaControlData, parentID, row, col, [], ['0'])); 
+        const mediaControlData = makeMediaElementControlData()
+        window.addAudioTag(id); window.reRenderAudioTags()
+        dispatch(addModule(id, name, moduleType, mediaControlData, parentID, row, col, [], ['0']))
         break;
       case LINE_IN: 
         makeLineInput(id)
