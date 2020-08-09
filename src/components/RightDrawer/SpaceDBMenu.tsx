@@ -1,31 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '../all'
 import { RootState } from '../../redux/stateTSTypes'
-import feathers from '@feathersjs/feathers'
-import rest from '@feathersjs/rest-client'
 import { useDispatch, useSelector } from 'react-redux'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import { colors } from '../../theme/theme'
 
-declare global {
-  interface Window {
-    spaceDBSaveService: any
-  }
-}
-
 export interface Save {
   id: string,
   savedState: RootState,
 }
-
-const spaceDB = feathers()
-const restClient = rest('http://192.168.1.81:30300') // spaceDB
-// http://192.168.1.79:3030 - yoga
-// http://192.168.1.65:3030 - mac
-
-spaceDB.configure(restClient.fetch(window.fetch))
-window.spaceDBSaveService = spaceDB.service('spaceDB-save-service')
 
 const buttonStyle = {
   backgroundColor: 'transparent'
@@ -36,13 +20,13 @@ function SpaceDBMenu() {
   const dispatch = useDispatch()
   const connections = useSelector((state: RootState) => state.connections)
   useEffect(() => {
-    window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
+    window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
   }, [])
   return (
     <div>
       <Button style={buttonStyle}
         onClick={() => {
-          window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
+          window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
         }}
       >
         refresh saves
@@ -53,7 +37,7 @@ function SpaceDBMenu() {
             <div style={{ display: 'flex', flexDirection: 'row' }} key={saveName}>
               <Button style={buttonStyle}
                 onClick={() => {
-                  window.spaceDBSaveService.get(saveName).then((savedState: RootState) => {
+                  window.projectSaveService.get(saveName).then((savedState: RootState) => {
                     restoreAMFromState(connections, savedState)
                     dispatch(restoreFromState(savedState))
                   })
@@ -65,7 +49,7 @@ function SpaceDBMenu() {
                 onClick={() => {
                   window.openConfirmDeleteMenu(saveName, () => {
                     window.setTimeout(() => {
-                      window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
+                      window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
                     }, 1000)
                   })
                 }}
@@ -80,7 +64,7 @@ function SpaceDBMenu() {
         onClick={() => {
           window.openSpaceDBSaveMenu(saveList, () => {
             window.setTimeout(() => {
-              window.spaceDBSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
+              window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
             }, 1000)
           })
         }}

@@ -34,7 +34,7 @@ function SpaceDBSaveMenu({ saveList, onClose }: Props) {
                 if (stringIn(saveName, saveList)) {
                   setConfirmSaveData({ isOpen: true, message: 'would you like to overwrite this save?' })
                 } else {
-                  window.spaceDBSaveService.create({
+                  window.projectSaveService.create({
                     saveName,
                     state
                   })
@@ -56,7 +56,7 @@ function SpaceDBSaveMenu({ saveList, onClose }: Props) {
             if (stringIn(saveName, saveList)) {
               setConfirmSaveData({ isOpen: true, message: 'would you like to overwrite this save?' })
             } else {
-              window.spaceDBSaveService.create({
+              window.projectSaveService.create({
                 saveName,
                 state
               })
@@ -80,7 +80,7 @@ function SpaceDBSaveMenu({ saveList, onClose }: Props) {
             >no</Button>
             <Button style={{ backgroundColor: colors.confirmButton }}
               onClick={() => {
-                window.spaceDBSaveService.update(saveName, state)
+                window.projectSaveService.update(saveName, state)
                 onClose()
               }}
             >yes</Button>

@@ -6,6 +6,7 @@ import makeAddModule from '../audioModules/makeAddModule'
 import { Dispatch } from 'redux'
 import { makePointerLayerData } from '../components/PointerLayer/makeData'
 import { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
+import configureSpaceDB from './configureSpaceDB'
 
 declare global {
   interface Window { 
@@ -26,6 +27,8 @@ window.fillContainerID = 'project'
 
 window.audioModules = {}
 window.addModule = makeAddModule()
+
+configureSpaceDB()
 
 function App() {
   const classes = useJSS()
