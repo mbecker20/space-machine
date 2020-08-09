@@ -5,6 +5,7 @@ import { RootState } from '../../../redux/stateTSTypes'
 import { Button } from '../../all'
 import { stringIn } from '../../../helpers/genFuncs'
 import { getContainerModulesConnections } from '../../../redux/getContainerAsProject'
+import { sizes } from '../../../theme/theme'
 
 interface Props {
   id: string
@@ -16,7 +17,7 @@ function confirmSaveName(setConfirmSaveData: (arg: any) => void, containerID: st
   if (!stringIn(name, saveList)) {
     const { modules, connections } = getContainerModulesConnections(state, containerID)
     window.containerSaveService.create({
-      name,
+      saveName: name,
       containerID,
       modules,
       connections,
@@ -38,7 +39,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
     <CenterMenu header='save container module' 
       onClose={onClose}
     >
-      <input 
+      <input style={{ fontSize: sizes.text.small }}
         value={name}
         placeholder={initName}
         ref={inputRef}
@@ -78,7 +79,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
             onClick={() => {
               const { modules, connections } = getContainerModulesConnections(state, id)
               window.containerSaveService.create({
-                name,
+                saveName: name,
                 containerID: id,
                 modules,
                 connections,

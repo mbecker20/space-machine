@@ -2,10 +2,13 @@ import { Modules, ContainerModule, Connections } from "../../stateTSTypes"
 import { filterOutFromObj } from "../../helpers"
 import { stringIn } from "../../../helpers/genFuncs"
 import { RemoveModuleAction } from "../connectionTSTypes"
+import { CONTAINER } from "../../../audioModules/moduleTypes"
+import { getContainerIDs } from "../../getContainerAsProject"
 
 const removeModule = (modules: Modules, connections: Connections, { id }: RemoveModuleAction) => {
   const parentID = modules[id].parentID as string
-  const trimmedModules = filterOutFromObj(modules, [ id ]) as Modules
+  const toTrimIDs = modules[id].moduleType === CONTAINER ? getContainerIDs(id, modules) : [ id ]
+  const trimmedModules = filterOutFromObj(modules, toTrimIDs) as Modules
   return {
     newModules: Object.assign({}, Object.fromEntries(Object.entries(trimmedModules).map(entry => {
       return [entry[0], {

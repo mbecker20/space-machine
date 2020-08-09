@@ -14,6 +14,10 @@ function getChildrenRecursive(containerID: string, modules: Modules): string[] {
   return [ ...childIDs, ...containerChildIDs ]
 }
 
+export function getContainerIDs(containerID: string, modules: Modules) {
+  return [ containerID, ...getChildrenRecursive(containerID, modules) ]
+}
+
 function getInternalConnections(connections: Connections, trimmedIDs: string[]) {
   const allConnectionIDs = Object.keys(connections)
   let connectionIDs: string[] = []

@@ -20,7 +20,7 @@ function ConfirmDeleteMenu({ saveName, onClose }: Props) {
         >no</Button>
         <Button style={{ backgroundColor: colors.confirmButton }}
           onClick={() => {
-            window.spaceDBSaveService.remove(saveName)
+            window.projectSaveService.remove(saveName)
             onClose()
           }}
         >yes</Button>

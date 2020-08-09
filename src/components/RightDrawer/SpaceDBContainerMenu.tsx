@@ -12,10 +12,11 @@ function SpaceDBContainerMenu({ totNumModules }: Props) {
   const [containerSaves, setContainerSaves] = useState<string[]>([])
   useEffect(() => {
     window.containerSaveService.find().then((saveNames: string[]) => { setContainerSaves(saveNames) }) 
-  })
+  }, [])
   const state = useSelector((state: RootState) => state)
   return (
-    <div style={{ width: '100%', height: '100%' }}
+    <div style={{ width: '100%', height: '100%', zIndex: 1000 }}
+      onDragOver={e => e.preventDefault()}
       onDrop={e => {
         const id = e.dataTransfer.getData('id')
         if (id && state.modules[id]) {
@@ -24,7 +25,7 @@ function SpaceDBContainerMenu({ totNumModules }: Props) {
             window.openSpaceDBContainerSaveMenu(containerSaves, id, () => {
               window.setTimeout(() => {
                 window.containerSaveService.find().then((saveNames: string[]) => { setContainerSaves(saveNames) })
-              }, 1000)
+              }, 500)
             })
           }
         }

@@ -10,7 +10,7 @@ import SpaceDBMenu from './SpaceDBMenu'
 import FileMenu from './FileMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import SpaceDBContainerMenu from './spaceDBContainerMenu'
+import SpaceDBContainerMenu from './SpaceDBContainerMenu'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
