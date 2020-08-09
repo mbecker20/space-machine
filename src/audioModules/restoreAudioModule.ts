@@ -11,6 +11,7 @@ import {
   LINE_IN,
   CONTAINER,
   ControlData,
+  DISTORTION,
 } from './moduleTypes'
 import makeConstantSource from './modules/constant'
 import makeAutoFilter from './modules/autoFilter'
@@ -22,6 +23,7 @@ import makeGain from './modules/gain'
 import makeOscillator from './modules/oscillator'
 import makeLineInput from './modules/lineInput'
 import makeContainer from './modules/container'
+import makeDistortion from './modules/distortion'
 
 
 function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData: ControlData) {
@@ -67,6 +69,10 @@ function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData:
     case CONTAINER:
       const container = makeContainer(id)
       window.audioModules = { ...window.audioModules, [id]: container };
+      break
+    case DISTORTION:
+      const distortion = makeDistortion(prevControlData)
+      window.audioModules = { ...window.audioModules, [id]: distortion }
       break
   }
 }

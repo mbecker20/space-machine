@@ -9,6 +9,7 @@ import { ConstantModule } from './modules/constant'
 import { MediaElementModule } from './modules/mediaElement'
 import { LineInputModule } from './modules/lineInput'
 import { ContainerModule } from './modules/container'
+import { DistortionModule } from './modules/distortion'
 
 // module types
 
@@ -23,12 +24,13 @@ export const CONSTANT = 'CONSTANT'
 export const MEDIA_ELEMENT = 'MEDIA_ELEMENT'
 export const LINE_IN = 'LINE_IN'
 export const CONTAINER = 'CONTAINER'
+export const DISTORTION = 'DISTORTION'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule
 
 export type AudioModule = ConnectingAudioModule | ContainerModule
 

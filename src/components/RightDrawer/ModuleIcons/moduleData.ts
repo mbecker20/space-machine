@@ -1,4 +1,4 @@
-import { GAIN, AUTOFILTER, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, MEDIA_ELEMENT, LINE_IN, OSCILLATOR, CONSTANT, CONTAINER, OUTPUT } from "../../../audioModules/moduleTypes";
+import { GAIN, AUTOFILTER, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, MEDIA_ELEMENT, LINE_IN, OSCILLATOR, CONSTANT, CONTAINER, OUTPUT, DISTORTION } from "../../../audioModules/moduleTypes";
 
 export type DrawerModuleData = [string, string, string][]
 
@@ -8,6 +8,7 @@ export const effectModuleData: DrawerModuleData = [
   ['kompressor', 'komp', KOMPRESSOR],
   ['signal delay', 'delay', SIGNAL_DELAY],
   ['stereo panner', 'pan', STEREO_PANNER],
+  ['distortion', 'dist', DISTORTION],
 ]
 
 export const sourceModuleData: DrawerModuleData = [

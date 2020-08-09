@@ -10,6 +10,7 @@ import {
   MEDIA_ELEMENT, 
   LINE_IN,
   CONTAINER,
+  DISTORTION,
 } from './moduleTypes'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
@@ -24,6 +25,7 @@ import makeOscillator, { makeOscControlData } from './modules/oscillator'
 import makeLineInput, { makeLineInControlData } from './modules/lineInput'
 import makeContainer, { makeContainerControlData } from './modules/container'
 import { makeMediaElementControlData } from './modules/mediaElement'
+import makeDistortion, { makeDistortionControlData } from './modules/distortion'
 
 function makeAddModule() {
   return function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
@@ -92,6 +94,12 @@ function makeAddModule() {
         window.audioModules = { ...window.audioModules, [id]: container }; 
         dispatch(addModule(id, name, moduleType, containerControlData, parentID, row, col, [], [])); 
         break;
+      case DISTORTION:
+        const distortion = makeDistortion()
+        const distortionControlData = makeDistortionControlData()
+        window.audioModules = { ...window.audioModules, [id]: distortion }
+        dispatch(addModule(id, name, moduleType, distortionControlData, parentID, row, col, ['0'], ['0']))
+        break
     }
   }
 }
