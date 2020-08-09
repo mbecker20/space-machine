@@ -11,7 +11,7 @@ export function makeGainControlData(): ControlData {
       controlType: VALUE,
       paramID: 'gain',
       value: 0,
-      range: [-1, 1],
+      range: [0, 1],
     }
   }
 }
