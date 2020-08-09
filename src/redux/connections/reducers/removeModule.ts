@@ -10,8 +10,7 @@ const removeModule = (modules: Modules, connections: Connections, { id }: Remove
   const toTrimModIDs = modules[id].moduleType === CONTAINER ? getContainerIDs(id, modules) : [ id ]
   const toTrimConnectionIDs = modules[id].moduleType === CONTAINER ? 
     [...modules[id].inputs, ...modules[id].outputs, ...getInternalConnectionIDs(connections, toTrimModIDs)] 
-    :
-    [...modules[id].inputs, ...modules[id].outputs]
+    :[...modules[id].inputs, ...modules[id].outputs]
   const trimmedModules = filterOutFromObj(modules, toTrimModIDs) as Modules
   return {
     newModules: Object.assign({}, Object.fromEntries(Object.entries(trimmedModules).map(entry => {
