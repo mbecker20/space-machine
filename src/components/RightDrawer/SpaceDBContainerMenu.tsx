@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ContainerDrawerItem from './containerDrawerItem'
+import ContainerDrawerItem from './ContainerDrawerItem'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { CONTAINER } from '../../audioModules/moduleTypes'
