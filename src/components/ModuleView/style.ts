@@ -79,6 +79,12 @@ const useJSS = createUseStyles({
     justifyContent: 'flex-start',
     overflowY: 'scroll',
     overflowX: 'hidden',
+    '&::-webkit-scrollbar': {
+      width: '0px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+    },
   },
 
   ArcherElement: {
