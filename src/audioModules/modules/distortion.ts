@@ -10,7 +10,7 @@ export function makeDistortionControlData(): ControlData {
     'amount': {
       controlType: VALUE,
       value: 0,
-      range: [0, 100],
+      range: [0, 20000],
     },
     'oversample': {
       controlType: VALUE,
