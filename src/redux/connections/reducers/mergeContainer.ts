@@ -10,8 +10,10 @@ const mergeContainer = (modules: Modules, connections: Connections, { containerI
       },
       [containerID]: {
         ...newModules[containerID],
+        parentID,
         row,
         col,
+        isBaseContainer: false,
       }
     }),
     newConnections: Object.assign({}, connections, newConnections)

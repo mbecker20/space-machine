@@ -41,6 +41,7 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
             }
           }),
         childModules: containerMod.childModules.map(id => modIDConverter[id]),
+        parentID: modules[modID].parentID ? modIDConverter[modules[modID].parentID as string] : null
       }
     } else {
       return {
@@ -52,6 +53,7 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
         outputs: modules[modID].outputs
           .filter(connectionID => stringIn(connectionID, connectionIDs))
           .map(connectionID => connectionIDConverter[connectionID]),
+        parentID: modIDConverter[modules[modID].parentID as string]
       }
     }
   }))
