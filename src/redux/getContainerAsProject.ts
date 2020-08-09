@@ -18,7 +18,7 @@ export function getContainerIDs(containerID: string, modules: Modules) {
   return [ containerID, ...getChildrenRecursive(containerID, modules) ]
 }
 
-function getInternalConnections(connections: Connections, trimmedIDs: string[]) {
+export function getInternalConnectionIDs(connections: Connections, trimmedIDs: string[]) {
   const allConnectionIDs = Object.keys(connections)
   let connectionIDs: string[] = []
   for (const i in allConnectionIDs) {
@@ -26,10 +26,14 @@ function getInternalConnections(connections: Connections, trimmedIDs: string[]) 
     const actualFromID = actualOutputID ? actualOutputID : fromID // actualIDs undefined if no containers involved in connection
     const actualToID = actualInputID ? actualInputID : toID
     if (bothStringsIn(actualFromID, actualToID, trimmedIDs)) {
-      connectionIDs = [...connectionIDs, allConnectionIDs[i] ]
+      connectionIDs = [...connectionIDs, allConnectionIDs[i]]
     }
   }
-  return keepOnlyIdsInObj(connections, connectionIDs) as Connections
+  return connectionIDs
+}
+
+function getInternalConnections(connections: Connections, trimmedIDs: string[]) {
+  return keepOnlyIdsInObj(connections, getInternalConnectionIDs(connections, trimmedIDs)) as Connections
 }
 
 export function getContainerModulesConnections(state: RootState, containerID: string) {

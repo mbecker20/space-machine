@@ -3,6 +3,7 @@ import ContainerDrawerItem from './ContainerDrawerItem'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { CONTAINER } from '../../audioModules/moduleTypes'
+import useJSS from './style'
 
 interface Props {
   totNumModules: number
@@ -14,8 +15,9 @@ function SpaceDBContainerMenu({ totNumModules }: Props) {
     window.containerSaveService.find().then((saveNames: string[]) => { setContainerSaves(saveNames) }) 
   }, [])
   const state = useSelector((state: RootState) => state)
+  const classes = useJSS()
   return (
-    <div style={{ width: '100%', height: '100%', zIndex: 1000 }}
+    <div className={classes.ItemRouter}
       onDragOver={e => e.preventDefault()}
       onDrop={e => {
         const id = e.dataTransfer.getData('id')
