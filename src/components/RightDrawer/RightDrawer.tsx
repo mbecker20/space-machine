@@ -8,12 +8,16 @@ import { clamp } from '../../helpers/genFuncs'
 import ModuleIcons from './ModuleIcons/ModuleIcons'
 import SpaceDBMenu from './SpaceDBMenu'
 import FileMenu from './FileMenu'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/stateTSTypes'
+import SpaceDBContainerMenu from './spaceDBContainerMenu'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
 const UTILITY = 'utility'
-const SPACEDB = 'spaceDB'
+const SPACEDB_PROJECTS = 'spaceDB projects'
 const FILE = 'file'
+const SPACEDB_CONTAINERS = 'spaceDB modules'
 
 let drawerWidth = sizes.rightDrawer.width
 
@@ -36,6 +40,7 @@ function RightDrawer() {
   const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   let adjusting = false
   const [, toReRender ] = useState({})
+  const totNumModules = useSelector((state: RootState) => Object.keys(state.modules).length)
   useEffect(() => {
     window.addEventListener('resize', () => {
       window.setTimeout(() => { toReRender({}) }, 500) 
@@ -100,8 +105,14 @@ function RightDrawer() {
           />
           <HeaderItem
             className={classes.DrawerHeaderItem}
-            text={SPACEDB}
-            onClick={() => { setSR(SPACEDB) }}
+            text={SPACEDB_CONTAINERS}
+            onClick={() => { setSR(SPACEDB_CONTAINERS) }}
+            selectedRoute={selectedRoute}
+          />
+          <HeaderItem
+            className={classes.DrawerHeaderItem}
+            text={SPACEDB_PROJECTS}
+            onClick={() => { setSR(SPACEDB_PROJECTS) }}
             selectedRoute={selectedRoute}
           />
           <HeaderItem
@@ -115,17 +126,21 @@ function RightDrawer() {
           {
             selectedRoute === SOURCES
             ?
-            <ModuleIcons moduleData={sourceModuleData} />
+            <ModuleIcons moduleData={sourceModuleData} totNumModules={totNumModules}/>
             :
             selectedRoute === EFFECTS
             ?
-            <ModuleIcons moduleData={effectModuleData} />
+            <ModuleIcons moduleData={effectModuleData} totNumModules={totNumModules}/>
             :
             selectedRoute === UTILITY
             ?
-            <ModuleIcons moduleData={utilityModuleData} />
+            <ModuleIcons moduleData={utilityModuleData} totNumModules={totNumModules}/>
             :
-            selectedRoute === SPACEDB
+            selectedRoute === SPACEDB_CONTAINERS
+            ?
+            <SpaceDBContainerMenu totNumModules={totNumModules}/>
+            :
+            selectedRoute === SPACEDB_PROJECTS
             ?
             <SpaceDBMenu />
             :

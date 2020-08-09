@@ -72,7 +72,7 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
   }
 }
 
-function performContainerMerge(dispatch: Dispatch, modulesToMerge: Modules, connectionsToMerge: Connections, totNumberModules: number, totNumberConnections: number, parentID: string, containerID: string, row: number, col: number) {
+export function performContainerMerge(dispatch: Dispatch, modulesToMerge: Modules, connectionsToMerge: Connections, totNumberModules: number, totNumberConnections: number, parentID: string, containerID: string, row: number, col: number) {
   // this function makes a copy of state with above function, then restores all modules and connections,
   // and dispatches an action to merge the copied state with the full project state 
   const { modIDConverter, newModules, newConnections } = getReplicatedState(modulesToMerge, connectionsToMerge, totNumberModules, totNumberConnections)
@@ -85,6 +85,12 @@ export function duplicateContainer(dispatch: Dispatch, state: RootState, parentI
   const totNumberModules = Object.keys(state.modules).length
   const totNumberConnections = Object.keys(state.connections).length
   performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, parentID, containerID, row, col)
+}
+
+export function loadSavedContainer(dispatch: Dispatch, name: string, totNumberModules: number, totNumberConnections: number, parentID: string, row: number, col: number) {
+  window.containerSaveService.get(name).then(({ containerID, modules, connections }: any) => {
+    performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, parentID, containerID, row, col)
+  })
 }
 
 export function loadProjectAsContainer(dispatch: Dispatch, currState: RootState, parentID: string, row: number, col: number, stateToRestore: RootState) {

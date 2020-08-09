@@ -11,7 +11,7 @@ interface Props {
   onClose: () => void
 }
 
-function SpaceDBSaveMenu({ saveList, onClose }: Props) {
+function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
   const [ baseContainerID, modules ] = useSelector((state: RootState) => [ state.baseContainerID, state.modules ])
   const [saveName, setSaveName] = useState(modules[baseContainerID].name)
   const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
@@ -91,4 +91,4 @@ function SpaceDBSaveMenu({ saveList, onClose }: Props) {
   )
 }
 
-export default SpaceDBSaveMenu
+export default SpaceDBProjectSaveMenu

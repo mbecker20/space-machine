@@ -1,30 +1,30 @@
 import React from 'react'
 import useJSS from './style'
 import getModuleColor from '../../theme/moduleColor'
-import { ADD_MODULE } from '../../redux/modules/moduleActionTypes'
+import { CONTAINER } from '../../audioModules/moduleTypes'
 import genRandomID from '../../redux/idGen'
 
+// drop types
+
+export const CONTAINER_RESTORE = 'CONTAINER_RESTORE'
 
 interface Props {
-  fullName: string
-  shortName: string
-  moduleType: string
+  name: string
   totNumModules: number
 }
 
-function DrawerItem({ fullName, shortName, moduleType, totNumModules }: Props) {
+function ContainerDrawerItem({ name, totNumModules }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.DrawerItem}>
-      <div 
+      <div
         className={classes.DrawerIcon}
-        style={{ backgroundColor: getModuleColor(moduleType) }}
+        style={{ backgroundColor: getModuleColor(CONTAINER) }}
         draggable={true}
         onDragStart={event => {
-          event.dataTransfer.setData('type', ADD_MODULE)
+          event.dataTransfer.setData('type', CONTAINER_RESTORE)
+          event.dataTransfer.setData('name', name)
           event.dataTransfer.setData('id', genRandomID(0, totNumModules))
-          event.dataTransfer.setData('moduleType', moduleType)
-          event.dataTransfer.setData('name', shortName)
           window.setFillIsExpanded(true)
         }}
         onDragEnd={() => {
@@ -32,10 +32,10 @@ function DrawerItem({ fullName, shortName, moduleType, totNumModules }: Props) {
         }}
       />
       <div className={classes.DrawerItemText}>
-        {fullName}
+        {name}
       </div>
     </div>
   )
 }
 
-export default DrawerItem
+export default ContainerDrawerItem

@@ -4,8 +4,10 @@ import { isOccupied } from '../ModuleView/helpers'
 import { Dispatch } from 'redux'
 import { ModuleType, CONTAINER } from '../../audioModules/moduleTypes'
 import { moveModule } from '../../redux/allActions'
-import { duplicateContainer } from '../../redux/replicateContainer'
+import { duplicateContainer, performContainerMerge } from '../../redux/replicateContainer'
 import { MOVE, COPY } from './DropSquare'
+import { ADD_MODULE } from '../../redux/modules/moduleActionTypes'
+import { CONTAINER_RESTORE } from '../RightDrawer/containerDrawerItem'
 import duplicateModule from '../../redux/replicateModule'
 
 export function onDrop(e: DragEvent<HTMLDivElement>, dispatch: Dispatch, state: RootState, row: number, col: number, setHL: (isHL: boolean) => void) {
@@ -16,10 +18,22 @@ export function onDrop(e: DragEvent<HTMLDivElement>, dispatch: Dispatch, state: 
   const possiblyOccupyingID = isOccupied(row, col, currentChildren, state.modules)
   if (!possiblyMod) {
     if (!possiblyOccupyingID) {
-      const moduleType = e.dataTransfer.getData('moduleType') as ModuleType
+      const dropType = e.dataTransfer.getData('type')
       const name = e.dataTransfer.getData('name')
+      switch(dropType) {
+        case ADD_MODULE:
+          const moduleType = e.dataTransfer.getData('moduleType') as ModuleType
+          window.addModule(id, name, window.fillContainerID, moduleType, dispatch, row, col)
+          break
+        case CONTAINER_RESTORE:
+          const totNumberModules = Object.keys(state.modules).length
+          const totNumberConnections = Object.keys(state.connections).length
+          window.containerSaveService.get(name).then(({ containerID, modules, connections }: any) => {
+            performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, window.fillContainerID, containerID, row, col)
+          })
+          break
+      }
       setHL(false)
-      window.addModule(id, name, window.fillContainerID, moduleType, dispatch, row, col)
       window.setFillIsExpanded(false)
     }
   } else if (possiblyOccupyingID) {

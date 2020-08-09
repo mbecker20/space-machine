@@ -62,7 +62,7 @@ function SpaceDBMenu() {
       </div>
       <Button style={buttonStyle}
         onClick={() => {
-          window.openSpaceDBSaveMenu(saveList, () => {
+          window.openSpaceDBProjectSaveMenu(saveList, () => {
             window.setTimeout(() => {
               window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
             }, 1000)

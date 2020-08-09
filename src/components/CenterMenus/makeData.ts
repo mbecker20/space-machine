@@ -25,6 +25,15 @@ export function makeSaveMenuData(isOpen: boolean, saveList: string[] = [], onClo
   }
 }
 
+export function makeContainerSaveMenuData(isOpen: boolean, id = '', saveList: string[] = [], onClose = () => { }) {
+  return {
+    isOpen,
+    id,
+    saveList,
+    onClose,
+  }
+}
+
 export function makeConfirmDeleteMenuData(isOpen: boolean, saveName = '', onClose = () => {}) {
   return {
     isOpen,
