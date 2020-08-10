@@ -3,30 +3,14 @@ import CenterMenu from '../../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { Button } from '../../all'
-import { stringIn } from '../../../helpers/genFuncs'
 import { getContainerModulesConnections } from '../../../redux/getContainerAsProject'
 import { sizes } from '../../../theme/theme'
+import { confirmContainerSaveName } from './helpers'
 
 interface Props {
   id: string
   saveList: string[]
   onClose: () => void
-}
-
-function confirmSaveName(setConfirmSaveData: (arg: any) => void, containerID: string, name: string, saveList: string[], state: RootState, onClose: () => void) {
-  if (!stringIn(name, saveList)) {
-    const { modules, connections } = getContainerModulesConnections(state, containerID)
-    window.containerSaveService.create({
-      saveName: name,
-      containerID,
-      modules,
-      connections,
-    })
-    onClose()
-    window.flashNotification('green', 'module saved to spaceDB')
-  } else {
-    setConfirmSaveData({ isOpen: true, message: 'module with this name already exists. would you like to overwrite it?' })
-  }
 }
 
 function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
@@ -49,7 +33,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
         onKeyDown={e => {
           switch (e.keyCode) {
             case 13: // enter
-              confirmSaveName(setConfirmSaveData, id, name, saveList, state, onClose)
+              confirmContainerSaveName(setConfirmSaveData, id, name, saveList, state, onClose)
               break
             case 27: // escape
               onClose()
@@ -60,7 +44,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
       />
       <Button
         onClick={() => {
-          confirmSaveName(setConfirmSaveData, id, name, saveList, state, onClose)
+          confirmContainerSaveName(setConfirmSaveData, id, name, saveList, state, onClose)
         }}
       >confirm</Button>
       {
@@ -78,13 +62,16 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
           <Button
             onClick={() => {
               const { modules, connections } = getContainerModulesConnections(state, id)
-              window.containerSaveService.create({
+              window.containerSaveService.update(name, {
                 saveName: name,
                 containerID: id,
                 modules,
                 connections,
+              }).then((success: string) => {
+                if (success) {
+                  window.flashNotification('green', 'module updated')
+                }
               })
-              window.flashNotification('green', 'module saved to spaceDB')
               onClose()
             }}
           >yes</Button>
