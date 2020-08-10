@@ -27,8 +27,14 @@ import makeContainer, { makeContainerControlData } from './modules/container'
 import { makeMediaElementControlData } from './modules/mediaElement'
 import makeDistortion, { makeDistortionControlData } from './modules/distortion'
 
+declare global {
+  interface Window {
+    addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
+  }
+}
+
 function makeAddModule() {
-  return function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
+  window.addModule = function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
     switch(moduleType) {
       case OSCILLATOR:
         const osc = makeOscillator()

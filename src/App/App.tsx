@@ -7,13 +7,13 @@ import { Dispatch } from 'redux'
 import { makePointerLayerData } from '../components/PointerLayer/makeData'
 import { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
 import configureSpaceDB from './configureSpaceDB'
+import setUserAgent from './setUserAgent'
 
 declare global {
   interface Window { 
     highlightedID: string
     fillContainerID: string
     audioModules: AudioModules
-    addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
     openPointerLayer: (pointerId: number, onPointerMove: PointerEventCallback, onPointerUp: PointerEventCallback) => void
   }
 
@@ -22,13 +22,13 @@ declare global {
   }
 }
 
-window.highlightedID = 'project' // make this '', for dev
+window.highlightedID = ''
 window.fillContainerID = 'project'
 
 window.audioModules = {}
-window.addModule = makeAddModule()
-
+makeAddModule()
 configureSpaceDB()
+setUserAgent()
 
 function App() {
   const classes = useJSS()
