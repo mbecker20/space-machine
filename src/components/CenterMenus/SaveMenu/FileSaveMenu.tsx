@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { sizes } from '../../../theme/theme'
 import { getFileDirectory } from './helpers'
-const fs = window.require('fs')
+let fs: any
+if (window.usingElectron) {
+  fs = window.require('fs')
+}
 
 declare global {
   interface Window {

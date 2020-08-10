@@ -115,12 +115,15 @@ function RightDrawer() {
             onClick={() => { setSR(SPACEDB_PROJECTS) }}
             selectedRoute={selectedRoute}
           />
-          <HeaderItem
-            className={classes.DrawerHeaderItem}
-            text={FILE}
-            onClick={() => { setSR(FILE) }}
-            selectedRoute={selectedRoute}
-          />
+          {
+            !window.usingElectron ? null :
+            <HeaderItem
+              className={classes.DrawerHeaderItem}
+              text={FILE}
+              onClick={() => { setSR(FILE) }}
+              selectedRoute={selectedRoute}
+            />
+          }
         </div>
         <div className={classes.ItemRouter} ref={itemRouterRef}>
           {

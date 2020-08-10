@@ -4,7 +4,10 @@ import { RootState } from '../../redux/stateTSTypes'
 import { Button } from '../all'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
-const fs = window.require('fs')
+let fs: any
+if (window.usingElectron) {
+  fs = window.require('fs')
+}
 
 function FileMenu() {
   const state = useSelector((state: RootState) => state)
