@@ -3,6 +3,26 @@ import restoreAudioModule from "./restoreAudioModule"
 import { ModuleType, ConnectingAudioModule, MEDIA_ELEMENT, LINE_IN } from "./moduleTypes"
 import { connect, disconnect } from "./connection"
 
+function connectLate(numTries: number, fromID: string, toID: string, param: string, outputIndex: number, inputIndex: number, actualOutputID?: string, actualInputID?: string) {
+  if (numTries > 10) {
+    alert('restore failed')
+  } else {
+    window.setTimeout(() => {
+      if (window.audioModules[actualOutputID ? actualOutputID : fromID] && window.audioModules[actualInputID ? actualInputID : toID]) {
+        connect(
+          window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
+          window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
+          param,
+          outputIndex,
+          inputIndex,
+        )
+      } else {
+        connectLate(numTries + 1, fromID, toID, param, outputIndex, inputIndex, actualOutputID, actualInputID)
+      }
+    }, 500)
+  }
+}
+
 function restoreAMFromState(prevConnections: Connections, { modules, connections }: RootState) {
   Object.keys(prevConnections).forEach(connectionID => {
     const { fromID, toID, param, outputIndex, actualOutputID, actualInputID } = prevConnections[connectionID]
@@ -38,15 +58,7 @@ function restoreAMFromState(prevConnections: Connections, { modules, connections
           inputIndex,
         )
       } else {
-        window.setTimeout(() => {
-          connect(
-            window.audioModules[actualOutputID ? actualOutputID : fromID] as ConnectingAudioModule,
-            window.audioModules[actualInputID ? actualInputID : toID] as ConnectingAudioModule,
-            param,
-            outputIndex,
-            inputIndex,
-          )
-        }, 200)
+        connectLate(0, fromID, toID, param, outputIndex, inputIndex, actualOutputID, actualInputID)
       }
     })
   }
