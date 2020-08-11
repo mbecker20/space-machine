@@ -3,7 +3,6 @@ import { Module, RootState, ContainerModule } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
-import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
@@ -15,7 +14,7 @@ import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
 import getModuleColor from '../../theme/moduleColor'
 import { bothStringsIn } from '../../helpers/genFuncs'
-import { MOVE, COPY } from '../DropSquare/DropSquare'
+import { iconOnDrop, iconOnDragStart } from './callbacks'
 
 interface Props {
   mod: Module
@@ -64,42 +63,11 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           event.preventDefault()
         }}
         onDrop={e => {
-          e.stopPropagation()
-          const id = e.dataTransfer.getData('id')
-          const moduleDragType = e.dataTransfer.getData('type')
-          if (id) {
-            const possiblyMod = modules[id]
-            if (possiblyMod && moduleDragType === MOVE) {
-              const fromRow = e.dataTransfer.getData('fromRow')
-              const fromCol = e.dataTransfer.getData('fromCol')
-              window.setFillIsExpanded(false)
-              dispatch(moveModule(id, mod.row, mod.col))
-              dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
-              window.setTimeout(window.refreshArcherContainer, 100)
-            }
-          } else {
-            if (mod.connectionInputs.length === 0 && window.audioModules[mod.id].connectingParamIDs.length === 0) {
-              alert('mod cannot accept input')
-            } else {
-              const fromID = e.dataTransfer.getData('fromID')
-              if (fromID) {
-                window.openConnectionMenu(fromID, mod.id)
-              }
-            }
-          }
-          setLarge(false)
+          iconOnDrop(e, modules, mod, dispatch, setLarge)
         }}
         draggable={!isLarge}
         onDragStart={e => {
-          if (e.shiftKey) {
-            e.dataTransfer.setData('type', COPY)
-          } else {
-            e.dataTransfer.setData('type', MOVE)
-          }
-          e.dataTransfer.setData('id', mod.id)
-          e.dataTransfer.setData('fromRow', `${mod.row}`)
-          e.dataTransfer.setData('fromCol', `${mod.col}`)
-          window.setFillIsExpanded(true)
+          iconOnDragStart(e, mod)
         }}
         onDragEnd={() => {
           window.setFillIsExpanded(false)
