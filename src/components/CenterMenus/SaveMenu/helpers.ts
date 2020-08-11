@@ -1,5 +1,6 @@
 import { stringIn } from "../../../helpers/genFuncs"
 import { getContainerModulesConnections } from "../../../redux/getContainerAsProject"
+import { RootState } from "../../../redux/stateTSTypes"
 
 export function getFileDirectory(badDir: string) {
   for (var i = badDir.length; i > 0; i--) {

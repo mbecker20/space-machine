@@ -10,7 +10,6 @@ import setUserAgent from './setUserAgent'
 
 declare global {
   interface Window { 
-    highlightedID: string
     fillContainerID: string
     audioModules: AudioModules
     openPointerLayer: (pointerId: number, onPointerMove: PointerEventCallback, onPointerUp: PointerEventCallback) => void
@@ -21,7 +20,6 @@ declare global {
   }
 }
 
-window.highlightedID = ''
 window.fillContainerID = 'project'
 
 window.audioModules = {}
@@ -35,10 +33,7 @@ function App() {
   window.openPointerLayer = (pointerId, onPointerMove, onPointerUp) => { setPointerLayerData(makePointerLayerData(true, pointerId, onPointerMove, onPointerUp)) }
   const resetPointerLayerData = () => { setPointerLayerData(makePointerLayerData(false)) }
   return (
-    <div className={classes.Bounder} onPointerDown={() => {
-      window.currUnHighlight()
-      window.currUnHighlight = () => { }
-    }}>
+    <div className={classes.Bounder}>
       <div className={classes.ModuleViewBounder}>
         <ModuleViewFill />
       </div>

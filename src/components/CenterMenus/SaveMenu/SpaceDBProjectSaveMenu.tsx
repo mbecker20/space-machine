@@ -54,7 +54,7 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
           onClick={e => {
             e.preventDefault()
             if (stringIn(saveName, saveList)) {
-              setConfirmSaveData({ isOpen: true, message: 'would you like to overwrite this save?' })
+              setConfirmSaveData({ isOpen: true, message: 'save already exists. do you want to replace it?' })
             } else {
               window.projectSaveService.create({
                 saveName,
@@ -70,7 +70,11 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
       {!confirmSaveData.isOpen ? null
         :
         <div>
-          <div>save already exists. do you want to replace it?</div>
+          <div
+            style={{ fontSize: sizes.text.small }}
+          >
+            { confirmSaveData.message }
+          </div>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
             <Button style={{ backgroundColor: colors.denyButton, marginRight: '3vmin' }}
               onClick={() => {

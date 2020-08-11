@@ -38,7 +38,7 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             :
             controlType === FILE
             ?
-            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} modName={name}/>
+            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} modName={name} actualModID={actualModID}/>
             :
             controlType === SWITCH
             ?

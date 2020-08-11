@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, Fragment } from 'react'
 import CenterMenu from '../../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
@@ -49,33 +49,40 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
       >confirm</Button>
       {
         !confirmSaveData.isOpen ? null :
-        <div style={{ display: 'flex' }}>
-          <Button
-            onClick={() => {
-              if (inputRef.current) {
-                inputRef.current.value = ''
-                inputRef.current.focus()
-              }
-              setConfirmSaveData({ isOpen: false, message: '' })
-            }}
-          >no</Button>
-          <Button
-            onClick={() => {
-              const { modules, connections } = getContainerModulesConnections(state, id)
-              window.containerSaveService.update(name, {
-                saveName: name,
-                containerID: id,
-                modules,
-                connections,
-              }).then((success: string) => {
-                if (success) {
-                  window.flashNotification('green', 'module updated')
+        <Fragment>
+          <div
+            style={{ fontSize: sizes.text.small }}
+          >
+            { confirmSaveData.message }
+          </div>
+          <div style={{ display: 'flex' }}>
+            <Button
+              onClick={() => {
+                if (inputRef.current) {
+                  inputRef.current.value = ''
+                  inputRef.current.focus()
                 }
-              })
-              onClose()
-            }}
-          >yes</Button>
-        </div>
+                setConfirmSaveData({ isOpen: false, message: '' })
+              }}
+            >no</Button>
+            <Button
+              onClick={() => {
+                const { modules, connections } = getContainerModulesConnections(state, id)
+                window.containerSaveService.update(name, {
+                  saveName: name,
+                  containerID: id,
+                  modules,
+                  connections,
+                }).then((success: string) => {
+                  if (success) {
+                    window.flashNotification('green', 'module updated')
+                  }
+                })
+                onClose()
+              }}
+            >yes</Button>
+          </div>
+        </Fragment>
       }
     </CenterMenu>
   )

@@ -17,14 +17,6 @@ import getModuleColor from '../../theme/moduleColor'
 import { bothStringsIn } from '../../helpers/genFuncs'
 import { MOVE, COPY } from '../DropSquare/DropSquare'
 
-declare global {
-  interface Window {
-    currUnHighlight: () => void
-  }
-}
-
-window.currUnHighlight = () => {}
-
 interface Props {
   mod: Module
   gridCol: number
@@ -33,37 +25,27 @@ interface Props {
 
 function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const classes = useJSS()
-  const [isHighlighted, setHighlighted] = useState(mod.id === window.highlightedID)
-  const [controlMenuOpen, setControlMenuOpen] = useState(false)
+  const [isLarge, setLarge] = useState(false)
   const [reRender, toReRender] = useState(false)
-  function reRenderIcon() {
-    toReRender(!reRender)
-  }
+  const reRenderIcon = () => { toReRender(!reRender) }
 
   const iconStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
-    borderStyle: isHighlighted ? 'solid' : 'none',
+    borderStyle: isLarge ? 'solid' : 'none',
     backgroundColor: getModuleColor(mod.moduleType),
+    width: isLarge ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
+    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon
   }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
+    width: isLarge ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
+    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
   }
-  
-  const iconSpring = useSpring({
-    width: isHighlighted ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
-    height: isHighlighted ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
-    config: {
-      tension: 650,
-      clamp: true,
-    },
-    onFrame: window.refreshArcherContainer,
-    onRest: () => { setControlMenuOpen(isHighlighted) }
-  })
 
   const nameSpring = useSpring({
-    fontSize: isHighlighted ? sizes.text.medium : sizes.text.small,
+    fontSize: isLarge ? sizes.text.medium : sizes.text.small,
     config: {
       tension: 350,
       clamp: true
@@ -76,7 +58,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     <Fragment>
       <animated.div 
         className={classes.Icon} 
-        style={Object.assign({}, iconSpring, iconStyle)}
+        style={iconStyle}
         onPointerDown={e => e.stopPropagation()}
         onDragOver={event => {
           event.preventDefault()
@@ -105,9 +87,9 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
               }
             }
           }
-          setHighlighted(false)
+          setLarge(false)
         }}
-        draggable={!isHighlighted}
+        draggable={!isLarge}
         onDragStart={e => {
           if (e.shiftKey) {
             e.dataTransfer.setData('type', COPY)
@@ -123,22 +105,9 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           window.setFillIsExpanded(false)
         }}
         onClick={e => {
-          if (e.stopPropagation) {
-            e.stopPropagation()
-          }
-          if (mod.id === window.highlightedID) {
-            window.currUnHighlight()
-            window.currUnHighlight = () => {}
-          } else {
-            window.currUnHighlight()
-            setHighlighted(true)
-            window.highlightedID = mod.id
-            window.currUnHighlight = () => {
-              window.highlightedID = ''
-              setControlMenuOpen(false)
-              setHighlighted(false)
-            }
-          }
+          e.stopPropagation()
+          setLarge(!isLarge)
+          window.setTimeout(window.refreshArcherContainer, 0)
         }}
       >
         {
@@ -153,7 +122,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         />
         }
         <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
-          if (isHighlighted) {
+          if (isLarge) {
             e.stopPropagation()
             window.openRenameMenu(mod.id)
           }
@@ -161,7 +130,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           {mod.name}
         </animated.div>
         {
-        !controlMenuOpen ? null :
+        !isLarge ? null :
         <div className={classes.IconControlContainer} 
           onClick={e => e.stopPropagation()}
         >
@@ -174,7 +143,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }
       </animated.div>
       <animated.div className={classes.ArcherElement}
-        style={Object.assign({}, iconSpring, archerElementStyle)}
+        style={archerElementStyle}
       >
         <div style={{
           gridColumn: `${1} / span 1`,

@@ -64,7 +64,6 @@ function ModuleViewFill() {
         <Button style={{ height: '.7em' }}
           onPointerDown={() => {
             window.fillContainerID = containerModule.parentID as string
-            window.currUnHighlight()
             window.reRenderFillContainer()
           }}
         >

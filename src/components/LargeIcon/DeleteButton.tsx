@@ -31,8 +31,7 @@ function DeleteButton({ selectedModule }: Props) {
           const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[outputData]
           disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
         })
-        dispatch(removeModule(window.highlightedID)) // should remove all connections
-        window.highlightedID = ''
+        dispatch(removeModule(selectedModule.id)) // should remove all connections
       }}
     >delete</Button>
   )

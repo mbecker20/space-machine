@@ -22,7 +22,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
           <div className={classes.ControlBounder} key={selectedModule.id + controlID + index}>
             {controlType === VALUE
             ?
-            <ValueControl controlID={controlID} setFunc={setFunc} />
+            <ValueControl controlID={controlID} setFunc={setFunc} actualModID={selectedModule.id}/>
             :
             controlType === BUTTON
             ?
@@ -34,7 +34,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             :
             controlType === FILE
             ?
-            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} />
+            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} actualModID={selectedModule.id}/>
             :
             controlType === SWITCH
             ?
