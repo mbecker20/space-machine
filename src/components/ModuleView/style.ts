@@ -117,6 +117,7 @@ const useJSS = createUseStyles({
     },
     justifySelf: 'flex-start',
     alignSelf: 'flex-end',
+    flexShrink: 0,
   },
 })
 

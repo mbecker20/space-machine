@@ -47,20 +47,37 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       ?
       <CenterMenu header={'choose output'} onClose={onClose}>
         <div className={classes.IORecursionBounder}>
-          {fromMod.connectionOutputs.map(outputID => {
-            return (
-              <IORecursion key={outputID + 'output'} id={isFromContainer ? outputID : fromID} isOutput={true} 
-                setConnection={(actualIOID, ioIndex) => {
-                  setActualFromID(actualIOID)
-                  setOutputIndex(ioIndex)
-                  if (toMod.connectionInputs.length > 1 || toMod.moduleType === CONTAINER) {
-                    setOpenMenu(CHOOSE_INPUT)
-                  } else {
-                    setOpenMenu(CONNECT_TO)
-                  }
-                }}
-              />
-            )
+          {fromMod.connectionOutputs.map((outputID, index) => {
+            if (isFromContainer) {
+              return (
+                <IORecursion key={outputID + 'output'} id={isFromContainer ? outputID : fromID} isOutput={true}
+                  setConnection={(actualIOID, ioIndex) => {
+                    setActualFromID(actualIOID)
+                    setOutputIndex(ioIndex)
+                    if (toMod.connectionInputs.length > 1 || toMod.moduleType === CONTAINER) {
+                      setOpenMenu(CHOOSE_INPUT)
+                    } else {
+                      setOpenMenu(CONNECT_TO)
+                    }
+                  }}
+                />
+              )
+            } else {
+              return (
+                <Button
+                  onClick={() => {
+                    setOutputIndex(index)
+                    if (toMod.connectionInputs.length > 1 || toMod.moduleType === CONTAINER) {
+                      setOpenMenu(CHOOSE_INPUT)
+                    } else {
+                      setOpenMenu(CONNECT_TO)
+                    }
+                  }}
+                >
+                  {fromMod.connectionOutputs[index]}
+                </Button>
+              )
+            }
           })}
         </div>
       </CenterMenu>
@@ -69,16 +86,29 @@ function ConnectionMenu({ fromID, toID, onClose }: Props) {
       ?
       <CenterMenu header={'choose input'} onClose={onClose}>
         <div className={classes.IORecursionBounder}>
-          {toMod.connectionInputs.map(inputID => {
-            return (
-              <IORecursion key={inputID + 'input'} id={isToContainer ? inputID : toID} isOutput={false}
-                setConnection={(actualIOID, ioIndex) => {
-                  setActualToID(actualIOID)
-                  setInputIndex(ioIndex)
-                  setOpenMenu(CONNECT_TO)
-                }}
-              />
-            )
+          {toMod.connectionInputs.map((inputID, index) => {
+            if (isToContainer) {
+              return (
+                <IORecursion key={inputID + 'input'} id={isToContainer ? inputID : toID} isOutput={false}
+                  setConnection={(actualIOID, ioIndex) => {
+                    setActualToID(actualIOID)
+                    setInputIndex(ioIndex)
+                    setOpenMenu(CONNECT_TO)
+                  }}
+                />
+              )
+            } else {
+              return (
+                <Button
+                  onClick={() => {
+                    setInputIndex(index)
+                    setOpenMenu(CONNECT_TO)
+                  }}
+                >
+                  {toMod.connectionInputs[index]}
+                </Button>
+              )
+            }
           })}
         </div>
       </CenterMenu>

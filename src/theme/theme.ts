@@ -92,5 +92,8 @@ export const sizes: Sizes = {
     rotRange: [-150, 150], // in degrees
     sensitivity: 1,
     borderWidth: 8,
-  }
+  },
+  switch: {
+    diameter: 3 // in vmin
+  },
 }
