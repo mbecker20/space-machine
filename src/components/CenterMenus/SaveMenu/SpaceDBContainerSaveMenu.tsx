@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { Button } from '../../all'
 import { getContainerModulesConnections } from '../../../redux/getContainerAsProject'
-import { sizes } from '../../../theme/theme'
+import { sizes, colors } from '../../../theme/theme'
 import { confirmContainerSaveName } from './helpers'
 
 interface Props {
@@ -56,7 +56,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
             { confirmSaveData.message }
           </div>
           <div style={{ display: 'flex' }}>
-            <Button
+            <Button style={{ backgroundColor: colors.denyButton }}
               onClick={() => {
                 if (inputRef.current) {
                   inputRef.current.value = ''
@@ -65,7 +65,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
                 setConfirmSaveData({ isOpen: false, message: '' })
               }}
             >no</Button>
-            <Button
+            <Button style={{ backgroundColor: colors.confirmButton }}
               onClick={() => {
                 const { modules, connections } = getContainerModulesConnections(state, id)
                 window.containerSaveService.update(name, {
