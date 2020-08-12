@@ -1,6 +1,5 @@
 import React from 'react'
 import useJSS from './style'
-import { AudioModuleWithTypes } from '../../audioModules/moduleTypes'
 import { ContainerModule, RootState } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
 import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
@@ -18,7 +17,7 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
     <div className={classes.ControlMenu}>
       {selectedModule.containerControls.map(({ modID, controlID, actualModID }, index) => {
         const audioModule = window.audioModules[actualModID]
-        const { controlType, value } = modules[actualModID].controlData[controlID]
+        const { controlType } = modules[actualModID].controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         const name = modules[modID].name
         return (
