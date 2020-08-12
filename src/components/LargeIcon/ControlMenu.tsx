@@ -1,6 +1,6 @@
 import React from 'react'
 import useJSS from './style'
-import { AudioModule, AudioModuleWithTypes, GRAPH } from '../../audioModules/moduleTypes'
+import { AudioModule, GRAPH } from '../../audioModules/moduleTypes'
 import { Module } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
 import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl } from './controls/all'
@@ -16,7 +16,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
   return (
     <div className={classes.ControlMenu}>
       {Object.keys(selectedModule.controlData).map((controlID, index) => {
-        const { controlType, value } = selectedModule.controlData[controlID]
+        const { controlType } = selectedModule.controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
         return (
           <div className={classes.ControlBounder} key={selectedModule.id + controlID + index}>
@@ -30,7 +30,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             :
             controlType === TYPE
             ?
-            <TypeControl setFunc={setFunc} audioModule={audioModule as AudioModuleWithTypes} controlID={controlID} value={value} modID={selectedModule.id} />
+            <TypeControl setFunc={setFunc} controlID={controlID} actualModID={selectedModule.id} />
             :
             controlType === FILE
             ?

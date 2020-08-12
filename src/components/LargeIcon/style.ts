@@ -34,6 +34,7 @@ const useJSS = createUseStyles({
     //justifyContent: 'space-around',
     alignItems: 'center',
     fontSize: sizes.text.small,
+    justifyContent: 'center',
     margin: '0vmin 1vmin'
   },
 
