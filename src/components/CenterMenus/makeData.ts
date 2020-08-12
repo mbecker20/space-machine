@@ -8,7 +8,7 @@ export function makeConnectionMenuData(isOpen: boolean, fromID = '', toID = '') 
   }
 }
 
-export function makeRangeSetMenuData(isOpen: boolean, modID = '', controlID = '', onChangeSubmit: (newRange: Range) => void = () => {}) {
+export function makeKnobRangeSetMenuData(isOpen: boolean, modID = '', controlID = '', onChangeSubmit: (newRange: Range) => void = () => {}) {
   return {
     isOpen,
     modID,

@@ -14,7 +14,7 @@ interface Props {
   controlID: string
 }
 
-function RangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) {
+function KnobRangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) {
   const { maxRange, range } = useSelector((state: RootState) => state.modules[modID].controlData[controlID])
   const [min, setMin] = useState((range as [number, number])[0])
   const [max, setMax] = useState((range as [number, number])[1])
@@ -79,4 +79,4 @@ function RangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) {
   )
 }
 
-export default RangeSetMenu
+export default KnobRangeSetMenu

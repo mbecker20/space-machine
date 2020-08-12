@@ -56,6 +56,8 @@ export const colors: Colors = {
 
   outputModuleBG: '#CA5F3C',
 
+  analyzerModuleBG: '#00347D',
+
   confirmButton: '#00802da6',
   denyButton: '#cc00006e',
 }

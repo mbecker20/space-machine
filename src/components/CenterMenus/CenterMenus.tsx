@@ -1,8 +1,8 @@
 import React, { useState, Fragment } from 'react'
-import { makeConnectionMenuData, makeRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData } from './makeData'
+import { makeConnectionMenuData, makeKnobRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData } from './makeData'
 import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import RenameMenu from './RenameMenu/RenameMenu'
-import RangeSetMenu from './RangeSetMenu/RangeSetMenu'
+import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
 import { Range } from '../../audioModules/moduleTypes'
 import SpaceDBProjectSaveMenu from './SaveMenu/SpaceDBProjectSaveMenu'
 import ConfirmDeleteMenu from './ConfirmDeleteMenu/ConfirmDeleteMenu'
@@ -13,7 +13,7 @@ declare global {
   interface Window {
     openConnectionMenu: (fromID: string, toID: string) => void
     openRenameMenu: (toRenameID: string) => void
-    openRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
+    openKnobRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
     openSpaceDBProjectSaveMenu: (saveList: string[], onClose: () => void) => void
     openSpaceDBContainerSaveMenu: (saveList: string[], id: string, onClose: () => void) => void
     openConfirmDeleteMenu: (saveName: string, onClose: () => void) => void
@@ -29,8 +29,8 @@ function CenterMenus() {
   const [renameMenuData, setRenameMenuData] = useState({ isOpen: false, toRenameID: '' })
   window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
   
-  const [rangeSetMenuData, setRangeSetMenuData] = useState(makeRangeSetMenuData(false))
-  window.openRangeSetMenu = (modID, controlID, onChangeSubmit) => { setRangeSetMenuData(makeRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
+  const [knobRangeSetMenuData, setKnobRangeSetMenuData] = useState(makeKnobRangeSetMenuData(false))
+  window.openKnobRangeSetMenu = (modID, controlID, onChangeSubmit) => { setKnobRangeSetMenuData(makeKnobRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
   
   const [spaceDBProjectSaveMenuData, setSpaceDBProjectSaveMenuData] = useState(makeSaveMenuData(false))
   window.openSpaceDBProjectSaveMenu = (saveList, onClose) => { setSpaceDBProjectSaveMenuData(makeSaveMenuData(true, saveList, onClose)) }
@@ -59,14 +59,14 @@ function CenterMenus() {
         <RenameMenu toRenameID={renameMenuData.toRenameID} onClose={() => { setRenameMenuData({ isOpen: false, toRenameID: '' }) }} />
       }
       {
-        !rangeSetMenuData.isOpen ? null :
-        <RangeSetMenu modID={rangeSetMenuData.modID} 
-          controlID={rangeSetMenuData.controlID}
+        !knobRangeSetMenuData.isOpen ? null :
+        <KnobRangeSetMenu modID={knobRangeSetMenuData.modID} 
+          controlID={knobRangeSetMenuData.controlID}
           onClose={() => {
-            setRangeSetMenuData(makeRangeSetMenuData(false))
+            setKnobRangeSetMenuData(makeKnobRangeSetMenuData(false))
           }}
           onChangeSubmit={newRange => {
-            rangeSetMenuData.onChangeSubmit(newRange)
+            knobRangeSetMenuData.onChangeSubmit(newRange)
           }}
         />
       }

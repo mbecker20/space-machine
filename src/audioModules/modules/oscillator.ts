@@ -17,7 +17,7 @@ export function makeOscControlData(oscillator: OscillatorNode): ControlData {
       controlType: VALUE,
       paramID: 'frequency',
       value: oscillator.frequency.value,
-      range: [0, 20000],
+      range: [0, 100],
     },
     'detune': {
       controlType: VALUE,
