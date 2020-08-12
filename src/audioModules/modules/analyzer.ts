@@ -5,7 +5,6 @@ export interface AnalyzerModule extends BaseAM {
   audioNode: AnalyserNode
   timeArray: Float32Array
   bufferLength: number
-  //freqArray: Uint8Array
 }
 
 export function makeAnalyzerControlData(): ControlData {
@@ -19,11 +18,9 @@ export function makeAnalyzerControlData(): ControlData {
 
 function makeAnalyzer(prevControlData?: ControlData): AnalyzerModule {
   const analyzer = audioCtx.createAnalyser()
-  analyzer.fftSize = 2048
+  analyzer.fftSize = 1024
   const bufferLength = analyzer.frequencyBinCount
   const timeArray = new Float32Array(bufferLength)
-  //const freqArray = new Uint8Array(bufferLength)
-
   const controlSetFuncs: ControlSetFuncs = {
     'time graph': () => {
       analyzer.getFloatTimeDomainData(timeArray)

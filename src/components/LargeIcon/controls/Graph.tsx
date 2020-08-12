@@ -48,11 +48,12 @@ function Graph({ modID, setFunc }: Props) {
       currY = nextY
     }
 
+    const zeroXStep = width / 20
     // draw 0 indicator
     p5.stroke(100)
     p5.strokeWeight(1)
-    p5.line(0, zero, 60 * xStep, zero)
-    p5.text('0', 80 * xStep, zero)
+    p5.line(0, zero, zeroXStep, zero)
+    p5.text('0', 1.5 * zeroXStep, zero)
   }
 
   const dispatch = useDispatch()
