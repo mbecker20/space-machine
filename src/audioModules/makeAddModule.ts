@@ -11,6 +11,7 @@ import {
   LINE_IN,
   CONTAINER,
   DISTORTION,
+  ANALYZER,
 } from './moduleTypes'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
@@ -26,6 +27,7 @@ import makeLineInput, { makeLineInControlData } from './modules/lineInput'
 import makeContainer, { makeContainerControlData } from './modules/container'
 import { makeMediaElementControlData } from './modules/mediaElement'
 import makeDistortion, { makeDistortionControlData } from './modules/distortion'
+import makeAnalyzer, { makeAnalyzerControlData } from './modules/analyzer'
 
 declare global {
   interface Window {
@@ -105,6 +107,12 @@ function makeAddModule() {
         const distortionControlData = makeDistortionControlData()
         window.audioModules = { ...window.audioModules, [id]: distortion }
         dispatch(addModule(id, name, moduleType, distortionControlData, parentID, row, col, ['0'], ['0']))
+        break
+      case ANALYZER:
+        const analyzer = makeAnalyzer()
+        const analyzerControlData = makeAnalyzerControlData()
+        window.audioModules = { ...window.audioModules, [id]: analyzer }
+        dispatch(addModule(id, name, moduleType, analyzerControlData, parentID, row, col, ['0'], ['0']))
         break
     }
   }

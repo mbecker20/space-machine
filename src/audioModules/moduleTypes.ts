@@ -10,6 +10,7 @@ import { MediaElementModule } from './modules/mediaElement'
 import { LineInputModule } from './modules/lineInput'
 import { ContainerModule } from './modules/container'
 import { DistortionModule } from './modules/distortion'
+import { AnalyzerModule } from './modules/analyzer'
 
 // module types
 
@@ -25,12 +26,13 @@ export const MEDIA_ELEMENT = 'MEDIA_ELEMENT'
 export const LINE_IN = 'LINE_IN'
 export const CONTAINER = 'CONTAINER'
 export const DISTORTION = 'DISTORTION'
+export const ANALYZER = 'ANALYZER'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule | AnalyzerModule
 
 export type AudioModule = ConnectingAudioModule | ContainerModule
 
@@ -46,8 +48,9 @@ export const BUTTON = 'BUTTON'
 export const FILE = 'FILE'
 export const INFO = 'INFO'
 export const SWITCH = 'SWITCH'
+export const GRAPH = 'GRAPH'
 
-export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH'
+export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH'
 export type Value = number | string | boolean
 export type SetFunc = (arg: string) => void
 export type Range = [number, number] // min / max
