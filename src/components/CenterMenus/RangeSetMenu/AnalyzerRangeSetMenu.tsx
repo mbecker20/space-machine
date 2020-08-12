@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { CenterMenu } from '../../all'
 import useJSS from './style'
 import Button from '../../Button/Button'
+import { Range } from '../../../audioModules/moduleTypes'
+import { sizes, colors } from '../../../theme/theme'
 
 interface Props {
   onClose: () => void
@@ -15,7 +17,16 @@ function AnalyzerRangeSetMenu({ range, onChangeSubmit, onClose }: Props) {
   const [max, setMax] = useState(range[1])
   return (
     <CenterMenu header='set analyzer range' onClose={onClose}>
-      <div className={classes.CMInputBounder}>
+      <div className={classes.CMInputBounder}
+        onKeyDown={e => {
+          if (e.keyCode === 27) {
+            onClose()
+          } else if (e.keyCode === 13) {
+            onChangeSubmit([min, max])
+            onClose()
+          }
+        }}
+      >
         <input className={classes.CenterMenuInput}
           onChange={e => {
             setMin(Number(e.target.value))
@@ -31,12 +42,13 @@ function AnalyzerRangeSetMenu({ range, onChangeSubmit, onClose }: Props) {
           type='number'
         />
       </div>
-      <Button
+      <Button style={{ fontSize: sizes.text.small, backgroundColor: colors.confirmButton }}
         onClick={() => {
-          
+          onChangeSubmit([min, max])
+          onClose()
         }}
       >
-
+        confirm
       </Button>
     </CenterMenu>
   )

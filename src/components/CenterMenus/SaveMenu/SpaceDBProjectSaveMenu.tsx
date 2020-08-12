@@ -2,9 +2,10 @@ import React, { useState, useRef } from 'react'
 import CenterMenu from '../../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
-import { Button } from '../../all'
+import { Button, FlexRow, FlexCol } from '../../all'
 import { stringIn } from '../../../helpers/genFuncs'
 import { sizes, colors } from '../../../theme/theme'
+import useJSS from './style'
 
 interface Props {
   saveList: string[]
@@ -17,12 +18,13 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
   const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
   const state = useSelector(state => state)
   const inputRef = useRef<HTMLInputElement>(null)
+  const classes = useJSS()
   return (
     <CenterMenu header='save project' 
       onClose={onClose}
     >
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-        <input style={{ fontSize: sizes.text.small }}
+      <FlexRow style={{ alignItems: 'center' }}>
+        <input className={classes.CenterMenuInput}
           value={saveName}
           placeholder={modules[baseContainerID].name}
           onChange={e => {
@@ -66,16 +68,16 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
         >
           save to spaceDB
         </Button>
-      </div>
+      </FlexRow>
       {!confirmSaveData.isOpen ? null
         :
-        <div>
+        <FlexCol>
           <div
             style={{ fontSize: sizes.text.small }}
           >
             { confirmSaveData.message }
           </div>
-          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+          <FlexRow style={{ justifyContent: 'center' }}>
             <Button style={{ backgroundColor: colors.denyButton, marginRight: '3vmin' }}
               onClick={() => {
                 inputRef.current?.focus()
@@ -88,8 +90,8 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
                 onClose()
               }}
             >yes</Button>
-          </div>
-        </div>
+          </FlexRow>
+        </FlexCol>
       }
     </CenterMenu>
   )

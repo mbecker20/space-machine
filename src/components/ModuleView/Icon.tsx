@@ -55,7 +55,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const dispatch = useDispatch()
   return (
     <Fragment>
-      <animated.div 
+      <div 
         className={classes.Icon} 
         style={iconStyle}
         onPointerDown={e => e.stopPropagation()}
@@ -109,8 +109,8 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           <DeleteButton selectedModule={mod} />
         </div>
         }
-      </animated.div>
-      <animated.div className={classes.ArcherElement}
+      </div>
+      <div className={classes.ArcherElement}
         style={archerElementStyle}
       >
         <div style={{
@@ -168,7 +168,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             }} />
           </ArcherElement>
         </div>
-      </animated.div>
+      </div>
     </Fragment>
   )
 }

@@ -12,6 +12,7 @@ export function makeAnalyzerControlData(): ControlData {
   return {
     'time graph': {
       controlType: GRAPH,
+      range: [-1.5, 1.5],
     }
   }
 }

@@ -3,7 +3,7 @@ import { CenterMenu, Button } from '../../all'
 import useJSS from './style'
 import { Range } from '../../../audioModules/moduleTypes'
 import { inRange } from '../../../helpers/genFuncs'
-import { sizes } from '../../../theme/theme'
+import { sizes, colors } from '../../../theme/theme'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 
@@ -52,27 +52,29 @@ function KnobRangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) 
           type='number'
         />
       </div>
-      <Button onClick={() => {
-        if (maxRange) {
-          if (inRange(min, maxRange) && inRange(max, maxRange)) {
+      <Button style={{ fontSize: sizes.text.small, backgroundColor: colors.confirmButton }}
+        onClick={() => {
+          if (maxRange) {
+            if (inRange(min, maxRange) && inRange(max, maxRange)) {
+              if (max > min) {
+                onChangeSubmit([min, max])
+                onClose()
+              } else {
+                alert('min must be less than max')
+              }
+            } else {
+              alert('a value is not within maximum range bounds')
+            }
+          } else {
             if (max > min) {
               onChangeSubmit([min, max])
               onClose()
             } else {
               alert('min must be less than max')
             }
-          } else {
-            alert('a value is not within maximum range bounds')
           }
-        } else {
-          if (max > min) {
-            onChangeSubmit([min, max])
-            onClose()
-          } else {
-            alert('min must be less than max')
-          }
-        }
-      }}>
+        }}
+      >
         confirm
       </Button>
     </CenterMenu>

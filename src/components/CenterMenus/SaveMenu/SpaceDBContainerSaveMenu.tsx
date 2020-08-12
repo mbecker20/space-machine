@@ -6,6 +6,7 @@ import { Button } from '../../all'
 import { getContainerModulesConnections } from '../../../redux/getContainerAsProject'
 import { sizes, colors } from '../../../theme/theme'
 import { confirmContainerSaveName } from './helpers'
+import useJSS from './style'
 
 interface Props {
   id: string
@@ -19,11 +20,12 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
   const [name, setName] = useState(initName)
   const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
   const inputRef = useRef<HTMLInputElement>(null)
+  const classes = useJSS()
   return (
     <CenterMenu header='save container module' 
       onClose={onClose}
     >
-      <input style={{ fontSize: sizes.text.small }}
+      <input className={classes.CenterMenuInput}
         value={name}
         placeholder={initName}
         ref={inputRef}

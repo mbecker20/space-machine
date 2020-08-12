@@ -17,6 +17,14 @@ export function makeKnobRangeSetMenuData(isOpen: boolean, modID = '', controlID 
   }
 }
 
+export function makeAnalyzerRangeSetMenuData(isOpen: boolean, range: Range = [0, 0], onChangeSubmit: (newRange: Range) => void = () => { }) {
+  return {
+    isOpen,
+    range,
+    onChangeSubmit,
+  }
+}
+
 export function makeSaveMenuData(isOpen: boolean, saveList: string[] = [], onClose = () => {}) {
   return {
     isOpen,

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { sizes } from '../../../theme/theme'
 import { getFileDirectory } from './helpers'
+import useJSS from './style'
 let fs: any
 if (window.usingElectron) {
   fs = window.require('fs')
@@ -28,6 +29,7 @@ function FileSaveMenu({ onClose }: Props) {
   const initName = state.modules[state.baseContainerID].name
   const [saveName, setSaveName] = useState(initName)
   const [currentDirectory, setCurrentDirectory] = useState(window.currentSaveDirectory)
+  const classes = useJSS()
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {
@@ -87,17 +89,7 @@ function FileSaveMenu({ onClose }: Props) {
             }
           }}
         />
-        <input 
-          style={{ 
-            fontSize: sizes.text.medium, 
-            backgroundColor: 'transparent', 
-            color: 'white',
-            justifyContent: 'center',
-            borderRadius: '1vmin',
-            textAlign: 'center',
-            padding: '1vmin',
-            width: `${saveName.length}em`
-          }}
+        <input className={classes.CenterMenuInput}
           value={saveName}
           onChange={e => {
             setSaveName(e.target.value)
