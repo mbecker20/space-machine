@@ -9,7 +9,6 @@ export function iconOnDrop(
   modules: Modules,
   mod: Module,
   dispatch: Dispatch,
-  setLarge: (isLarge: boolean) => void
 ) {
   e.stopPropagation()
   const id = e.dataTransfer.getData('id')
@@ -34,7 +33,6 @@ export function iconOnDrop(
       }
     }
   }
-  setLarge(false)
 }
 
 export function iconOnDragStart(

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sketch from 'react-p5'
 import p5Types from 'p5'
 import { AnalyzerModule } from '../../../audioModules/modules/analyzer'
@@ -20,15 +20,14 @@ const height = 200
 function Graph({ modID, setFunc }: Props) {
   const analyzer = window.audioModules[modID] as AnalyzerModule
   const yRange = useSelector((state: RootState) => state.modules[modID].controlData['time graph'].range as Range)
-  let width = 0
-  let zero = height - mapValBetweenRanges(0, yRange, [0, height])
+  const zero = height - mapValBetweenRanges(0, yRange, [0, height])
+  const [width, setWidth] = useState(0)
 
   function setup(p5: p5Types, canvasParentRef: Element) {
-    width = canvasParentRef.clientWidth
-    zero = height - mapValBetweenRanges(0, yRange, [0, height])
-    p5.createCanvas(width, height).parent(canvasParentRef)
+    p5.createCanvas(canvasParentRef.clientWidth, height).parent(canvasParentRef)
     p5.textAlign(p5.CENTER, p5.CENTER)
     p5.fill(100)
+    setWidth(canvasParentRef.clientWidth)
   }
 
   function draw(p5: p5Types) {

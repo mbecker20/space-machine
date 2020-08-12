@@ -63,7 +63,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           event.preventDefault()
         }}
         onDrop={e => {
-          iconOnDrop(e, modules, mod, dispatch, setLarge)
+          iconOnDrop(e, modules, mod, dispatch)
         }}
         draggable={!isLarge}
         onDragStart={e => {
