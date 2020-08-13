@@ -34,7 +34,8 @@ export function makeFilterControlData(autoFilter: BiquadFilterNode): ControlData
       controlType: VALUE,
       paramID: 'Q',
       value: autoFilter.Q.value,
-      range: [-30, 30]
+      range: [0.0001, 1000],
+      maxRange: [0.0001, 1000],
     },
     'gain': {
       controlType: VALUE,

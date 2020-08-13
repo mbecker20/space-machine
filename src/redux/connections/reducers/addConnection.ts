@@ -1,11 +1,9 @@
 import { Modules, Connections } from "../../stateTSTypes"
 import { AddConnectionAction, ConnectionReducerReturn } from "../connectionTSTypes"
-
-let connectionNumber = 0
+import genRandomID from "../../idGen"
 
 const addConnection = (modules: Modules, connections: Connections, { fromID, toID, param, outputIndex, inputIndex, containerOutputChildID, containerInputChildID }: AddConnectionAction): ConnectionReducerReturn => {
-  const connectionID = `${fromID} ${toID} ${connectionNumber}`
-  connectionNumber++
+  const connectionID = genRandomID(0, Object.keys(connections).length)
   return {
     newModules: Object.assign({}, modules, {
       [fromID]: {
