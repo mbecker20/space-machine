@@ -12,12 +12,11 @@ import { updateControlRange } from '../../../redux/allActions'
 
 interface Props {
   modID: string
-  setFunc: (arg: string) => void
 }
 
 const height = 200
 
-function Graph({ modID, setFunc }: Props) {
+function Graph({ modID }: Props) {
   const analyzer = window.audioModules[modID] as AnalyzerModule
   const yRange = useSelector((state: RootState) => state.modules[modID].controlData['time graph'].range as Range)
   const zero = height - mapValBetweenRanges(0, yRange, [0, height])
@@ -31,18 +30,17 @@ function Graph({ modID, setFunc }: Props) {
   }
 
   function draw(p5: p5Types) {
-    setFunc('')
-    const timeArray = analyzer.timeArray
+    analyzer.audioNode.getFloatTimeDomainData(analyzer.timeArray)
     const xStep = width / analyzer.bufferLength
     p5.background(0) // draw black background
 
     let currX = 0
-    let currY = height - mapValBetweenRanges(timeArray[0], yRange, [0, height])
+    let currY = height - mapValBetweenRanges(analyzer.timeArray[0], yRange, [0, height])
     p5.stroke(colors.analyzerModuleBG)
     p5.strokeWeight(6)
     for (let i = 0; i < analyzer.bufferLength - 1; i++) {
       const nextX = (i + 1) * xStep
-      const nextY = height - mapValBetweenRanges(timeArray[i + 1], yRange, [0, height])
+      const nextY = height - mapValBetweenRanges(analyzer.timeArray[i + 1], yRange, [0, height])
       p5.line(currX, currY, nextX, nextY)
       currX = nextX
       currY = nextY

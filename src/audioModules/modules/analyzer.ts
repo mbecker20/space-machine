@@ -23,7 +23,7 @@ function makeAnalyzer(prevControlData?: ControlData): AnalyzerModule {
   const timeArray = new Float32Array(bufferLength)
   const controlSetFuncs: ControlSetFuncs = {
     'time graph': () => {
-      analyzer.getFloatTimeDomainData(timeArray)
+      
     }
   }
 

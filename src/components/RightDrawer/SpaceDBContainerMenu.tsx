@@ -18,6 +18,7 @@ function SpaceDBContainerMenu({ totNumModules }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.ItemRouter}
+      style={{ width: '100%' }}
       onDragOver={e => e.preventDefault()}
       onDrop={e => {
         const id = e.dataTransfer.getData('id')

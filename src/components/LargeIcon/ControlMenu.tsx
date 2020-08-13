@@ -42,7 +42,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             :
             controlType === GRAPH
             ?
-            <GraphControl modID={selectedModule.id} setFunc={setFunc} />
+            <GraphControl modID={selectedModule.id} />
             :
             null
             }

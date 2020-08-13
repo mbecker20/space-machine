@@ -45,7 +45,7 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             :
             controlType === GRAPH
             ?
-            <GraphControl modID={actualModID} setFunc={setFunc}/>
+            <GraphControl modID={actualModID} />
             :
             null
             }
