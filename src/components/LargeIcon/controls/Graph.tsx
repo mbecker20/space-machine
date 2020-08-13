@@ -39,7 +39,7 @@ function Graph({ modID, setFunc }: Props) {
     let currX = 0
     let currY = height - mapValBetweenRanges(timeArray[0], yRange, [0, height])
     p5.stroke(colors.analyzerModuleBG)
-    p5.strokeWeight(4)
+    p5.strokeWeight(6)
     for (let i = 0; i < analyzer.bufferLength - 1; i++) {
       const nextX = (i + 1) * xStep
       const nextY = height - mapValBetweenRanges(timeArray[i + 1], yRange, [0, height])

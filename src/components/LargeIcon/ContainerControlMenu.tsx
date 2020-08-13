@@ -1,8 +1,8 @@
 import React from 'react'
 import useJSS from './style'
 import { ContainerModule, RootState } from '../../redux/stateTSTypes'
-import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
-import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl } from './controls/all'
+import { TYPE, BUTTON, VALUE, FILE, SWITCH, GRAPH } from '../../audioModules/moduleTypes'
+import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl } from './controls/all'
 import { useSelector } from 'react-redux'
 
 interface Props {
@@ -42,6 +42,10 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             controlType === SWITCH
             ?
             <SwitchControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} modName={name} />
+            :
+            controlType === GRAPH
+            ?
+            <GraphControl modID={actualModID} setFunc={setFunc}/>
             :
             null
             }
