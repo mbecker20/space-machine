@@ -39,6 +39,10 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
                   window.projectSaveService.create({
                     saveName,
                     state
+                  }).then((res: any) => {
+                    if (res) {
+                      window.flashNotification('green', 'project saved')
+                    }
                   })
                   onClose()
                 }
@@ -61,6 +65,10 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
               window.projectSaveService.create({
                 saveName,
                 state
+              }).then((res: any) => {
+                if (res) {
+                  window.flashNotification('green', 'project saved')
+                }
               })
               onClose()
             } 
@@ -86,7 +94,11 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
             >no</Button>
             <Button style={{ backgroundColor: colors.confirmButton }}
               onClick={() => {
-                window.projectSaveService.update(saveName, state)
+                window.projectSaveService.update(saveName, state).then((res: any) => {
+                  if (res) {
+                    window.flashNotification('green', 'project updated')
+                  }
+                })
                 onClose()
               }}
             >yes</Button>
