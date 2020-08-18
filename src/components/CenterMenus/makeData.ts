@@ -1,4 +1,5 @@
 import { Range } from "../../audioModules/moduleTypes"
+import { ContainerControl } from "../../redux/stateTSTypes"
 
 export function makeConnectionMenuData(isOpen: boolean, fromID = '', toID = '') {
   return {
@@ -47,5 +48,14 @@ export function makeConfirmDeleteMenuData(isOpen: boolean, saveName = '', onClos
     isOpen,
     saveName,
     onClose
+  }
+}
+
+export function makeRenameControlMenuData(isOpen: boolean, placeholder = '', parentModID = '', containerControl?: ContainerControl) {
+  return {
+    isOpen,
+    placeholder,
+    containerControl,
+    parentModID
   }
 }

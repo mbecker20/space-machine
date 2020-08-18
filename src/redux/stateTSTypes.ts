@@ -36,6 +36,7 @@ export interface ContainerControl {
   modID: string
   controlID: string
   actualModID: string
+  name?: string
 }
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 

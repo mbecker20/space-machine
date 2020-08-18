@@ -15,33 +15,33 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
   const modules = useSelector((state: RootState) => state.modules)
   return (
     <div className={classes.ControlMenu}>
-      {selectedModule.containerControls.map(({ modID, controlID, actualModID }, index) => {
+      {selectedModule.containerControls.map(({ modID, controlID, actualModID, name }, index) => {
         const audioModule = window.audioModules[actualModID]
         const { controlType } = modules[actualModID].controlData[controlID]
         const setFunc = audioModule.controlSetFuncs[controlID]
-        const name = modules[modID].name
+        const modName = modules[modID].name
         return (
           <div className={classes.ControlBounder} key={modID + controlID + index}>
             {
             controlType === VALUE
             ?
-            <ValueControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} displayModName={name}/>
+            <ValueControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} displayModName={modName} label={name}/>
             :
             controlType === BUTTON
             ?
-            <ButtonControl setFunc={setFunc} controlID={controlID} modName={name} />
+            <ButtonControl setFunc={setFunc} controlID={controlID} modName={modName} label={name}/>
             :
             controlType === TYPE
             ?
-            <TypeControl setFunc={setFunc} controlID={controlID} actualModID={actualModID} modName={name}/>
+            <TypeControl setFunc={setFunc} controlID={controlID} actualModID={actualModID} modName={modName} label={name}/>
             :
             controlType === FILE
             ?
-            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} modName={name} actualModID={actualModID}/>
+            <FileControl controlID={controlID} setFunc={setFunc} reRenderIcon={reRenderIcon} modName={modName} actualModID={actualModID} label={name}/>
             :
             controlType === SWITCH
             ?
-            <SwitchControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} modName={name} />
+            <SwitchControl controlID={controlID} setFunc={setFunc} actualModID={actualModID} modName={modName} label={name}/>
             :
             controlType === GRAPH
             ?

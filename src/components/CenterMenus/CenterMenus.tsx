@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from 'react'
-import { makeConnectionMenuData, makeKnobRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData, makeAnalyzerRangeSetMenuData } from './makeData'
+import { makeConnectionMenuData, makeKnobRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData, makeAnalyzerRangeSetMenuData, makeRenameControlMenuData } from './makeData'
 import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
-import RenameMenu from './RenameMenu/RenameMenu'
 import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
 import { Range } from '../../audioModules/moduleTypes'
 import SpaceDBProjectSaveMenu from './SaveMenu/SpaceDBProjectSaveMenu'
@@ -9,11 +8,15 @@ import ConfirmDeleteMenu from './ConfirmDeleteMenu/ConfirmDeleteMenu'
 import FileSaveMenu from './SaveMenu/FileSaveMenu'
 import SpaceDBContainerSaveMenu from './SaveMenu/SpaceDBContainerSaveMenu'
 import AnalyzerRangeSetMenu from './RangeSetMenu/AnalyzerRangeSetMenu'
+import { ContainerControl } from '../../redux/stateTSTypes'
+import RenameModuleMenu from './RenameMenu/RenameModuleMenu'
+import RenameControlMenu from './RenameMenu/RenameControlMenu'
 
 declare global {
   interface Window {
     openConnectionMenu: (fromID: string, toID: string) => void
-    openRenameMenu: (toRenameID: string) => void
+    openModuleRenameMenu: (toRenameID: string) => void
+    openControlRenameMenu: (placeholder: string, parentModID: string, containerControl: ContainerControl) => void
     openKnobRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
     openAnalyzerRangeSetMenu: (range: Range, onChangeSubmit: (newRange: Range) => void) => void
     openSpaceDBProjectSaveMenu: (saveList: string[], onClose: () => void) => void
@@ -28,9 +31,12 @@ function CenterMenus() {
   const [connectionMenuData, setConnectionMenuData] = useState(makeConnectionMenuData(false))
   window.openConnectionMenu = (fromID, toID) => { setConnectionMenuData(makeConnectionMenuData(true, fromID, toID)) }
   
-  const [renameMenuData, setRenameMenuData] = useState({ isOpen: false, toRenameID: '' })
-  window.openRenameMenu = toRenameID => { setRenameMenuData({ isOpen: true, toRenameID }) }
-  
+  const [renameModuleMenuData, setRenameModuleMenuData] = useState({ isOpen: false, toRenameID: '' })
+  window.openModuleRenameMenu = toRenameID => { setRenameModuleMenuData({ isOpen: true, toRenameID }) }
+
+  const [renameControlMenuData, setRenameControlMenuData] = useState(makeRenameControlMenuData(false))
+  window.openControlRenameMenu = (placeholder, parentModID, containerControl) => { setRenameControlMenuData(makeRenameControlMenuData(true, placeholder, parentModID, containerControl)) }
+
   const [knobRangeSetMenuData, setKnobRangeSetMenuData] = useState(makeKnobRangeSetMenuData(false))
   window.openKnobRangeSetMenu = (modID, controlID, onChangeSubmit) => { setKnobRangeSetMenuData(makeKnobRangeSetMenuData(true, modID, controlID, onChangeSubmit)) }
 
@@ -60,8 +66,22 @@ function CenterMenus() {
         />
       }
       {
-        !renameMenuData.isOpen ? null :
-        <RenameMenu toRenameID={renameMenuData.toRenameID} onClose={() => { setRenameMenuData({ isOpen: false, toRenameID: '' }) }} />
+        !renameModuleMenuData.isOpen ? null :
+        <RenameModuleMenu toRenameID={renameModuleMenuData.toRenameID} 
+          onClose={() => { 
+            setRenameModuleMenuData({ isOpen: false, toRenameID: '' }) 
+          }} 
+        />
+      }
+      {
+        !renameControlMenuData.isOpen ? null :
+        <RenameControlMenu placeholder={renameControlMenuData.placeholder} 
+          containerControl={renameControlMenuData.containerControl as ContainerControl}
+          parentModID={renameControlMenuData.parentModID}
+          onClose={() => {
+            setRenameControlMenuData(makeRenameControlMenuData(false))
+          }}
+        />
       }
       {
         !knobRangeSetMenuData.isOpen ? null :

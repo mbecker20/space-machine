@@ -1,57 +1,62 @@
-import React, { useRef, useState } from 'react'
-import { CenterMenu } from '../../all'
+import React, { useState } from 'react'
+import { CenterMenu, Button } from '../../all'
 import useJSS from './style'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../../redux/stateTSTypes'
-import { renameModule } from '../../../redux/allActions'
-
 
 interface Props {
+  header: string
+  onSubmit: (newName: string) => void
+  placeholder: string
+  initName: string
   onClose: () => void
-  toRenameID: string
 }
 
-function RenameMenu({ toRenameID, onClose }: Props) {
+function RenameMenu({ header, onSubmit, placeholder, initName, onClose }: Props) {
   const classes = useJSS()
-  const renameInputRef = useRef<HTMLInputElement>(null)
-  const modules = useSelector((state: RootState) => state.modules)
-  const dispatch = useDispatch()
-  const [ isTooShort, setSubmitState] = useState(false)
-  function submitNewName() {
-    if (renameInputRef && renameInputRef.current) {
-      const newName = renameInputRef.current.value
-      if (newName.length === 0) {
-        setSubmitState(true)
-      } else {
-        dispatch(renameModule(toRenameID, newName))
-        onClose()
-      } 
+  const [val, setVal] = useState(initName)
+  const [isTooShort, setIsTooShort] = useState(false)
+  function trySubmit() {
+    if (val.length > 0) {
+      onSubmit(val)
+    } else {
+      setIsTooShort(true)
     }
   }
   return (
-    <CenterMenu header='rename' onClose={onClose}>
-        <div className={classes.CMInputBounder}>
-          <input className={classes.CenterMenuInput}
-            placeholder={modules[toRenameID]?.name}
-            onKeyUp={event => {
-              if (event.keyCode === 13) {
-                submitNewName()
-              } else if (event.keyCode === 27) {
+    <CenterMenu header={header} onClose={onClose}>
+      <div className={classes.CMInputBounder}>
+        <input className={classes.CenterMenuInput}
+          placeholder={placeholder}
+          value={val}
+          onChange={e => {
+            setVal(e.target.value)
+          }}
+          onKeyDown={e => {
+            switch (e.keyCode) {
+              case 13:
+                trySubmit()
+                break
+              case 27:
                 onClose()
-              }
-            }}
-            ref={renameInputRef}
-            autoFocus
-          />
-          <div className={classes.InputSubmit}
-            onClick={() => {submitNewName()}}
-          >enter</div>
-        </div>
-        {!isTooShort ? null :
-        <div className={classes.Error}>
-          please enter a name
-        </div>}
-      </CenterMenu>
+                break
+            }
+          }}
+          autoFocus
+        />
+        <Button
+          onClick={() => {
+            trySubmit()
+          }}
+        >
+          confirm
+        </Button>
+        {
+          !isTooShort ? null :
+          <div className={classes.Error}>
+            please enter a name
+          </div>
+        }
+      </div>
+    </CenterMenu>
   )
 }
 

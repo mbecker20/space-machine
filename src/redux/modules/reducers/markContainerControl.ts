@@ -1,7 +1,7 @@
 import { Modules, ContainerModule } from "../../stateTSTypes";
 import { MarkContainerControlAction } from "../moduleTSTypes";
 
-const markContainerControl = (state: Modules, { modID, controlID, actualModID }: MarkContainerControlAction): Modules => {
+const markContainerControl = (state: Modules, { modID, controlID, actualModID, name }: MarkContainerControlAction): Modules => {
   const parentID = state[modID].parentID as string
   return Object.assign({}, state, {
     [modID]: {
@@ -10,7 +10,7 @@ const markContainerControl = (state: Modules, { modID, controlID, actualModID }:
     },
     [parentID]: {
       ...state[parentID],
-      containerControls: [...(state[parentID] as ContainerModule).containerControls, { modID, controlID, actualModID }],
+      containerControls: [...(state[parentID] as ContainerModule).containerControls, { modID, controlID, actualModID, name }],
     }
   })
 }

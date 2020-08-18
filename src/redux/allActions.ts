@@ -9,6 +9,7 @@ export {
   unmarkContainerOutput,
   markContainerControl,
   unmarkContainerControl,
+  renameContainerControl,
   updateControlRange,
   updateControlValue,
 } from './modules/moduleActions'

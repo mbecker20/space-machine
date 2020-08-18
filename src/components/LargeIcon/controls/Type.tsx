@@ -11,9 +11,10 @@ interface Props {
   actualModID: string
   modName?: string
   controlID: string
+  label?: string
 }
 
-function Type({ setFunc, controlID, actualModID, modName }: Props) {
+function Type({ setFunc, controlID, actualModID, modName, label }: Props) {
   const classes = useJSS()
   const audioModule = window.audioModules[actualModID] as ConnectingAudioModule
   const { audioNode } = audioModule
@@ -21,7 +22,7 @@ function Type({ setFunc, controlID, actualModID, modName }: Props) {
   const value = useSelector((state: RootState) => state.modules[actualModID].controlData[controlID].value)
   return (
     <FlexRow style={{ justifyContent: 'center', margin: '1vmin 0vmin' }}>
-      <label htmlFor={'type'}>{modName ? `set type - ${modName}` : 'set type'}</label>
+      <label htmlFor={'type'}>{label ? `set type - ${label}` : modName ? `set type - ${modName}` : 'set type'}</label>
       <select className={classes.ControlTypeSelect}
         name='type' id='type'
         onChange={e => {
