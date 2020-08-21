@@ -35,7 +35,7 @@ function getReplicatedState(modules: Modules, connections: Connections, totNumbe
         containerControls: containerMod.containerControls
           .map(containerControl => {
             return {
-              controlID: containerControl.controlID,
+              ...containerControl,
               modID: modIDConverter[containerControl.modID],
               actualModID: modIDConverter[containerControl.actualModID],
             }

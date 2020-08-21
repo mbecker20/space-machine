@@ -25,15 +25,15 @@ function MarkContainerControls({ selectedModule }: Props) {
       <FlexCol>
         {
           open && selectedModule.moduleType === CONTAINER ?
-          (selectedModule as ContainerModule).containerControls.map(({ modID, controlID, actualModID, name, markedToContainer }, index) => {
+          (selectedModule as ContainerModule).containerControls.map((control, index) => {
+            const { modID, controlID, actualModID, name, markedToContainer } = control
             const modName = modules[modID].name
             let containerControl: ContainerControl
             const isMarked = markedToContainer ? true : false
             if (isMarked) {
               containerControl = (modules[selectedModule.parentID as string] as ContainerModule).containerControls.filter(containerControl => {
                 return (
-                  containerControl.modID === selectedModule.id ||
-                  containerControl.controlID === controlID ||
+                  containerControl.controlID === controlID &&
                   containerControl.actualModID === actualModID
                 )
               })[0]
