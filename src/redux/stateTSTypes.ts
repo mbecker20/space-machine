@@ -25,7 +25,6 @@ export interface Module { // the base of the Module types
   controlData: ControlData
   connectionInputs: string[] // these are the audionode i/o ports/channels, or in the case of containers, ids referencing 
   connectionOutputs: string[]
-  toContainerControls: string[]
   isContainerInput: boolean
   isContainerOutput: boolean
   parentID: string | null // id of parent ContainerModule

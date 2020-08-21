@@ -17,6 +17,7 @@ function RenameMenu({ header, onSubmit, placeholder, initName, onClose }: Props)
   function trySubmit() {
     if (val.length > 0) {
       onSubmit(val)
+      onClose()
     } else {
       setIsTooShort(true)
     }

@@ -6,19 +6,18 @@ const renameContainerControl = (modules: Modules, { name, parentModID, modID, co
   return Object.assign({}, modules, {
     [parentModID]: {
       ...containerMod,
-      containerControls: containerMod.containerControls.map((containerControl) => {
-        const isControl = (
-          containerControl.modID === modID ||
-          containerControl.controlID === controlID ||
-          containerControl.actualModID === actualModID
+      containerControls: containerMod.containerControls.map(containerControl => {
+        const notRightControl = (
+          containerControl.controlID !== controlID ||
+          containerControl.actualModID !== actualModID
         )
-        if (isControl) {
+        if (notRightControl) {
+          return containerControl
+        } else {
           return {
             ...containerControl,
             name: name
           }
-        } else {
-          return containerControl
         }
       })
     }

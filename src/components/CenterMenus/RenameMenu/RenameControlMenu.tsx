@@ -18,6 +18,7 @@ function RenameControlMenu({ placeholder, containerControl, parentModID, onClose
     <RenameMenu header='rename control'
       onSubmit={newName => {
         dispatch(renameContainerControl(newName, parentModID, modID, controlID, actualModID))
+        window.flashNotification('green', 'control passthrough renamed')
       }}
       placeholder={placeholder}
       initName={''}

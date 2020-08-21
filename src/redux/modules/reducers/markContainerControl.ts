@@ -11,7 +11,6 @@ const markContainerControl = (state: Modules, { modID, controlID, actualModID, n
         containerControls: (state[modID] as ContainerModule).containerControls.map(containerControl => {
           if (
             containerControl.controlID !== controlID ||
-            containerControl.modID !== modID ||
             containerControl.actualModID !== actualModID
           ) {
             return containerControl
@@ -25,7 +24,7 @@ const markContainerControl = (state: Modules, { modID, controlID, actualModID, n
       },
       [parentID]: {
         ...state[parentID],
-        containerControls: [...(state[parentID] as ContainerModule).containerControls, { modID, controlID, actualModID, name }],
+        containerControls: [...(state[parentID] as ContainerModule).containerControls, { modID, controlID, actualModID, name, markedToContainer: false }],
       }
     })
   } else {

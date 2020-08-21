@@ -73,8 +73,7 @@ function MarkContainerControls({ selectedModule }: Props) {
           if (isMarked) {
             containerControl = (modules[selectedModule.parentID as string] as ContainerModule).containerControls.filter(containerControl => {
               return (
-                containerControl.modID === selectedModule.id ||
-                containerControl.controlID === controlID ||
+                containerControl.controlID === controlID &&
                 containerControl.actualModID === selectedModule.id
               )
             })[0]
@@ -94,7 +93,7 @@ function MarkContainerControls({ selectedModule }: Props) {
               />
               {
                 !isMarked ? null :
-                <Button
+                <Button style={{ fontSize: sizes.text.small }}
                   onClick={() => {
                     window.openControlRenameMenu(controlID, selectedModule.parentID as string, containerControl)
                   }}
