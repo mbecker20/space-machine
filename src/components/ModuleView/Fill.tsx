@@ -54,7 +54,7 @@ function ModuleViewFill() {
           style={{ width: `${containerModule.name.length / 2}em` }}
           onClick={(e) => {
             e.stopPropagation()
-            window.openRenameMenu(window.fillContainerID)
+            window.openModuleRenameMenu(window.fillContainerID)
           }}
           onPointerDown={e => e.stopPropagation()}
         >

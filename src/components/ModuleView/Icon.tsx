@@ -92,7 +92,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
           if (isLarge) {
             e.stopPropagation()
-            window.openRenameMenu(mod.id)
+            window.openModuleRenameMenu(mod.id)
           }
         }}>
           {mod.name}

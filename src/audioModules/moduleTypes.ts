@@ -61,6 +61,7 @@ export interface ControlDataPacket {
   value?: Value // need either paramID or value
   range?: Range
   maxRange?: Range // the max the range can be set to be
+  markedToContainer?: boolean
 }
 
 export interface ControlData {

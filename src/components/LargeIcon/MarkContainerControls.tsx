@@ -4,7 +4,6 @@ import { sizes } from '../../theme/theme'
 import { Module, ContainerModule, RootState, ContainerControl } from '../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { markContainerControl, unmarkContainerControl } from '../../redux/allActions'
-import { stringIn } from '../../helpers/genFuncs'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 
 interface Props {
@@ -26,10 +25,10 @@ function MarkContainerControls({ selectedModule }: Props) {
       <FlexCol>
         {
           open && selectedModule.moduleType === CONTAINER ?
-            (selectedModule as ContainerModule).containerControls.map(({ modID, controlID, actualModID, name }, index) => {
+          (selectedModule as ContainerModule).containerControls.map(({ modID, controlID, actualModID, name, markedToContainer }, index) => {
             const modName = modules[modID].name
-            const isMarked = stringIn(actualModID + controlID, selectedModule.toContainerControls)
             let containerControl: ContainerControl
+            const isMarked = markedToContainer ? true : false
             if (isMarked) {
               containerControl = (modules[selectedModule.parentID as string] as ContainerModule).containerControls.filter(containerControl => {
                 return (
@@ -54,22 +53,22 @@ function MarkContainerControls({ selectedModule }: Props) {
                 />
                 {
                   !isMarked ? null :
-                    <Button
-                      onClick={() => {
-                        window.openControlRenameMenu(controlID, selectedModule.parentID as string, containerControl)
-                      }}
-                    >
-                      edit
-                </Button>
+                  <Button style={{ fontSize: sizes.text.small }}
+                    onClick={() => {
+                      window.openControlRenameMenu(controlID, selectedModule.parentID as string, containerControl)
+                    }}
+                  >
+                    edit
+                  </Button>
                 }
               </FlexRow>
             )
           }) : null
         }
         {
-        !open ? null :
+        !open || selectedModule.moduleType === CONTAINER ? null :
         Object.keys(selectedModule.controlData).map((controlID, index) => {
-          const isMarked = stringIn(selectedModule.id + controlID, selectedModule.toContainerControls)
+          const isMarked = selectedModule.controlData[controlID].markedToContainer ? true : false
           let containerControl: ContainerControl
           if (isMarked) {
             containerControl = (modules[selectedModule.parentID as string] as ContainerModule).containerControls.filter(containerControl => {
