@@ -13,6 +13,7 @@ import {
   ControlData,
   DISTORTION,
   ANALYZER,
+  ENVELOPED_TRIGGER,
 } from './moduleTypes'
 import makeConstantSource from './modules/constant'
 import makeAutoFilter from './modules/autoFilter'
@@ -26,6 +27,7 @@ import makeLineInput from './modules/lineInput'
 import makeContainer from './modules/container'
 import makeDistortion from './modules/distortion'
 import makeAnalyzer from './modules/analyzer'
+import makeEnvelopedTrigger from './modules/envelopedTrigger'
 
 
 function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData: ControlData) {
@@ -79,6 +81,10 @@ function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData:
     case ANALYZER:
       const analyzer = makeAnalyzer(prevControlData)
       window.audioModules = { ...window.audioModules, [id]: analyzer }
+      break
+    case ENVELOPED_TRIGGER:
+      const envelopedTrigger = makeEnvelopedTrigger(prevControlData)
+      window.audioModules = { ...window.audioModules, [id]: envelopedTrigger }
       break
   }
 }

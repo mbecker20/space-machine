@@ -1,9 +1,10 @@
 import React from 'react'
 import useJSS from './style'
 import { ContainerModule, RootState } from '../../redux/stateTSTypes'
-import { TYPE, BUTTON, VALUE, FILE, SWITCH, GRAPH } from '../../audioModules/moduleTypes'
+import { TYPE, BUTTON, VALUE, FILE, SWITCH, GRAPH, PAD } from '../../audioModules/moduleTypes'
 import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl } from './controls/all'
 import { useSelector } from 'react-redux'
+import PadControl from './controls/Pad'
 
 interface Props {
   selectedModule: ContainerModule
@@ -46,6 +47,10 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             controlType === GRAPH
             ?
             <GraphControl modID={actualModID} />
+            :
+            controlType === PAD
+            ?
+            <PadControl setFunc={setFunc} />
             :
             null
             }

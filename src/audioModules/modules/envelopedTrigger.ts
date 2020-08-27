@@ -75,7 +75,6 @@ function makeEnvelopedTrigger(prevControlData?: ControlData): EnvelopedTriggerMo
     'release': (val: string) => {
       release = Number(val)
     },
-
   }
 
   return {

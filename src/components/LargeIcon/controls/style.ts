@@ -25,6 +25,12 @@ const useJSS = createUseStyles({
     width: '100%',
     alignItems: 'center'
   },
+
+  Pad: {
+    width: '10vmin',
+    height: '7vmin',
+    borderRadius: '2vmin',
+  }
 })
 
 export default useJSS

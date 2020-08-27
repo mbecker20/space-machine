@@ -12,6 +12,7 @@ import {
   CONTAINER,
   DISTORTION,
   ANALYZER,
+  ENVELOPED_TRIGGER,
 } from './moduleTypes'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
@@ -28,6 +29,7 @@ import makeContainer, { makeContainerControlData } from './modules/container'
 import { makeMediaElementControlData } from './modules/mediaElement'
 import makeDistortion, { makeDistortionControlData } from './modules/distortion'
 import makeAnalyzer, { makeAnalyzerControlData } from './modules/analyzer'
+import makeEnvelopedTrigger, { makeEnvelopedTriggerControlData } from './modules/envelopedTrigger'
 
 declare global {
   interface Window {
@@ -113,6 +115,12 @@ function makeAddModule() {
         const analyzerControlData = makeAnalyzerControlData()
         window.audioModules = { ...window.audioModules, [id]: analyzer }
         dispatch(addModule(id, name, moduleType, analyzerControlData, parentID, row, col, ['0'], ['0']))
+        break
+      case ENVELOPED_TRIGGER:
+        const envelopedTrigger = makeEnvelopedTrigger()
+        const envelopedTriggerControlData = makeEnvelopedTriggerControlData()
+        window.audioModules = { ...window.audioModules, [id]: envelopedTrigger }
+        dispatch(addModule(id, name, moduleType, envelopedTriggerControlData, parentID, row, col, [], ['0']))
         break
     }
   }
