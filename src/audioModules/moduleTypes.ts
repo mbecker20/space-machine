@@ -27,8 +27,9 @@ export const LINE_IN = 'LINE_IN'
 export const CONTAINER = 'CONTAINER'
 export const DISTORTION = 'DISTORTION'
 export const ANALYZER = 'ANALYZER'
+export const ENVELOPED_TRIGGER = 'ENVELOPED_TRIGGER'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER' | 'ENVELOPED_TRIGGER'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
@@ -49,8 +50,9 @@ export const FILE = 'FILE'
 export const INFO = 'INFO'
 export const SWITCH = 'SWITCH'
 export const GRAPH = 'GRAPH'
+export const PAD = 'PAD'
 
-export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH'
+export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH' | 'PAD'
 export type Value = number | string | boolean
 export type SetFunc = (arg: string) => void
 export type Range = [number, number] // min / max
