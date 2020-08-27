@@ -12,7 +12,7 @@ export function makeEnvelopedTriggerControlData(): ControlData {
     },
     'attack': {
       controlType: VALUE,
-      value: 0,
+      value: 0.1,
       range: [0, 1],
       maxRange: [0, 100],
     },
@@ -24,13 +24,13 @@ export function makeEnvelopedTriggerControlData(): ControlData {
     },
     'sustain': {
       controlType: VALUE,
-      value: 0,
+      value: 1,
       range: [0, 1],
       maxRange: [0, 100],
     },
     'release': {
       controlType: VALUE,
-      value: 0,
+      value: 0.1,
       range: [0.001, 1],
       maxRange: [0.001, 100],
     },
@@ -41,10 +41,10 @@ function makeEnvelopedTrigger(prevControlData?: ControlData): EnvelopedTriggerMo
   const constant = audioCtx.createConstantSource()
   constant.offset.value = 0
 
-  let attack = 0
+  let attack = .1
   let decay = 0.2
   let sustain = 1
-  let release = 0
+  let release = .1
 
   if (prevControlData) {
     attack = prevControlData['attack'].value as number
@@ -57,9 +57,11 @@ function makeEnvelopedTrigger(prevControlData?: ControlData): EnvelopedTriggerMo
     'trigger': (val: string) => {
       const currTime = audioCtx.currentTime
       if (val === 'on') {
+        constant.offset.cancelAndHoldAtTime(currTime)
         constant.offset.linearRampToValueAtTime(1, currTime + attack)
         constant.offset.setTargetAtTime(sustain, currTime + attack, decay)
       } else {
+        constant.offset.cancelAndHoldAtTime(currTime)
         constant.offset.setTargetAtTime(0, currTime, release)
       }
     },
@@ -76,6 +78,8 @@ function makeEnvelopedTrigger(prevControlData?: ControlData): EnvelopedTriggerMo
       release = Number(val)
     },
   }
+
+  constant.start()
 
   return {
     audioNode: constant,

@@ -26,10 +26,14 @@ function SpaceDBMenu() {
     <div>
       <Button style={buttonStyle}
         onClick={() => {
-          window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
+          window.openSpaceDBProjectSaveMenu(saveList, () => {
+            window.setTimeout(() => {
+              window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
+            }, 1000)
+          })
         }}
       >
-        refresh saves
+        save
       </Button>
       <div>
         {saveList.map(saveName => {
@@ -60,17 +64,6 @@ function SpaceDBMenu() {
           )
         })}
       </div>
-      <Button style={buttonStyle}
-        onClick={() => {
-          window.openSpaceDBProjectSaveMenu(saveList, () => {
-            window.setTimeout(() => {
-              window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
-            }, 1000)
-          })
-        }}
-      >
-        save
-      </Button>
     </div>
   )
 }

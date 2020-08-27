@@ -30,6 +30,7 @@ const useJSS = createUseStyles({
     width: '10vmin',
     height: '7vmin',
     borderRadius: '2vmin',
+    backgroundColor: 'black',
   }
 })
 
