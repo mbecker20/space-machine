@@ -27,8 +27,8 @@ const useJSS = createUseStyles({
   },
 
   Pad: {
-    width: '10vmin',
-    height: '7vmin',
+    width: '20vmin',
+    height: '15vmin',
     borderRadius: '2vmin',
     backgroundColor: 'black',
   }
