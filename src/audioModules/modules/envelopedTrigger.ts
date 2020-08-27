@@ -57,7 +57,6 @@ function makeEnvelopedTrigger(prevControlData?: ControlData): EnvelopedTriggerMo
     'trigger': (val: string) => {
       const currTime = audioCtx.currentTime
       if (val === 'on') {
-        constant.offset.cancelAndHoldAtTime(currTime)
         constant.offset.linearRampToValueAtTime(1, currTime + attack)
         constant.offset.setTargetAtTime(sustain, currTime + attack, decay)
       } else {
