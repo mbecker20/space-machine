@@ -13,8 +13,8 @@ export function makeEnvelopedTriggerControlData(): ControlData {
     'attack': {
       controlType: VALUE,
       value: 0.1,
-      range: [0, 1],
-      maxRange: [0, 100],
+      range: [0.01, 1],
+      maxRange: [0.001, 100],
     },
     'decay': {
       controlType: VALUE,
