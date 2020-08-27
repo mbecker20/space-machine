@@ -19,7 +19,7 @@ export function makeEnvelopedTriggerControlData(): ControlData {
     'decay': {
       controlType: VALUE,
       value: 0.2,
-      range: [0.001, 10],
+      range: [0.001, 1],
       maxRange: [0.001, 100],
     },
     'sustain': {
