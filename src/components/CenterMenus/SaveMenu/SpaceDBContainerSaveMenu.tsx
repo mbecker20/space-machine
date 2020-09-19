@@ -1,5 +1,5 @@
 import React, { useState, useRef, Fragment } from 'react'
-import CenterMenu from '../../CenterMenu/CenterMenu'
+import CenterMenu from '../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { Button } from '../../all'
