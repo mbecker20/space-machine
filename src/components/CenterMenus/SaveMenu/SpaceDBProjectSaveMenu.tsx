@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import CenterMenu from '../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
-import { Modules, RootState } from '../../../redux/stateTSTypes'
+import { RootState } from '../../../redux/stateTSTypes'
 import { Button, FlexRow, FlexCol } from '../../all'
 import { stringIn } from '../../../helpers/genFuncs'
 import { sizes, colors } from '../../../theme/theme'
@@ -13,10 +13,10 @@ interface Props {
 }
 
 function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
-  const [ baseContainerID, modules ] = useSelector((state: RootState) => [ state.baseContainerID, state.modules ])
+  const state = useSelector((state: RootState) => state)
+  const { baseContainerID, modules } = state
   const [saveName, setSaveName] = useState(modules[baseContainerID].name)
   const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
-  const state = useSelector(state => state)
   const inputRef = useRef<HTMLInputElement>(null)
   const classes = useJSS()
   return (
