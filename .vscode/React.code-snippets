@@ -1,0 +1,41 @@
+{
+	"React Stateless function": {
+		"scope": "typescriptreact,javascriptreact",
+		"prefix": "rsf",
+		"body": [
+			"import React from 'react'",
+			"",
+			"function ${0:$TM_FILENAME_BASE}() {",
+			"\treturn (",
+			"\t\t<div>",
+			"",
+			"\t\t</div>",
+			"\t)",
+			"}",
+			"",
+			"export default ${0:$TM_FILENAME_BASE}"
+		]
+	},
+
+	"React Stateless function with Props": {
+		"scope": "typescriptreact",
+		"prefix": "rsfp",
+		"body": [
+			"import React from 'react'",
+			"",
+			"interface Props {",
+			"\t$0",
+			"}",
+			"",
+			"function ${1:$TM_FILENAME_BASE}({  }: Props) {",
+			"\treturn (",
+			"\t\t<div>",
+			"",
+			"\t\t</div>",
+			"\t)",
+			"}",
+			"",
+			"export default ${1:$TM_FILENAME_BASE}"
+		]
+	}
+}
