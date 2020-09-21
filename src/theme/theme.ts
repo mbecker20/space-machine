@@ -76,9 +76,8 @@ export const sizes: Sizes = {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
     icon: '10vmin',
-    bigIcon: '27vmin',
-    bigIconWidth: '30vmin',
-    bigIconHeight: '50vmin',
+    bigIconWidth: '25vmin',
+    bigIconHeight: '35vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
@@ -92,7 +91,7 @@ export const sizes: Sizes = {
     borderRadius: '1.5vmin'
   },
   knob: {
-    size: 9, // converted to vmin in knob
+    size: 7, // converted to vmin in knob
     markerWidth: .5,
     markerHeight: 1.3,
     rotRange: [-150, 150], // in degrees
