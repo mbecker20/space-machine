@@ -23,22 +23,22 @@ function DeleteButton({ modID, onClose }: Props) {
   return (
     <Button className={classes.DeleteButtonBounder}
       onPointerDown={e => { e.stopPropagation() }}
+      onClick={() => {
+        selectedModule.inputs.forEach(inputData => {
+          const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[inputData]
+          disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
+        })
+        selectedModule.outputs.forEach(outputData => {
+          const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[outputData]
+          disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
+        })
+        dispatch(removeModule(selectedModule.id))
+        onClose()
+      }}
     >
       <img className={classes.DeleteButtonSVG}
         src={trashSVG}
         alt='delete'
-        onClick={() => {
-          selectedModule.inputs.forEach(inputData => {
-            const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[inputData]
-            disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
-          })
-          selectedModule.outputs.forEach(outputData => {
-            const { fromID, toID, param, outputIndex, actualOutputID: containerOutputChildID, actualInputID: containerInputChildID } = connections[outputData]
-            disconnect(am[containerOutputChildID ? containerOutputChildID : fromID] as ConnectingAudioModule, am[containerInputChildID ? containerInputChildID : toID] as ConnectingAudioModule, param, outputIndex)
-          })
-          dispatch(removeModule(selectedModule.id))
-          onClose()
-        }}
       />
     </Button>
   )
