@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import useJSS from '../../LargeIcon/style'
+import useJSS from './style'
 import { Modules, RootState } from '../../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeConnection } from '../../../redux/allActions'
