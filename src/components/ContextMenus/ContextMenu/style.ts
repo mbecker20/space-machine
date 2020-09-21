@@ -8,17 +8,22 @@ const useJSS = createUseStyles({
   Bounder: {
     width: '100vw',
     height: '100vh',
-    backgroundColor: '#00000026',
+    backgroundColor: 'transparent',
     position: 'absolute',
+    overflow: 'hidden',
     top: 0,
     left: 0,
-    maxHeight,
-    overflowY: 'scroll'
+    zIndex: 1000,
   },
 
   ContextMenu: {
+    maxHeight,
+    backgroundColor: colors.contextMenuBackground,
+    padding: '.2em .7em',
     display: 'flex',
     flexDirection: 'column',
+    position: 'absolute',
+    overflowY: 'scroll',
   },
 
   MenuItem: {

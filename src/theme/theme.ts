@@ -62,7 +62,8 @@ export const colors: Colors = {
   denyButton: '#cc00006e',
 
   // Context menu
-  contextMenuItemBorder: 'black'
+  contextMenuItemBorder: 'black',
+  contextMenuBackground: 'grey',
 }
 
 export const sizes: Sizes = {

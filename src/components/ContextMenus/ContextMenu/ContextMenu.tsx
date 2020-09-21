@@ -1,23 +1,26 @@
-import React, { MouseEvent, ReactChildren } from 'react'
+import React, { MouseEvent, ReactElement } from 'react'
 import useJSS from './style'
 
 interface Props {
   e: MouseEvent<HTMLDivElement>
-  children: ReactChildren
+  children: ReactElement
+  onClose: () => void
 }
 
-function ContextMenu({ e, children }: Props) {
+function ContextMenu({ e, children, onClose }: Props) {
   const classes = useJSS()
   const top = (window.innerHeight - e.pageY) > window.innerHeight / 4 ? 
     e.pageY : undefined
   const left = (window.innerWidth - e.pageX) > window.innerWidth / 6 ? 
     e.pageX : undefined
   const bottom = (window.innerHeight - e.pageY) <= window.innerHeight / 4 ?
-    e.pageY : undefined
+    window.innerHeight - e.pageY : undefined
   const right = (window.innerWidth - e.pageX) <= window.innerWidth / 6 ?
-    e.pageX : undefined
+    window.innerWidth - e.pageX : undefined
   return (
-    <div className={classes.Bounder}>
+    <div className={classes.Bounder}
+      onClick={onClose}
+    >
       <div className={classes.ContextMenu}
         style={{
           top,

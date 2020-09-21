@@ -7,6 +7,7 @@ import { makePointerLayerData } from '../components/PointerLayer/makeData'
 import { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
 import configureSpaceDB from './configureSpaceDB'
 import setUserAgent from './setUserAgent'
+import ContextMenus from '../components/ContextMenus/ContextMenus'
 
 declare global {
   interface Window { 
@@ -45,6 +46,7 @@ function App() {
       }
       <CenterMenus />
       <Notification />
+      <ContextMenus />
     </div>
   )
 }

@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button } from '../all'
-import { colors, sizes } from '../../theme/theme'
-import { ContainerModule, Module, RootState } from '../../redux/stateTSTypes'
-import { disconnect } from '../../audioModules/connection'
-import { ConnectingAudioModule } from '../../audioModules/moduleTypes'
+import { Button } from '../../all'
+import { colors, sizes } from '../../../theme/theme'
+import { ContainerModule, Module, RootState } from '../../../redux/stateTSTypes'
+import { disconnect } from '../../../audioModules/connection'
+import { ConnectingAudioModule } from '../../../audioModules/moduleTypes'
 import { useDispatch } from 'react-redux'
-import { removeModule } from '../../redux/allActions'
+import { removeModule } from '../../../redux/allActions'
 import { useSelector } from 'react-redux'
 
 interface Props {

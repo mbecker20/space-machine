@@ -9,7 +9,6 @@ import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
 import InputOutputView from '../LargeIcon/InputOutputView'
 import MarkContainerIO from '../LargeIcon/MarkContainerIO'
-import DeleteButton from '../LargeIcon/DeleteButton'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
 import getModuleColor from '../../theme/moduleColor'
@@ -77,6 +76,11 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           setLarge(!isLarge)
           window.setTimeout(window.refreshArcherContainer, 0)
         }}
+        onContextMenu={e => {
+          e.preventDefault()
+          e.persist()
+          window.openModuleContextMenu(e, mod)
+        }}
       >
         {
         mod.connectionOutputs.length === 0 ? null
@@ -106,7 +110,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} />
           <InputOutputView selectedModule={mod} modules={modules} />
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
-          <DeleteButton selectedModule={mod} />
         </div>
         }
       </div>
