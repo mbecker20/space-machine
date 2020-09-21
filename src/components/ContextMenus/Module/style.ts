@@ -17,7 +17,7 @@ const useJSS = createUseStyles({
   },
 
   Connection: {
-    fontSize: sizes.text.small,
+    fontSize: sizes.text.xsmall,
     backgroundColor: colors.fillModule,
     margin: '.5vmin 3vmin',
     borderRadius: '1vmin',
@@ -36,7 +36,7 @@ const useJSS = createUseStyles({
   },
 
   MenuHeader: {
-    fontSize: sizes.text.medium,
+    fontSize: sizes.text.small,
     borderStyle: 'none none solid none',
     margin: '1vmin',
     width: '90%'
