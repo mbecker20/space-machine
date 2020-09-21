@@ -1,19 +1,22 @@
 import React, { MouseEvent } from 'react'
-import { Module } from '../../../redux/stateTSTypes'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../../redux/stateTSTypes'
 import ContextMenu from '../ContextMenu/ContextMenu'
-import ContextMenuItem from '../ContextMenu/ContextMenuItem'
 import DeleteButton from './DeleteButton'
+import InputOutputView from './InputOutputView'
 
 interface Props {
   event: MouseEvent<HTMLDivElement>
   onClose: () => void
-  selectedModule: Module
+  modID: string
 }
 
-function ModuleContextMenu({ event, onClose, selectedModule }: Props) {
+function ModuleContextMenu({ event, onClose, modID }: Props) {
+  const modules = useSelector((state: RootState) => state.modules)
   return (
     <ContextMenu e={event} onClose={onClose}>
-      <DeleteButton selectedModule={selectedModule} />
+      <InputOutputView modID={modID} modules={modules}/>
+      <DeleteButton modID={modID} onClose={onClose}/>
     </ContextMenu>
   )
 }

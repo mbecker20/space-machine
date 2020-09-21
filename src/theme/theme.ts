@@ -63,7 +63,7 @@ export const colors: Colors = {
 
   // Context menu
   contextMenuItemBorder: 'black',
-  contextMenuBackground: 'grey',
+  contextMenuBackground: '#08101deb',
 }
 
 export const sizes: Sizes = {

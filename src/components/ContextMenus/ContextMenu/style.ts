@@ -19,11 +19,18 @@ const useJSS = createUseStyles({
   ContextMenu: {
     maxHeight,
     backgroundColor: colors.contextMenuBackground,
-    padding: '.2em .7em',
+    padding: '.2em',
+    borderRadius: '.2em',
     display: 'flex',
     flexDirection: 'column',
     position: 'absolute',
     overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      width: '0em',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+    },
   },
 
   MenuItem: {

@@ -3,6 +3,7 @@ import useJSS from './style'
 import CSS from 'csstype'
 
 interface Props {
+  className?: string
   children?: React.ReactNode
   onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   style?: CSS.Properties
@@ -11,10 +12,10 @@ interface Props {
   onKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void
 }
 
-function Button({ onClick, children, style, onPointerDown, ref, onKeyDown }: Props) {
+function Button({ className, onClick, children, style, onPointerDown, ref, onKeyDown }: Props) {
   const classes = useJSS()
   return (
-    <div className={classes.Button}
+    <div className={className ? `${classes.Button} ${className}` : classes.Button}
       onClick={onClick}
       onPointerDown={onPointerDown}
       style={style}

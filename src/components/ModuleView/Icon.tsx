@@ -7,7 +7,6 @@ import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
-import InputOutputView from '../LargeIcon/InputOutputView'
 import MarkContainerIO from '../LargeIcon/MarkContainerIO'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
@@ -79,7 +78,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         onContextMenu={e => {
           e.preventDefault()
           e.persist()
-          window.openModuleContextMenu(e, mod)
+          window.openModuleContextMenu(e, mod.id)
         }}
       >
         {
@@ -108,7 +107,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         >
           {mod.moduleType === CONTAINER ? <ContainerControlMenu selectedModule={mod as ContainerModule} reRenderIcon={reRenderIcon} /> : null}
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} />
-          <InputOutputView selectedModule={mod} modules={modules} />
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
         </div>
         }

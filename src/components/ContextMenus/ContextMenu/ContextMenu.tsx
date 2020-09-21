@@ -1,9 +1,9 @@
-import React, { MouseEvent, ReactElement } from 'react'
+import React, { MouseEvent, ReactNode } from 'react'
 import useJSS from './style'
 
 interface Props {
   e: MouseEvent<HTMLDivElement>
-  children: ReactElement
+  children: ReactNode
   onClose: () => void
 }
 
@@ -19,7 +19,7 @@ function ContextMenu({ e, children, onClose }: Props) {
     window.innerWidth - e.pageX : undefined
   return (
     <div className={classes.Bounder}
-      onClick={onClose}
+      onPointerDown={onClose}
     >
       <div className={classes.ContextMenu}
         style={{
