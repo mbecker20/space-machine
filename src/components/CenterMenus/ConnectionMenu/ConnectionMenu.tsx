@@ -28,7 +28,7 @@ const buttonStyle: CSS.Properties = {
 function ConnectionMenu({ fromID, toID, onClose }: Props) {
   const classes = useJSS()
   const am = window.audioModules
-  const [ modules, connections ] = useSelector((state: RootState) => [ state.modules, state.connections ])
+  const { modules, connections } = useSelector((state: RootState) => state)
   const fromMod = modules[fromID]
   const toMod = modules[toID]
   const [outputIndex, setOutputIndex] = useState(0)
