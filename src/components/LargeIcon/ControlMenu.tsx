@@ -25,7 +25,7 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             ?
             <ValueControl controlID={controlID} setFunc={setFunc} actualModID={selectedModule.id}/>
             :
-            controlType === BUTTON
+            controlType === BUTTON && controlID !== 'open'
             ?
             <ButtonControl setFunc={setFunc} controlID={controlID} />
             :

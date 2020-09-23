@@ -1,4 +1,4 @@
-import { BaseAM, ControlData, ControlSetFuncs, BUTTON } from "../moduleTypes"
+import { BaseAM, ControlData, ControlSetFuncs } from "../moduleTypes"
 
 export interface ContainerModule extends BaseAM {
   inputModuleID?: string
@@ -7,18 +7,13 @@ export interface ContainerModule extends BaseAM {
 
 export function makeContainerControlData(): ControlData {
   return {
-    'open': {
-      controlType: BUTTON,
-    },
+    
   }
 }
 
 function makeContainer(id: string): ContainerModule {
   const controlSetFuncs: ControlSetFuncs = {
-    'open': () => {
-      window.fillContainerID = id
-      window.reRenderFillContainer()
-    },
+    
   }
   return {
     connectingParamIDs: [],

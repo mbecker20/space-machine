@@ -26,7 +26,12 @@ const useJSS = createUseStyles({
     borderStyle: 'none none solid none',
     margin: '1vmin',
     width: '90%'
-  }, 
+  },
+
+  OpenButton: {
+    fontSize: sizes.text.small,
+
+  },
 })
 
 export default useJSS

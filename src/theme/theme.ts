@@ -65,7 +65,7 @@ export const colors: Colors = {
   contextMenuItemBorder: 'black',
   contextMenuBackground: '#08101deb',
 
-  sdbSaveButton: grey,
+  sdbSaveButton: '#282c349c',
 }
 
 export const sizes: Sizes = {

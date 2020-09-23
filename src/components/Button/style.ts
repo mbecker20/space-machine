@@ -17,8 +17,8 @@ const useJSS = createUseStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '1vmin',
-    margin: '1vmin',
+    padding: '.3em',
+    margin: '.3em',
     textAlign: 'center',
   },
 })
