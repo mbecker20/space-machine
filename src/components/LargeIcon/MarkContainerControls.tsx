@@ -1,10 +1,9 @@
 import React, { useState, Fragment } from 'react'
-import { Button, Switch } from '../all'
+import { Button, Switch, FlexRow, FlexCol } from '../all'
 import { sizes } from '../../theme/theme'
-import { Module, ContainerModule, RootState } from '../../redux/stateTSTypes'
+import { Module, ContainerModule, RootState, ContainerControl } from '../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { markContainerControl, unmarkContainerControl } from '../../redux/allActions'
-import { stringIn } from '../../helpers/genFuncs'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 
 interface Props {
@@ -23,46 +22,90 @@ function MarkContainerControls({ selectedModule }: Props) {
           setOpen(!open)
         }}
       >mark container controls</Button>
-      <div>
+      <FlexCol>
         {
-        !open ? null :
-        Object.keys(selectedModule.controlData).map((controlID, index) => {
-          return (
-            <Switch initState={stringIn(selectedModule.id + controlID, selectedModule.toContainerControls)} text={controlID}
-              style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
-              key={controlID + index}
-              onSwitch={isMarked => {
-                if (isMarked) {
-                  dispatch(markContainerControl(selectedModule.id, controlID, selectedModule.id))
-                } else {
-                  dispatch(unmarkContainerControl(selectedModule.id, controlID, selectedModule.id))
-                }
-              }} 
-            />
-          )
-        })
-        }
-        {
-        open && selectedModule.moduleType === CONTAINER ?
-          (selectedModule as ContainerModule).containerControls.map(({ modID, controlID, actualModID }, index) => {
-            const name = modules[modID].name
+          open && selectedModule.moduleType === CONTAINER ?
+          (selectedModule as ContainerModule).containerControls.map((control, index) => {
+            const { modID, controlID, actualModID, name, markedToContainer } = control
+            const modName = modules[modID].name
+            let containerControl: ContainerControl
+            const isMarked = markedToContainer ? true : false
+            if (isMarked) {
+              containerControl = (modules[selectedModule.parentID as string] as ContainerModule).containerControls.filter(containerControl => {
+                return (
+                  containerControl.controlID === controlID &&
+                  containerControl.actualModID === actualModID
+                )
+              })[0]
+            }
             return (
-              <Switch initState={stringIn(actualModID + controlID, selectedModule.toContainerControls)} text={`${name} - ${controlID}`}
-                style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
-                key={modID + index}
-                onSwitch={isMarked => {
-                  if (isMarked) {
-                    dispatch(markContainerControl(selectedModule.id, controlID, actualModID))
-                  } else {
-                    dispatch(unmarkContainerControl(selectedModule.id, controlID, actualModID))
-                  }
-                }}
-              />
+              <FlexRow>
+                <Switch initState={isMarked} text={name ? name : `${modName} - ${controlID}`}
+                  style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
+                  key={modID + index}
+                  onSwitch={nowMarked => {
+                    if (nowMarked) {
+                      dispatch(markContainerControl(selectedModule.id, controlID, actualModID))
+                    } else {
+                      dispatch(unmarkContainerControl(selectedModule.id, controlID, actualModID))
+                    }
+                  }}
+                />
+                {
+                  !isMarked ? null :
+                  <Button style={{ fontSize: sizes.text.small }}
+                    onClick={() => {
+                      window.openControlRenameMenu(controlID, selectedModule.parentID as string, containerControl)
+                    }}
+                  >
+                    edit
+                  </Button>
+                }
+              </FlexRow>
             )
           }) : null
         }
-
-      </div>
+        {
+        !open || selectedModule.moduleType === CONTAINER ? null :
+        Object.keys(selectedModule.controlData).map((controlID, index) => {
+          const isMarked = selectedModule.controlData[controlID].markedToContainer ? true : false
+          let containerControl: ContainerControl
+          if (isMarked) {
+            containerControl = (modules[selectedModule.parentID as string] as ContainerModule).containerControls.filter(containerControl => {
+              return (
+                containerControl.controlID === controlID &&
+                containerControl.actualModID === selectedModule.id
+              )
+            })[0]
+          }
+          return (
+            <FlexRow>
+              <Switch initState={isMarked} text={controlID}
+                style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
+                key={controlID + index}
+                onSwitch={nowMarked => {
+                  if (nowMarked) {
+                    dispatch(markContainerControl(selectedModule.id, controlID, selectedModule.id))
+                  } else {
+                    dispatch(unmarkContainerControl(selectedModule.id, controlID, selectedModule.id))
+                  }
+                }} 
+              />
+              {
+                !isMarked ? null :
+                <Button style={{ fontSize: sizes.text.small }}
+                  onClick={() => {
+                    window.openControlRenameMenu(controlID, selectedModule.parentID as string, containerControl)
+                  }}
+                >
+                  edit
+                </Button>
+              }
+            </FlexRow>
+          )
+        })
+        }
+      </FlexCol>
     </Fragment>
   )
 }

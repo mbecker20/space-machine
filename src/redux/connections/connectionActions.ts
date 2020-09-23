@@ -1,5 +1,6 @@
-import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE } from "./connectionActionTypes"
-import { AddConnectionAction, RemoveConnectionAction, RemoveModuleAction } from "./connectionTSTypes"
+import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE, MERGE_CONTAINER } from "./connectionActionTypes"
+import { AddConnectionAction, RemoveConnectionAction, RemoveModuleAction, MergeContainerAction } from "./connectionTSTypes"
+import { Modules, Connections } from "../stateTSTypes"
 
 export const addConnection = (fromID: string, toID: string, param: string, outputIndex: number, inputIndex: number, containerOutputChildID?: string, containerInputChildID?: string): AddConnectionAction => {
   return {
@@ -25,5 +26,17 @@ export const removeModule = (id: string): RemoveModuleAction => {
   return {
     type: REMOVE_MODULE,
     id,
+  }
+}
+
+export const mergeContainer = (containerID: string, newModules: Modules, newConnections: Connections, parentID: string, row: number, col: number): MergeContainerAction => {
+  return {
+    type: MERGE_CONTAINER,
+    containerID,
+    newModules,
+    newConnections,
+    parentID,
+    row,
+    col,
   }
 }

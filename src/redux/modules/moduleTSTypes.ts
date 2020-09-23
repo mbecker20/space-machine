@@ -36,6 +36,16 @@ export interface MarkContainerControlAction {
   modID: string
   controlID: string
   actualModID: string
+  name?: string
+}
+
+export interface RenameContainerControlAction {
+  type: string
+  name: string
+  parentModID: string
+  modID: string
+  controlID: string
+  actualModID: string
 }
 
 export interface UpdateControlValueAction {

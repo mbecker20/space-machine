@@ -11,6 +11,7 @@ import {
   UNMARK_CONTAINER_CONTROL,
   UPDATE_CONTROL_VALUE,
   UPDATE_CONTROL_RANGE,
+  RENAME_CONTAINER_CONTROL,
 } from './moduleActionTypes'
 import { 
   ModuleAction, 
@@ -21,6 +22,7 @@ import {
   MarkContainerControlAction,
   UpdateControlValueAction,
   UpdateControlRangeAction,
+  RenameContainerControlAction,
 } from './moduleTSTypes'
 import { 
   addModuleReducer, 
@@ -34,6 +36,7 @@ import {
   unmarkContainerControlReducer,
   updateControlValueReducer,
   updateControlRangeReducer,
+  renameContainerControlReducer,
 } from "./reducers/allModuleReducers"
 import { CONTAINER, BUTTON } from "../../audioModules/moduleTypes"
 
@@ -51,7 +54,6 @@ const initBaseCM: ContainerModule = {
   },
   connectionInputs: [],
   connectionOutputs: [],
-  toContainerControls: [],
   inputs: [],
   outputs: [],
   parentID: null,
@@ -80,6 +82,7 @@ const moduleReducer = (state = initState, action?: ModuleAction) => {
       case UNMARK_CONTAINER_CONTROL: return unmarkContainerControlReducer(state, action as MarkContainerControlAction)
       case UPDATE_CONTROL_VALUE: return updateControlValueReducer(state, action as UpdateControlValueAction)
       case UPDATE_CONTROL_RANGE: return updateControlRangeReducer(state, action as UpdateControlRangeAction)
+      case RENAME_CONTAINER_CONTROL: return renameContainerControlReducer(state, action as RenameContainerControlAction)
       default: return state
     }
   } else {

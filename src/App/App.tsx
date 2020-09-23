@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import useJSS from './style'
-import { RightDrawer, ModuleViewFill, AudioTags, CenterMenus, PointerLayer } from '../components/all'
-import { AudioModules, ModuleType } from '../audioModules/moduleTypes'
+import { RightDrawer, ModuleViewFill, AudioTags, CenterMenus, PointerLayer, Notification } from '../components/all'
+import { AudioModules } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
-import { Dispatch } from 'redux'
 import { makePointerLayerData } from '../components/PointerLayer/makeData'
 import { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
+import configureSpaceDB from './configureSpaceDB'
+import setUserAgent from './setUserAgent'
+import ContextMenus from '../components/ContextMenus/ContextMenus'
 
 declare global {
   interface Window { 
-    highlightedID: string
     fillContainerID: string
     audioModules: AudioModules
-    addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
     openPointerLayer: (pointerId: number, onPointerMove: PointerEventCallback, onPointerUp: PointerEventCallback) => void
   }
 
@@ -21,11 +21,12 @@ declare global {
   }
 }
 
-window.highlightedID = 'project' // make this '', for dev
 window.fillContainerID = 'project'
 
 window.audioModules = {}
-window.addModule = makeAddModule()
+makeAddModule()
+configureSpaceDB()
+setUserAgent()
 
 function App() {
   const classes = useJSS()
@@ -33,10 +34,7 @@ function App() {
   window.openPointerLayer = (pointerId, onPointerMove, onPointerUp) => { setPointerLayerData(makePointerLayerData(true, pointerId, onPointerMove, onPointerUp)) }
   const resetPointerLayerData = () => { setPointerLayerData(makePointerLayerData(false)) }
   return (
-    <div className={classes.Bounder} onPointerDown={() => {
-      window.currUnHighlight()
-      window.currUnHighlight = () => { }
-    }}>
+    <div className={classes.Bounder}>
       <div className={classes.ModuleViewBounder}>
         <ModuleViewFill />
       </div>
@@ -47,6 +45,8 @@ function App() {
         <PointerLayer pointerLayerData={ pointerLayerData } resetPointerLayerData={resetPointerLayerData}/>
       }
       <CenterMenus />
+      <Notification />
+      <ContextMenus />
     </div>
   )
 }

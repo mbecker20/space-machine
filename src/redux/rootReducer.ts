@@ -5,7 +5,9 @@ import { RootState } from './stateTSTypes'
 import { ModuleAction } from './modules/moduleTSTypes'
 import { BCIDAction } from './baseContainerID/bcidTSTypes'
 import { ConnectionAction } from './connections/connectionTSTypes'
-import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE } from './connections/connectionActionTypes'
+import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE, MERGE_CONTAINER } from './connections/connectionActionTypes'
+import { RESTORE_FROM_STATE } from './root/rootActionTypes'
+import { RootAction } from './root/rootActionTSTypes'
 
 const initState = {
   modules: moduleReducer(),
@@ -14,7 +16,7 @@ const initState = {
 }
 
 function combinedModuleConnectionReducer(state: RootState, action: ModuleAction | ConnectionAction) {
-  if (action.type === ADD_CONNECTION || action.type === REMOVE_CONNECTION || action.type === REMOVE_MODULE) {
+  if (action.type === ADD_CONNECTION || action.type === REMOVE_CONNECTION || action.type === REMOVE_MODULE || action.type === MERGE_CONTAINER) {
     return connectionReducer(state.modules, state.connections, action as ConnectionAction)
   } else {
     return {
@@ -24,12 +26,19 @@ function combinedModuleConnectionReducer(state: RootState, action: ModuleAction 
   }
 }
 
-const rootReducer = (state = initState, action: ModuleAction | BCIDAction | ConnectionAction): RootState => {
-  const { newModules, newConnections } = combinedModuleConnectionReducer(state, action as ModuleAction | ConnectionAction)
-  return {
-    modules: newModules,
-    connections: newConnections,
-    baseContainerID: bcidReducer(state.baseContainerID, action as BCIDAction),
+const rootReducer = (state = initState, action: ModuleAction | BCIDAction | ConnectionAction | RootAction): RootState => {
+  if (action.type === RESTORE_FROM_STATE) {
+    const newState = (action as RootAction).state
+    return Object.assign(newState, newState.connections ? {} : {
+      connections: {}
+    })
+  } else {
+    const { newModules, newConnections } = combinedModuleConnectionReducer(state, action as ModuleAction | ConnectionAction)
+    return {
+      modules: newModules,
+      connections: newConnections,
+      baseContainerID: bcidReducer(state.baseContainerID, action as BCIDAction),
+    }
   }
 }
 

@@ -19,7 +19,7 @@ const useJSS = createUseStyles({
 
   FillHeader: {
     borderColor: 'white',
-    borderStyle: 'none none solid none',
+    borderStyle: 'none none none none',
     padding: '1vmin',
     marginLeft: '2vmin',
     '&:hover': {
@@ -79,11 +79,18 @@ const useJSS = createUseStyles({
     justifyContent: 'flex-start',
     overflowY: 'scroll',
     overflowX: 'hidden',
+    '&::-webkit-scrollbar': {
+      width: '0px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+    },
   },
 
   ArcherElement: {
     zIndex: 1,
     display: 'grid',
+    backgroundColor: 'transparent',
     gridTemplateRows: '10px auto 10px',
     gridTemplateColumns: '10px auto 10px',
     padding: '1vmin'
@@ -110,6 +117,7 @@ const useJSS = createUseStyles({
     },
     justifySelf: 'flex-start',
     alignSelf: 'flex-end',
+    flexShrink: 0,
   },
 })
 

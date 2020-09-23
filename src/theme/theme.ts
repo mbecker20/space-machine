@@ -41,7 +41,31 @@ export const colors: Colors = {
 
   // connection menu
   connectableName: 'white',
-  expandableName: '#85adad'
+  expandableName: '#85adad',
+
+  // module colors
+
+  sourceModuleBG: '#028174',
+  //sourceModuleKnob
+
+  effectsModuleBG: '#7D1551',
+  //effectsModukeKnob
+
+  containerModuleBG: '#4C4141',
+  //container knob magic tricks
+
+  outputModuleBG: '#CA5F3C',
+
+  analyzerModuleBG: '#00347D',
+
+  confirmButton: '#00802da6',
+  denyButton: '#cc00006e',
+
+  // Context menu
+  contextMenuItemBorder: 'black',
+  contextMenuBackground: '#08101deb',
+
+  sdbSaveButton: '#282c349c',
 }
 
 export const sizes: Sizes = {
@@ -54,9 +78,8 @@ export const sizes: Sizes = {
     iconGrid: '12vmin',
     gutterGrid: '6vmin',
     icon: '10vmin',
-    bigIcon: '27vmin',
-    bigIconWidth: '30vmin',
-    bigIconHeight: '50vmin',
+    bigIconWidth: '25vmin',
+    bigIconHeight: '35vmin',
   },
   text: {
     large: 'calc(25px + 2.8vmin)',
@@ -70,11 +93,14 @@ export const sizes: Sizes = {
     borderRadius: '1.5vmin'
   },
   knob: {
-    size: 9, // converted to vmin in knob
+    size: 7, // converted to vmin in knob
     markerWidth: .5,
     markerHeight: 1.3,
     rotRange: [-150, 150], // in degrees
     sensitivity: 1,
     borderWidth: 8,
-  }
+  },
+  switch: {
+    diameter: 3 // in vmin
+  },
 }

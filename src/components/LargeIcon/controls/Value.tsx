@@ -10,16 +10,16 @@ import { updateControlValue, updateControlRange } from '../../../redux/allAction
 interface Props {
   controlID: string
   setFunc: SetFunc
-  actualModID?: string
+  actualModID: string
   displayModName?: string
+  label?: string
 }
 
-function ValueControl({ controlID, setFunc, actualModID, displayModName }: Props) {
-  const modID = actualModID ? actualModID : window.highlightedID
+function ValueControl({ controlID, setFunc, actualModID, displayModName, label }: Props) {
   const [ val, currRange ] = useSelector((state: RootState) => {
     return [
-      state.modules[modID].controlData[controlID].value as number,
-      state.modules[modID].controlData[controlID].range as [number, number],
+      state.modules[actualModID].controlData[controlID].value as number,
+      state.modules[actualModID].controlData[controlID].range as [number, number],
     ]
   })
   const [inputVal, setInputVal] = useState(makeValString(val))
@@ -40,17 +40,17 @@ function ValueControl({ controlID, setFunc, actualModID, displayModName }: Props
         }}
         onChange={newVal => {
           setFunc(newVal.toString())
-          dispatch(updateControlValue(modID, controlID, newVal))
+          dispatch(updateControlValue(actualModID, controlID, newVal))
         }}
         onSettingsClick={() => {
-          window.openRangeSetMenu(modID, controlID, (newRange) => {
+          window.openKnobRangeSetMenu(actualModID, controlID, (newRange) => {
             setFunc(clamp(val, newRange).toString())
             setInputVal(makeValString(clamp(val, newRange)))
-            dispatch(updateControlRange(modID, controlID, newRange))
+            dispatch(updateControlRange(actualModID, controlID, newRange))
           })
         }}
       />
-      <div>{displayModName ? `${displayModName} - ${controlID}` : controlID}</div>
+      <div>{label ? label : displayModName ? `${displayModName} - ${controlID}` : controlID}</div>
     </div>
   )
 }

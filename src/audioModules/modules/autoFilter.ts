@@ -7,16 +7,14 @@ export interface AutoFilterModule extends BaseAM {
 }
 
 const filterTypes = ['lowpass', 'lowshelf', 'highpass', 'highshelf', 'allpass', 'bandpass', 'notch', 'peaking']
+const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
 
-function makeAutoFilter (): [ AutoFilterModule, ControlData ] {
-  const autoFilter = audioCtx.createBiquadFilter()
-
-  const connectingParamIDs = ['frequency', 'detune', 'Q', 'gain']
-
-  const controlData: ControlData = {
+export function makeFilterControlData(autoFilter: BiquadFilterNode): ControlData {
+  return {
     'set type': {
       controlType: TYPE,
       paramID: 'type',
+      value: autoFilter.type
     },
     'frequency': {
       controlType: VALUE,
@@ -36,15 +34,28 @@ function makeAutoFilter (): [ AutoFilterModule, ControlData ] {
       controlType: VALUE,
       paramID: 'Q',
       value: autoFilter.Q.value,
-      range: [-30, 30]
+      range: [0.0001, 1000],
+      maxRange: [0.0001, 1000],
     },
     'gain': {
       controlType: VALUE,
       paramID: 'gain',
       value: autoFilter.gain.value,
-      range: [-20000, 1400],
-      maxRange: [-20000, 1400],
+      range: [-40, 40],
+      maxRange: [-40, 40],
     },
+  }
+}
+
+function makeAutoFilter (prevControlData?: ControlData): AutoFilterModule {
+  const autoFilter = audioCtx.createBiquadFilter()
+
+  if (prevControlData) {
+    autoFilter.type = prevControlData['set type'].value as BiquadFilterType
+    autoFilter.frequency.value = prevControlData['frequency'].value as number
+    autoFilter.detune.value = prevControlData['detune'].value as number
+    autoFilter.Q.value = prevControlData['Q'].value as number
+    autoFilter.gain.value = prevControlData['gain'].value as number
   }
 
   const controlSetFuncs: ControlSetFuncs = {
@@ -63,15 +74,13 @@ function makeAutoFilter (): [ AutoFilterModule, ControlData ] {
     },
   }
 
-  return [
-    {
-      audioNode: autoFilter,
-      typeTypes: filterTypes,
-      connectingParamIDs,
-      controlSetFuncs,
-    },
-    controlData,
-  ] 
+  return {
+    audioNode: autoFilter,
+    typeTypes: filterTypes,
+    connectingParamIDs,
+    controlSetFuncs,
+  }
+    
 }
 
 export default makeAutoFilter

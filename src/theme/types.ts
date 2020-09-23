@@ -32,10 +32,18 @@ interface Knob {
   borderWidth: number
 }
 
+interface Switch {
+  diameter: number // in vmin
+}
+
 export interface Sizes {
   rightDrawer: Drawer
   moduleView: ModuleView
   text: Text
   connector: Connector
   knob: Knob
+  switch: Switch
 }
+
+
+

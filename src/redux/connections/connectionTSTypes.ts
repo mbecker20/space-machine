@@ -21,9 +21,19 @@ export interface RemoveModuleAction {
   id: string
 }
 
+export interface MergeContainerAction {
+  type: string
+  containerID: string
+  newModules: Modules
+  newConnections: Connections
+  parentID: string
+  row: number // the new row / col of the merged container within the container it was instantiated
+  col: number
+}
+
 export interface ConnectionReducerReturn {
   newModules: Modules
   newConnections: Connections
 }
 
-export type ConnectionAction = AddConnectionAction | RemoveConnectionAction | RemoveModuleAction
+export type ConnectionAction = AddConnectionAction | RemoveConnectionAction | RemoveModuleAction | MergeContainerAction

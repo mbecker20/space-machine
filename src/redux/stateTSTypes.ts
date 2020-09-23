@@ -25,17 +25,17 @@ export interface Module { // the base of the Module types
   controlData: ControlData
   connectionInputs: string[] // these are the audionode i/o ports/channels, or in the case of containers, ids referencing 
   connectionOutputs: string[]
-  toContainerControls: string[]
   isContainerInput: boolean
   isContainerOutput: boolean
   parentID: string | null // id of parent ContainerModule
-  
 }
 
 export interface ContainerControl {
   modID: string
   controlID: string
   actualModID: string
+  name?: string
+  markedToContainer: boolean
 }
 
 export interface ContainerModule extends Module { // modules composing other modules in tree structure 
@@ -51,14 +51,14 @@ export interface Modules {
 // connection related state
 
 export interface ConnectionData {
-  connectionID: string // stored on both from and to objected
+  connectionID: string // stored on both from and to modules
   fromID: string
   toID: string
   param: string
   outputIndex: number
   inputIndex: number
-  containerOutputChildID?: string
-  containerInputChildID?: string
+  actualOutputID?: string // this is the actual module id
+  actualInputID?: string
 }
 
 export interface Connections {

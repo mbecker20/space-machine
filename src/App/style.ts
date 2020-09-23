@@ -26,8 +26,7 @@ const useJSS = createUseStyles({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     zIndex: 0,
-    overflowX: 'hidden',
-    overflowY: 'scroll',
+    overflow: 'scroll',
     '&::-webkit-scrollbar': {
       width: '0px',
     },

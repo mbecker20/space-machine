@@ -19,6 +19,8 @@ interface Props {
   setInputVal: (newValString: string) => void
 }
 
+let justClicked = false
+
 function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsClick, inputVal, setInputVal }: Props) {
   const classes = useJSS()
   const svgRef = useRef<SVGSVGElement>(null)
@@ -52,11 +54,17 @@ function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsCl
           if (onEveryChange) { onEveryChange(clamp(Number(e.target.value), range)) }
         }}
         onBlur={e => {
-          const newVal = clamp(Number(e.target.value), range)
-          if (onChange) {
-            onChange(newVal)
+          if (e.target.value.length !== 0) {
+            const newVal = clamp(Number(e.target.value), range)
+            if (onChange) {
+              onChange(newVal)
+            }
+            setInputVal(makeValString(newVal))
+          } else {
+            if (textRef.current) {
+              textRef.current.value = inputVal
+            }
           }
-          setInputVal(makeValString(newVal))
         }}
         onKeyDown={e => {
           if (e.keyCode === 13) {
@@ -80,13 +88,24 @@ function StatelessKnob({ initValue, range, onChange, onEveryChange, onSettingsCl
               textRef.current.focus()
             }
           } else {
-            window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
+            if (justClicked) {
+              if (textRef.current) {
+                textRef.current.placeholder = textRef.current.value
+                textRef.current.value = ''
+                textRef.current.focus()
+              }
+            } else {
+              window.openPointerLayer(e.pointerId, onPointerMove, onPointerUp)
+              justClicked = true
+              window.setTimeout(() => { justClicked = false }, 200)
+            }
           }
         }}
       />
       {!onSettingsClick ? null
       :
       <img className={classes.SettingsButton}
+        title='edit knob range'
         src={settingsSVG}
         alt='settings'
         onClick={onSettingsClick}

@@ -63,12 +63,12 @@ const useJSS = createUseStyles({
 
   ItemRouter: {
     width: sizes.rightDrawer.width,
+    height: 'calc(100% - 60px)',
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     alignContent: 'flex-start',
-    height: 'calc(100% - 60px)',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       width: '0px',

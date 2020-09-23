@@ -3,24 +3,16 @@ import { Module, RootState, ContainerModule } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
-import { moveModule } from '../../redux/allActions'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
-import InputOutputView from '../LargeIcon/InputOutputView'
 import MarkContainerIO from '../LargeIcon/MarkContainerIO'
-import DeleteButton from '../LargeIcon/DeleteButton'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
-
-declare global {
-  interface Window {
-    currUnHighlight: () => void
-  }
-}
-
-window.currUnHighlight = () => {}
+import getModuleColor from '../../theme/moduleColor'
+import { bothStringsIn } from '../../helpers/genFuncs'
+import { iconOnDrop, iconOnDragStart } from './callbacks'
 
 interface Props {
   mod: Module
@@ -30,36 +22,27 @@ interface Props {
 
 function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const classes = useJSS()
-  const [isHighlighted, setHighlighted] = useState(mod.id === window.highlightedID)
-  const [controlMenuOpen, setControlMenuOpen] = useState(false)
+  const [isLarge, setLarge] = useState(false)
   const [reRender, toReRender] = useState(false)
-  function reRenderIcon() {
-    toReRender(!reRender)
-  }
+  const reRenderIcon = () => { toReRender(!reRender) }
 
   const iconStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
-    borderStyle: isHighlighted ? 'solid' : 'none',
+    borderStyle: isLarge ? 'solid' : 'none',
+    backgroundColor: getModuleColor(mod.moduleType),
+    width: isLarge ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
+    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon
   }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
+    width: isLarge ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
+    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
   }
-  
-  const iconSpring = useSpring({
-    width: isHighlighted ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
-    height: isHighlighted ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
-    config: {
-      tension: 350,
-      clamp: true,
-    },
-    onFrame: window.refreshArcherContainer,
-    onRest: () => { setControlMenuOpen(isHighlighted) }
-  })
 
   const nameSpring = useSpring({
-    fontSize: isHighlighted ? sizes.text.medium : sizes.text.small,
+    fontSize: isLarge ? sizes.text.medium : sizes.text.small,
     config: {
       tension: 350,
       clamp: true
@@ -70,64 +53,29 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const dispatch = useDispatch()
   return (
     <Fragment>
-      <animated.div 
+      <div 
         className={classes.Icon} 
-        style={Object.assign(iconSpring, iconStyle)}
+        style={iconStyle}
         onPointerDown={e => e.stopPropagation()}
         onDragOver={event => {
           event.preventDefault()
         }}
         onDrop={e => {
-          const id = e.dataTransfer.getData('id')
-          if (id) {
-            const possiblyMod = modules[id]
-            if (possiblyMod) {
-              const fromRow = e.dataTransfer.getData('fromRow')
-              const fromCol = e.dataTransfer.getData('fromCol')
-              window.setFillIsExpanded(false)
-              dispatch(moveModule(id, mod.row, mod.col))
-              dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
-              window.setTimeout(window.refreshArcherContainer, 100)
-            }
-          } else {
-            if (mod.connectionInputs.length === 0 && window.audioModules[mod.id].connectingParamIDs.length === 0) {
-              alert('mod cannot accept input')
-            } else {
-              const fromID = e.dataTransfer.getData('fromID')
-              if (fromID) {
-                window.openConnectionMenu(fromID, mod.id)
-              }
-            }
-          }
-          setHighlighted(false)
+          iconOnDrop(e, modules, mod, dispatch)
         }}
-        draggable={!isHighlighted}
-        onDragStart={event => {
-          event.dataTransfer.setData('id', mod.id)
-          event.dataTransfer.setData('fromRow', `${mod.row}`)
-          event.dataTransfer.setData('fromCol', `${mod.col}`)
-          window.setFillIsExpanded(true)
-        }}
-        onDragEnd={() => {
-          window.setFillIsExpanded(false)
+        draggable={!isLarge}
+        onDragStart={e => {
+          iconOnDragStart(e, mod)
         }}
         onClick={e => {
-          if (e.stopPropagation) {
-            e.stopPropagation()
-          }
-          if (mod.id === window.highlightedID) {
-            window.currUnHighlight()
-            window.currUnHighlight = () => {}
-          } else {
-            window.currUnHighlight()
-            setHighlighted(true)
-            window.highlightedID = mod.id
-            window.currUnHighlight = () => {
-              window.highlightedID = ''
-              setControlMenuOpen(false)
-              setHighlighted(false)
-            }
-          }
+          e.stopPropagation()
+          setLarge(!isLarge)
+          window.setTimeout(window.refreshArcherContainer, 0)
+        }}
+        onContextMenu={e => {
+          e.preventDefault()
+          e.persist()
+          window.openModuleContextMenu(e, mod.id)
         }}
       >
         {
@@ -142,28 +90,26 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         />
         }
         <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
-          if (isHighlighted) {
+          if (isLarge) {
             e.stopPropagation()
-            window.openRenameMenu(mod.id)
+            window.openModuleRenameMenu(mod.id)
           }
         }}>
           {mod.name}
         </animated.div>
         {
-        !controlMenuOpen ? null :
+        !isLarge ? null :
         <div className={classes.IconControlContainer} 
           onClick={e => e.stopPropagation()}
         >
           {mod.moduleType === CONTAINER ? <ContainerControlMenu selectedModule={mod as ContainerModule} reRenderIcon={reRenderIcon} /> : null}
           <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} />
-          <InputOutputView selectedModule={mod} modules={modules} />
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
-          <DeleteButton selectedModule={mod} />
         </div>
         }
-      </animated.div>
-      <animated.div className={classes.ArcherElement}
-        style={Object.assign({}, iconSpring, archerElementStyle)}
+      </div>
+      <div className={classes.ArcherElement}
+        style={archerElementStyle}
       >
         <div style={{
           gridColumn: `${1} / span 1`,
@@ -199,7 +145,10 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         }}>
           <ArcherElement
             id={mod.id + ' output'}
-            relations={mod.outputs.map(connectionID => {
+            relations={mod.outputs.filter(connectionID => {
+              const { fromID, toID } = connections[connectionID]
+              return bothStringsIn(fromID, toID, (modules[window.fillContainerID] as ContainerModule).childModules)
+            }).map(connectionID => {
               const { toID, param } = connections[connectionID]
               return {
                 targetId: param === '' ? toID + ' input' : toID + ' controls',
@@ -217,7 +166,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
             }} />
           </ArcherElement>
         </div>
-      </animated.div>
+      </div>
     </Fragment>
   )
 }

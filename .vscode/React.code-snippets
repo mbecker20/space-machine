@@ -1,0 +1,101 @@
+{
+	"component": {
+		"scope": "typescriptreact,javascriptreact",
+		"prefix": "comp",
+		"body": [
+			"import React from 'react'",
+			"",
+			"function ${0:$TM_FILENAME_BASE}() {",
+			"\treturn (",
+			"\t\t<div>",
+			"",
+			"\t\t</div>",
+			"\t)",
+			"}",
+			"",
+			"export default ${0:$TM_FILENAME_BASE}"
+		]
+	},
+
+	"component with Props": {
+		"scope": "typescriptreact",
+		"prefix": "comp-props",
+		"body": [
+			"import React from 'react'",
+			"",
+			"interface Props {",
+			"\t$0",
+			"}",
+			"",
+			"function ${1:$TM_FILENAME_BASE}({  }: Props) {",
+			"\treturn (",
+			"\t\t<div>",
+			"",
+			"\t\t</div>",
+			"\t)",
+			"}",
+			"",
+			"export default ${1:$TM_FILENAME_BASE}"
+		]
+	},
+
+	"component with jss": {
+		"scope": "typescriptreact",
+		"prefix": "comp-jss",
+		"body": [
+			"import React from 'react'",
+			"import useJSS from './style'",
+			"",
+			"function ${0:$TM_FILENAME_BASE}({  }: Props) {",
+			"\tconst classes = useJSS()",
+			"\treturn (",
+			"\t\t<div>",
+			"",
+			"\t\t</div>",
+			"\t)",
+			"}",
+			"",
+			"export default ${0:$TM_FILENAME_BASE}"
+		]
+	},
+
+	"component with Props, jss": {
+		"scope": "typescriptreact",
+		"prefix": "comp-props-jss",
+		"body": [
+			"import React from 'react'",
+			"import useJSS from './style'",
+			"",
+			"interface Props {",
+			"\t$0",
+			"}",
+			"",
+			"function ${1:$TM_FILENAME_BASE}({  }: Props) {",
+			"\tconst classes = useJSS()",
+			"\treturn (",
+			"\t\t<div>",
+			"",
+			"\t\t</div>",
+			"\t)",
+			"}",
+			"",
+			"export default ${1:$TM_FILENAME_BASE}"
+		]
+	},
+
+	"useJSS": {
+		"scope": "typescript,javascript",
+		"prefix": "useJSS",
+		"body": [
+			"import { createUseStyles } from 'react-jss'",
+			"",
+			"const useJSS = createUseStyles({",
+			"\t${1:Class}: {",
+			"\t\t$0",
+			"\t},",
+			"})",
+			"",
+			"export default useJSS"
+		]
+	},
+}

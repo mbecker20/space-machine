@@ -10,86 +10,118 @@ import {
   MEDIA_ELEMENT, 
   LINE_IN,
   CONTAINER,
-  ControlData,
-  ControlType,
-  FILE,
+  DISTORTION,
+  ANALYZER,
+  ENVELOPED_TRIGGER,
 } from './moduleTypes'
-import { 
-  makeOscillator, 
-  makeOutput, makeGain, 
-  makeAutoFilter, 
-  makeKompressor, 
-  makeStereoPanner, 
-  makeSignalDelay, 
-  makeConstantSource, 
-  makeLineInput,
-  makeContainer
-} from './all'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
+import makeConstantSource, { makeConstantControlData } from './modules/constant'
+import makeAutoFilter, { makeFilterControlData } from './modules/autoFilter'
+import makeOutput, { makeOutputControlData } from './modules/output'
+import makeStereoPanner, { makePannerControlData } from './modules/stereoPanner'
+import makeSignalDelay, { makeDelayControlData } from './modules/signalDelay'
+import makeKompressor, { makeKompControlData } from './modules/kompressor'
+import makeGain, { makeGainControlData } from './modules/gain'
+import makeOscillator, { makeOscControlData } from './modules/oscillator'
+import makeLineInput, { makeLineInControlData } from './modules/lineInput'
+import makeContainer, { makeContainerControlData } from './modules/container'
+import { makeMediaElementControlData } from './modules/mediaElement'
+import makeDistortion, { makeDistortionControlData } from './modules/distortion'
+import makeAnalyzer, { makeAnalyzerControlData } from './modules/analyzer'
+import makeEnvelopedTrigger, { makeEnvelopedTriggerControlData } from './modules/envelopedTrigger'
+
+declare global {
+  interface Window {
+    addModule: (id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) => void
+  }
+}
 
 function makeAddModule() {
-  return function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
+  window.addModule = function(id: string, name: string, parentID: string, moduleType: ModuleType, dispatch: Dispatch, row: number, col: number) {
     switch(moduleType) {
       case OSCILLATOR:
-        const [ osc, oscControlData ] = makeOscillator();
+        const osc = makeOscillator()
+        const oscControlData = makeOscControlData(osc.audioNode)
         window.audioModules = { ...window.audioModules, [id]: osc };
         dispatch(addModule(id, name, moduleType, oscControlData, parentID, row, col, [], ['0']));
         break;
       case GAIN:
-        const [ gain, gainControlData ] = makeGain()
+        const gain = makeGain()
+        const gainControlData = makeGainControlData()
         window.audioModules = { ...window.audioModules, [id]: gain }; 
         dispatch(addModule(id, name, moduleType, gainControlData, parentID, row, col, ['0'], ['0'])); 
         break;
       case OUTPUT:
-        const [ output, outputControlData ] = makeOutput()
-        window.audioModules = { ...window.audioModules, [id]: output }; 
-        dispatch(addModule(id, name, moduleType, outputControlData, parentID, row, col, ['0'], [])); 
-        break;
+        const output = makeOutput()
+        const outputControlData = makeOutputControlData()
+        window.audioModules = { ...window.audioModules, [id]: output }
+        dispatch(addModule(id, name, moduleType, outputControlData, parentID, row, col, ['0'], []))
+        break
       case AUTOFILTER: 
-        const [ filter, filterControlData ] = makeAutoFilter();
-        window.audioModules = { ...window.audioModules, [id]: filter }; 
-        dispatch(addModule(id, name, moduleType, filterControlData, parentID, row, col, ['0'], ['0'])); 
-        break;
+        const filter = makeAutoFilter()
+        const filterControlData = makeFilterControlData(filter.audioNode)
+        window.audioModules = { ...window.audioModules, [id]: filter }
+        dispatch(addModule(id, name, moduleType, filterControlData, parentID, row, col, ['0'], ['0']))
+        break
       case KOMPRESSOR:
-        const [ komp, kompControlData ] = makeKompressor()
+        const komp = makeKompressor()
+        const kompControlData = makeKompControlData(komp.audioNode)
         window.audioModules = { ...window.audioModules, [id]: komp }; 
         dispatch(addModule(id, name, moduleType, kompControlData, parentID, row, col, ['0'], ['0'])); 
         break;
       case STEREO_PANNER:
-        const [ panner, pannerControlData ] = makeStereoPanner()
+        const panner = makeStereoPanner()
+        const pannerControlData = makePannerControlData()
         window.audioModules = { ...window.audioModules, [id]: panner }; 
         dispatch(addModule(id, name, moduleType, pannerControlData, parentID, row, col, ['0'], ['0'])); 
         break;
       case SIGNAL_DELAY:
-        const [ delay, delayControlData ] = makeSignalDelay()
+        const delay = makeSignalDelay()
+        const delayControlData = makeDelayControlData()
         window.audioModules = { ...window.audioModules, [id]: delay }; 
         dispatch(addModule(id, name, moduleType, delayControlData, parentID, row, col, ['0'], ['0'])); 
         break;
       case CONSTANT:
-        const [ constant, constantControlData ] = makeConstantSource()
+        const constant = makeConstantSource()
+        const constantControlData = makeConstantControlData()
         window.audioModules = { ...window.audioModules, [id]: constant }; 
         dispatch(addModule(id, name, moduleType, constantControlData, parentID, row, col, [], ['0'])); 
         break;
       case MEDIA_ELEMENT:
-        const mediaControlData: ControlData = {
-          'choose file': {
-            controlType: FILE as ControlType,
-            paramID: 'n/a'
-          }
-        }
-        window.addAudioTag(id); window.reRenderAudioTags(); 
-        dispatch(addModule(id, name, moduleType, mediaControlData, parentID, row, col, [], ['0'])); 
+        const mediaControlData = makeMediaElementControlData()
+        window.addAudioTag(id); window.reRenderAudioTags()
+        dispatch(addModule(id, name, moduleType, mediaControlData, parentID, row, col, [], ['0']))
         break;
       case LINE_IN: 
-        const lineInControlData = makeLineInput(id); 
+        makeLineInput(id)
+        const lineInControlData = makeLineInControlData()
         dispatch(addModule(id, name, moduleType, lineInControlData, parentID, row, col, [], ['0 (L)', '1 (R)'])); 
         break;
       case CONTAINER: 
-        const [ container, containerControlData ] = makeContainer(id)
+        const container = makeContainer(id)
+        const containerControlData = makeContainerControlData()
         window.audioModules = { ...window.audioModules, [id]: container }; 
         dispatch(addModule(id, name, moduleType, containerControlData, parentID, row, col, [], [])); 
         break;
+      case DISTORTION:
+        const distortion = makeDistortion()
+        const distortionControlData = makeDistortionControlData()
+        window.audioModules = { ...window.audioModules, [id]: distortion }
+        dispatch(addModule(id, name, moduleType, distortionControlData, parentID, row, col, ['0'], ['0']))
+        break
+      case ANALYZER:
+        const analyzer = makeAnalyzer()
+        const analyzerControlData = makeAnalyzerControlData()
+        window.audioModules = { ...window.audioModules, [id]: analyzer }
+        dispatch(addModule(id, name, moduleType, analyzerControlData, parentID, row, col, ['0'], ['0']))
+        break
+      case ENVELOPED_TRIGGER:
+        const envelopedTrigger = makeEnvelopedTrigger()
+        const envelopedTriggerControlData = makeEnvelopedTriggerControlData()
+        window.audioModules = { ...window.audioModules, [id]: envelopedTrigger }
+        dispatch(addModule(id, name, moduleType, envelopedTriggerControlData, parentID, row, col, [], ['0']))
+        break
     }
   }
 }

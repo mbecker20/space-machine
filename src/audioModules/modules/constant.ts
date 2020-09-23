@@ -5,14 +5,8 @@ export interface ConstantModule extends BaseAM {
   audioNode: ConstantSourceNode
 }
 
-
-function makeConstantSource(): [ ConstantModule, ControlData ] {
-  const constantSource = audioCtx.createConstantSource()
-  constantSource.offset.value = 0
-
-  const connectingParamIDs = ['offset']
-
-  const controlData: ControlData = {
+export function makeConstantControlData(): ControlData {
+  return {
     'value': {
       controlType: VALUE,
       paramID: 'offset',
@@ -24,6 +18,14 @@ function makeConstantSource(): [ ConstantModule, ControlData ] {
       paramID: 'n/a',
     }
   }
+}
+
+
+function makeConstantSource(prevControlData?: ControlData): ConstantModule {
+  const constantSource = audioCtx.createConstantSource()
+  constantSource.offset.value = prevControlData ? prevControlData['value'].value as number : 0
+
+  const connectingParamIDs = ['offset']
 
   const controlSetFuncs: ControlSetFuncs = {
     'value': (newValue: string) => { constantSource.offset.value = Number(newValue) },
@@ -32,15 +34,11 @@ function makeConstantSource(): [ ConstantModule, ControlData ] {
 
   constantSource.start()
 
-  return [
-    {
-      audioNode: constantSource,
-      connectingParamIDs,
-      controlSetFuncs,
-    },
-    controlData,
-  ]
-
+  return {
+    audioNode: constantSource,
+    connectingParamIDs,
+    controlSetFuncs,
+  }
 }
 
 export default makeConstantSource

@@ -34,9 +34,9 @@ function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
         initState={selectedModule.isContainerInput}
         onSwitch={(newState) => {
           if (newState) {
-            dispatch(markContainerInput(window.highlightedID))
+            dispatch(markContainerInput(selectedModule.id))
           } else {
-            dispatch(unmarkContainerInput(window.highlightedID))
+            dispatch(unmarkContainerInput(selectedModule.id))
           }
         }}
       />
@@ -49,9 +49,9 @@ function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
         initState={selectedModule.isContainerOutput}
         onSwitch={(newState) => {
           if (newState) {
-            dispatch(markContainerOutput(window.highlightedID))
+            dispatch(markContainerOutput(selectedModule.id))
           } else {
-            dispatch(unmarkContainerOutput(window.highlightedID))
+            dispatch(unmarkContainerOutput(selectedModule.id))
           }
         }}
       />

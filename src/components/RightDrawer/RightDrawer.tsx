@@ -2,14 +2,22 @@ import React, { useState, useRef, useEffect } from 'react'
 import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
-import ModuleGroup from './DrawerRouteLink'
+import HeaderItem from './HeaderItem'
 import { sourceModuleData, effectModuleData, utilityModuleData } from './ModuleIcons/moduleData'
 import { clamp } from '../../helpers/genFuncs'
 import ModuleIcons from './ModuleIcons/ModuleIcons'
+import SpaceDBMenu from './SpaceDBMenu'
+import FileMenu from './FileMenu'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/stateTSTypes'
+import SpaceDBContainerMenu from './SpaceDBContainerMenu'
 
 const SOURCES = 'sources'
 const EFFECTS = 'effects'
 const UTILITY = 'utility'
+const SPACEDB_PROJECTS = 'spaceDB projects'
+const FILE = 'file'
+const SPACEDB_CONTAINERS = 'spaceDB modules'
 
 let drawerWidth = sizes.rightDrawer.width
 
@@ -32,11 +40,12 @@ function RightDrawer() {
   const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   let adjusting = false
   const [, toReRender ] = useState({})
+  const totNumModules = useSelector((state: RootState) => Object.keys(state.modules).length)
   useEffect(() => {
     window.addEventListener('resize', () => {
       window.setTimeout(() => { toReRender({}) }, 500) 
     })
-  })
+  }, [])
   return (
     <animated.div className={classes.DrawerBounder} style={drawerSpring} onPointerDown={e => e.stopPropagation()}>
       <div className={classes.Toggle}
@@ -76,38 +85,71 @@ function RightDrawer() {
             }
           }}
         >
-          <ModuleGroup
+          <HeaderItem
             className={classes.DrawerHeaderItem} 
             text={SOURCES}
             onClick={() => {setSR(SOURCES)}}
             selectedRoute={selectedRoute}
           />
-          <ModuleGroup
+          <HeaderItem
             className={classes.DrawerHeaderItem} 
             text={EFFECTS} 
             onClick={() => {setSR(EFFECTS)}}
             selectedRoute={selectedRoute}
           />
-          <ModuleGroup 
+          <HeaderItem 
             className={classes.DrawerHeaderItem} 
             text={UTILITY} 
             onClick={() => {setSR(UTILITY)}}
             selectedRoute={selectedRoute}
           />
+          <HeaderItem
+            className={classes.DrawerHeaderItem}
+            text={SPACEDB_CONTAINERS}
+            onClick={() => { setSR(SPACEDB_CONTAINERS) }}
+            selectedRoute={selectedRoute}
+          />
+          <HeaderItem
+            className={classes.DrawerHeaderItem}
+            text={SPACEDB_PROJECTS}
+            onClick={() => { setSR(SPACEDB_PROJECTS) }}
+            selectedRoute={selectedRoute}
+          />
+          {
+            !window.usingElectron ? null :
+            <HeaderItem
+              className={classes.DrawerHeaderItem}
+              text={FILE}
+              onClick={() => { setSR(FILE) }}
+              selectedRoute={selectedRoute}
+            />
+          }
         </div>
         <div className={classes.ItemRouter} ref={itemRouterRef}>
           {
             selectedRoute === SOURCES
             ?
-            <ModuleIcons moduleData={sourceModuleData} />
+            <ModuleIcons moduleData={sourceModuleData} totNumModules={totNumModules}/>
             :
             selectedRoute === EFFECTS
             ?
-            <ModuleIcons moduleData={effectModuleData} />
+            <ModuleIcons moduleData={effectModuleData} totNumModules={totNumModules}/>
             :
             selectedRoute === UTILITY
             ?
-            <ModuleIcons moduleData={utilityModuleData} />
+            <ModuleIcons moduleData={utilityModuleData} totNumModules={totNumModules}/>
+            :
+            selectedRoute === SPACEDB_CONTAINERS
+            ?
+            <SpaceDBContainerMenu totNumModules={totNumModules}/>
+            :
+            selectedRoute === SPACEDB_PROJECTS
+            ?
+            <SpaceDBMenu />
+            :
+            selectedRoute === FILE
+            ?
+            <FileMenu />
             :
             null
           }

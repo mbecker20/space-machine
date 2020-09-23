@@ -1,7 +1,7 @@
 import { Modules } from "../../stateTSTypes";
 import { MoveModuleAction } from "../moduleTSTypes";
 
-const moveModuleAction = (state: Modules, { id, newRow, newCol }: MoveModuleAction) => {
+const moveModule = (state: Modules, { id, newRow, newCol }: MoveModuleAction) => {
   return Object.assign({}, state, {
     [id]: {
       ...state[id],
@@ -11,4 +11,4 @@ const moveModuleAction = (state: Modules, { id, newRow, newCol }: MoveModuleActi
   })
 }
 
-export default moveModuleAction
+export default moveModule

@@ -10,9 +10,10 @@ import {
   UNMARK_CONTAINER_CONTROL,
   UPDATE_CONTROL_VALUE,
   UPDATE_CONTROL_RANGE,
+  RENAME_CONTAINER_CONTROL,
 } from './moduleActionTypes'
-import { ModuleType, ControlData, Range } from '../../audioModules/moduleTypes'
-import { AddModuleAction, MoveModuleAction, RenameModuleAction, MarkContainerIOAction, MarkContainerControlAction, UpdateControlValueAction, UpdateControlRangeAction } from './moduleTSTypes'
+import { ModuleType, ControlData, Range, Value } from '../../audioModules/moduleTypes'
+import { AddModuleAction, MoveModuleAction, RenameModuleAction, MarkContainerIOAction, MarkContainerControlAction, UpdateControlValueAction, UpdateControlRangeAction, RenameContainerControlAction } from './moduleTSTypes'
 
 export const addModule = (id: string, name: string, moduleType: ModuleType, controlData: ControlData, parentID: string, row: number, col: number, connectionInputs: string[], connectionOutputs: string[]): AddModuleAction => {
   return {
@@ -73,9 +74,21 @@ export const unmarkContainerOutput = (id: string): MarkContainerIOAction => {
   }
 }
 
-export const markContainerControl = (modID: string, controlID: string, actualModID: string): MarkContainerControlAction => {
+export const markContainerControl = (modID: string, controlID: string, actualModID: string, name?: string): MarkContainerControlAction => {
   return {
     type: MARK_CONTAINER_CONTROL,
+    modID,
+    controlID,
+    actualModID,
+    name,
+  }
+}
+
+export const renameContainerControl = (name: string, parentModID: string, modID: string, controlID: string, actualModID: string): RenameContainerControlAction => {
+  return {
+    type: RENAME_CONTAINER_CONTROL,
+    name,
+    parentModID,
     modID,
     controlID,
     actualModID,
@@ -91,7 +104,7 @@ export const unmarkContainerControl = (modID: string, controlID: string, actualM
   }
 }
 
-export const updateControlValue = (modID: string, controlID: string, newValue: number): UpdateControlValueAction => {
+export const updateControlValue = (modID: string, controlID: string, newValue: Value): UpdateControlValueAction => {
   return {
     type: UPDATE_CONTROL_VALUE,
     modID,

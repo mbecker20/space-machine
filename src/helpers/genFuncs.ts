@@ -69,3 +69,9 @@ export function clamp(val: number, range: [number, number]) {
 export function inRange(val: number, range: [number, number]) {
 	return val >= range[0] && val <= range[1] 
 }
+
+export function mapValBetweenRanges(val: number, fromRange: [number, number], toRange: [number, number]) {
+	const valProportion = (val - fromRange[0]) / (fromRange[1] - fromRange[0])
+	const toRangeDif = toRange[1] - toRange[0]
+	return toRange[0] + valProportion * toRangeDif
+}

@@ -1,38 +1,43 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import useJSS from './style'
-import { SetFunc, Value, AudioModuleWithTypes } from '../../../audioModules/moduleTypes'
-import { Module, ContainerModule } from '../../../redux/stateTSTypes'
+import { SetFunc, AudioModuleWithTypes, ConnectingAudioModule } from '../../../audioModules/moduleTypes'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateControlValue } from '../../../redux/allActions'
+import { FlexRow } from '../../all'
+import { RootState } from '../../../redux/stateTSTypes'
 
 interface Props {
   setFunc: SetFunc
-  audioModule: AudioModuleWithTypes
-  value: Value | undefined
-  selectedModule: Module | ContainerModule
-  reRenderIcon: () => void
+  actualModID: string
   modName?: string
+  controlID: string
+  label?: string
 }
 
-function Type({ setFunc, audioModule, value, selectedModule, reRenderIcon, modName }: Props) {
+function Type({ setFunc, controlID, actualModID, modName, label }: Props) {
   const classes = useJSS()
+  const audioModule = window.audioModules[actualModID] as ConnectingAudioModule
   const { audioNode } = audioModule
+  const dispatch = useDispatch()
+  const value = useSelector((state: RootState) => state.modules[actualModID].controlData[controlID].value)
   return (
-    <Fragment>
-      <label htmlFor={'type'}>{modName ? `set type - ${modName}` : 'set type'}</label>
+    <FlexRow style={{ justifyContent: 'center', margin: '1vmin 0vmin' }}>
+      <label htmlFor={'type'}>{label ? `set type - ${label}` : modName ? `set type - ${modName}` : 'set type'}</label>
       <select className={classes.ControlTypeSelect}
         name='type' id='type'
-        onChange={(e) => {
+        onChange={e => {
           setFunc(e.target.value)
-          reRenderIcon()
+          dispatch(updateControlValue(actualModID, controlID, e.target.value))
         }}
         value={value as string ? value as string : audioNode.type as string}
       >
         {(audioModule as AudioModuleWithTypes).typeTypes.map(type => {
           return (
-            <option value={type} key={selectedModule.id + type}>{type}</option>
+            <option value={type} key={actualModID + type}>{type}</option>
           )
         })}
       </select>
-    </Fragment>
+    </FlexRow>
   )
 }
 

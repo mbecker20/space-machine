@@ -9,12 +9,13 @@ interface Props {
   setFunc: SetFunc
   actualModID: string
   modName?: string
+  label?: string
 }
 
-function SwitchControl({ controlID, setFunc, actualModID, modName }: Props) {
+function SwitchControl({ controlID, setFunc, actualModID, modName, label }: Props) {
   const initState = useSelector((state: RootState) => state.modules[actualModID].controlData[controlID].value as boolean)
   return (
-    <Switch text={modName ? `${modName} - ${controlID}` : controlID} 
+    <Switch text={label ? label : modName ? `${modName} - ${controlID}` : controlID} 
       initState={initState} 
       onSwitch={(newState) => {
         setFunc(newState ? 'true' : 'false')

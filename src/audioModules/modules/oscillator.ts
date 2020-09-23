@@ -6,40 +6,47 @@ export interface OscillatorModule extends BaseAM {
   typeTypes: string[]
 }
 
-const oscillatorTypes = ['sine', 'square', 'triangle', 'sawtooth']
-
-function makeOscillator(): [ OscillatorModule, ControlData ] {
-  const oscillator = audioCtx.createOscillator()
-   
-  const connectingParamIDs = ['frequency', 'detune']
-
-  const controlData: ControlData = {
+export function makeOscControlData(oscillator: OscillatorNode): ControlData {
+  return {
     'set type': {
       controlType: TYPE,
       paramID: 'type',
+      value: oscillator.type,
     },
     'frequency': {
       controlType: VALUE,
       paramID: 'frequency',
       value: oscillator.frequency.value,
-      range: [0, 20000]
+      range: [0, 440],
     },
     'detune': {
       controlType: VALUE,
       paramID: 'detune',
       value: oscillator.detune.value,
-      range: [-100, 100],
+      range: [-50, 50],
     }
   }
+}
+
+const oscillatorTypes = ['sine', 'square', 'triangle', 'sawtooth']
+
+function makeOscillator(prevControlData?: ControlData): OscillatorModule {
+  const oscillator = audioCtx.createOscillator()
+   
+  if (prevControlData) {
+    oscillator.type = prevControlData['set type'].value as OscillatorType
+    oscillator.frequency.value = prevControlData['frequency'].value as number
+    oscillator.detune.value = prevControlData['detune'].value as number 
+  }
+
+  const connectingParamIDs = ['frequency', 'detune']
 
   const controlSetFuncs: ControlSetFuncs = {
     'set type': (newType: string) => { oscillator.type = newType as OscillatorType },
     'frequency': (newFrequency: string) => {
-      controlData['frequency'].value = Number(newFrequency)
       oscillator.frequency.value = Number(newFrequency)
     },
     'detune': (newDetune: string) => { 
-      controlData['detune'].value = Number(newDetune)
       oscillator.detune.value = Number(newDetune)
     },
     'kill': (arg = '') => { oscillator.stop() }
@@ -47,15 +54,13 @@ function makeOscillator(): [ OscillatorModule, ControlData ] {
 
   oscillator.start()
   
-  return [
-    {
-      audioNode: oscillator,
-      typeTypes: oscillatorTypes,
-      connectingParamIDs,
-      controlSetFuncs,
-    },
-    controlData,
-  ]
+  return {
+    audioNode: oscillator,
+    typeTypes: oscillatorTypes,
+    connectingParamIDs,
+    controlSetFuncs,
+  }
+    
 }
 
 export default makeOscillator

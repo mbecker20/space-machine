@@ -1,11 +1,9 @@
 import { Modules, Connections } from "../../stateTSTypes"
 import { AddConnectionAction, ConnectionReducerReturn } from "../connectionTSTypes"
-
-let connectionNumber = 0
+import genRandomID from "../../idGen"
 
 const addConnection = (modules: Modules, connections: Connections, { fromID, toID, param, outputIndex, inputIndex, containerOutputChildID, containerInputChildID }: AddConnectionAction): ConnectionReducerReturn => {
-  const connectionID = `${fromID} ${toID} ${connectionNumber}`
-  connectionNumber++
+  const connectionID = genRandomID(0, Object.keys(connections).length)
   return {
     newModules: Object.assign({}, modules, {
       [fromID]: {
@@ -22,23 +20,7 @@ const addConnection = (modules: Modules, connections: Connections, { fromID, toI
           connectionID
         ]
       }
-    }, !containerOutputChildID ? {} : {
-      [containerOutputChildID]: {
-        ...modules[containerOutputChildID],
-        outputs: [
-          ...modules[containerOutputChildID].outputs,
-          connectionID,
-        ]
-      }
-    }, !containerInputChildID ? {} : {
-      [containerInputChildID]: {
-        ...modules[containerInputChildID],
-        inputs: [
-          ...modules[containerInputChildID].inputs,
-          connectionID,
-        ]
-      }
-    },),
+    }),
     newConnections: {
       ...connections,
       [connectionID]: {
@@ -48,8 +30,8 @@ const addConnection = (modules: Modules, connections: Connections, { fromID, toI
         param,
         outputIndex,
         inputIndex,
-        containerOutputChildID,
-        containerInputChildID,
+        actualOutputID: containerOutputChildID,
+        actualInputID: containerInputChildID,
       },
     },
   }

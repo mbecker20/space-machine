@@ -7,9 +7,10 @@ interface Props {
   setFunc: SetFunc
   controlID: string
   modName?: string
+  label?: string
 }
 
-function ButtonControl({ setFunc, controlID, modName }: Props) {
+function ButtonControl({ setFunc, controlID, modName, label }: Props) {
   return (
     <Button style={{
       //backgroundColor: colors.fillModule,
@@ -19,7 +20,9 @@ function ButtonControl({ setFunc, controlID, modName }: Props) {
       onClick={() => {
         setFunc('')
       }}
-    >{modName ? `${modName} - ${controlID}` : controlID}</Button>
+    >
+      {label ? label : modName ? `${modName} - ${controlID}` : controlID}
+    </Button>
   )
 }
 

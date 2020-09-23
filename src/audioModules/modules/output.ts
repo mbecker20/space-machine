@@ -5,12 +5,8 @@ export interface OutputModule extends BaseAM {
   audioNode: GainNode
 }
 
-function makeOutput(): [ OutputModule, ControlData ] {
-  audioCtx.resume()
-
-  const masterGain = audioCtx.createGain(); masterGain.connect(audioCtx.destination)
-
-  const controlData: ControlData = {
+export function makeOutputControlData(): ControlData {
+  return {
     'master gain': {
       controlType: VALUE,
       paramID: 'gain',
@@ -27,6 +23,19 @@ function makeOutput(): [ OutputModule, ControlData ] {
       paramID: 'n/a'
     }
   }
+}
+
+function makeOutput(prevControlData?: ControlData): OutputModule {
+  audioCtx.resume()
+
+  const masterGain = audioCtx.createGain()
+  masterGain.connect(audioCtx.destination)
+
+  if (prevControlData) {
+    masterGain.gain.value = prevControlData['master gain'].value as number
+  } else {
+    masterGain.gain.value = 1
+  }
 
   const controlSetFuncs = {
     'master gain': (arg: string) => {
@@ -36,14 +45,11 @@ function makeOutput(): [ OutputModule, ControlData ] {
     'suspend': (arg: string) => { audioCtx.suspend() }
   }
 
-  return [
-    {
-      audioNode: masterGain,
-      connectingParamIDs: [],
-      controlSetFuncs,
-    },
-    controlData,
-  ]
+  return {
+    audioNode: masterGain,
+    connectingParamIDs: [],
+    controlSetFuncs,
+  }
 }
 
 export default makeOutput
