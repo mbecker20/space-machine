@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react'
-import { makeConnectionMenuData, makeKnobRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData, makeAnalyzerRangeSetMenuData, makeRenameControlMenuData } from './makeData'
+import { makeConnectionMenuData, makeKnobRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData, makeAnalyzerRangeSetMenuData, makeRenameControlMenuData, makeAddModuleMenuData } from './makeData'
 import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
 import { Range } from '../../audioModules/moduleTypes'
@@ -24,7 +24,7 @@ declare global {
     openSpaceDBContainerSaveMenu: (saveList: string[], id: string, onClose: () => void) => void
     openConfirmDeleteMenu: (saveName: string, onClose: () => void) => void
     openFileSaveMenu: () => void
-    openAddModuleMenu: () => void
+    openAddModuleMenu: (row: number, col: number) => void
   }
 }
 
@@ -57,8 +57,8 @@ function CenterMenus() {
   const [fileSaveMenuData, setFileSaveMenuData] = useState({ isOpen: false })
   window.openFileSaveMenu = () => { setFileSaveMenuData({ isOpen: true }) }
 
-  const [addModuleMenuData, setAddModuleMenuData] = useState({ isOpen: false })
-  window.openAddModuleMenu = () => { setAddModuleMenuData({ isOpen: true }) }
+  const [addModuleMenuData, setAddModuleMenuData] = useState(makeAddModuleMenuData(false))
+  window.openAddModuleMenu = (row, col) => { setAddModuleMenuData(makeAddModuleMenuData(true, row, col)) }
   
   return (
     <Fragment>
@@ -151,8 +151,10 @@ function CenterMenus() {
         !addModuleMenuData.isOpen ? null :
         <AddModuleMenu 
           onClose={() => {
-            setAddModuleMenuData({ isOpen: false })
+            setAddModuleMenuData(makeAddModuleMenuData(false))
           }}
+          row={addModuleMenuData.row as number}
+          col={addModuleMenuData.col as number}
         />
       }
     </Fragment>

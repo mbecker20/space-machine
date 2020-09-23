@@ -59,3 +59,11 @@ export function makeRenameControlMenuData(isOpen: boolean, placeholder = '', par
     parentModID
   }
 }
+
+export function makeAddModuleMenuData(isOpen: boolean, row?: number, col?: number) {
+  return {
+    isOpen,
+    row,
+    col,
+  }
+}

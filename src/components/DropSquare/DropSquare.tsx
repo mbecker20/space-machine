@@ -43,6 +43,10 @@ function DropSquare({ row, col }: Props) {
       onDrop={e => {
         onDrop(e, dispatch, state, row, col, setHL)
       }}
+      onContextMenu={e => {
+        e.preventDefault()
+        window.openAddModuleMenu(row, col)
+      }}
     />
   )
 }
