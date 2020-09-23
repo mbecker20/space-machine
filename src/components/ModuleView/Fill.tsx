@@ -12,7 +12,6 @@ import { Button } from '../all'
 
 declare global {
   interface Window { 
-    setFillIsExpanded: (isExpanded: boolean) => void
     refreshArcherContainer: () => void
     reRenderFillContainer: () => void
   }
@@ -20,8 +19,6 @@ declare global {
 
 function ModuleViewFill() {
   const classes = useJSS()
-  const [isExpanded, setIsExpanded] = useState(false)
-  window.setFillIsExpanded = setIsExpanded
   const [reRender, toReRender] = useState(false)
   window.reRenderFillContainer = () => { toReRender(!reRender) }
   const { modules, baseContainerID } = useSelector((state: RootState) => {
@@ -41,8 +38,8 @@ function ModuleViewFill() {
     }
   } else {
     gridStyle = {
-      gridTemplateRows: `repeat(${isExpanded ? maxRow + 2 : maxRow + 1}, ${'auto'})`,
-      gridTemplateColumns: `repeat(${isExpanded ? maxCol + 2 : maxCol + 1}, ${'auto'})`,
+      gridTemplateRows: `repeat(${maxRow + 2}, ${'auto'})`,
+      gridTemplateColumns: `repeat(${maxCol + 2}, ${'auto'})`,
     }
   }
   const archerContainerRef = useRef<ArcherContainer>(null)
@@ -78,8 +75,8 @@ function ModuleViewFill() {
       >
         <div className={classes.Fill} style={gridStyle}>
           {isEmpty ? <DropSquare row={0} col={0}/> :
-          range(0, isExpanded ? maxRow + 2 : maxRow + 1).map(row => {
-            return range(0, isExpanded ? maxCol + 2 : maxCol + 1).map(col => {
+          range(0, maxRow + 2).map(row => {
+            return range(0, maxCol + 2).map(col => {
               return (
                 <DropSquare
                   key={`${row} ${col}`}

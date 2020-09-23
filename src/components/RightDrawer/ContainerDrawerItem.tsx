@@ -25,10 +25,6 @@ function ContainerDrawerItem({ name, totNumModules }: Props) {
           event.dataTransfer.setData('type', CONTAINER_RESTORE)
           event.dataTransfer.setData('name', name)
           event.dataTransfer.setData('id', genRandomID(0, totNumModules))
-          window.setFillIsExpanded(true)
-        }}
-        onDragEnd={() => {
-          window.setFillIsExpanded(false)
         }}
       />
       <div className={classes.DrawerItemText}>

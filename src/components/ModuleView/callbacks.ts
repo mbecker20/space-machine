@@ -18,7 +18,6 @@ export function iconOnDrop(
     if (possiblyMod && moduleDragType === MOVE) {
       const fromRow = e.dataTransfer.getData('fromRow')
       const fromCol = e.dataTransfer.getData('fromCol')
-      window.setFillIsExpanded(false)
       dispatch(moveModule(id, mod.row, mod.col))
       dispatch(moveModule(mod.id, Number(fromRow), Number(fromCol)))
       window.setTimeout(window.refreshArcherContainer, 100)
@@ -47,5 +46,4 @@ export function iconOnDragStart(
   e.dataTransfer.setData('id', mod.id)
   e.dataTransfer.setData('fromRow', `${mod.row}`)
   e.dataTransfer.setData('fromCol', `${mod.col}`)
-  window.setFillIsExpanded(true)
 }

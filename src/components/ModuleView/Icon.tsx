@@ -67,9 +67,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         onDragStart={e => {
           iconOnDragStart(e, mod)
         }}
-        onDragEnd={() => {
-          window.setFillIsExpanded(false)
-        }}
         onClick={e => {
           e.stopPropagation()
           setLarge(!isLarge)

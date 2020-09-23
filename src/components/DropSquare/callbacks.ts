@@ -34,20 +34,17 @@ export function onDrop(e: DragEvent<HTMLDivElement>, dispatch: Dispatch, state: 
           break
       }
       setHL(false)
-      window.setFillIsExpanded(false)
     }
   } else if (possiblyOccupyingID) {
     const fromRow = e.dataTransfer.getData('fromRow')
     const fromCol = e.dataTransfer.getData('fromCol')
     setHL(false)
-    window.setFillIsExpanded(false)
     dispatch(moveModule(id, row, col))
     dispatch(moveModule(possiblyOccupyingID, Number(fromRow), Number(fromCol)))
     window.setTimeout(window.refreshArcherContainer, 1)
   } else {
     const moduleDragType = e.dataTransfer.getData('type')
     setHL(false)
-    window.setFillIsExpanded(false)
     switch (moduleDragType) {
       case MOVE:
         dispatch(moveModule(id, row, col))
