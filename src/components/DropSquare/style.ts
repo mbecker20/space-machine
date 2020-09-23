@@ -10,6 +10,9 @@ const useJSS = createUseStyles({
     borderRadius: '10px',
     borderColor: colors.dropSquareHL,
     zIndex: 1,
+    '$:hover': {
+      cursor: 'pointer',
+    }
   },
 })
 

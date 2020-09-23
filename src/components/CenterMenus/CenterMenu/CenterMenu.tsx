@@ -1,13 +1,18 @@
 import React from 'react'
 import useJSS from './style'
+import CSS from 'csstype'
 
 interface Props {
+  className?: string
+  style?: CSS.Properties
+  headerClassName?: string
+  headerStyle?: CSS.Properties
   children: React.ReactNode
   header: string
   onClose: () => void
 }
 
-function CenterMenu({ children, header, onClose }: Props) {
+function CenterMenu({ className, style, headerClassName, headerStyle, children, header, onClose }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.CenterMenuBounder}
@@ -16,10 +21,13 @@ function CenterMenu({ children, header, onClose }: Props) {
         onClose()
       }}
     >
-      <div className={classes.CenterMenu}
-        onPointerDown={(e) => {e.stopPropagation()}} 
+      <div className={className ? `${classes.CenterMenu} ${className}` : classes.CenterMenu}
+        onPointerDown={(e) => {e.stopPropagation()}}
+        style={style}
       >
-        <div className={classes.Header}>
+        <div className={headerClassName ? `${classes.Header} ${headerClassName}` : classes.Header}
+          style={headerStyle}
+        >
           {header}
         </div>
         {children}

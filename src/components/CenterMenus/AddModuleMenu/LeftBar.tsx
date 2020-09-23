@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, FlexCol } from '../../all'
 import { addModuleMenuGroups } from './AddModuleMenu'
-//import useJSS from './style'
+import useJSS from './style'
 
 interface Props {
   selectedGroup: string
@@ -9,9 +9,9 @@ interface Props {
 }
 
 function LeftBar({ selectedGroup, setSG }: Props) {
-  //const classes = useJSS()
+  const classes = useJSS()
   return (
-    <FlexCol>
+    <FlexCol className={classes.LeftBar}>
       {addModuleMenuGroups.map(group => {
         const isHL = group === selectedGroup
         return (
