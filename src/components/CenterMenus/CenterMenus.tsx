@@ -11,6 +11,7 @@ import AnalyzerRangeSetMenu from './RangeSetMenu/AnalyzerRangeSetMenu'
 import { ContainerControl } from '../../redux/stateTSTypes'
 import RenameModuleMenu from './RenameMenu/RenameModuleMenu'
 import RenameControlMenu from './RenameMenu/RenameControlMenu'
+import AddModuleMenu from './AddModuleMenu/AddModuleMenu'
 
 declare global {
   interface Window {
@@ -23,6 +24,7 @@ declare global {
     openSpaceDBContainerSaveMenu: (saveList: string[], id: string, onClose: () => void) => void
     openConfirmDeleteMenu: (saveName: string, onClose: () => void) => void
     openFileSaveMenu: () => void
+    openAddModuleMenu: () => void
   }
 }
 
@@ -54,6 +56,9 @@ function CenterMenus() {
   
   const [fileSaveMenuData, setFileSaveMenuData] = useState({ isOpen: false })
   window.openFileSaveMenu = () => { setFileSaveMenuData({ isOpen: true }) }
+
+  const [addModuleMenuData, setAddModuleMenuData] = useState({ isOpen: false })
+  window.openAddModuleMenu = () => { setAddModuleMenuData({ isOpen: true }) }
   
   return (
     <Fragment>
@@ -139,6 +144,14 @@ function CenterMenus() {
         <FileSaveMenu
           onClose={() => {
             setFileSaveMenuData({ isOpen: false })
+          }}
+        />
+      }
+      {
+        !addModuleMenuData.isOpen ? null :
+        <AddModuleMenu 
+          onClose={() => {
+            setAddModuleMenuData({ isOpen: false })
           }}
         />
       }

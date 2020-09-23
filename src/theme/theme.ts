@@ -21,7 +21,7 @@ export const colors: Colors = {
   text: 'white',
   selectedText: '#007ab3',
 
-  dropSquareHL: 'white',
+  dropSquareHL: '#ffffff60',
 
   defaultButton: 'black',
   deleteButton: '#cc00006e',

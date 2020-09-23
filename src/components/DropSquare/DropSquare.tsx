@@ -3,7 +3,6 @@ import CSS from 'csstype'
 import useJSS from './style'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import { colors } from '../../theme/theme'
 import { onDrop } from './callbacks'
 
 interface Props {
@@ -19,11 +18,10 @@ function DropSquare({ row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
   const state = useSelector((state: RootState) => state)
-  const [isHL, setHL] = useState(false) // to highlight on drag enter
+  const [, setHL] = useState(false) // to highlight on drag enter
   const dsStyle: CSS.Properties = {
     gridColumn: `${col + 1} / span 1`,
     gridRow: `${row + 1} / span 1`,
-    borderColor: isHL ? colors.dropSquareHL : 'transparent',
   }
   return (
     <div 

@@ -26,21 +26,18 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   const [reRender, toReRender] = useState(false)
   const reRenderIcon = () => { toReRender(!reRender) }
 
-  const iconStyle: CSS.Properties = {
-    gridColumn: `${gridCol} / span 1`,
-    gridRow: `${gridRow} / span 1`,
-    borderStyle: isLarge ? 'solid' : 'none',
-    backgroundColor: getModuleColor(mod.moduleType),
-    width: isLarge ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
-    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon
-  }
   const archerElementStyle: CSS.Properties = {
     gridColumn: `${gridCol} / span 1`,
     gridRow: `${gridRow} / span 1`,
     width: isLarge ? sizes.moduleView.bigIconWidth : sizes.moduleView.icon,
-    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon,
+    height: isLarge ? sizes.moduleView.bigIconHeight : sizes.moduleView.icon
   }
 
+  const iconStyle = Object.assign({}, archerElementStyle, {
+    borderStyle: isLarge ? 'solid' : 'none',
+    backgroundColor: getModuleColor(mod.moduleType),
+  })
+  
   const nameSpring = useSpring({
     fontSize: isLarge ? sizes.text.medium : sizes.text.small,
     config: {
