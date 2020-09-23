@@ -24,7 +24,7 @@ function SpaceDBMenu() {
   }, [])
   return (
     <div>
-      <Button style={buttonStyle}
+      <Button style={{ backgroundColor: colors.sdbSaveButton }}
         onClick={() => {
           window.openSpaceDBProjectSaveMenu(saveList, () => {
             window.setTimeout(() => {
@@ -38,29 +38,21 @@ function SpaceDBMenu() {
       <div>
         {saveList.map(saveName => {
           return (
-            <div style={{ display: 'flex', flexDirection: 'row' }} key={saveName}>
-              <Button style={buttonStyle}
-                onClick={() => {
-                  window.projectSaveService.get(saveName).then((savedState: RootState) => {
-                    restoreAMFromState(connections, savedState)
-                    dispatch(restoreFromState(savedState))
-                  })
-                }}
-              >
-                {saveName}
-              </Button>
-              <Button style={{ backgroundColor: colors.deleteButton }}
-                onClick={() => {
-                  window.openConfirmDeleteMenu(saveName, () => {
-                    window.setTimeout(() => {
-                      window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) })
-                    }, 1000)
-                  })
-                }}
-              >
-                delete
-              </Button>
-            </div>
+            <Button style={buttonStyle}
+              onClick={() => {
+                window.projectSaveService.get(saveName).then((savedState: RootState) => {
+                  restoreAMFromState(connections, savedState)
+                  dispatch(restoreFromState(savedState))
+                })
+              }}
+              onContextMenu={(e) => {
+                e.preventDefault()
+                e.persist()
+                window.openSDBProjectContextMenu(e, saveName, setSaveList)
+              }}
+            >
+              {saveName}
+            </Button>
           )
         })}
       </div>

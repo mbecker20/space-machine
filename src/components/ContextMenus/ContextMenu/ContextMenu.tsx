@@ -1,20 +1,19 @@
-import React, { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import { ContextMenuBaseProps } from '../types'
 import { getLocation } from './helpers'
 import useJSS from './style'
 
-interface Props {
-  e: MouseEvent<HTMLDivElement>
+interface Props extends ContextMenuBaseProps {
   children: ReactNode
-  onClose: () => void
 }
 
-function ContextMenu({ e, children, onClose }: Props) {
+function ContextMenu({ event, children, onClose }: Props) {
   const classes = useJSS()
   const cmRef = useRef<HTMLDivElement>(null)
-  const [location, setLocation] = useState(getLocation(e, cmRef))
+  const [location, setLocation] = useState(getLocation(event, cmRef))
   useEffect(() => {
-    setLocation(getLocation(e, cmRef))
-  }, [e])
+    setLocation(getLocation(event, cmRef))
+  }, [event])
   return (
     <div className={classes.Bounder}
       onPointerDown={onClose}
