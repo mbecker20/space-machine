@@ -46,7 +46,7 @@
 			"import React from 'react'",
 			"import useJSS from './style'",
 			"",
-			"function ${0:$TM_FILENAME_BASE}({  }: Props) {",
+			"function ${0:$TM_FILENAME_BASE}() {",
 			"\tconst classes = useJSS()",
 			"\treturn (",
 			"\t\t<div>",
