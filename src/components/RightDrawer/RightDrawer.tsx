@@ -6,9 +6,6 @@ import HeaderItem from './HeaderItem'
 import { clamp } from '../../helpers/genFuncs'
 import SpaceDBMenu from './SpaceDBMenu'
 import FileMenu from './FileMenu'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../redux/stateTSTypes'
-import SpaceDBContainerMenu from './SpaceDBContainerMenu'
 
 const SPACEDB_PROJECTS = 'spaceDB projects'
 const FILE = 'file'
@@ -19,7 +16,7 @@ const addPx = (arg: string) => `${arg}px`
 
 function RightDrawer() {
   const classes = useJSS()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [width, setWidth] = useState(drawerWidth)
   const drawerSpring = useSpring({
     transform: open ? 'translate(0px, 0px)' : `translate(${width}px, 0px)`,
@@ -36,7 +33,6 @@ function RightDrawer() {
   const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   let adjusting = false
   const [, toReRender ] = useState({})
-  const totNumModules = useSelector((state: RootState) => Object.keys(state.modules).length)
   useEffect(() => {
     window.addEventListener('resize', () => {
       window.setTimeout(() => { toReRender({}) }, 500) 
