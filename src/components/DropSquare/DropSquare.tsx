@@ -38,9 +38,10 @@ function DropSquare({ row, col }: Props) {
         }
       }}
       onDragLeave={e => {
-        if (e.dataTransfer.types.length >= 3) {
+        setHL(false)
+        /* if (e.dataTransfer.types.length >= 3) {
           setHL(false)
-        }
+        } */
       }}
       onDrop={e => {
         onDrop(e, dispatch, state, row, col, setHL)
