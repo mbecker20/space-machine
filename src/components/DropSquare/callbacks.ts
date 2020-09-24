@@ -7,7 +7,7 @@ import { moveModule } from '../../redux/allActions'
 import { duplicateContainer, performContainerMerge } from '../../redux/replicateContainer'
 import { MOVE, COPY } from './DropSquare'
 import { ADD_MODULE } from '../../redux/modules/moduleActionTypes'
-import { CONTAINER_RESTORE } from '../RightDrawer/ContainerDrawerItem'
+import { CONTAINER_RESTORE } from '../old/ContainerDrawerItem'
 import duplicateModule from '../../redux/replicateModule'
 
 export function onDrop(e: DragEvent<HTMLDivElement>, dispatch: Dispatch, state: RootState, row: number, col: number, setHL: (isHL: boolean) => void) {

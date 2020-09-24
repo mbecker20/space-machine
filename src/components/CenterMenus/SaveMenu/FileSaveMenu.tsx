@@ -7,9 +7,6 @@ import { sizes } from '../../../theme/theme'
 import { getFileDirectory } from './helpers'
 import useJSS from './style'
 let fs: any
-if (window.usingElectron) {
-  fs = window.require('fs')
-}
 
 declare global {
   interface Window {
@@ -30,6 +27,10 @@ function FileSaveMenu({ onClose }: Props) {
   const [saveName, setSaveName] = useState(initName)
   const [currentDirectory, setCurrentDirectory] = useState(window.currentSaveDirectory)
   const classes = useJSS()
+  if (window.usingElectron && !fs) {
+    fs = window.require('fs')
+  }
+  console.log(fs)
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {

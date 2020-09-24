@@ -1,5 +1,5 @@
 import React from 'react'
-import useJSS from './style'
+import useJSS from '../RightDrawer/style'
 import getModuleColor from '../../theme/moduleColor'
 import { ADD_MODULE } from '../../redux/modules/moduleActionTypes'
 import genRandomID from '../../redux/idGen'

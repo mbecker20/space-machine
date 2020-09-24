@@ -3,7 +3,7 @@ import ContainerDrawerItem from './ContainerDrawerItem'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { CONTAINER } from '../../audioModules/moduleTypes'
-import useJSS from './style'
+import useJSS from '../RightDrawer/style'
 
 interface Props {
   totNumModules: number

@@ -4,15 +4,17 @@ import { RootState } from '../../redux/stateTSTypes'
 import { Button } from '../all'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
-let fs: any
-if (window.usingElectron) {
-  fs = window.require('fs')
-}
+let fs: any = null
 
 function FileMenu() {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
+  if (window.usingElectron && !fs) {
+    console.log('using electron')
+    fs = window.require('fs')
+    console.log(fs)
+  }
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {
