@@ -8,11 +8,10 @@ const useJSS = createUseStyles({
     padding: '.5vmin',
     borderStyle: 'solid',
     borderRadius: '10px',
-    borderColor: colors.dropSquareHL,
     zIndex: 1,
-    '$:hover': {
+    '&:hover': {
       cursor: 'pointer',
-    }
+    },
   },
 })
 
