@@ -36,9 +36,10 @@ function SpaceDBMenu() {
         save
       </Button>
       <div>
-        {saveList.map(saveName => {
+        {saveList.map((saveName, index) => {
           return (
             <Button style={buttonStyle}
+              key={index}
               onClick={() => {
                 window.projectSaveService.get(saveName).then((savedState: RootState) => {
                   restoreAMFromState(connections, savedState)

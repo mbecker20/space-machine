@@ -4,12 +4,12 @@ import { colors, sizes } from '../../../theme/theme'
 const useJSS = createUseStyles({
   LeftBar: {
     width: '20vmin',
-    height: '50vmin',
+    height: '70vmin',
   },
 
   IconRouter: {
     width: '60vmin',
-    heigth: '50vmin',
+    height: '70vmin',
     overflowY: 'scroll',
     display: 'grid',
     gridTemplateColumns: 'repeat(3, auto)',

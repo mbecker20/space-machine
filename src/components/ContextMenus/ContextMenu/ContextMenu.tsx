@@ -24,6 +24,7 @@ function ContextMenu({ event, children, onClose }: Props) {
           left: location.left,
         }}
         ref={cmRef}
+        onPointerDown={e => { e.stopPropagation() }}
       >
         { children }
       </div>

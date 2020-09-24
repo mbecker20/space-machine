@@ -30,7 +30,10 @@ const useJSS = createUseStyles({
 
   OpenButton: {
     fontSize: sizes.text.small,
+  },
 
+  SaveButton: {
+    fontSize: sizes.text.small
   },
 })
 

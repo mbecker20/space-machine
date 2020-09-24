@@ -14,7 +14,7 @@ interface Props {
 export const EFFECTS = 'effects'
 export const SOURCES = 'sources'
 export const UTILITY = 'utility'
-export const SPACEDB_MODULES = 'spaceDB modules'
+export const SPACEDB_MODULES = 'spaceDB'
 
 export const addModuleMenuGroups = [
   EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES,

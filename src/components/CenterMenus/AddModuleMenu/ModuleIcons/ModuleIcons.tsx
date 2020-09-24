@@ -1,19 +1,17 @@
 import React, { Fragment } from 'react'
-import { useSelector } from 'react-redux'
 import { ModuleType } from '../../../../audioModules/moduleTypes'
-import { RootState } from '../../../../redux/stateTSTypes'
 import { DrawerModuleData } from './moduleData'
 import ModuleIcon from './ModuleIcon'
 
 interface Props {
+  totNumModules: number
   moduleData: DrawerModuleData
   row: number
   col: number
   onClose: () => void
 }
 
-function ModuleIcons({ moduleData, row, col, onClose }: Props) {
-  const totNumModules = useSelector((state: RootState) => Object.keys(state.modules).length)
+function ModuleIcons({ totNumModules, moduleData, row, col, onClose }: Props) {
   return (
     <Fragment>
       {moduleData.map(([fullName, shortName, moduleType], index) => {

@@ -9,11 +9,9 @@ import FileMenu from './FileMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import SpaceDBContainerMenu from './SpaceDBContainerMenu'
-import { SPACEDB_MODULES } from '../CenterMenus/AddModuleMenu/AddModuleMenu'
 
 const SPACEDB_PROJECTS = 'spaceDB projects'
 const FILE = 'file'
-const SPACEDB_CONTAINERS = 'spaceDB modules'
 
 let drawerWidth = `${sizes.rightDrawer.width}`
 
@@ -30,7 +28,7 @@ function RightDrawer() {
       clamp: true,
     }
   })
-  const [selectedRoute, setSR] = useState(SPACEDB_MODULES)
+  const [selectedRoute, setSR] = useState(SPACEDB_PROJECTS)
   const drawerRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLDivElement>(null)
   const drawerHeaderRef = useRef<HTMLDivElement>(null)
@@ -85,12 +83,6 @@ function RightDrawer() {
         >
           <HeaderItem
             className={classes.DrawerHeaderItem}
-            text={SPACEDB_CONTAINERS}
-            onClick={() => { setSR(SPACEDB_CONTAINERS) }}
-            selectedRoute={selectedRoute}
-          />
-          <HeaderItem
-            className={classes.DrawerHeaderItem}
             text={SPACEDB_PROJECTS}
             onClick={() => { setSR(SPACEDB_PROJECTS) }}
             selectedRoute={selectedRoute}
@@ -107,10 +99,6 @@ function RightDrawer() {
         </div>
         <div className={classes.ItemRouter} ref={itemRouterRef}>
           {
-            selectedRoute === SPACEDB_CONTAINERS
-            ?
-            <SpaceDBContainerMenu totNumModules={totNumModules}/>
-            :
             selectedRoute === SPACEDB_PROJECTS
             ?
             <SpaceDBMenu />

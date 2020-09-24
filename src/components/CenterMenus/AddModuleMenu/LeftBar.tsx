@@ -12,10 +12,10 @@ function LeftBar({ selectedGroup, setSG }: Props) {
   const classes = useJSS()
   return (
     <FlexCol className={classes.LeftBar}>
-      {addModuleMenuGroups.map(group => {
+      {addModuleMenuGroups.map((group, index) => {
         const isHL = group === selectedGroup
         return (
-          <Button
+          <Button key={index}
             style={{
               borderRadius: '.2em',
               borderColor: isHL ? 'white' : 'transparent'
