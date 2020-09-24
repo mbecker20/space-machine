@@ -21,7 +21,7 @@ const useJSS = createUseStyles({
   Drawer: {
     backgroundColor: colors.rightDrawer,
     height: '100vh',
-    width: sizes.rightDrawer.width,
+    width: `${sizes.rightDrawer.width}px`,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
@@ -62,7 +62,7 @@ const useJSS = createUseStyles({
   },
 
   ItemRouter: {
-    width: sizes.rightDrawer.width,
+    width: `${sizes.rightDrawer.width}px`,
     height: 'calc(100% - 60px)',
     display: 'flex',
     flexFlow: 'row wrap',
@@ -124,7 +124,7 @@ const useJSS = createUseStyles({
     },
     position: 'absolute',
     top: '0px',
-    right: sizes.rightDrawer.width,
+    right: `${sizes.rightDrawer.width}px`,
   },
 
   ToggleLine: {

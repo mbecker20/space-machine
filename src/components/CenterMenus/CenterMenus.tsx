@@ -15,6 +15,7 @@ import AddModuleMenu from './AddModuleMenu/AddModuleMenu'
 
 declare global {
   interface Window {
+    openAddModuleMenu: (row: number, col: number) => void
     openConnectionMenu: (fromID: string, toID: string) => void
     openModuleRenameMenu: (toRenameID: string) => void
     openControlRenameMenu: (placeholder: string, parentModID: string, containerControl: ContainerControl) => void
@@ -24,11 +25,13 @@ declare global {
     openSpaceDBContainerSaveMenu: (saveList: string[], id: string, onClose: () => void) => void
     openConfirmDeleteMenu: (saveName: string, onClose: () => void) => void
     openFileSaveMenu: () => void
-    openAddModuleMenu: (row: number, col: number) => void
   }
 }
 
 function CenterMenus() {
+
+  const [addModuleMenuData, setAddModuleMenuData] = useState(makeAddModuleMenuData(false))
+  window.openAddModuleMenu = (row, col) => { setAddModuleMenuData(makeAddModuleMenuData(true, row, col)) }
 
   const [connectionMenuData, setConnectionMenuData] = useState(makeConnectionMenuData(false))
   window.openConnectionMenu = (fromID, toID) => { setConnectionMenuData(makeConnectionMenuData(true, fromID, toID)) }
@@ -56,12 +59,17 @@ function CenterMenus() {
   
   const [fileSaveMenuData, setFileSaveMenuData] = useState({ isOpen: false })
   window.openFileSaveMenu = () => { setFileSaveMenuData({ isOpen: true }) }
-
-  const [addModuleMenuData, setAddModuleMenuData] = useState(makeAddModuleMenuData(false))
-  window.openAddModuleMenu = (row, col) => { setAddModuleMenuData(makeAddModuleMenuData(true, row, col)) }
   
   return (
     <Fragment>
+      <AddModuleMenu
+        isOpen={addModuleMenuData.isOpen}
+        onClose={() => {
+          setAddModuleMenuData(makeAddModuleMenuData(false))
+        }}
+        row={addModuleMenuData.row as number}
+        col={addModuleMenuData.col as number}
+      />
       {
         !connectionMenuData.isOpen ? null :
         <ConnectionMenu fromID={connectionMenuData.fromID} toID={connectionMenuData.toID}
@@ -145,16 +153,6 @@ function CenterMenus() {
           onClose={() => {
             setFileSaveMenuData({ isOpen: false })
           }}
-        />
-      }
-      {
-        !addModuleMenuData.isOpen ? null :
-        <AddModuleMenu 
-          onClose={() => {
-            setAddModuleMenuData(makeAddModuleMenuData(false))
-          }}
-          row={addModuleMenuData.row as number}
-          col={addModuleMenuData.col as number}
         />
       }
     </Fragment>

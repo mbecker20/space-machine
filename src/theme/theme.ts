@@ -13,7 +13,8 @@ export const colors: Colors = {
   drawerToggle: '#00347d',
   drawerToggleLine: '#001b40',
 
-  centerMenu: 'black',
+  centerMenu: '#000000c4',
+  centerMenuBackground: '#000000b3',
 
   fillModule: '#c0c0c038',
   module: '#37538a',
@@ -70,7 +71,7 @@ export const colors: Colors = {
 
 export const sizes: Sizes = {
   rightDrawer: {
-    width: '400px',
+    width: '400', // converted to px
     toggleWidth: '2vmin',
     item: '9vmin',
   },

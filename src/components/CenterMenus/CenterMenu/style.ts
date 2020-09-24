@@ -3,7 +3,8 @@ import { colors, sizes } from '../../../theme/theme'
 
 const useJSS = createUseStyles({
   CenterMenuBounder: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
+    backgroundColor: colors.centerMenuBackground,
+    backdropFilter: 'blur(5px)',
     position: 'absolute',
     top: 0,
     left: 0,

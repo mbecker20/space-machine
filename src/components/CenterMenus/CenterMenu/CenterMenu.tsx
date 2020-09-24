@@ -10,9 +10,10 @@ interface Props {
   children: React.ReactNode
   header: string
   onClose: () => void
+  bounderStyle?: CSS.Properties
 }
 
-function CenterMenu({ className, style, headerClassName, headerStyle, children, header, onClose }: Props) {
+function CenterMenu({ className, style, headerClassName, headerStyle, children, header, onClose, bounderStyle }: Props) {
   const classes = useJSS()
   return (
     <div className={classes.CenterMenuBounder}
@@ -20,6 +21,7 @@ function CenterMenu({ className, style, headerClassName, headerStyle, children, 
         e.stopPropagation()
         onClose()
       }}
+      style={bounderStyle}
     >
       <div className={className ? `${classes.CenterMenu} ${className}` : classes.CenterMenu}
         onPointerDown={(e) => {e.stopPropagation()}}

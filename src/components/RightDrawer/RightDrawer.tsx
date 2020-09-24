@@ -3,27 +3,25 @@ import useJSS from './style'
 import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import HeaderItem from './HeaderItem'
-import { sourceModuleData, effectModuleData, utilityModuleData } from './ModuleIcons/moduleData'
 import { clamp } from '../../helpers/genFuncs'
-import ModuleIcons from './ModuleIcons/ModuleIcons'
 import SpaceDBMenu from './SpaceDBMenu'
 import FileMenu from './FileMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import SpaceDBContainerMenu from './SpaceDBContainerMenu'
+import { SPACEDB_MODULES } from '../CenterMenus/AddModuleMenu/AddModuleMenu'
 
-const SOURCES = 'sources'
-const EFFECTS = 'effects'
-const UTILITY = 'utility'
 const SPACEDB_PROJECTS = 'spaceDB projects'
 const FILE = 'file'
 const SPACEDB_CONTAINERS = 'spaceDB modules'
 
-let drawerWidth = sizes.rightDrawer.width
+let drawerWidth = `${sizes.rightDrawer.width}`
+
+const addPx = (arg: string) => `${arg}px`
 
 function RightDrawer() {
   const classes = useJSS()
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [width, setWidth] = useState(drawerWidth)
   const drawerSpring = useSpring({
     transform: open ? 'translate(0px, 0px)' : `translate(${width}px, 0px)`,
@@ -32,7 +30,7 @@ function RightDrawer() {
       clamp: true,
     }
   })
-  const [selectedRoute, setSR] = useState(SOURCES)
+  const [selectedRoute, setSR] = useState(SPACEDB_MODULES)
   const drawerRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLDivElement>(null)
   const drawerHeaderRef = useRef<HTMLDivElement>(null)
@@ -60,11 +58,11 @@ function RightDrawer() {
         }}
         onPointerMove={e => {
           if (adjusting) {
-            drawerWidth = `${clamp(vw - e.clientX, [150, 700] )}px`
-            if (drawerRef.current) { drawerRef.current.style.width = drawerWidth }
-            if (drawerHeaderRef.current) { drawerHeaderRef.current.style.width = drawerWidth }
-            if (itemRouterRef.current) { itemRouterRef.current.style.width = drawerWidth }
-            if (toggleRef.current) { toggleRef.current.style.right = drawerWidth }
+            drawerWidth = `${clamp(vw - e.clientX, [150, 700] )}`
+            if (drawerRef.current) { drawerRef.current.style.width = addPx(drawerWidth) }
+            if (drawerHeaderRef.current) { drawerHeaderRef.current.style.width = addPx(drawerWidth) }
+            if (itemRouterRef.current) { itemRouterRef.current.style.width = addPx(drawerWidth) }
+            if (toggleRef.current) { toggleRef.current.style.right = addPx(drawerWidth) }
           }
         }}
         onPointerUp={e => {
@@ -85,24 +83,6 @@ function RightDrawer() {
             }
           }}
         >
-          <HeaderItem
-            className={classes.DrawerHeaderItem} 
-            text={SOURCES}
-            onClick={() => {setSR(SOURCES)}}
-            selectedRoute={selectedRoute}
-          />
-          <HeaderItem
-            className={classes.DrawerHeaderItem} 
-            text={EFFECTS} 
-            onClick={() => {setSR(EFFECTS)}}
-            selectedRoute={selectedRoute}
-          />
-          <HeaderItem 
-            className={classes.DrawerHeaderItem} 
-            text={UTILITY} 
-            onClick={() => {setSR(UTILITY)}}
-            selectedRoute={selectedRoute}
-          />
           <HeaderItem
             className={classes.DrawerHeaderItem}
             text={SPACEDB_CONTAINERS}
@@ -127,18 +107,6 @@ function RightDrawer() {
         </div>
         <div className={classes.ItemRouter} ref={itemRouterRef}>
           {
-            selectedRoute === SOURCES
-            ?
-            <ModuleIcons moduleData={sourceModuleData} totNumModules={totNumModules}/>
-            :
-            selectedRoute === EFFECTS
-            ?
-            <ModuleIcons moduleData={effectModuleData} totNumModules={totNumModules}/>
-            :
-            selectedRoute === UTILITY
-            ?
-            <ModuleIcons moduleData={utilityModuleData} totNumModules={totNumModules}/>
-            :
             selectedRoute === SPACEDB_CONTAINERS
             ?
             <SpaceDBContainerMenu totNumModules={totNumModules}/>

@@ -1,5 +1,5 @@
 import { createUseStyles } from 'react-jss'
-import { colors, sizes } from '../../theme/theme'
+import { sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   DropSquare: {
