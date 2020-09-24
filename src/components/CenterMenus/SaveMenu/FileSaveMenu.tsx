@@ -30,7 +30,6 @@ function FileSaveMenu({ onClose }: Props) {
   if (window.usingElectron && !fs) {
     fs = window.require('fs')
   }
-  console.log(fs)
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {

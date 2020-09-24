@@ -11,9 +11,7 @@ function FileMenu() {
   const folderRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
   if (window.usingElectron && !fs) {
-    console.log('using electron')
     fs = window.require('fs')
-    console.log(fs)
   }
   useEffect(() => {
     window.setTimeout(() => {
