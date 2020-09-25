@@ -4,6 +4,7 @@ import { CONTAINER } from '../../../../audioModules/moduleTypes'
 import { performContainerMerge } from '../../../../redux/replicateContainer'
 import { RootState } from '../../../../redux/stateTSTypes'
 import getModuleColor from '../../../../theme/moduleColor'
+import { colors } from '../../../../theme/theme'
 import useJSS from '../style'
 
 interface Props {
@@ -12,23 +13,30 @@ interface Props {
   onClose: () => void
   row: number
   col: number
-
+  isFocussed?: boolean
 }
 
-function SpaceDBModuleIcon({ moduleName, totNumberModules, onClose, row, col }: Props) {
+function SpaceDBModuleIcon({ moduleName, totNumberModules, onClose, row, col, isFocussed }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
+  function addModule() {
+    window.containerSaveService.get(moduleName).then(({ containerID, modules, connections }: any) => {
+      performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, window.fillContainerID, containerID, row, col)
+    })
+    onClose()
+  }
+  if (isFocussed) {
+    window.addSelectedSearchModule = addModule
+  }
   const totNumberConnections = useSelector((state: RootState) => Object.keys(state.connections).length)
   return (
     <div className={classes.DrawerItem}>
       <div className={classes.DrawerIcon}
-        style={{ backgroundColor: getModuleColor(CONTAINER) }}
-        onClick={() => {
-          window.containerSaveService.get(moduleName).then(({ containerID, modules, connections }: any) => {
-            performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, window.fillContainerID, containerID, row, col)
-          })
-          onClose()
+        style={{ 
+          backgroundColor: getModuleColor(CONTAINER),
+          borderColor: isFocussed ? 'white' : colors.grey,
         }}
+        onClick={addModule}
       />
       <div className={classes.DrawerItemText}>
         {moduleName}
