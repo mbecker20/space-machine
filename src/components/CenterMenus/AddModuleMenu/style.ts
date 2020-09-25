@@ -44,13 +44,17 @@ const useJSS = createUseStyles({
   SearchBar: {
     width: '80%',
     height: '1.5em',
-    marginTop: '1.4em',
+    marginTop: '1.3em',
+    marginBottom: '.4em',
     fontSize: sizes.text.small,
     backgroundColor: colors.addModuleSearchBarBG,
     color: colors.addModuleSearchBarText,
     textAlign: 'center',
     borderStyle: 'none',
     borderRadius: '.2em',
+    '&:focus': {
+      outline: 'none',
+    }
   },
 
   DrawerItem: {

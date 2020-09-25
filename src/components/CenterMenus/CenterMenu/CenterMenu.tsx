@@ -8,7 +8,7 @@ interface Props {
   headerClassName?: string
   headerStyle?: CSS.Properties
   children: React.ReactNode
-  header: string
+  header?: string
   onClose: () => void
   bounderStyle?: CSS.Properties
 }
@@ -27,11 +27,12 @@ function CenterMenu({ className, style, headerClassName, headerStyle, children, 
         onPointerDown={(e) => {e.stopPropagation()}}
         style={style}
       >
+        {!header ? null : 
         <div className={headerClassName ? `${classes.Header} ${headerClassName}` : classes.Header}
           style={headerStyle}
         >
           {header}
-        </div>
+        </div>}
         {children}
       </div>
     </div>
