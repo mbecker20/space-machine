@@ -33,11 +33,11 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
           setName(e.target.value)
         }}
         onKeyDown={e => {
-          switch (e.keyCode) {
-            case 13: // enter
+          switch (e.key) {
+            case 'Enter': // enter
               confirmContainerSaveName(setConfirmSaveData, id, name, saveList, state, onClose)
               break
-            case 27: // escape
+            case 'Escape': // escape
               onClose()
               break
           }
@@ -78,6 +78,7 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
                 }).then((success: string) => {
                   if (success) {
                     window.flashNotification('green', 'module updated')
+                    window.refreshSpaceDBModules()
                   }
                 })
                 onClose()

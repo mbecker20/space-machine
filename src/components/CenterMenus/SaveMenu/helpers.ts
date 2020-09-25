@@ -22,6 +22,7 @@ export function confirmContainerSaveName(setConfirmSaveData: (arg: any) => void,
     }).then((success: string) => {
       if (success) {
         window.flashNotification('green', 'module saved to spaceDB')
+        window.refreshSpaceDBModules()
       }
     })
     onClose()
