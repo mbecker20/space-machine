@@ -4,6 +4,7 @@ import LeftBar from './LeftBar'
 import IconRouter from './IconRouter'
 import SearchBar from './SearchBar'
 import useJSS from './style'
+import { useSpring } from 'react-spring'
 
 declare global {
   interface Window {
@@ -36,16 +37,18 @@ function AddModuleMenu({ isOpen, onClose, row, col, searchRef }: Props) {
   window.refreshSpaceDBModules = () => {
     window.containerSaveService.find().then((saveNames: string[]) => { setSpaceDBModules(saveNames) })
   }
+  const styleSpring = useSpring({
+    opacity: isOpen ? 1 : 0,
+  })
   useEffect(() => {
     window.refreshSpaceDBModules()
   }, [])
   const classes = useJSS()
   return (
     <CenterMenu header='add module' onClose={onClose}
-      bounderStyle={{ 
+      bounderStyle={Object.assign({}, styleSpring, {
         zIndex: isOpen ? 1000 : -1000,
-        opacity: isOpen ? 1 : 0,
-      }}
+      })}
     >
       <FlexRow>
         <FlexCol className={classes.RouterBounder}>

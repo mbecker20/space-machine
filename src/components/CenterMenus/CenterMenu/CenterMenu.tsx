@@ -1,6 +1,7 @@
 import React from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
+import { animated } from 'react-spring'
 
 interface Props {
   className?: string
@@ -16,7 +17,7 @@ interface Props {
 function CenterMenu({ className, style, headerClassName, headerStyle, children, header, onClose, bounderStyle }: Props) {
   const classes = useJSS()
   return (
-    <div className={classes.CenterMenuBounder}
+    <animated.div className={classes.CenterMenuBounder}
       onPointerDown={e => {
         e.stopPropagation()
         onClose()
@@ -35,7 +36,7 @@ function CenterMenu({ className, style, headerClassName, headerStyle, children, 
         </div>}
         {children}
       </div>
-    </div>
+    </animated.div>
   )
 }
 
