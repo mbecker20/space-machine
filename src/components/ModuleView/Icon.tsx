@@ -3,7 +3,6 @@ import { Module, RootState, ContainerModule } from '../../redux/stateTSTypes'
 import useJSS from './style'
 import CSS from 'csstype'
 import { useSelector, useDispatch } from 'react-redux'
-import { animated, useSpring } from 'react-spring'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
@@ -37,7 +36,12 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
     borderStyle: isLarge ? 'solid' : 'none',
     backgroundColor: getModuleColor(mod.moduleType),
   })
+
+  const nameStyle: CSS.Properties = {
+    fontSize: isLarge ? sizes.text.medium : sizes.text.small,
+  }
   
+  /*
   const nameSpring = useSpring({
     fontSize: isLarge ? sizes.text.medium : sizes.text.small,
     config: {
@@ -45,6 +49,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
       clamp: true
     }
   })
+  */
 
   const { modules, baseContainerID, connections } = useSelector((state: RootState) => state)
   const dispatch = useDispatch()
@@ -86,14 +91,14 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           }}
         />
         }
-        <animated.div className={classes.IconName} style={nameSpring} onClick={e => {
+        <div className={classes.IconName} style={nameStyle} onClick={e => {
           if (isLarge) {
             e.stopPropagation()
             window.openModuleRenameMenu(mod.id)
           }
         }}>
           {mod.name}
-        </animated.div>
+        </div>
         {
         !isLarge ? null :
         <div className={classes.IconControlContainer} 
