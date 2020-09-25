@@ -1,4 +1,5 @@
 import React from 'react'
+import { colors } from '../../../theme/theme'
 import { Button, FlexCol } from '../../all'
 import { addModuleMenuGroups } from './AddModuleMenu'
 import useJSS from './style'
@@ -15,10 +16,10 @@ function LeftBar({ selectedGroup, setSG }: Props) {
       {addModuleMenuGroups.map((group, index) => {
         const isHL = group === selectedGroup
         return (
-          <Button key={index}
+          <Button className={classes.LeftBarButton}
+            key={index}
             style={{
-              borderRadius: '.2em',
-              borderColor: isHL ? 'white' : 'transparent'
+              color: isHL ? colors.selectedText : 'white',
             }}
             onClick={() => {
               setSG(group)

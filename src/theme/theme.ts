@@ -67,6 +67,10 @@ export const colors: Colors = {
   contextMenuBackground: '#08101deb',
 
   sdbSaveButton: '#282c349c',
+
+  // add module menu
+  addModuleLeftBarBG: 'transparent',
+  addModuleLeftBarButtonHL: '#ffffff60',
 }
 
 export const sizes: Sizes = {
@@ -104,4 +108,9 @@ export const sizes: Sizes = {
   switch: {
     diameter: 3 // in vmin
   },
+  addModuleMenu: {
+    leftBarWidth: '20vmin',
+    iconRouterWidth: '60vmin',
+    height: '60vmin',
+  }
 }

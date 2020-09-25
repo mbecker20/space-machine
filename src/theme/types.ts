@@ -36,6 +36,12 @@ interface Switch {
   diameter: number // in vmin
 }
 
+interface AddModuleMenu {
+  leftBarWidth: string
+  iconRouterWidth: string
+  height: string
+}
+
 export interface Sizes {
   rightDrawer: Drawer
   moduleView: ModuleView
@@ -43,6 +49,7 @@ export interface Sizes {
   connector: Connector
   knob: Knob
   switch: Switch
+  addModuleMenu: AddModuleMenu
 }
 
 

@@ -3,13 +3,26 @@ import { colors, sizes } from '../../../theme/theme'
 
 const useJSS = createUseStyles({
   LeftBar: {
-    width: '20vmin',
-    height: '70vmin',
+    width: sizes.addModuleMenu.leftBarWidth,
+    //height: sizes.addModuleMenu.height,
+    backgroundColor: colors.addModuleLeftBarBG,
+  },
+
+  LeftBarButton: {
+    borderRadius: '0em',
+    margin: '0em',
+    backgroundColor: 'transparent',
+    //borderStyle: 'none solid none none',
+    borderColor: 'transparent',
+    borderWidth: '1px',
+    '&:hover': {
+      borderColor: 'transparent',
+    }
   },
 
   IconRouter: {
-    width: '60vmin',
-    height: '70vmin',
+    width: sizes.addModuleMenu.iconRouterWidth,
+    height: sizes.addModuleMenu.height,
     overflowY: 'scroll',
     display: 'grid',
     gridTemplateColumns: 'repeat(3, auto)',
@@ -22,6 +35,13 @@ const useJSS = createUseStyles({
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'white',
     },
+  },
+
+  SearchBar: {
+    width: '80%',
+    height: '1em',
+    fontSize: sizes.text.small,
+    
   },
 
   DrawerItem: {

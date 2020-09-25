@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { CenterMenu, FlexRow } from '../../all'
+import { CenterMenu, FlexCol, FlexRow } from '../../all'
 import LeftBar from './LeftBar'
 import IconRouter from './IconRouter'
-//import useJSS from './style'
+import useJSS from './style'
 
 interface Props {
   isOpen: boolean
@@ -21,7 +21,7 @@ export const addModuleMenuGroups = [
 ]
 
 function AddModuleMenu({ isOpen, onClose, row, col }: Props) {
-  //const classes = useJSS()
+  const classes = useJSS()
   const [selectedGroup, setSG] = useState(EFFECTS)
   return (
     <CenterMenu header='add module' onClose={onClose}
@@ -32,7 +32,12 @@ function AddModuleMenu({ isOpen, onClose, row, col }: Props) {
     >
       <FlexRow>
         <LeftBar selectedGroup={selectedGroup} setSG={setSG} />
-        <IconRouter selectedGroup={selectedGroup} row={row} col={col} onClose={onClose} />
+        <FlexCol style={{ alignItems: 'center' }}>
+          <input className={classes.SearchBar}
+
+          />
+          <IconRouter selectedGroup={selectedGroup} row={row} col={col} onClose={onClose} />
+        </FlexCol>
       </FlexRow>
     </CenterMenu>
   )
