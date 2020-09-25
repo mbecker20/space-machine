@@ -24,3 +24,5 @@ export const utilityModuleData: DrawerModuleData = [
   ['output', 'out', OUTPUT],
   ['analyzer', 'analyzer', ANALYZER]
 ]
+
+export const allModuleData: DrawerModuleData = effectModuleData.concat(sourceModuleData).concat(utilityModuleData)

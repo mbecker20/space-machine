@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import SpaceDBModuleIcon from './SpaceDBModuleIcon'
 
 interface Props {
@@ -6,18 +6,19 @@ interface Props {
   onClose: () => void
   row: number
   col: number
+  spaceDBModules: string[]
 }
 
-function SpaceDBModules({ totNumModules, onClose, row, col }: Props) {
-  const [containerSaves, setContainerSaves] = useState<string[]>([])
+function SpaceDBModules({ spaceDBModules, totNumModules, onClose, row, col }: Props) {
   useEffect(() => {
-    window.containerSaveService.find().then((saveNames: string[]) => { setContainerSaves(saveNames) })
+    window.refreshSpaceDBModules()
   }, [])
   return (
     <Fragment>
-      {containerSaves.map((containerName, index) => {
+      {spaceDBModules.map((moduleName, index) => {
         return (
-          <SpaceDBModuleIcon containerName={containerName}
+          <SpaceDBModuleIcon 
+            moduleName={moduleName}
             key={index}
             totNumberModules={totNumModules}
             onClose={onClose}

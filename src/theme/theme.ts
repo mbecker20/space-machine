@@ -71,6 +71,8 @@ export const colors: Colors = {
   // add module menu
   addModuleLeftBarBG: 'transparent',
   addModuleLeftBarButtonHL: '#ffffff60',
+  addModuleSearchBarBG: '#1d1d2b',
+  addModuleSearchBarText: 'white'
 }
 
 export const sizes: Sizes = {

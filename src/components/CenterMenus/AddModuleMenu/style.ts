@@ -20,6 +20,10 @@ const useJSS = createUseStyles({
     }
   },
 
+  RouterBounder: {
+    alignItems: 'center'
+  },
+
   IconRouter: {
     width: sizes.addModuleMenu.iconRouterWidth,
     height: sizes.addModuleMenu.height,
@@ -39,9 +43,14 @@ const useJSS = createUseStyles({
 
   SearchBar: {
     width: '80%',
-    height: '1em',
+    height: '1.5em',
+    marginTop: '1.4em',
     fontSize: sizes.text.small,
-    
+    backgroundColor: colors.addModuleSearchBarBG,
+    color: colors.addModuleSearchBarText,
+    textAlign: 'center',
+    borderStyle: 'none',
+    borderRadius: '.2em',
   },
 
   DrawerItem: {

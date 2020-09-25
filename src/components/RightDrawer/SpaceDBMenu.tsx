@@ -33,7 +33,7 @@ function SpaceDBMenu() {
           })
         }}
       >
-        save
+        save project
       </Button>
       <div>
         {saveList.map((saveName, index) => {

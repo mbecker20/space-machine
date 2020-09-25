@@ -9,7 +9,7 @@ import useJSS from '../style'
 interface Props {
   fullName: string
   shortName: string
-  moduleType: ModuleType
+  moduleType: string
   totNumModules: number
   row: number
   col: number
@@ -28,7 +28,7 @@ function ModuleIcon({ fullName, shortName, moduleType, totNumModules, row, col, 
             genRandomID(0, totNumModules),
             shortName,
             window.fillContainerID,
-            moduleType,
+            moduleType as ModuleType,
             dispatch,
             row, col
           )

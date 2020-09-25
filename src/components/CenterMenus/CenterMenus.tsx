@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useRef } from 'react'
 import { makeConnectionMenuData, makeKnobRangeSetMenuData, makeSaveMenuData, makeConfirmDeleteMenuData, makeContainerSaveMenuData, makeAnalyzerRangeSetMenuData, makeRenameControlMenuData, makeAddModuleMenuData } from './makeData'
 import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
@@ -29,9 +29,12 @@ declare global {
 }
 
 function CenterMenus() {
-
+  const addModuleSearchRef = useRef<HTMLInputElement>(null)
   const [addModuleMenuData, setAddModuleMenuData] = useState(makeAddModuleMenuData(false))
-  window.openAddModuleMenu = (row, col) => { setAddModuleMenuData(makeAddModuleMenuData(true, row, col)) }
+  window.openAddModuleMenu = (row, col) => { 
+    setAddModuleMenuData(makeAddModuleMenuData(true, row, col))
+    if (addModuleSearchRef.current) addModuleSearchRef.current.focus()
+  }
 
   const [connectionMenuData, setConnectionMenuData] = useState(makeConnectionMenuData(false))
   window.openConnectionMenu = (fromID, toID) => { setConnectionMenuData(makeConnectionMenuData(true, fromID, toID)) }
@@ -69,6 +72,7 @@ function CenterMenus() {
         }}
         row={addModuleMenuData.row as number}
         col={addModuleMenuData.col as number}
+        searchRef={addModuleSearchRef}
       />
       {
         !connectionMenuData.isOpen ? null :

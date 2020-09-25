@@ -7,7 +7,7 @@ import getModuleColor from '../../../../theme/moduleColor'
 import useJSS from '../style'
 
 interface Props {
-  containerName: string
+  moduleName: string
   totNumberModules: number
   onClose: () => void
   row: number
@@ -15,7 +15,7 @@ interface Props {
 
 }
 
-function SpaceDBModuleIcon({ containerName, totNumberModules, onClose, row, col }: Props) {
+function SpaceDBModuleIcon({ moduleName, totNumberModules, onClose, row, col }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
   const totNumberConnections = useSelector((state: RootState) => Object.keys(state.connections).length)
@@ -24,14 +24,14 @@ function SpaceDBModuleIcon({ containerName, totNumberModules, onClose, row, col 
       <div className={classes.DrawerIcon}
         style={{ backgroundColor: getModuleColor(CONTAINER) }}
         onClick={() => {
-          window.containerSaveService.get(containerName).then(({ containerID, modules, connections }: any) => {
+          window.containerSaveService.get(moduleName).then(({ containerID, modules, connections }: any) => {
             performContainerMerge(dispatch, modules, connections, totNumberModules, totNumberConnections, window.fillContainerID, containerID, row, col)
           })
           onClose()
         }}
       />
       <div className={classes.DrawerItemText}>
-        {containerName}
+        {moduleName}
       </div>
     </div>
   )
