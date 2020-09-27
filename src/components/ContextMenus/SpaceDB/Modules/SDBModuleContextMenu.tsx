@@ -15,7 +15,7 @@ function makeData(isOpen: boolean, event?: MouseDivEvent) {
   }
 }
 
-function ModuleContextMenu() {
+function SDBModuleContextMenu() {
   const [{ isOpen, event }, setData] = useState(makeData(false))
   return (
     <Fragment>
@@ -30,4 +30,4 @@ function ModuleContextMenu() {
   )
 }
 
-export default ModuleContextMenu
+export default SDBModuleContextMenu
