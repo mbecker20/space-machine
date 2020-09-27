@@ -41,6 +41,9 @@ function AddModuleMenu({ isOpen, onClose, row, col, searchRef }: Props) {
   }
   const styleSpring = useSpring({
     opacity: isOpen ? 1 : 0,
+    config: {
+      tension: 270,
+    }
   })
   useEffect(() => {
     window.refreshSpaceDBModules()
