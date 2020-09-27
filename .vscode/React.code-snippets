@@ -98,4 +98,44 @@
 			"export default useJSS"
 		]
 	},
+
+	"context-menu": {
+		"scope": "typescriptreact",
+		"prefix": "context-menu",
+		"body": [
+			"import React, { Fragment, useState } from 'react'",
+			"import ContextMenu from '../../ContextMenu/ContextMenu'",
+			"import { MouseDivEvent } from '../../types'",
+			"",
+			"declare global {",
+			"\tinterface Window {",
+			"\t\topen${1:$TM_FILENAME_BASE}: (event: MouseDivEvent) => void",
+			"\t}",
+			"}",
+			"",
+			"function makeData(isOpen: boolean, event?: MouseDivEvent) {",
+			"\treturn {",
+			"\t\tisOpen,",
+			"\t\tevent,",
+			"\t}",
+			"}",
+			"",
+			"function ${1:$TM_FILENAME_BASE}() {",
+			"\tconst [{ isOpen, event }, setData] = useState(makeData(false))",
+			"\treturn (",
+			"\t\t<Fragment>",
+			"\t\t\t{!isOpen ? null :",
+			"\t\t\t\t<ContextMenu event={event as MouseDivEvent}",
+			"\t\t\t\t\tonClose={() => setData(makeData(false))}",
+			"\t\t\t\t>",
+			"\t\t\t\t\t$0",
+			"\t\t\t\t</ContextMenu>",
+			"\t\t\t}",
+			"\t\t</Fragment>",
+			"\t)",
+			"}",
+			"",
+			"export default ${1:$TM_FILENAME_BASE}"
+		]
+	}
 }
