@@ -1,8 +1,8 @@
 import React from 'react'
 import useJSS from './style'
-import { Button } from '../../all'
 import { colors, sizes } from '../../../theme/theme'
 import { SetFunc } from '../../../audioModules/moduleTypes'
+import Button from '../../Button/Button'
 
 interface Props {
   actualModID: string

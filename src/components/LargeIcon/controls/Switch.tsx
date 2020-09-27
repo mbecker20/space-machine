@@ -1,8 +1,8 @@
 import React from 'react'
-import { Switch } from '../../all'
 import { SetFunc } from '../../../audioModules/moduleTypes'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
+import Switch from '../../Switch/Switch'
 
 interface Props {
   controlID: string

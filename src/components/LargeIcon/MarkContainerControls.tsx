@@ -1,10 +1,13 @@
 import React, { useState, Fragment } from 'react'
-import { Button, Switch, FlexRow, FlexCol } from '../all'
 import { sizes } from '../../theme/theme'
 import { Module, ContainerModule, RootState, ContainerControl } from '../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { markContainerControl, unmarkContainerControl } from '../../redux/allActions'
 import { CONTAINER } from '../../audioModules/moduleTypes'
+import Button from '../Button/Button'
+import FlexCol from '../Flex/FlexCol'
+import FlexRow from '../Flex/FlexRow'
+import Switch from '../Switch/Switch'
 
 interface Props {
   selectedModule: Module

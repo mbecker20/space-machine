@@ -1,6 +1,7 @@
 import React from 'react'
 import { colors } from '../../../theme/theme'
-import { Button, FlexCol } from '../../all'
+import Button from '../../Button/Button'
+import FlexCol from '../../Flex/FlexCol'
 import { addModuleMenuGroups } from './AddModuleMenu'
 import useJSS from './style'
 

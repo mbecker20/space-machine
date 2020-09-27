@@ -1,6 +1,7 @@
 import React from 'react'
-import { CenterMenu, Button } from '../../all'
 import { colors } from '../../../theme/theme'
+import Button from '../../Button/Button'
+import CenterMenu from '../CenterMenu/CenterMenu'
 
 interface Props {
   saveName: string

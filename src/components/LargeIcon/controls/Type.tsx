@@ -3,8 +3,8 @@ import useJSS from './style'
 import { SetFunc, AudioModuleWithTypes, ConnectingAudioModule } from '../../../audioModules/moduleTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateControlValue } from '../../../redux/allActions'
-import { FlexRow } from '../../all'
 import { RootState } from '../../../redux/stateTSTypes'
+import FlexRow from '../../Flex/FlexRow'
 
 interface Props {
   setFunc: SetFunc

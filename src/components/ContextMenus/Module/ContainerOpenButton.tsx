@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { CONTAINER } from '../../../audioModules/moduleTypes'
 import { Modules } from '../../../redux/stateTSTypes'
-import { Button } from '../../all'
+import Button from '../../Button/Button'
 import useJSS from './style'
 
 interface Props {

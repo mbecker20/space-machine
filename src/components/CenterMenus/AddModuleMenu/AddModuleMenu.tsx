@@ -1,10 +1,12 @@
 import React, { RefObject, useEffect, useState } from 'react'
-import { CenterMenu, FlexCol, FlexRow } from '../../all'
 import LeftBar from './LeftBar'
 import IconRouter from './IconRouter'
 import SearchBar from './SearchBar'
 import useJSS from './style'
 import { useSpring } from 'react-spring'
+import CenterMenu from '../CenterMenu/CenterMenu'
+import FlexRow from '../../Flex/FlexRow'
+import FlexCol from '../../Flex/FlexCol'
 
 declare global {
   interface Window {

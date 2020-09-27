@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import useJSS from './style'
-import { RightDrawer, ModuleViewFill, AudioTags, CenterMenus, PointerLayer, Notification } from '../components/all'
 import { AudioModules } from '../audioModules/moduleTypes'
 import makeAddModule from '../audioModules/makeAddModule'
 import { makePointerLayerData } from '../components/PointerLayer/makeData'
-import { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
+import PointerLayer, { PointerEventCallback } from '../components/PointerLayer/PointerLayer'
 import configureSpaceDB from './configureSpaceDB'
 import setUserAgent from './setUserAgent'
 import ContextMenus from '../components/ContextMenus/ContextMenus'
+import ModuleViewFill from '../components/ModuleView/Fill'
+import RightDrawer from '../components/RightDrawer/RightDrawer'
+import AudioTags from '../components/AudioTags/AudioTags'
+import CenterMenus from '../components/CenterMenus/CenterMenus'
+import Notification from '../components/Notification/Notification'
 
 declare global {
   interface Window { 

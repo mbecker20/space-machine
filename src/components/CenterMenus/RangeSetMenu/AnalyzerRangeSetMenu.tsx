@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { CenterMenu } from '../../all'
 import useJSS from './style'
 import Button from '../../Button/Button'
 import { Range } from '../../../audioModules/moduleTypes'
 import { sizes, colors } from '../../../theme/theme'
+import CenterMenu from '../CenterMenu/CenterMenu'
 
 interface Props {
   onClose: () => void
@@ -19,9 +19,9 @@ function AnalyzerRangeSetMenu({ range, onChangeSubmit, onClose }: Props) {
     <CenterMenu header='set analyzer range' onClose={onClose}>
       <div className={classes.CMInputBounder}
         onKeyDown={e => {
-          if (e.keyCode === 27) {
+          if (e.key === 'Escape') {
             onClose()
-          } else if (e.keyCode === 13) {
+          } else if (e.key === 'Enter') {
             onChangeSubmit([min, max])
             onClose()
           }

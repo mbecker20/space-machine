@@ -8,7 +8,7 @@ import { getGridRange } from './helpers'
 import { range } from '../../helpers/genFuncs'
 import DropSquare from '../DropSquare/DropSquare'
 import { ArcherContainer } from 'react-archer'
-import { Button } from '../all'
+import Button from '../Button/Button'
 
 declare global {
   interface Window { 

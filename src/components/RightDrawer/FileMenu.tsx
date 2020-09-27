@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
-import { Button } from '../all'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
+import Button from '../Button/Button'
 let fs: any = null
 
 function FileMenu() {

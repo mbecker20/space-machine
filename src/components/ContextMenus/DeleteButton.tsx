@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../all'
+import Button from '../Button/Button'
 import TrashSVG from '../SVG/TrashSVG'
 import useJSS from './style'
 

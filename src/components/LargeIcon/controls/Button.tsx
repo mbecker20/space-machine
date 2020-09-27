@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '../../all'
 import { SetFunc } from '../../../audioModules/moduleTypes'
 import { colors } from '../../../theme/theme'
+import Button from '../../Button/Button'
 
 interface Props {
   setFunc: SetFunc
@@ -16,6 +16,7 @@ function ButtonControl({ setFunc, controlID, modName, label }: Props) {
       //backgroundColor: colors.fillModule,
       borderColor: colors.deleteButton,
       width: '50%',
+      padding: '.1em',
     }}
       onClick={() => {
         setFunc('')

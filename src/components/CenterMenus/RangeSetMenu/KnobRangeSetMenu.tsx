@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { CenterMenu, Button } from '../../all'
 import useJSS from './style'
 import { Range } from '../../../audioModules/moduleTypes'
 import { inRange } from '../../../helpers/genFuncs'
 import { sizes, colors } from '../../../theme/theme'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
+import CenterMenu from '../CenterMenu/CenterMenu'
+import Button from '../../Button/Button'
 
 interface Props {
   onClose: () => void
@@ -29,9 +30,9 @@ function KnobRangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) 
       </div>
       <div className={classes.CMInputBounder}
         onKeyDown={e => {
-          if (e.keyCode === 27) {
+          if (e.key === 'Escape') {
             onClose()
-          } else if (e.keyCode === 13) {
+          } else if (e.key === 'Enter') {
             onChangeSubmit([min, max])
             onClose()
           }

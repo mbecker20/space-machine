@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { SetFunc } from '../../../audioModules/moduleTypes'
-import { StatelessKnob } from '../../all'
 import { clamp } from '../../../helpers/genFuncs'
 import { makeValString } from '../../Knob/helpers'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { updateControlValue, updateControlRange } from '../../../redux/allActions'
+import StatelessKnob from '../../Knob/StatelessKnob'
 
 interface Props {
   controlID: string
@@ -16,11 +16,11 @@ interface Props {
 }
 
 function ValueControl({ controlID, setFunc, actualModID, displayModName, label }: Props) {
-  const [ val, currRange ] = useSelector((state: RootState) => {
-    return [
-      state.modules[actualModID].controlData[controlID].value as number,
-      state.modules[actualModID].controlData[controlID].range as [number, number],
-    ]
+  const { val, currRange } = useSelector((state: RootState) => {
+    return {
+      val: state.modules[actualModID].controlData[controlID].value as number,
+      currRange: state.modules[actualModID].controlData[controlID].range as [number, number],
+    }
   })
   const [inputVal, setInputVal] = useState(makeValString(val))
   const dispatch = useDispatch()

@@ -2,11 +2,11 @@ import React, { useState, useRef, Fragment } from 'react'
 import CenterMenu from '../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
-import { Button } from '../../all'
 import { getContainerModulesConnections } from '../../../redux/getContainerAsProject'
 import { sizes, colors } from '../../../theme/theme'
 import { confirmContainerSaveName } from './helpers'
 import useJSS from './style'
+import Button from '../../Button/Button'
 
 interface Props {
   id: string

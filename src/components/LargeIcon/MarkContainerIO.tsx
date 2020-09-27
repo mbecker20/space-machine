@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
 import { Module } from '../../redux/stateTSTypes'
-import { Switch } from '../all'
 import { useDispatch } from 'react-redux'
 import { markContainerInput, unmarkContainerInput, markContainerOutput, unmarkContainerOutput } from '../../redux/allActions'
 import CSS from 'csstype'
 import { sizes } from '../../theme/theme'
 import MarkContainerControls from './MarkContainerControls'
+import Switch from '../Switch/Switch'
 
 interface Props {
   baseContainerID: string

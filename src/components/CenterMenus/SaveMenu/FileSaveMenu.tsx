@@ -1,11 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { Button, CenterMenu } from '../../all'
 import settingsSVG from '../../../icons/settings.svg'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { sizes } from '../../../theme/theme'
 import { getFileDirectory } from './helpers'
 import useJSS from './style'
+import CenterMenu from '../CenterMenu/CenterMenu'
+import Button from '../../Button/Button'
 let fs: any
 
 declare global {

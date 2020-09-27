@@ -2,10 +2,12 @@ import React, { useState, useRef } from 'react'
 import CenterMenu from '../CenterMenu/CenterMenu'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
-import { Button, FlexRow, FlexCol } from '../../all'
 import { stringIn } from '../../../helpers/genFuncs'
 import { sizes, colors } from '../../../theme/theme'
 import useJSS from './style'
+import FlexRow from '../../Flex/FlexRow'
+import Button from '../../Button/Button'
+import FlexCol from '../../Flex/FlexCol'
 
 interface Props {
   saveList: string[]

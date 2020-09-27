@@ -4,11 +4,12 @@ import p5Types from 'p5'
 import { AnalyzerModule } from '../../../audioModules/modules/analyzer'
 import { mapValBetweenRanges } from '../../../helpers/genFuncs'
 import { colors, sizes } from '../../../theme/theme'
-import { FlexCol, Button } from '../../all'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { Range } from '../../../audioModules/moduleTypes'
 import { updateControlRange } from '../../../redux/allActions'
+import FlexCol from '../../Flex/FlexCol'
+import Button from '../../Button/Button'
 
 interface Props {
   modID: string

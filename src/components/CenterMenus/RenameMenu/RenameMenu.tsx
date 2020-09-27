@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { CenterMenu, Button } from '../../all'
+import Button from '../../Button/Button'
+import CenterMenu from '../CenterMenu/CenterMenu'
 import useJSS from './style'
 
 interface Props {

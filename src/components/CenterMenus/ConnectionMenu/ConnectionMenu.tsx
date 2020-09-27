@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react'
-import { CenterMenu, Button } from '../../all'
 import { connect } from '../../../audioModules/connection'
 import { useDispatch, useSelector } from 'react-redux'
 import { ConnectingAudioModule, CONTAINER } from '../../../audioModules/moduleTypes'
@@ -9,6 +8,8 @@ import { RootState } from '../../../redux/stateTSTypes'
 import IORecursion from './IORecursion'
 import useJSS from './style'
 import { connectionExists } from './helpers'
+import CenterMenu from '../CenterMenu/CenterMenu'
+import Button from '../../Button/Button'
 
 interface Props {
   fromID: string

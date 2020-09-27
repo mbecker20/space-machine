@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '../all'
 import { RootState } from '../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import { colors } from '../../theme/theme'
+import Button from '../Button/Button'
 
 export interface Save {
   id: string,
