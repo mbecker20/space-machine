@@ -1,10 +1,12 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import { ContextMenuBaseProps } from '../types'
+import { MouseDivEvent } from '../types'
 import { getLocation } from './helpers'
 import useJSS from './style'
 
-interface Props extends ContextMenuBaseProps {
+interface Props {
   children: ReactNode
+  event: MouseDivEvent
+  onClose: () => void
 }
 
 function ContextMenu({ event, children, onClose }: Props) {
