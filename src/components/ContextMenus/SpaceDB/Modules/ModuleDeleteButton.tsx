@@ -1,14 +1,21 @@
 import React from 'react'
+import DeleteButton from '../../DeleteButton'
 
 interface Props {
-  
+  saveName: string
+  onClose: () => void
 }
 
-function ModuleDeleteButton({  }: Props) {
+function ModuleDeleteButton({ saveName, onClose }: Props) {
   return (
-    <div>
-
-    </div>
+    <DeleteButton onClick={() => {
+      window.containerSaveService.remove(saveName).then((res: string) => {
+        console.log(res)
+        //window.flashNotification(r)
+        window.refreshSpaceDBModules()
+        onClose()
+      })
+    }}/>
   )
 }
 

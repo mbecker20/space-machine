@@ -37,6 +37,11 @@ function SpaceDBModuleIcon({ moduleName, totNumberModules, onClose, row, col, is
           borderColor: isFocussed ? 'white' : colors.grey,
         }}
         onClick={addModule}
+        onContextMenu={e => {
+          e.preventDefault()
+          e.persist()
+          window.openSDBModuleContextMenu(e, moduleName)
+        }}
       />
       <div className={classes.DrawerItemText}>
         {moduleName}

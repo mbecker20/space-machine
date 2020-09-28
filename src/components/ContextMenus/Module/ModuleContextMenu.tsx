@@ -11,7 +11,6 @@ import { MouseDivEvent } from '../types'
 declare global {
   interface Window {
     openModuleContextMenu: (event: MouseDivEvent, modID: string) => void
-
   }
 }
 
