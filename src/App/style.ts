@@ -4,7 +4,8 @@ import { createUseStyles } from 'react-jss'
 const useJSS = createUseStyles({
   Bounder: {
     //backgroundColor: colors.grey,
-    backgroundImage: 'url(https://media.wired.com/photos/5a593a7ff11e325008172bc2/master/pass/pulsar-831502910.jpg)',
+    //backgroundImage: 'url(https://media.wired.com/photos/5a593a7ff11e325008172bc2/master/pass/pulsar-831502910.jpg)',
+    backgroundImage: 'url(https://i.imgur.com/mSjoh6M.jpg)',
     width: '100vw',
     height: '100vh',
     display: 'flex',
