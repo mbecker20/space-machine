@@ -57,14 +57,14 @@ function Graph({ modID }: Props) {
 
   const dispatch = useDispatch()
   return (
-    <FlexCol style={{ justifyContent: 'center' }}>
-      <Sketch style={{ width: sizes.moduleView.bigIconWidth, margin: '.5vmin 0vmin' }}
+    <FlexCol style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <Sketch style={{ width: sizes.moduleView.bigIconWidth,  }}
         setup={setup} 
         draw={draw} 
       />
       <Button style={{ width: '10em' }}
         onClick={() => {
-          window.openAnalyzerRangeSetMenu(yRange, (newRange) => {
+          window.openAnalyzerRangeSetMenu(yRange, newRange => {
             dispatch(updateControlRange(modID, 'time graph', newRange))
           })
         }}
