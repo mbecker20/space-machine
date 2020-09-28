@@ -16,7 +16,7 @@ function ButtonControl({ setFunc, controlID, modName, label }: Props) {
       //backgroundColor: colors.fillModule,
       borderColor: colors.deleteButton,
       width: '50%',
-      padding: '.1em',
+      padding: '.3em',
     }}
       onClick={() => {
         setFunc('')

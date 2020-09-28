@@ -15,7 +15,6 @@ import AddModuleMenu from './AddModuleMenu/AddModuleMenu'
 
 declare global {
   interface Window {
-    openAddModuleMenu: (row: number, col: number) => void
     openConnectionMenu: (fromID: string, toID: string) => void
     openModuleRenameMenu: (toRenameID: string) => void
     openControlRenameMenu: (placeholder: string, parentModID: string, containerControl: ContainerControl) => void
@@ -29,13 +28,6 @@ declare global {
 }
 
 function CenterMenus() {
-  const addModuleSearchRef = useRef<HTMLInputElement>(null)
-  const [addModuleMenuData, setAddModuleMenuData] = useState(makeAddModuleMenuData(false))
-  window.openAddModuleMenu = (row, col) => { 
-    setAddModuleMenuData(makeAddModuleMenuData(true, row, col))
-    if (addModuleSearchRef.current) addModuleSearchRef.current.focus()
-  }
-
   const [connectionMenuData, setConnectionMenuData] = useState(makeConnectionMenuData(false))
   window.openConnectionMenu = (fromID, toID) => { setConnectionMenuData(makeConnectionMenuData(true, fromID, toID)) }
   
@@ -65,15 +57,7 @@ function CenterMenus() {
   
   return (
     <Fragment>
-      <AddModuleMenu
-        isOpen={addModuleMenuData.isOpen}
-        onClose={() => {
-          setAddModuleMenuData(makeAddModuleMenuData(false))
-        }}
-        row={addModuleMenuData.row as number}
-        col={addModuleMenuData.col as number}
-        searchRef={addModuleSearchRef}
-      />
+      <AddModuleMenu/>
       {
         !connectionMenuData.isOpen ? null :
         <ConnectionMenu fromID={connectionMenuData.fromID} toID={connectionMenuData.toID}

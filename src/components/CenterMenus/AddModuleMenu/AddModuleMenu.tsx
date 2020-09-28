@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import LeftBar from './LeftBar'
 import IconRouter from './IconRouter'
 import SearchBar from './SearchBar'
@@ -10,16 +10,9 @@ import FlexCol from '../../Flex/FlexCol'
 
 declare global {
   interface Window {
+    openAddModuleMenu: (row: number, col: number) => void
     refreshSpaceDBModules: () => void
   }
-}
-
-interface Props {
-  isOpen: boolean
-  onClose: () => void
-  row: number
-  col: number
-  searchRef: RefObject<HTMLInputElement>
 }
 
 export const EFFECTS = 'effects'
@@ -32,7 +25,22 @@ export const addModuleMenuGroups = [
   EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES,
 ]
 
-function AddModuleMenu({ isOpen, onClose, row, col, searchRef }: Props) {
+function makeData(isOpen: boolean, row?: number, col?: number) {
+  return {
+    isOpen,
+    row,
+    col,
+  }
+}
+
+function AddModuleMenu() {
+  const [{ isOpen, row, col }, setData] = useState(makeData(false))
+  const searchRef = useRef<HTMLInputElement>(null)
+  window.openAddModuleMenu = (row, col) => {
+    setData(makeData(true, row, col))
+    if (searchRef.current) searchRef.current.focus()
+  }
+  const onClose = () => { setData(makeData(false)) }
   const [selectedGroup, setSG] = useState(EFFECTS)
   const [query, setQuery] = useState('') // used with the search bar
   const [spaceDBModules, setSpaceDBModules] = useState<string[]>([])
@@ -60,7 +68,12 @@ function AddModuleMenu({ isOpen, onClose, row, col, searchRef }: Props) {
           <SearchBar selectedGroup={selectedGroup} setSG={setSG} setQuery={setQuery} searchRef={searchRef} onClose={onClose} />
           <LeftBar selectedGroup={selectedGroup} setSG={setSG} />
         </FlexCol>
-        <IconRouter selectedGroup={selectedGroup} row={row} col={col} onClose={onClose} query={query} spaceDBModules={spaceDBModules} />
+        <IconRouter 
+          selectedGroup={selectedGroup} 
+          row={row as number} col={col as number} 
+          onClose={onClose} query={query} 
+          spaceDBModules={spaceDBModules} 
+        />
       </FlexRow>
     </CenterMenu>
   )
