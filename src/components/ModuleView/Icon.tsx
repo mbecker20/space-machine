@@ -105,7 +105,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
           onClick={e => e.stopPropagation()}
         >
           {mod.moduleType === CONTAINER ? <ContainerControlMenu selectedModule={mod as ContainerModule} reRenderIcon={reRenderIcon} /> : null}
-          <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} />
+          {mod.moduleType !== CONTAINER ? <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} /> : null}
           <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
         </div>
         }
