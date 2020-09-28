@@ -8,20 +8,31 @@ import { RootState } from '../../../redux/stateTSTypes'
 import CenterMenu from '../CenterMenu/CenterMenu'
 import Button from '../../Button/Button'
 
-interface Props {
-  onClose: () => void
-  onChangeSubmit: (newRange: Range) => void
-  modID: string
-  controlID: string
+declare global {
+  interface Window {
+    openKnobRangeSetMenu: (modID: string, controlID: string, onChangeSubmit: (newRange: Range) => void) => void
+  }
 }
 
-function KnobRangeSetMenu({ onClose, modID, controlID, onChangeSubmit }: Props) {
+function makeData(isOpen: boolean, modID = '', controlID = '', onChangeSubmit: (newRange: Range) => void = () => { }) {
+  return {
+    isOpen,
+    modID,
+    controlID,
+    onChangeSubmit,
+  }
+}
+
+function KnobRangeSetMenu() {
+  const [{ isOpen, modID, controlID, onChangeSubmit }, setData] = useState(makeData(false))
+  window.openKnobRangeSetMenu = (modID, controlID, onChangeSubmit) => { setData(makeData(true, modID, controlID, onChangeSubmit)) }
+  const onClose = () => { setData(makeData(false)) }
   const { maxRange, range } = useSelector((state: RootState) => state.modules[modID].controlData[controlID])
   const [min, setMin] = useState((range as [number, number])[0])
   const [max, setMax] = useState((range as [number, number])[1])
   const classes = useJSS()
   return (
-    <CenterMenu header={`set ${controlID} range`} onClose={onClose}>
+    <CenterMenu isOpen={isOpen} header={`set ${controlID} range`} onClose={onClose}>
       <div style={{ fontSize: sizes.text.small }}>
         {!maxRange ? null 
         :

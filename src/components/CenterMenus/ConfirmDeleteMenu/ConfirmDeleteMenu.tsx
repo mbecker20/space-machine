@@ -1,16 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { colors } from '../../../theme/theme'
 import Button from '../../Button/Button'
 import CenterMenu from '../CenterMenu/CenterMenu'
 
-interface Props {
-  saveName: string
-  onClose: () => void
+declare global {
+  interface Window {
+    openConfirmDeleteMenu: (saveName: string, onClose: () => void) => void
+  }
 }
 
-function ConfirmDeleteMenu({ saveName, onClose }: Props) {
+function makeData(isOpen: boolean, saveName = '', onClose = () => { }) {
+  return {
+    isOpen,
+    saveName,
+    preOnClose: onClose
+  }
+}
+
+function ConfirmDeleteMenu() {
+  const [{ isOpen, saveName, preOnClose }, setData] = useState(makeData(false))
+  window.openConfirmDeleteMenu = (saveName, onClose) => { setData(makeData(true, saveName, onClose)) }
+  const onClose = () => {
+    preOnClose()
+    setData(makeData(false))
+  }
   return (
     <CenterMenu header={`are you sure you want to delete ${saveName}?`}
+      isOpen={isOpen}
       onClose={onClose}
     >
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>

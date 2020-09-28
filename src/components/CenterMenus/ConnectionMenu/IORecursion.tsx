@@ -13,12 +13,12 @@ interface Props {
 }
 
 function IORecursion({ id, isOutput, setConnection }: Props) {
-  const [ isContainer, name, io ] = useSelector((state: RootState) => {
-    return [
-      state.modules[id].moduleType === CONTAINER,
-      state.modules[id].name,
-      isOutput ? state.modules[id].connectionOutputs : state.modules[id].connectionInputs
-    ]
+  const { isContainer, name, io } = useSelector((state: RootState) => {
+    return {
+      isContainer: state.modules[id].moduleType === CONTAINER,
+      name: state.modules[id].name,
+      io: isOutput ? state.modules[id].connectionOutputs : state.modules[id].connectionInputs
+    }
   })
   const [open, setOpen] = useState(false)
   const classes = useJSS()

@@ -5,18 +5,29 @@ import { Range } from '../../../audioModules/moduleTypes'
 import { sizes, colors } from '../../../theme/theme'
 import CenterMenu from '../CenterMenu/CenterMenu'
 
-interface Props {
-  onClose: () => void
-  onChangeSubmit: (newRange: Range) => void
-  range: [number, number]
+declare global {
+  interface Window {
+    openAnalyzerRangeSetMenu: (range: Range, onChangeSubmit: (newRange: Range) => void) => void
+  }
 }
 
-function AnalyzerRangeSetMenu({ range, onChangeSubmit, onClose }: Props) {
+function makeData(isOpen: boolean, range: Range = [0, 0], onChangeSubmit: (newRange: Range) => void = () => { }) {
+  return {
+    isOpen,
+    range,
+    onChangeSubmit,
+  }
+}
+
+function AnalyzerRangeSetMenu() {
+  const [{ isOpen, range, onChangeSubmit }, setData] = useState(makeData(false))
+  window.openAnalyzerRangeSetMenu = (range, onChangeSubmit) => { setData(makeData(true, range, onChangeSubmit)) }
+  const onClose = () => { setData(makeData(false)) }
   const classes = useJSS()
   const [min, setMin] = useState(range[0])
   const [max, setMax] = useState(range[1])
   return (
-    <CenterMenu header='set analyzer range' onClose={onClose}>
+    <CenterMenu isOpen={isOpen} header='set analyzer range' onClose={onClose}>
       <div className={classes.CMInputBounder}
         onKeyDown={e => {
           if (e.key === 'Escape') {

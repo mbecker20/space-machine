@@ -11,17 +11,17 @@ let fs: any
 
 declare global {
   interface Window {
+    openFileSaveMenu: () => void
     currentSaveDirectory: string
   }
 }
 
 window.currentSaveDirectory = ''
 
-interface Props {
-  onClose: () => void
-}
-
-function FileSaveMenu({ onClose }: Props) {
+function FileSaveMenu() {
+  const [isOpen, setOpen] = useState(false)
+  window.openFileSaveMenu = () => { setOpen(true) }
+  const onClose = () => { setOpen(false) }
   const folderRef = useRef<HTMLInputElement>(null)
   const state = useSelector((state: RootState) => state)
   const initName = state.modules[state.baseContainerID].name
@@ -40,6 +40,7 @@ function FileSaveMenu({ onClose }: Props) {
   }, [])
   return (
     <CenterMenu header='save project as file'
+      isOpen={isOpen}
       onClose={onClose}
     >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -96,8 +97,8 @@ function FileSaveMenu({ onClose }: Props) {
             setSaveName(e.target.value)
           }}
           onKeyDown={e => {
-            switch (e.keyCode) {
-              case 13: //enter
+            switch (e.key) {
+              case 'Enter':
                 if (saveName !== '') {
                   fs.writeFile(currentDirectory + saveName + '.sm', JSON.stringify(state), (err: any) => {
                     //console.log(`saved to ${currentDirectory + saveName + '.sm'}`)
@@ -109,7 +110,7 @@ function FileSaveMenu({ onClose }: Props) {
                   alert('please enter a save name')
                 }
                 break
-              case 27: //escape
+              case 'Escape': //escape
                 onClose()
                 break
             }

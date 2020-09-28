@@ -4,6 +4,7 @@ import CenterMenu from '../CenterMenu/CenterMenu'
 import useJSS from './style'
 
 interface Props {
+  isOpen: boolean
   header: string
   onSubmit: (newName: string) => void
   placeholder: string
@@ -11,7 +12,7 @@ interface Props {
   onClose: () => void
 }
 
-function RenameMenu({ header, onSubmit, placeholder, initName, onClose }: Props) {
+function RenameMenu({ isOpen, header, onSubmit, placeholder, initName, onClose }: Props) {
   const classes = useJSS()
   const [val, setVal] = useState(initName)
   const [isTooShort, setIsTooShort] = useState(false)
@@ -24,7 +25,7 @@ function RenameMenu({ header, onSubmit, placeholder, initName, onClose }: Props)
     }
   }
   return (
-    <CenterMenu header={header} onClose={onClose}>
+    <CenterMenu isOpen={isOpen} header={header} onClose={onClose}>
       <div className={classes.CMInputBounder}>
         <input className={classes.CenterMenuInput}
           placeholder={placeholder}
@@ -33,11 +34,11 @@ function RenameMenu({ header, onSubmit, placeholder, initName, onClose }: Props)
             setVal(e.target.value)
           }}
           onKeyDown={e => {
-            switch (e.keyCode) {
-              case 13:
+            switch (e.key) {
+              case 'Enter':
                 trySubmit()
                 break
-              case 27:
+              case 'Escape':
                 onClose()
                 break
             }

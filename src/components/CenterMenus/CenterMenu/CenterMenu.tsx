@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
 import { animated } from 'react-spring'
 
 interface Props {
+  isOpen: boolean
   className?: string
   style?: CSS.Properties
   headerClassName?: string
@@ -14,29 +15,32 @@ interface Props {
   bounderStyle?: CSS.Properties
 }
 
-function CenterMenu({ className, style, headerClassName, headerStyle, children, header, onClose, bounderStyle }: Props) {
+function CenterMenu({ isOpen, className, style, headerClassName, headerStyle, children, header, onClose, bounderStyle }: Props) {
   const classes = useJSS()
   return (
-    <animated.div className={classes.CenterMenuBounder}
-      onPointerDown={e => {
-        e.stopPropagation()
-        onClose()
-      }}
-      style={bounderStyle}
-    >
-      <div className={className ? `${classes.CenterMenu} ${className}` : classes.CenterMenu}
-        onPointerDown={(e) => {e.stopPropagation()}}
-        style={style}
+    <Fragment>
+      {!isOpen ? null :
+      <animated.div className={classes.CenterMenuBounder}
+        onPointerDown={e => {
+          e.stopPropagation()
+          onClose()
+        }}
+        style={bounderStyle}
       >
-        {!header ? null : 
-        <div className={headerClassName ? `${classes.Header} ${headerClassName}` : classes.Header}
-          style={headerStyle}
+        <div className={className ? `${classes.CenterMenu} ${className}` : classes.CenterMenu}
+          onPointerDown={(e) => {e.stopPropagation()}}
+          style={style}
         >
-          {header}
-        </div>}
-        {children}
-      </div>
-    </animated.div>
+          {!header ? null : 
+          <div className={headerClassName ? `${classes.Header} ${headerClassName}` : classes.Header}
+            style={headerStyle}
+          >
+            {header}
+          </div>}
+          {children}
+        </div>
+      </animated.div>}
+    </Fragment>
   )
 }
 

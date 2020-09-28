@@ -8,13 +8,28 @@ import { confirmContainerSaveName } from './helpers'
 import useJSS from './style'
 import Button from '../../Button/Button'
 
-interface Props {
-  id: string
-  saveList: string[]
-  onClose: () => void
+declare global {
+  interface Window {
+    openSpaceDBContainerSaveMenu: (saveList: string[], id: string, onClose: () => void) => void
+  }
 }
 
-function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
+function makeData(isOpen: boolean, id = '', saveList: string[] = [], onClose = () => { }) {
+  return {
+    isOpen,
+    id,
+    saveList,
+    preOnClose: onClose,
+  }
+}
+
+function SpaceDBContainerSaveMenu() {
+  const [{ isOpen, id, saveList, preOnClose }, setData] = useState(makeData(false))
+  window.openSpaceDBContainerSaveMenu = (saveList, id, onClose) => { setData(makeData(true, id, saveList, onClose)) }
+  const onClose = () => {
+    preOnClose()
+    setData(makeData(false)) 
+  }
   const state = useSelector((state: RootState) => state)
   const initName = state.modules[id].name
   const [name, setName] = useState(initName)
@@ -22,7 +37,8 @@ function SpaceDBContainerSaveMenu({ id, saveList, onClose }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const classes = useJSS()
   return (
-    <CenterMenu header='save container module' 
+    <CenterMenu header='save container module'
+      isOpen={isOpen}
       onClose={onClose}
     >
       <input className={classes.CenterMenuInput}

@@ -9,12 +9,27 @@ import FlexRow from '../../Flex/FlexRow'
 import Button from '../../Button/Button'
 import FlexCol from '../../Flex/FlexCol'
 
-interface Props {
-  saveList: string[]
-  onClose: () => void
+declare global {
+  interface Window {
+    openSpaceDBProjectSaveMenu: (saveList: string[], onClose: () => void) => void
+  }
 }
 
-function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
+function makeData(isOpen: boolean, saveList: string[] = [], onClose = () => { }) {
+  return {
+    isOpen,
+    saveList,
+    preOnClose: onClose,
+  }
+}
+
+function SpaceDBProjectSaveMenu() {
+  const [{ isOpen, saveList, preOnClose }, setData] = useState(makeData(false))
+  window.openSpaceDBProjectSaveMenu = (saveList, onClose) => { setData(makeData(true, saveList, onClose)) }
+  const onClose = () => {
+    preOnClose()
+    setData(makeData(false))
+  }
   const state = useSelector((state: RootState) => state)
   const { baseContainerID, modules } = state
   const [saveName, setSaveName] = useState(modules[baseContainerID].name)
@@ -22,7 +37,8 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
   const classes = useJSS()
   return (
-    <CenterMenu header='save project' 
+    <CenterMenu header='save project'
+      isOpen={isOpen}
       onClose={onClose}
     >
       <FlexRow style={{ alignItems: 'center' }}>
@@ -33,8 +49,8 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
             setSaveName(e.target.value)
           }}
           onKeyDown={e => {
-            switch (e.keyCode) {
-              case 13:
+            switch (e.key) {
+              case 'Enter':
                 if (stringIn(saveName, saveList)) {
                   setConfirmSaveData({ isOpen: true, message: 'would you like to overwrite this save?' })
                 } else {
@@ -49,7 +65,7 @@ function SpaceDBProjectSaveMenu({ saveList, onClose }: Props) {
                   onClose()
                 }
                 break
-              case 27:
+              case 'Escape':
                 onClose()
                 break
             }

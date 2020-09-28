@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import { renameModule } from '../../../redux/allActions'
 import RenameMenu from './RenameMenu'
 
-
-interface Props {
-  onClose: () => void
-  toRenameID: string
+declare global {
+  interface Window {
+    openModuleRenameMenu: (toRenameID: string) => void
+  }
 }
 
-function RenameModuleMenu({ toRenameID, onClose }: Props) {
+function makeData(isOpen: boolean, toRenameID = '') {
+  return {
+    isOpen,
+    toRenameID,
+  }
+}
+
+function RenameModuleMenu() {
+  const [{ isOpen, toRenameID }, setData] = useState(makeData(false))
+  window.openModuleRenameMenu = toRenameID => { setData(makeData(true, toRenameID)) }
+  const onClose = () => { setData(makeData(false)) }
   const modules = useSelector((state: RootState) => state.modules)
   const dispatch = useDispatch()
   return (
     <RenameMenu header='rename module' 
+      isOpen={isOpen}
       onSubmit={newName => {
         dispatch(renameModule(toRenameID, newName))
       }}
