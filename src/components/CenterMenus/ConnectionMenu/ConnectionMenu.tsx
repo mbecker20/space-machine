@@ -3,7 +3,7 @@ import { connect } from '../../../audioModules/connection'
 import { useDispatch, useSelector } from 'react-redux'
 import { ConnectingAudioModule, CONTAINER } from '../../../audioModules/moduleTypes'
 import { addConnection } from '../../../redux/allActions'
-import { RootState } from '../../../redux/stateTSTypes'
+import { Module, RootState } from '../../../redux/stateTSTypes'
 import IORecursion from './IORecursion'
 import useJSS from './style'
 import { connectionExists } from './helpers'
@@ -36,32 +36,32 @@ function ConnectionMenu() {
   const classes = useJSS()
   const am = window.audioModules
   const { modules, connections } = useSelector((state: RootState) => state)
-  const fromMod = modules[fromID]
-  const toMod = modules[toID]
+  const fromMod = fromID ? modules[fromID] : null
+  const toMod = toID ? modules[toID] : null
   const [outputIndex, setOutputIndex] = useState(0)
   const [inputIndex, setInputIndex] = useState(0)
   const [actualFromID, setActualFromID] = useState(fromID)
   const [actualToID, setActualToID] = useState(toID)
   const dispatch = useDispatch()
-  const isFromContainer = fromMod.moduleType === CONTAINER
-  const isToContainer = toMod.moduleType === CONTAINER
-  const initMenu = fromMod.connectionOutputs.length > 1 || isFromContainer ? CHOOSE_OUTPUT :
-    toMod.connectionInputs.length > 1 || isToContainer ? CHOOSE_INPUT : CONNECT_TO
+  const isFromContainer = fromMod ? fromMod.moduleType === CONTAINER : false
+  const isToContainer = toMod ? toMod.moduleType === CONTAINER : false
+  const initMenu = fromMod ? fromMod.connectionOutputs.length > 1 || isFromContainer ? CHOOSE_OUTPUT :
+    toMod ? toMod.connectionInputs.length > 1 || isToContainer ? CHOOSE_INPUT : CONNECT_TO : '' : ''
   const [openMenu, setOpenMenu] = useState(initMenu)
   return (
     <Fragment>
       {openMenu === CHOOSE_OUTPUT
       ?
-      <CenterMenu header={'choose output'} isOpen={isOpen} onClose={onClose}>
+      <CenterMenu header={'choose output'} isClosed={!isOpen} onClose={onClose}>
         <div className={classes.IORecursionBounder}>
-          {fromMod.connectionOutputs.map((outputID, index) => {
+          {(fromMod as Module).connectionOutputs.map((outputID, index) => {
             if (isFromContainer) {
               return (
                 <IORecursion key={outputID + 'output'} id={isFromContainer ? outputID : fromID} isOutput={true}
                   setConnection={(actualIOID, ioIndex) => {
                     setActualFromID(actualIOID)
                     setOutputIndex(ioIndex)
-                    if (toMod.connectionInputs.length > 1 || toMod.moduleType === CONTAINER) {
+                    if ((toMod as Module).connectionInputs.length > 1 || (toMod as Module).moduleType === CONTAINER) {
                       setOpenMenu(CHOOSE_INPUT)
                     } else {
                       setOpenMenu(CONNECT_TO)
@@ -74,14 +74,14 @@ function ConnectionMenu() {
                 <Button
                   onClick={() => {
                     setOutputIndex(index)
-                    if (toMod.connectionInputs.length > 1 || toMod.moduleType === CONTAINER) {
+                    if ((toMod as Module).connectionInputs.length > 1 || (toMod as Module).moduleType === CONTAINER) {
                       setOpenMenu(CHOOSE_INPUT)
                     } else {
                       setOpenMenu(CONNECT_TO)
                     }
                   }}
                 >
-                  {fromMod.connectionOutputs[index]}
+                  {(fromMod as Module).connectionOutputs[index]}
                 </Button>
               )
             }
@@ -91,9 +91,9 @@ function ConnectionMenu() {
       :
       openMenu === CHOOSE_INPUT
       ?
-      <CenterMenu header={'choose input'} isOpen={isOpen} onClose={onClose}>
+      <CenterMenu header={'choose input'} isClosed={!isOpen} onClose={onClose}>
         <div className={classes.IORecursionBounder}>
-          {toMod.connectionInputs.map((inputID, index) => {
+          {(toMod as Module).connectionInputs.map((inputID, index) => {
             if (isToContainer) {
               return (
                 <IORecursion key={inputID + 'input'} id={isToContainer ? inputID : toID} isOutput={false}
@@ -112,7 +112,7 @@ function ConnectionMenu() {
                     setOpenMenu(CONNECT_TO)
                   }}
                 >
-                  {toMod.connectionInputs[index]}
+                  {(toMod as Module).connectionInputs[index]}
                 </Button>
               )
             }
@@ -122,14 +122,14 @@ function ConnectionMenu() {
       :
       openMenu === CONNECT_TO
       ?
-      <CenterMenu header={`connect ${isFromContainer ? fromMod.name + ' - ' + modules[actualFromID].name : fromMod.name} to ${isToContainer ? toMod.name + ' - ' + modules[actualToID].name : toMod.name}`}
-        isOpen={isOpen}
+      <CenterMenu header={`connect ${isFromContainer ? (fromMod as Module).name + ' - ' + modules[actualFromID].name : (fromMod as Module).name} to ${isToContainer ? (toMod as Module).name + ' - ' + modules[actualToID].name : (toMod as Module).name}`}
+        isClosed={!isOpen}
         onClose={onClose}
       >
-        {(isToContainer ? modules[toMod.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod.connectionInputs.length === 0) ? null :
+        {(isToContainer ? modules[(toMod as Module).connectionInputs[inputIndex]].connectionInputs.length === 0 : (toMod as Module).connectionInputs.length === 0) ? null :
         <Button
           onClick={() => {
-            if (!connectionExists(connections, fromMod, actualToID)) {
+            if (!connectionExists(connections, fromMod as Module, actualToID)) {
               connect(
                 am[actualFromID] as ConnectingAudioModule,
                 am[actualToID] as ConnectingAudioModule,
@@ -166,13 +166,13 @@ function ConnectionMenu() {
       :
       openMenu === CHOOSE_PARAM
       ?
-      <CenterMenu header={'props'} isOpen={isOpen} onClose={onClose}>
+      <CenterMenu header={'props'} isClosed={!isOpen} onClose={onClose}>
         {am[actualToID].connectingParamIDs.map((paramID, key) => {
           return (
             <Button
               key={fromID + toID + key}
               onClick={() => {
-                if (!connectionExists(connections, fromMod, actualToID, paramID)) {
+                if (!connectionExists(connections, fromMod as Module, actualToID, paramID)) {
                   connect(
                     am[actualFromID] as ConnectingAudioModule,
                     am[actualToID] as ConnectingAudioModule,

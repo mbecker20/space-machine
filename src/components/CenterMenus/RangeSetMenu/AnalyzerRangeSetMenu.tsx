@@ -27,7 +27,7 @@ function AnalyzerRangeSetMenu() {
   const [min, setMin] = useState(range[0])
   const [max, setMax] = useState(range[1])
   return (
-    <CenterMenu isOpen={isOpen} header='set analyzer range' onClose={onClose}>
+    <CenterMenu isClosed={!isOpen} header='set analyzer range' onClose={onClose}>
       <div className={classes.CMInputBounder}
         onKeyDown={e => {
           if (e.key === 'Escape') {

@@ -40,7 +40,7 @@ function FileSaveMenu() {
   }, [])
   return (
     <CenterMenu header='save project as file'
-      isOpen={isOpen}
+      isClosed={!isOpen}
       onClose={onClose}
     >
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

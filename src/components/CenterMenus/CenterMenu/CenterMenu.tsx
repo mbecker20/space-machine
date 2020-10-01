@@ -4,7 +4,7 @@ import CSS from 'csstype'
 import { animated } from 'react-spring'
 
 interface Props {
-  isOpen: boolean
+  isClosed?: boolean
   className?: string
   style?: CSS.Properties
   headerClassName?: string
@@ -15,11 +15,11 @@ interface Props {
   bounderStyle?: CSS.Properties
 }
 
-function CenterMenu({ isOpen, className, style, headerClassName, headerStyle, children, header, onClose, bounderStyle }: Props) {
+function CenterMenu({ isClosed, className, style, headerClassName, headerStyle, children, header, onClose, bounderStyle }: Props) {
   const classes = useJSS()
   return (
     <Fragment>
-      {!isOpen ? null :
+      {isClosed ? null :
       <animated.div className={classes.CenterMenuBounder}
         onPointerDown={e => {
           e.stopPropagation()

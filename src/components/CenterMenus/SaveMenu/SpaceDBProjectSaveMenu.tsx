@@ -38,7 +38,7 @@ function SpaceDBProjectSaveMenu() {
   const classes = useJSS()
   return (
     <CenterMenu header='save project'
-      isOpen={isOpen}
+      isClosed={!isOpen}
       onClose={onClose}
     >
       <FlexRow style={{ alignItems: 'center' }}>

@@ -25,7 +25,7 @@ function RenameMenu({ isOpen, header, onSubmit, placeholder, initName, onClose }
     }
   }
   return (
-    <CenterMenu isOpen={isOpen} header={header} onClose={onClose}>
+    <CenterMenu isClosed={!isOpen} header={header} onClose={onClose}>
       <div className={classes.CMInputBounder}>
         <input className={classes.CenterMenuInput}
           placeholder={placeholder}

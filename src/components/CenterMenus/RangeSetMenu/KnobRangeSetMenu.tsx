@@ -32,7 +32,7 @@ function KnobRangeSetMenu() {
   const [max, setMax] = useState((range as [number, number])[1])
   const classes = useJSS()
   return (
-    <CenterMenu isOpen={isOpen} header={`set ${controlID} range`} onClose={onClose}>
+    <CenterMenu isClosed={!isOpen} header={`set ${controlID} range`} onClose={onClose}>
       <div style={{ fontSize: sizes.text.small }}>
         {!maxRange ? null 
         :

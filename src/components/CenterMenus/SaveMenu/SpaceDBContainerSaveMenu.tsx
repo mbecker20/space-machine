@@ -14,31 +14,34 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, id = '', saveList: string[] = [], onClose = () => { }) {
+function makeData(isOpen: boolean, id = '', saveList: string[] = [], onClose = () => {}, initName = '') {
   return {
     isOpen,
     id,
     saveList,
     preOnClose: onClose,
+    initName
   }
 }
 
 function SpaceDBContainerSaveMenu() {
-  const [{ isOpen, id, saveList, preOnClose }, setData] = useState(makeData(false))
-  window.openSpaceDBContainerSaveMenu = (saveList, id, onClose) => { setData(makeData(true, id, saveList, onClose)) }
+  const [{ isOpen, id, saveList, preOnClose, initName }, setData] = useState(makeData(false))
+  const state = useSelector((state: RootState) => state)
+  const [name, setName] = useState('')
+  window.openSpaceDBContainerSaveMenu = (saveList, id, onClose) => {
+    setData(makeData(true, id, saveList, onClose, state.modules[id].name))
+    setName(state.modules[id].name)
+  }
   const onClose = () => {
     preOnClose()
-    setData(makeData(false)) 
+    setData(makeData(false))
   }
-  const state = useSelector((state: RootState) => state)
-  const initName = state.modules[id].name
-  const [name, setName] = useState(initName)
   const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
   const inputRef = useRef<HTMLInputElement>(null)
   const classes = useJSS()
   return (
     <CenterMenu header='save container module'
-      isOpen={isOpen}
+      isClosed={!isOpen}
       onClose={onClose}
     >
       <input className={classes.CenterMenuInput}

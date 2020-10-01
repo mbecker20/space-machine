@@ -58,7 +58,8 @@ function AddModuleMenu() {
   }, [])
   const classes = useJSS()
   return (
-    <CenterMenu header='add module' onClose={onClose}
+    <CenterMenu header='add module'
+      onClose={onClose}
       bounderStyle={Object.assign({}, styleSpring, {
         zIndex: isOpen ? 1000 : -1000,
       })}

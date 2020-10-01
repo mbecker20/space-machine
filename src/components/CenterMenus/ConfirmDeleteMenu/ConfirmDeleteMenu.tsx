@@ -26,7 +26,7 @@ function ConfirmDeleteMenu() {
   }
   return (
     <CenterMenu header={`are you sure you want to delete ${saveName}?`}
-      isOpen={isOpen}
+      isClosed={!isOpen}
       onClose={onClose}
     >
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
