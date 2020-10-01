@@ -10,7 +10,7 @@ declare global {
 
 function configureSpaceDB() {
   const spaceDB = feathers()
-  const restClient = rest('http://192.168.1.68:30300') // spaceDB
+  const restClient = rest('http://192.168.1.64:30300') // spaceDB
 
   spaceDB.configure(restClient.fetch(window.fetch))
   window.projectSaveService = spaceDB.service('project-save-service')
