@@ -30,7 +30,6 @@ function RenameModuleMenu() {
         dispatch(renameModule(toRenameID, newName))
       }}
       placeholder={modules[toRenameID]?.name}
-      initName={''}
       onClose={onClose}
     />
   )

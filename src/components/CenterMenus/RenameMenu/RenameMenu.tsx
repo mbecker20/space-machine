@@ -8,24 +8,24 @@ interface Props {
   header: string
   onSubmit: (newName: string) => void
   placeholder: string
-  initName: string
   onClose: () => void
 }
 
-function RenameMenu({ isOpen, header, onSubmit, placeholder, initName, onClose }: Props) {
+function RenameMenu({ isOpen, header, onSubmit, placeholder, onClose }: Props) {
   const classes = useJSS()
-  const [val, setVal] = useState(initName)
+  const [val, setVal] = useState('')
   const [isTooShort, setIsTooShort] = useState(false)
   function trySubmit() {
     if (val.length > 0) {
       onSubmit(val)
       onClose()
+      setVal('')
     } else {
       setIsTooShort(true)
     }
   }
   return (
-    <CenterMenu isClosed={!isOpen} header={header} onClose={onClose}>
+    <CenterMenu isClosed={!isOpen} header={header} onClose={() => { onClose(); setVal('') }}>
       <div className={classes.CMInputBounder}>
         <input className={classes.CenterMenuInput}
           placeholder={placeholder}

@@ -14,22 +14,34 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, modID = '', controlID = '', onChangeSubmit: (newRange: Range) => void = () => { }) {
+function makeData(isOpen: boolean, controlID = '', onChangeSubmit: (newRange: Range) => void = () => { }) {
   return {
     isOpen,
-    modID,
     controlID,
     onChangeSubmit,
   }
 }
 
 function KnobRangeSetMenu() {
-  const [{ isOpen, modID, controlID, onChangeSubmit }, setData] = useState(makeData(false))
-  window.openKnobRangeSetMenu = (modID, controlID, onChangeSubmit) => { setData(makeData(true, modID, controlID, onChangeSubmit)) }
-  const onClose = () => { setData(makeData(false)) }
-  const { maxRange, range } = useSelector((state: RootState) => state.modules[modID].controlData[controlID])
-  const [min, setMin] = useState((range as [number, number])[0])
-  const [max, setMax] = useState((range as [number, number])[1])
+  const [{ isOpen, controlID, onChangeSubmit }, setData] = useState(makeData(false))
+  const modules = useSelector((state: RootState) => state.modules)
+  const [min, setMin] = useState(0)
+  const [max, setMax] = useState(0)
+  const [maxRange, setMaxRange] = useState<[number, number] | undefined>(undefined)
+  window.openKnobRangeSetMenu = (modID, controlID, onChangeSubmit) => {
+    const { range, maxRange } = modules[modID].controlData[controlID]
+    setData(makeData(
+      true, 
+      controlID, 
+      onChangeSubmit
+    ))
+    setMin((range as [number, number])[0])
+    setMax((range as [number, number])[1])
+    setMaxRange(maxRange)
+  }
+  const onClose = () => { 
+    setData(makeData(false))
+  }
   const classes = useJSS()
   return (
     <CenterMenu isClosed={!isOpen} header={`set ${controlID} range`} onClose={onClose}>
@@ -67,7 +79,7 @@ function KnobRangeSetMenu() {
       <Button style={{ fontSize: sizes.text.small, backgroundColor: colors.confirmButton }}
         onClick={() => {
           if (maxRange) {
-            if (inRange(min, maxRange) && inRange(max, maxRange)) {
+            if (inRange(min, maxRange as [number, number]) && inRange(max, maxRange as [number, number])) {
               if (max > min) {
                 onChangeSubmit([min, max])
                 onClose()

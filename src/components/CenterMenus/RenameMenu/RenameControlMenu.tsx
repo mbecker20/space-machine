@@ -33,7 +33,6 @@ function RenameControlMenu() {
         window.flashNotification('green', 'control passthrough renamed')
       }}
       placeholder={placeholder}
-      initName={''}
       onClose={onClose}
     />
   )
