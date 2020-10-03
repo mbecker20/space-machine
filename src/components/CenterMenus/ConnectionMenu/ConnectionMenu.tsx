@@ -31,23 +31,35 @@ function makeData(isOpen: boolean, fromID = '', toID = '') {
 
 function ConnectionMenu() {
   const [{ isOpen, fromID, toID }, setData] = useState(makeData(false))
-  window.openConnectionMenu = (fromID, toID) => { setData(makeData(true, fromID, toID)) }
   const onClose = () => { setData(makeData(false)) }
   const classes = useJSS()
   const am = window.audioModules
   const { modules, connections } = useSelector((state: RootState) => state)
-  const fromMod = fromID ? modules[fromID] : null
-  const toMod = toID ? modules[toID] : null
+  const [fromMod, setFromMod] = useState<Module | undefined>(undefined)
+  const [toMod, setToMod] = useState<Module | undefined>(undefined)
   const [outputIndex, setOutputIndex] = useState(0)
   const [inputIndex, setInputIndex] = useState(0)
-  const [actualFromID, setActualFromID] = useState(fromID)
-  const [actualToID, setActualToID] = useState(toID)
+  const [actualFromID, setActualFromID] = useState('')
+  const [actualToID, setActualToID] = useState('')
   const dispatch = useDispatch()
   const isFromContainer = fromMod ? fromMod.moduleType === CONTAINER : false
   const isToContainer = toMod ? toMod.moduleType === CONTAINER : false
-  const initMenu = fromMod ? fromMod.connectionOutputs.length > 1 || isFromContainer ? CHOOSE_OUTPUT :
-    toMod ? toMod.connectionInputs.length > 1 || isToContainer ? CHOOSE_INPUT : CONNECT_TO : '' : ''
-  const [openMenu, setOpenMenu] = useState(initMenu)
+  const [openMenu, setOpenMenu] = useState('')
+  window.openConnectionMenu = (fromID, toID) => {
+    const fromMod = modules[fromID]
+    const toMod = modules[toID]
+    const newMenu = fromMod.connectionOutputs.length > 1 || isFromContainer ? CHOOSE_OUTPUT :
+      toMod.connectionInputs.length > 1 || isToContainer ? CHOOSE_INPUT : CONNECT_TO
+    console.log(fromMod)
+    setData(makeData(true, fromID, toID))
+    setFromMod(fromMod)
+    setToMod(toMod)
+    setActualFromID(fromID)
+    setActualToID(toID)
+    setOpenMenu(newMenu)
+    setOutputIndex(0)
+    setInputIndex(0)
+  }
   return (
     <Fragment>
       {openMenu === CHOOSE_OUTPUT
