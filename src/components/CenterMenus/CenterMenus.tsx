@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
+import ConnectionMenu from './ConnectionMenu/ConnectionMenuOld'
 import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
 import SpaceDBProjectSaveMenu from './SaveMenu/SpaceDBProjectSaveMenu'
 import ConfirmDeleteMenu from './ConfirmDeleteMenu/ConfirmDeleteMenu'
