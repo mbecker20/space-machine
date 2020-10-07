@@ -6,7 +6,7 @@ import { sizes } from '../../../../theme/theme'
 import useJSS from './style'
 
 interface Props {
-  mod: AnyModule
+  mod?: AnyModule
   isFrom: boolean
 }
 
@@ -22,11 +22,11 @@ function ModuleIcon({ mod, isFrom }: Props) {
     >
       <div className={classes.ModuleIcon}
         style={{ 
-          backgroundColor: getModuleColor(mod.moduleType),
+          backgroundColor: getModuleColor(mod?.moduleType),
           marginRight: isFrom ? sizes.moduleView.icon : '0vmin'
         }}
       >
-        {mod.name}
+        {mod?.name}
       </div>
     </ArcherElement>
   )

@@ -7,10 +7,11 @@ import { AnyModule, RootState } from '../../../redux/stateTSTypes'
 import Button from '../../Button/Button'
 import FlexRow from '../../Flex/FlexRow'
 import CenterMenu from '../CenterMenu/CenterMenu'
+import ChooseInput from './ChooseInput'
+import ChooseOutput from './ChooseOutput'
 import ConnectedModules from './ConnectedModules/ConnectedModules'
 import { connectionExists } from './helpers'
-import IORecursion from './IORecursion'
-import useJSS from './style'
+//import useJSS from './style'
 
 declare global {
   interface Window {
@@ -34,70 +35,24 @@ function ConnectionMenu() {
   const [actualFromID, setActualFromID] = useState('')
   const [actualToID, setActualToID] = useState('')
   window.openConnectionMenu = (fromID, toID) => {
+    setActualFromID(fromID)
+    setActualToID(toID)
     setData(makeData(true, modules[fromID], modules[toID]))
   }
   const onClose = () => {
     setOutputIndex(0)
     setInputIndex(0)
-    setActualFromID('')
-    setActualToID('')
     setData(makeData(false)) 
   }
-  const classes = useJSS()
+  //const classes = useJSS()
   const am = window.audioModules
   const dispatch = useDispatch()
   return (
     <CenterMenu header='add connection' isClosed={!isOpen} onClose={onClose}>
       <FlexRow>
-        <div className={classes.IORecursionBounder}>
-          {fromMod?.connectionOutputs.map((outputID, index) => {
-            if (fromMod?.moduleType === CONTAINER) {
-              return (
-                <IORecursion key={outputID + 'output'} id={outputID} isOutput={true}
-                  setConnection={(actualIOID, ioIndex) => {
-                    setActualFromID(actualIOID)
-                    setOutputIndex(ioIndex)
-                  }}
-                />
-              )
-            } else {
-              return (
-                <Button
-                  onClick={() => {
-                    setOutputIndex(index)
-                  }}
-                >
-                  {fromMod?.connectionOutputs[index]}
-                </Button>
-              )
-            }
-          })}
-        </div>
-        <ConnectedModules fromMod={fromMod as AnyModule} toMod={toMod as AnyModule} />
-        <div className={classes.IORecursionBounder}>
-          {toMod?.connectionInputs.map((inputID, index) => {
-            if (toMod?.moduleType === CONTAINER) {
-              return (
-                <IORecursion key={inputID + 'input'} id={inputID} isOutput={false}
-                  setConnection={(actualIOID, ioIndex) => {
-                    setActualToID(actualIOID)
-                    setInputIndex(ioIndex)
-                  }}
-                />
-              )
-            } else {
-              return (
-                <Button
-                  onClick={() => {
-                    setInputIndex(index)
-                  }}
-                >
-                  {fromMod?.connectionOutputs[index]}
-                </Button>
-              )
-            }
-          })}
-        </div>
+        <ChooseOutput fromMod={fromMod} setActualFromID={setActualFromID} setOutputIndex={setOutputIndex} />
+        <ConnectedModules fromMod={fromMod} toMod={toMod} />
+        <ChooseInput toMod={toMod} setActualToID={setActualToID} setInputIndex={setInputIndex} />
       </FlexRow>
       {(toMod?.moduleType === CONTAINER ? modules[toMod?.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod?.connectionInputs.length === 0) ? null :
         <Button

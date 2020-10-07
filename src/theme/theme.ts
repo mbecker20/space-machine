@@ -15,6 +15,7 @@ export const colors: Colors = {
 
   centerMenu: '#000000c4',
   centerMenuBackground: '#000000b3',
+  centerMenuBorder: grey,
 
   fillModule: '#c0c0c038',
   module: '#37538a',

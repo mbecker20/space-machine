@@ -1,7 +1,7 @@
 import { colors } from './theme'
 import { LINE_IN, OSCILLATOR, MEDIA_ELEMENT, CONSTANT, AUTOFILTER, GAIN, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, CONTAINER, OUTPUT, DISTORTION, ANALYZER, ENVELOPED_TRIGGER } from '../audioModules/moduleTypes'
 
-function getModuleColor(moduleType: string) {
+function getModuleColor(moduleType?: string) {
 
   switch (moduleType) {
 
