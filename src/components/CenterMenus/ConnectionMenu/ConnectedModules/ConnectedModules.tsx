@@ -2,7 +2,6 @@ import React from 'react'
 import { ArcherContainer } from 'react-archer'
 import { AnyModule } from '../../../../redux/stateTSTypes'
 import FlexRow from '../../../Flex/FlexRow'
-import useJSS from '../style'
 import ModuleIcon from './ModuleIcon'
 
 interface Props {
@@ -11,10 +10,9 @@ interface Props {
 }
 
 function ConnectedModules({ fromMod, toMod }: Props) {
-  const classes = useJSS()
   return (
     <ArcherContainer>
-      <FlexRow style={{ justifyContent: 'space-between' }}>
+      <FlexRow>
         <ModuleIcon mod={fromMod} isFrom={true} />
         <ModuleIcon mod={toMod} isFrom={false} />
       </FlexRow>
