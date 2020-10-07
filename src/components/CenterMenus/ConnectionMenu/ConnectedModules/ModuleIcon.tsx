@@ -1,6 +1,9 @@
 import React from 'react'
+import { ArcherElement } from 'react-archer'
 import { AnyModule } from '../../../../redux/stateTSTypes'
-import useJSS from '../style'
+import getModuleColor from '../../../../theme/moduleColor'
+import { sizes } from '../../../../theme/theme'
+import useJSS from './style'
 
 interface Props {
   mod: AnyModule
@@ -10,9 +13,22 @@ interface Props {
 function ModuleIcon({ mod, isFrom }: Props) {
   const classes = useJSS()
   return (
-    <div className={classes.ModuleIcon}>
-      
-    </div>
+    <ArcherElement id={isFrom ? 'from' : 'to'}
+      relations={isFrom ? [{
+        targetId: 'to',
+        targetAnchor: 'left',
+        sourceAnchor: 'right',
+      }] : undefined}
+    >
+      <div className={classes.ModuleIcon}
+        style={{ 
+          backgroundColor: getModuleColor(mod.moduleType),
+          marginRight: isFrom ? sizes.moduleView.icon : '0vmin'
+        }}
+      >
+        {mod.name}
+      </div>
+    </ArcherElement>
   )
 }
 
