@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ContainerModule, Module, RootState } from '../../../redux/stateTSTypes'
+import { AnyModule, RootState } from '../../../redux/stateTSTypes'
 import CenterMenu from '../CenterMenu/CenterMenu'
-import useJSS from './style'
+import ConnectedModules from './ConnectedModules/ConnectedModules'
+import useJSS from './ConnectedModules/style'
 
 declare global {
   interface Window {
@@ -10,7 +11,7 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, fromMod?: Module | ContainerModule, toMod?: Module | ContainerModule) {
+function makeData(isOpen: boolean, fromMod?: AnyModule, toMod?: AnyModule) {
   return {
     isOpen,
     fromMod,
@@ -28,7 +29,7 @@ function ConnectionMenu() {
   const classes = useJSS()
   return (
     <CenterMenu header='add connection' isClosed={!isOpen} onClose={onClose}>
-      
+      <ConnectedModules fromMod={fromMod as AnyModule} toMod={toMod as AnyModule} />
     </CenterMenu>
   )
 }

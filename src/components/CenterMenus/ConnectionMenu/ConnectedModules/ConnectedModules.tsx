@@ -1,16 +1,18 @@
 import React, { ReactNode } from 'react'
 import { ArcherContainer } from 'react-archer'
-import useJSS from './style'
+import { AnyModule } from '../../../../redux/stateTSTypes'
+import useJSS from '../style'
 
 interface Props {
-  children: ReactNode
+  fromMod: AnyModule
+  toMod: AnyModule
 }
 
-function ConnectedModules({ children }: Props) {
+function ConnectedModules({ fromMod, toMod }: Props) {
   const classes = useJSS()
   return (
     <ArcherContainer>
-
+      
     </ArcherContainer>
   )
 }

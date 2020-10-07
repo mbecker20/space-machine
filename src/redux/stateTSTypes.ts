@@ -44,8 +44,10 @@ export interface ContainerModule extends Module { // modules composing other mod
   containerControls: ContainerControl[]
 }
 
+export type AnyModule = Module | ContainerModule
+
 export interface Modules {
-  [index: string]: Module | ContainerModule
+  [index: string]: AnyModule
 }
 
 // connection related state

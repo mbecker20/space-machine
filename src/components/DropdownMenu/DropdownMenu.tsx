@@ -5,13 +5,13 @@ interface Props {
   
 }
 
-function ModuleIcon({  }: Props) {
+function DropdownMenu({  }: Props) {
   const classes = useJSS()
   return (
-    <div className={classes.ModuleIcon}>
+    <div>
 
     </div>
   )
 }
 
-export default ModuleIcon
+export default DropdownMenu
