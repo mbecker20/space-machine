@@ -8,7 +8,7 @@ const useJSS = createUseStyles({
     alignSelf: 'flex-start',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    width: '90%',
+    //width: '90%',
     overflowY: 'scroll',
     overflowX: 'visible',
     '&::-webkit-scrollbar': {

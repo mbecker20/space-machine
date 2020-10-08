@@ -54,6 +54,7 @@ function IORecursion({ id, isOutput, setConnection }: Props) {
               return (
                 <Button style={{ color: colors.connectableName }}
                   onClick={() => { setConnection(id, index) }}
+                  key={index}
                 >{ioID}</Button>
               )
             })}

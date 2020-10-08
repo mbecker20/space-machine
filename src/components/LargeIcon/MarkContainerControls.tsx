@@ -82,7 +82,7 @@ function MarkContainerControls({ selectedModule }: Props) {
             })[0]
           }
           return (
-            <FlexRow>
+            <FlexRow key={index}>
               <Switch initState={isMarked} text={controlID}
                 style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
                 key={controlID + index}
