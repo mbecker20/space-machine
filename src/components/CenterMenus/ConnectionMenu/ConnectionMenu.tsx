@@ -79,16 +79,38 @@ function ConnectionMenu() {
             }
             onClose()
           }}
-        >module</Button>}
-      {
-        am[actualToID]?.connectingParamIDs.length === 0 ? null
-          :
-          <Button
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-          >params</Button>
+        >module</Button>
       }
+      {am[actualToID]?.connectingParamIDs.map((paramID, key) => {
+        return (
+          <Button
+            key={key}
+            onClick={() => {
+              if (!connectionExists(connections, fromMod as AnyModule, actualToID, paramID)) {
+                connect(
+                  am[actualFromID] as ConnectingAudioModule,
+                  am[actualToID] as ConnectingAudioModule,
+                  paramID,
+                  outputIndex,
+                  inputIndex,
+                )
+                dispatch(addConnection(
+                  (fromMod as AnyModule).id,
+                  (toMod as AnyModule).id,
+                  paramID,
+                  outputIndex,
+                  inputIndex,
+                  fromMod?.moduleType === CONTAINER ? actualFromID : undefined,
+                  toMod?.moduleType === CONTAINER ? actualToID : undefined,
+                ))
+              } else {
+                alert('modules already connected')
+              }
+              onClose()
+            }}
+          >{paramID}</Button>
+        )
+      })}
     </CenterMenu>
   )
 }

@@ -11,6 +11,7 @@ import { LineInputModule } from './modules/lineInput'
 import { ContainerModule } from './modules/container'
 import { DistortionModule } from './modules/distortion'
 import { AnalyzerModule } from './modules/analyzer'
+import { WhiteNoiseModule } from './modules/whiteNoise'
 
 // module types
 
@@ -28,12 +29,13 @@ export const CONTAINER = 'CONTAINER'
 export const DISTORTION = 'DISTORTION'
 export const ANALYZER = 'ANALYZER'
 export const ENVELOPED_TRIGGER = 'ENVELOPED_TRIGGER'
+export const WHITE_NOISE = 'WHITE_NOISE'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER' | 'ENVELOPED_TRIGGER'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER' | 'ENVELOPED_TRIGGER' | 'WHITE_NOISE'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule | AnalyzerModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule | AnalyzerModule | WhiteNoiseModule
 
 export type AudioModule = ConnectingAudioModule | ContainerModule
 

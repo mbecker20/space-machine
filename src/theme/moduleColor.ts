@@ -1,5 +1,5 @@
 import { colors } from './theme'
-import { LINE_IN, OSCILLATOR, MEDIA_ELEMENT, CONSTANT, AUTOFILTER, GAIN, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, CONTAINER, OUTPUT, DISTORTION, ANALYZER, ENVELOPED_TRIGGER } from '../audioModules/moduleTypes'
+import { LINE_IN, OSCILLATOR, MEDIA_ELEMENT, CONSTANT, AUTOFILTER, GAIN, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, CONTAINER, OUTPUT, DISTORTION, ANALYZER, ENVELOPED_TRIGGER, WHITE_NOISE } from '../audioModules/moduleTypes'
 
 function getModuleColor(moduleType?: string) {
 
@@ -11,6 +11,7 @@ function getModuleColor(moduleType?: string) {
     case MEDIA_ELEMENT: return colors.sourceModuleBG 
     case CONSTANT: return colors.sourceModuleBG
     case ENVELOPED_TRIGGER: return colors.sourceModuleBG
+    case WHITE_NOISE: return colors.sourceModuleBG
 
     // effects 
     case GAIN: return colors.effectsModuleBG

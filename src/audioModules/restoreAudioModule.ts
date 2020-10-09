@@ -14,6 +14,7 @@ import {
   DISTORTION,
   ANALYZER,
   ENVELOPED_TRIGGER,
+  WHITE_NOISE,
 } from './moduleTypes'
 import makeConstantSource from './modules/constant'
 import makeAutoFilter from './modules/autoFilter'
@@ -28,6 +29,7 @@ import makeContainer from './modules/container'
 import makeDistortion from './modules/distortion'
 import makeAnalyzer from './modules/analyzer'
 import makeEnvelopedTrigger from './modules/envelopedTrigger'
+import makeWhiteNoise from './modules/whiteNoise'
 
 
 function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData: ControlData) {
@@ -85,6 +87,10 @@ function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData:
     case ENVELOPED_TRIGGER:
       const envelopedTrigger = makeEnvelopedTrigger(prevControlData)
       window.audioModules = { ...window.audioModules, [id]: envelopedTrigger }
+      break
+    case WHITE_NOISE:
+      const whiteNoise = makeWhiteNoise(prevControlData)
+      window.audioModules = { ...window.audioModules, [id]: whiteNoise }
       break
   }
 }
