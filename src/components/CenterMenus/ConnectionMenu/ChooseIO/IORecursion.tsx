@@ -1,10 +1,10 @@
 import React, { useState, Fragment } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../redux/stateTSTypes'
-import { CONTAINER } from '../../../audioModules/moduleTypes'
-import Button from '../../Button/Button'
-import useJSS from './style'
-import { colors } from '../../../theme/theme'
+import { RootState } from '../../../../redux/stateTSTypes'
+import { CONTAINER } from '../../../../audioModules/moduleTypes'
+import Button from '../../../Button/Button'
+import useJSS from '../style'
+import { colors } from '../../../../theme/theme'
 
 interface Props {
   id: string

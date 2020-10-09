@@ -1,9 +1,9 @@
 import React from 'react'
-import { CONTAINER } from '../../../audioModules/moduleTypes'
-import { AnyModule } from '../../../redux/stateTSTypes'
-import Button from '../../Button/Button'
+import { CONTAINER } from '../../../../audioModules/moduleTypes'
+import { AnyModule } from '../../../../redux/stateTSTypes'
+import Button from '../../../Button/Button'
 import IORecursion from './IORecursion'
-import useJSS from './style'
+import useJSS from '../style'
 
 interface Props {
   fromMod?: AnyModule
