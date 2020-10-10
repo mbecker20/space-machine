@@ -11,6 +11,10 @@ import ChooseInput from './ChooseIO/ChooseInput'
 import ChooseOutput from './ChooseIO/ChooseOutput'
 import ConnectedModules from './ConnectedModules/ConnectedModules'
 import { connectionExists } from './helpers'
+import ContainerInModule from './Modules/ContainerInModule'
+import ContainerOutModule from './Modules/ContainerOutModule'
+import InModule from './Modules/InModule'
+import OutModule from './Modules/OutModule'
 //import useJSS from './style'
 
 declare global {
@@ -50,67 +54,17 @@ function ConnectionMenu() {
   return (
     <CenterMenu header='add connection' isClosed={!isOpen} onClose={onClose}>
       <FlexRow>
-        <ChooseOutput fromMod={fromMod} setActualFromID={setActualFromID} setOutputIndex={setOutputIndex} />
-        <ConnectedModules fromMod={fromMod} toMod={toMod} />
-        <ChooseInput toMod={toMod} setActualToID={setActualToID} setInputIndex={setInputIndex} />
+        {fromMod?.moduleType === CONTAINER ? 
+          <ContainerOutModule modID={fromMod?.id as string} startsBig={true} isBase={true}/>
+        :
+          <OutModule modID={fromMod?.id as string} startsBig={true}/>
+        }
+        {toMod?.moduleType === CONTAINER ?
+          <ContainerInModule modID={toMod?.id as string} startsBig={true}/>
+        :
+          <InModule modID={toMod?.id as string} startsBig={true}/>
+        }
       </FlexRow>
-      {(toMod?.moduleType === CONTAINER ? modules[toMod?.connectionInputs[inputIndex]].connectionInputs.length === 0 : toMod?.connectionInputs.length === 0) ? null :
-        <Button
-          onClick={() => {
-            if (!connectionExists(connections, fromMod as AnyModule, actualToID)) {
-              connect(
-                am[actualFromID] as ConnectingAudioModule,
-                am[actualToID] as ConnectingAudioModule,
-                '',
-                outputIndex,
-                inputIndex,
-              )
-              dispatch(addConnection(
-                fromMod?.id as string,
-                toMod?.id as string,
-                '',
-                outputIndex,
-                inputIndex,
-                fromMod?.moduleType === CONTAINER ? actualFromID : undefined,
-                toMod?.moduleType === CONTAINER ? actualToID : undefined,
-              ))
-            } else {
-              alert('modules already connected')
-            }
-            onClose()
-          }}
-        >module</Button>
-      }
-      {am[actualToID]?.connectingParamIDs.map((paramID, key) => {
-        return (
-          <Button
-            key={key}
-            onClick={() => {
-              if (!connectionExists(connections, fromMod as AnyModule, actualToID, paramID)) {
-                connect(
-                  am[actualFromID] as ConnectingAudioModule,
-                  am[actualToID] as ConnectingAudioModule,
-                  paramID,
-                  outputIndex,
-                  inputIndex,
-                )
-                dispatch(addConnection(
-                  (fromMod as AnyModule).id,
-                  (toMod as AnyModule).id,
-                  paramID,
-                  outputIndex,
-                  inputIndex,
-                  fromMod?.moduleType === CONTAINER ? actualFromID : undefined,
-                  toMod?.moduleType === CONTAINER ? actualToID : undefined,
-                ))
-              } else {
-                alert('modules already connected')
-              }
-              onClose()
-            }}
-          >{paramID}</Button>
-        )
-      })}
     </CenterMenu>
   )
 }
