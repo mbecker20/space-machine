@@ -21,17 +21,13 @@ function MarkContainerIO({ modID }: Props) {
   const baseContainerID = useSelector((state: RootState) => state.baseContainerID)
   const selectedModule = useSelector((state: RootState) => state.modules[modID])
   return (
-    (selectedModule && window.fillContainerID !== baseContainerID) ?
+    window.fillContainerID !== baseContainerID ?
     <Fragment>
-      {
-      Object.keys(window.audioModules[selectedModule.id]).length === 0 ? null :
       <MarkContainerControls selectedModule={selectedModule} />
-      }
-      {
-      selectedModule.connectionInputs.length === 0 ? null :
+      {selectedModule.connectionInputs.length === 0 ? null :
       <Switch style={switchStyle}
         key={selectedModule.id + 'inputSwitch'}
-        text={'mark as container input'} 
+        text={'input'} 
         initState={selectedModule.isContainerInput}
         onSwitch={(newState) => {
           if (newState) {
@@ -40,13 +36,11 @@ function MarkContainerIO({ modID }: Props) {
             dispatch(unmarkContainerInput(selectedModule.id))
           }
         }}
-      />
-      }
-      {
-      selectedModule.connectionOutputs.length === 0 ? null :
+      />}
+      {selectedModule.connectionOutputs.length === 0 ? null :
       <Switch style={switchStyle}
         key={selectedModule.id + 'outputSwitch'}
-        text={'mark as container output'}
+        text={'output'}
         initState={selectedModule.isContainerOutput}
         onSwitch={(newState) => {
           if (newState) {
