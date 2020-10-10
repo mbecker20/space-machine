@@ -7,8 +7,8 @@ interface Props {
   className?: string
   style?: CSS.Properties
   direction: 'row' | 'column' | 'row dense' | 'column dense'
-  numRows?: number
-  numCols?: number
+  numRows?: number | string
+  numCols?: number | string
   gap?: string
 }
 

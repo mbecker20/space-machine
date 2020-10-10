@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/stateTSTypes'
 import getModuleColor from '../../../../theme/moduleColor'
+import AutoPlacingGrid from '../../../AutoPlacingGrid.tsx/AutoPlacingGrid'
 import FlexCol from '../../../Flex/FlexCol'
 import useJSS from './style'
 
@@ -29,7 +30,7 @@ function OutModule({ modID, startsBig, isBase }: Props) {
       >{ mod.name }</div>
       {!isBig ? null :
       mod.connectionOutputs.length > 1 ?
-      <div className={classes.ChildBounder}>
+      <AutoPlacingGrid direction='row' numCols='2' gap='.2em'>
         {mod.connectionOutputs.map((output, index) => {
           return (
             <FlexCol className={classes.ConnectorBounder} key={index}>
@@ -46,7 +47,7 @@ function OutModule({ modID, startsBig, isBase }: Props) {
             </FlexCol>
           )
         })}
-      </div>
+      </AutoPlacingGrid>
       :
       <FlexCol className={classes.ConnectorBounder}>
         <div className={classes.IconConnector}

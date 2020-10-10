@@ -6,6 +6,7 @@ import { addConnection } from '../../../../redux/allActions'
 import { Module, RootState } from '../../../../redux/stateTSTypes'
 import getModuleColor from '../../../../theme/moduleColor'
 import { colors } from '../../../../theme/theme'
+import AutoPlacingGrid from '../../../AutoPlacingGrid.tsx/AutoPlacingGrid'
 import FlexCol from '../../../Flex/FlexCol'
 import FlexRow from '../../../Flex/FlexRow'
 import { connectionExists } from './helpers'
@@ -77,7 +78,7 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
           })}
         </FlexCol>
         {audioMod.connectingParamIDs.length === 0 ? null : 
-        <div className={classes.ChildBounder}>
+        <AutoPlacingGrid direction='row' numCols='2' gap='.2em'>
           {!isBig ? null : audioMod.connectingParamIDs.map((paramID, index) => {
             return (
               <FlexCol style={{ alignItems: 'center' }} key={index}
@@ -116,7 +117,7 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
               </FlexCol>
             )
           })}
-        </div>}
+        </AutoPlacingGrid>}
       </FlexRow>
     </div>
   )

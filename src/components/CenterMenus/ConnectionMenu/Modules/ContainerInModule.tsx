@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { CONTAINER } from '../../../../audioModules/moduleTypes'
 import { ContainerModule, RootState } from '../../../../redux/stateTSTypes'
 import getModuleColor from '../../../../theme/moduleColor'
+import AutoPlacingGrid from '../../../AutoPlacingGrid.tsx/AutoPlacingGrid'
 import InModule from './InModule'
 import useJSS from './style'
 
@@ -13,53 +14,57 @@ interface Props {
   toID: string
   isFromContainer: boolean
   onClose: () => void
+  isBase: boolean
 }
 
-function ContainerInModule({ modID, startsBig, fromID, toID, isFromContainer, onClose }: Props) {
+function ContainerInModule({ modID, startsBig, fromID, toID, isFromContainer, onClose, isBase }: Props) {
   const classes = useJSS()
   const modules = useSelector((state: RootState) => state.modules)
   const mod = modules[modID]
   const modInputs = (mod as ContainerModule).connectionInputs
-  //const childrenStartBig = modInputs.length === 1
+  const childrenStartBig = modInputs.length <= 2
   const [isBig, setBig] = useState(startsBig)
   return (
     <div className={classes.Module} 
       style={{
-        backgroundColor: getModuleColor(CONTAINER)
+        backgroundColor: getModuleColor(CONTAINER),
+        maxHeight: isBase ? '60vmin' : '40vmin',
+        overflowY: isBase ? 'scroll' : 'visible',
       }}
     >
       <div className={classes.Name}
         onClick={() => { setBig(!isBig) }}
       >{mod.name}</div>
-      <div className={classes.ChildBounder}>
+      <AutoPlacingGrid direction={'row'} numCols={2} gap={'.2em'}>
         {!isBig ? null : modInputs.map((inputModID, index) => {
           const inMod = modules[inputModID]
           if(inMod.moduleType === CONTAINER) {
             return (
               <ContainerInModule key={index} 
                 modID={inputModID}
-                startsBig={true}
                 fromID={fromID}
                 toID={toID}
                 isFromContainer={isFromContainer}
                 onClose={onClose}
+                isBase={false}
+                startsBig={childrenStartBig}
               />
             )
           } else {
             return (
               <InModule key={index}
                 modID={inputModID}
-                startsBig={true}
                 fromID={fromID}
                 toID={toID}
                 isFromContainer={true}
                 isToContainer={true}
                 onClose={onClose}
+                startsBig={childrenStartBig}
               />
             )
           }
         })}
-      </div>
+      </AutoPlacingGrid>
     </div>
   )
 }

@@ -7,12 +7,8 @@ const useJSS = createUseStyles({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    //maxHeight: '30vmin',
-    //minHeight: '20vmin',
     flexGrow: 1,
     flexShrink: 1,
-    //overflowY: 'scroll',
-    //overflowX: 'visible',
     '&::-webkit-scrollbar': {
       width: '0px',
     },
@@ -20,18 +16,7 @@ const useJSS = createUseStyles({
       backgroundColor: 'white',
     },
     padding: '.2em .5em',
-    //borderStyle: 'solid',
-    //borderColor: colors.grey,
-  },
-
-  ChildBounder: {
-    display: 'grid',
-    gridTemplateColumns: 'auto auto',
-    gridAutoRows: 'auto',
-    gridAutoFlow: 'row',
-    gap: '.2em',
-    justifyItems: 'center',
-    //alignItems: 'start',
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
   },
 
   IconConnector: {
@@ -56,6 +41,9 @@ const useJSS = createUseStyles({
     whiteSpace: 'noWrap',
     fontSize: sizes.text.medium,
     marginBottom: '.2em',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 
   ConnectorName: {

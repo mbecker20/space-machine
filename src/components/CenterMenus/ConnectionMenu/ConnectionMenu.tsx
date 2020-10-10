@@ -50,6 +50,7 @@ function ConnectionMenu() {
             toID={toMod?.id as string}
             isFromContainer={fromMod?.moduleType === CONTAINER}
             onClose={onClose}
+            isBase={true}
           />
         :
           <InModule 
