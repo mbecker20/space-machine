@@ -42,8 +42,8 @@ export const colors: Colors = {
   knobMarker: 'white',
 
   // connection menu
-  connectableName: 'white',
-  expandableName: '#85adad',
+  moduleInput: '#da1212',
+  paramInput: 'blue',
 
   // module colors
 
@@ -73,8 +73,14 @@ export const colors: Colors = {
   addModuleLeftBarBG: 'transparent',
   addModuleLeftBarButtonHL: '#ffffff60',
   addModuleSearchBarBG: '#1d1d2b',
-  addModuleSearchBarText: 'white'
+  addModuleSearchBarText: 'white',
+
+  // notification
+  success: '#00802da6',
 }
+
+export const paramColors = ['#dbde02', '#0a9408', '#470ff5', '#0ba8cc']
+// yellow, green, purple, light blue
 
 export const sizes: Sizes = {
   rightDrawer: {
@@ -98,7 +104,9 @@ export const sizes: Sizes = {
   },
   connector: {
     size: '2.5vmin',
-    borderRadius: '1.5vmin'
+    borderRadius: '2.5vmin',
+    smallSize: '1.5vmin',
+    smallBorderRadius: '1.5vmin',
   },
   knob: {
     size: 7, // converted to vmin in knob

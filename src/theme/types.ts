@@ -21,6 +21,8 @@ interface Text {
 interface Connector {
   size: string
   borderRadius: string
+  smallSize: string
+  smallBorderRadius: string
 }
 
 interface Knob {

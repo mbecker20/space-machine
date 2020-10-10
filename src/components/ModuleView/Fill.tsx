@@ -70,7 +70,7 @@ function ModuleViewFill() {
       </div>
       <ArcherContainer ref={archerContainerRef}
         svgContainerStyle={{ zIndex: -1 }}
-        strokeWidth={4}
+        strokeWidth={8}
         arrowLength={0}
       >
         <div className={classes.Fill} style={gridStyle}>

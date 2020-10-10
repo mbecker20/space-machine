@@ -9,14 +9,18 @@ import useJSS from './style'
 interface Props {
   modID: string
   startsBig: boolean
+  fromID: string // original fromID of connection
+  toID: string
+  isFromContainer: boolean
+  onClose: () => void
 }
 
-function ContainerInModule({ modID, startsBig }: Props) {
+function ContainerInModule({ modID, startsBig, fromID, toID, isFromContainer, onClose }: Props) {
   const classes = useJSS()
   const modules = useSelector((state: RootState) => state.modules)
   const mod = modules[modID]
   const modInputs = (mod as ContainerModule).connectionInputs
-  const childrenStartBig = modInputs.length === 1
+  //const childrenStartBig = modInputs.length === 1
   const [isBig, setBig] = useState(startsBig)
   return (
     <div className={classes.Module} 
@@ -34,14 +38,23 @@ function ContainerInModule({ modID, startsBig }: Props) {
             return (
               <ContainerInModule key={index} 
                 modID={inputModID}
-                startsBig={childrenStartBig}
+                startsBig={true}
+                fromID={fromID}
+                toID={toID}
+                isFromContainer={isFromContainer}
+                onClose={onClose}
               />
             )
           } else {
             return (
               <InModule key={index}
                 modID={inputModID}
-                startsBig={childrenStartBig}
+                startsBig={true}
+                fromID={fromID}
+                toID={toID}
+                isFromContainer={true}
+                isToContainer={true}
+                onClose={onClose}
               />
             )
           }

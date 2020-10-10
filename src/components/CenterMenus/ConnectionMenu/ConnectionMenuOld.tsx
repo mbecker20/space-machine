@@ -6,7 +6,7 @@ import { addConnection } from '../../../redux/allActions'
 import { Module, RootState } from '../../../redux/stateTSTypes'
 import IORecursion from './ChooseIO/IORecursion'
 import useJSS from './style'
-import { connectionExists } from './helpers'
+import { connectionExists } from './Modules/helpers'
 import CenterMenu from '../CenterMenu/CenterMenu'
 import Button from '../../Button/Button'
 
@@ -190,7 +190,7 @@ function ConnectionMenu() {
                     am[actualToID] as ConnectingAudioModule,
                     paramID,
                     outputIndex,
-                    inputIndex,
+                    0,
                   )
                   dispatch(addConnection(
                     fromID,

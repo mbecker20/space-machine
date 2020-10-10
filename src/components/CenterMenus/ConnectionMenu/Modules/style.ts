@@ -20,6 +20,8 @@ const useJSS = createUseStyles({
       backgroundColor: 'white',
     },
     padding: '.2em .5em',
+    //borderStyle: 'solid',
+    //borderColor: colors.grey,
   },
 
   ChildBounder: {
@@ -27,7 +29,9 @@ const useJSS = createUseStyles({
     gridTemplateColumns: 'auto auto',
     gridAutoRows: 'auto',
     gridAutoFlow: 'row',
-    gap: '.2em'
+    gap: '.2em',
+    justifyItems: 'center',
+    //alignItems: 'start',
   },
 
   IconConnector: {
@@ -50,7 +54,8 @@ const useJSS = createUseStyles({
 
   Name: {
     whiteSpace: 'noWrap',
-    fontSize: sizes.text.medium
+    fontSize: sizes.text.medium,
+    marginBottom: '.2em',
   },
 
   ConnectorName: {
@@ -64,11 +69,25 @@ const useJSS = createUseStyles({
   },
 
   ConnectionReciever: {
-
+    backgroundColor: 'black',
+    width: sizes.connector.size,
+    height: sizes.connector.size,
+    borderRadius: sizes.connector.borderRadius,
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    borderStyle: 'solid',
+    borderColor: colors.moduleInput,
+    borderWidth: '.25em'
   },
 
   SmallConnectionReciever: {
-
+    backgroundColor: 'black',
+    width: sizes.connector.smallSize,
+    height: sizes.connector.smallSize,
+    borderRadius: sizes.connector.smallBorderRadius,
+    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+    borderStyle: 'solid',
+    borderColor: colors.paramInput,
+    borderWidth: '.2em',
   }
 })
 

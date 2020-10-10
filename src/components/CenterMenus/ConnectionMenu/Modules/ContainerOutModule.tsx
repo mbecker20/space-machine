@@ -45,6 +45,7 @@ function ContainerOutModule({ modID, startsBig, isBase }: Props) {
               <OutModule key={index} 
                 modID={outputModID}
                 startsBig={true}
+                isBase={false}
               />
             )
           }
