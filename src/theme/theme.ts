@@ -76,7 +76,7 @@ export const colors: Colors = {
   addModuleSearchBarText: 'white',
 
   // notification
-  success: '#00802da6',
+  success: '#00802d',
 }
 
 export const paramColors = ['#dbde02', '#0a9408', '#470ff5', '#0ba8cc']
