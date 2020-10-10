@@ -35,8 +35,8 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
         style={{ marginBottom: '.2em' }}
         onClick={() => { setBig(!isBig) }}
       >{mod.name}</div>
-      <FlexRow>
-        <FlexCol style={{ marginRight: '.4em' }}>
+      <FlexRow style={{ justifyContent: 'center' }}>
+        <FlexCol style={{ marginRight: audioMod.connectingParamIDs.length !== 0 ?'.4em' : '0em' }}>
           {!isBig ? null : mod.connectionInputs.map((input, index) => {
             return (
               <FlexCol key={index}>
@@ -76,6 +76,7 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
             )
           })}
         </FlexCol>
+        {audioMod.connectingParamIDs.length === 0 ? null : 
         <div className={classes.ChildBounder}>
           {!isBig ? null : audioMod.connectingParamIDs.map((paramID, index) => {
             return (
@@ -115,7 +116,7 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
               </FlexCol>
             )
           })}
-        </div>
+        </div>}
       </FlexRow>
     </div>
   )
