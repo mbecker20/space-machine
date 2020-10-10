@@ -1,13 +1,14 @@
-import React, { useState, Fragment } from 'react'
-import { sizes } from '../../theme/theme'
-import { Module, ContainerModule, RootState, ContainerControl } from '../../redux/stateTSTypes'
+import React from 'react'
+import { sizes } from '../../../theme/theme'
+import { Module, ContainerModule, RootState, ContainerControl } from '../../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
-import { markContainerControl, unmarkContainerControl } from '../../redux/allActions'
-import { CONTAINER } from '../../audioModules/moduleTypes'
-import Button from '../Button/Button'
-import FlexCol from '../Flex/FlexCol'
-import FlexRow from '../Flex/FlexRow'
-import Switch from '../Switch/Switch'
+import { markContainerControl, unmarkContainerControl } from '../../../redux/allActions'
+import { CONTAINER } from '../../../audioModules/moduleTypes'
+import Button from '../../Button/Button'
+import FlexRow from '../../Flex/FlexRow'
+import Switch from '../../Switch/Switch'
+import FlexCol from '../../Flex/FlexCol'
+import useJSS from './style'
 
 interface Props {
   selectedModule: Module
@@ -15,19 +16,15 @@ interface Props {
 
 
 function MarkContainerControls({ selectedModule }: Props) {
-  const [open, setOpen] = useState(false)
   const dispatch = useDispatch()
   const modules = useSelector((state: RootState) => state.modules)
+  const classes = useJSS()
   return (
-    <Fragment>
-      <Button style={{ fontSize: sizes.text.xsmall, marginTop: '2vmin' }}
-        onClick={() => {
-          setOpen(!open)
-        }}
-      >mark container controls</Button>
-      <FlexCol>
+    <FlexCol>
+      <div className={classes.MenuHeader}> mark as container control </div>
+      <FlexRow style={{ flexWrap: 'wrap', justifyContent: 'center', maxWidth: '40vmin' }}>
         {
-          open && selectedModule.moduleType === CONTAINER ?
+          selectedModule.moduleType === CONTAINER ?
           (selectedModule as ContainerModule).containerControls.map((control, index) => {
             const { modID, controlID, actualModID, name, markedToContainer } = control
             const modName = modules[modID].name
@@ -69,7 +66,7 @@ function MarkContainerControls({ selectedModule }: Props) {
           }) : null
         }
         {
-        !open || selectedModule.moduleType === CONTAINER ? null :
+        selectedModule.moduleType === CONTAINER ? null :
         Object.keys(selectedModule.controlData).map((controlID, index) => {
           const isMarked = selectedModule.controlData[controlID].markedToContainer ? true : false
           let containerControl: ContainerControl
@@ -108,8 +105,8 @@ function MarkContainerControls({ selectedModule }: Props) {
           )
         })
         }
-      </FlexCol>
-    </Fragment>
+      </FlexRow>
+    </FlexCol>
   )
 }
 

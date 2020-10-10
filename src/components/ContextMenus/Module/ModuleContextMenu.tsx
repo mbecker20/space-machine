@@ -7,6 +7,7 @@ import InputOutputView from './InputOutputView'
 import ContainerOpenButton from './ContainerOpenButton'
 import ContainerSaveButton from './ContainerSaveButton'
 import { MouseDivEvent } from '../types'
+import MarkContainerIO from './MarkContainerIO'
 
 declare global {
   interface Window {
@@ -31,9 +32,11 @@ function ModuleContextMenu() {
     <Fragment>
       {!isOpen ? null :
         <ContextMenu event={event as MouseDivEvent} onClose={onClose}>
+          <div>{modules[modID as string]?.name}</div>
           <ContainerOpenButton modules={modules} modID={modID as string} onClose={onClose} />
           <InputOutputView modID={modID as string} modules={modules}/>
           <ContainerSaveButton modules={modules} modID={modID as string} onClose={onClose} />
+          <MarkContainerIO modID={modID as string} />
           <DeleteButton modID={modID as string} onClose={onClose}/>
         </ContextMenu>
       }

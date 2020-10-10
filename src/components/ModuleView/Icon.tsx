@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { sizes } from '../../theme/theme'
 import { ArcherElement } from 'react-archer'
 import ControlMenu from '../LargeIcon/ControlMenu'
-import MarkContainerIO from '../LargeIcon/MarkContainerIO'
 import { CONTAINER } from '../../audioModules/moduleTypes'
 import ContainerControlMenu from '../LargeIcon/ContainerControlMenu'
 import getModuleColor from '../../theme/moduleColor'
@@ -51,7 +50,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   })
   */
 
-  const { modules, baseContainerID, connections } = useSelector((state: RootState) => state)
+  const { modules, connections } = useSelector((state: RootState) => state)
   const dispatch = useDispatch()
   return (
     <Fragment>
@@ -106,7 +105,6 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
         >
           {mod.moduleType === CONTAINER ? <ContainerControlMenu selectedModule={mod as ContainerModule} reRenderIcon={reRenderIcon} /> : null}
           {mod.moduleType !== CONTAINER ? <ControlMenu audioModule={window.audioModules[mod.id]} selectedModule={mod} reRenderIcon={reRenderIcon} /> : null}
-          <MarkContainerIO baseContainerID={baseContainerID} selectedModule={mod} />
         </div>
         }
       </div>

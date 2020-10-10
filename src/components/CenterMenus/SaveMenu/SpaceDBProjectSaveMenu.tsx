@@ -15,25 +15,29 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, saveList: string[] = [], onClose = () => { }) {
+function makeData(isOpen: boolean, saveList: string[] = [], preOnClose = () => { }) {
   return {
     isOpen,
     saveList,
-    preOnClose: onClose,
+    preOnClose,
   }
 }
 
 function SpaceDBProjectSaveMenu() {
   const [{ isOpen, saveList, preOnClose }, setData] = useState(makeData(false))
-  window.openSpaceDBProjectSaveMenu = (saveList, onClose) => { setData(makeData(true, saveList, onClose)) }
+  const state = useSelector((state: RootState) => state)
+  const { baseContainerID, modules } = state
+  const [saveName, setSaveName] = useState('')
+  const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
+  window.openSpaceDBProjectSaveMenu = (saveList, onClose) => {
+    setSaveName(modules[baseContainerID].name)
+    setConfirmSaveData({ isOpen: false, message: '' })
+    setData(makeData(true, saveList, onClose)) 
+  }
   const onClose = () => {
     preOnClose()
     setData(makeData(false))
   }
-  const state = useSelector((state: RootState) => state)
-  const { baseContainerID, modules } = state
-  const [saveName, setSaveName] = useState(modules[baseContainerID].name)
-  const [confirmSaveData, setConfirmSaveData] = useState({ isOpen: false, message: '' })
   const inputRef = useRef<HTMLInputElement>(null)
   const classes = useJSS()
   return (

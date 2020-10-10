@@ -1,24 +1,25 @@
 import React, { Fragment } from 'react'
-import { Module } from '../../redux/stateTSTypes'
-import { useDispatch } from 'react-redux'
-import { markContainerInput, unmarkContainerInput, markContainerOutput, unmarkContainerOutput } from '../../redux/allActions'
+import { RootState } from '../../../redux/stateTSTypes'
+import { useDispatch, useSelector } from 'react-redux'
+import { markContainerInput, unmarkContainerInput, markContainerOutput, unmarkContainerOutput } from '../../../redux/allActions'
 import CSS from 'csstype'
-import { sizes } from '../../theme/theme'
+import { sizes } from '../../../theme/theme'
 import MarkContainerControls from './MarkContainerControls'
-import Switch from '../Switch/Switch'
+import Switch from '../../Switch/Switch'
 
 interface Props {
-  baseContainerID: string
-  selectedModule: Module
+  modID: string
 }
 
 const switchStyle: CSS.Properties = {
-  fontSize: sizes.text.xsmall,
-  padding: '1vmin',
+  fontSize: sizes.text.small,
+  padding: '.1em',
 }
 
-function MarkContainerIO({ baseContainerID, selectedModule }: Props) {
+function MarkContainerIO({ modID }: Props) {
   const dispatch = useDispatch()
+  const baseContainerID = useSelector((state: RootState) => state.baseContainerID)
+  const selectedModule = useSelector((state: RootState) => state.modules[modID])
   return (
     (selectedModule && window.fillContainerID !== baseContainerID) ?
     <Fragment>
