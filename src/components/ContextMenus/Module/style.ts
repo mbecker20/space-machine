@@ -24,14 +24,16 @@ const useJSS = createUseStyles({
   Name: {
     fontSize: sizes.text.medium,
     margin: '1vmin',
-    width: '90%'
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
 
   MenuHeader: {
     fontSize: sizes.text.small,
     borderStyle: 'none none solid none',
     margin: '1vmin',
-    width: '90%'
+    whiteSpace: 'noWrap',
   },
 
   OpenButton: {

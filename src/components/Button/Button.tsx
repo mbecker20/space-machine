@@ -11,10 +11,11 @@ interface Props {
   ref?: RefObject<HTMLDivElement>
   onKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void
   onContextMenu?: (e: MouseEvent<HTMLDivElement>) => void
+  fontSize?: string
 }
 
-function Button({ className, onClick, children, style, onPointerDown, ref, onKeyDown, onContextMenu }: Props) {
-  const classes = useJSS()
+function Button({ className, onClick, children, style, onPointerDown, ref, onKeyDown, onContextMenu, fontSize }: Props) {
+  const classes = useJSS({ fontSize })
   return (
     <div className={className ? `${classes.Button} ${className}` : classes.Button}
       onClick={onClick}

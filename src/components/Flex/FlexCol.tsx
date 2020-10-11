@@ -9,10 +9,12 @@ interface Props {
   ref?: React.RefObject<HTMLDivElement>
   onDrop?: (e: DragEvent<HTMLDivElement>) => void
   onDragOver?: (e: DragEvent<HTMLDivElement>) => void
+  justifyContent?: string
+  alignItems?: string
 }
 
-function FlexCol({ className, children, style, ref, onDrop, onDragOver }: Props) {
-  const classes = useJSS()
+function FlexCol({ className, children, style, ref, onDrop, onDragOver, justifyContent, alignItems }: Props) {
+  const classes = useJSS({ justifyContent, alignItems })
   return (
     <div className={className ? `${classes.FlexCol} ${className}` : classes.FlexCol}
       style={style}

@@ -21,6 +21,10 @@ const useJSS = createUseStyles({
     flexShrink: 0,
     //padding: '.5vmin',
   },
+
+  Text: {
+    fontSize: ({ fontSize }) => fontSize,
+  }
 })
 
 export default useJSS;

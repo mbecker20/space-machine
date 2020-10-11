@@ -7,10 +7,12 @@ interface Props {
   style?: CSS.Properties
   children?: React.ReactNode
   ref?: React.RefObject<HTMLDivElement>
+  justifyContent?: string
+  alignItems?: string
 }
 
-function FlexRow({ className, children, style, ref }: Props) {
-  const classes = useJSS()
+function FlexRow({ className, children, style, ref, justifyContent, alignItems }: Props) {
+  const classes = useJSS({ justifyContent, alignItems })
   return (
     <div className={className ? `${classes.FlexRow} ${className}` : classes.FlexRow}
       style={style}

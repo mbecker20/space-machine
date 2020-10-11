@@ -8,6 +8,7 @@ interface Props {
   onSwitch: (newState: boolean) => void,
   initState: boolean,
   style?: object,
+  fontSize?: string
 }
 
 const heightDif = 1
@@ -23,9 +24,9 @@ const rectY = heightDif
 const circleCY = (sizes.switch.diameter + heightDif) / 2
 
 
-function Switch({ text, onSwitch, initState, style }: Props) {
+function Switch({ text, onSwitch, initState, style, fontSize }: Props) {
   const [isSwitched, setSwitched] = useState(initState)
-  const classes = useJSS()
+  const classes = useJSS({ fontSize })
   const spring = useSpring({
     cx: isSwitched ? `${fullWidth - sizes.switch.diameter / 2}vmin` : `${sizes.switch.diameter / 2}vmin`,
     fill: isSwitched ? 'green' : 'red',
@@ -35,7 +36,7 @@ function Switch({ text, onSwitch, initState, style }: Props) {
   })
   return (
     <div className={classes.Bounder} style={style}>
-      <div
+      <div className={classes.Text}
         onClick={() => { onSwitch(!isSwitched); setSwitched(!isSwitched) }}
       >
         {text}

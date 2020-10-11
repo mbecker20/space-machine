@@ -20,6 +20,7 @@ const useJSS = createUseStyles({
     padding: '.3em',
     margin: '.3em',
     textAlign: 'center',
+    fontSize: ({ fontSize }) => fontSize
   },
 })
 

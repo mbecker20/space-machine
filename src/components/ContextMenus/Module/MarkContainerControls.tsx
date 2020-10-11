@@ -28,7 +28,7 @@ function MarkContainerControls({ selectedModule }: Props) {
       {!open ? null :
       <FlexCol>
         <div className={classes.MenuHeader}> mark as container control </div>
-        <FlexRow style={{ flexWrap: 'wrap', justifyContent: 'center', maxWidth: '40vmin' }}>
+        <FlexRow justifyContent='center' style={{ flexWrap: 'wrap', maxWidth: '40vmin' }}>
           {
             selectedModule.moduleType === CONTAINER ?
             (selectedModule as ContainerModule).containerControls.map((control, index) => {
@@ -47,7 +47,7 @@ function MarkContainerControls({ selectedModule }: Props) {
               return (
                 <FlexRow>
                   <Switch initState={isMarked} text={name ? name : `${modName} - ${controlID}`}
-                    style={{ fontSize: sizes.text.xsmall, padding: '1vmin' }}
+                    style={{ fontSize: sizes.text.small, padding: '.2em' }}
                     key={modID + index}
                     onSwitch={nowMarked => {
                       if (nowMarked) {
@@ -59,7 +59,7 @@ function MarkContainerControls({ selectedModule }: Props) {
                   />
                   {
                     !isMarked ? null :
-                    <Button style={{ fontSize: sizes.text.small }}
+                    <Button fontSize={sizes.text.xsmall}
                       onClick={() => {
                         window.openControlRenameMenu(controlID, selectedModule.parentID as string, containerControl)
                       }}

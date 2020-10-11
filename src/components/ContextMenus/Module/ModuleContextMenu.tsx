@@ -8,6 +8,7 @@ import ContainerOpenButton from './ContainerOpenButton'
 import ContainerSaveButton from './ContainerSaveButton'
 import { MouseDivEvent } from '../types'
 import MarkContainerIO from './MarkContainerIO'
+import useJSS from './style'
 
 declare global {
   interface Window {
@@ -28,11 +29,17 @@ function ModuleContextMenu() {
   const [{ isOpen, event, modID }, setData] = useState(makeData(false))
   window.openModuleContextMenu = (event, modID) => setData(makeData(true, event, modID))
   const onClose = () => { setData(makeData(false)) }
+  const classes = useJSS()
   return (
     <Fragment>
       {!isOpen ? null :
         <ContextMenu event={event as MouseDivEvent} onClose={onClose}>
-          <div>{modules[modID as string]?.name}</div>
+          <div className={classes.Name}
+            title='rename module'
+            onClick={() => {
+              window.openModuleRenameMenu(modID as string)
+            }}
+          >{modules[modID as string]?.name}</div>
           <ContainerOpenButton modules={modules} modID={modID as string} onClose={onClose} />
           <InputOutputView modID={modID as string} modules={modules}/>
           <ContainerSaveButton modules={modules} modID={modID as string} onClose={onClose} />
