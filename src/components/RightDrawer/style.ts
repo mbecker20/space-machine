@@ -65,48 +65,17 @@ const useJSS = createUseStyles({
     width: `${sizes.rightDrawer.width}px`,
     height: 'calc(100% - 60px)',
     display: 'flex',
-    flexFlow: 'row wrap',
+    flexFlow: 'column wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     alignContent: 'flex-start',
-    overflowY: 'scroll',
+    //overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       width: '0px',
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'white',
     },
-  },
-
-  // Drawer items
-
-  DrawerItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    borderRadius: '10px',
-    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    margin: '3vmin',
-  },
-
-  DrawerIcon: {
-    backgroundColor: colors.grey,
-    borderColor: colors.grey,
-    borderStyle: 'solid',
-    width: sizes.rightDrawer.item,
-    height: sizes.rightDrawer.item,
-    borderRadius: '1.5vmin',
-    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-    marginBottom: '1.5vmin',
-    '&:hover': {
-      cursor: 'pointer',
-      borderColor: 'white',
-    },
-  },
-
-  DrawerItemText: {
-    fontSize: sizes.text.small,
   },
 
   // toggle
@@ -132,6 +101,19 @@ const useJSS = createUseStyles({
     borderRadius: '4px',
     width: '0.75vmin',
     height: '80px',
+  },
+
+  SDBSaveList: {
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'scroll',
+    height: '60%',
+    '&::-webkit-scrollbar': {
+      width: '0px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+    },
   },
 })
 

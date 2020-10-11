@@ -5,6 +5,7 @@ import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import { colors } from '../../theme/theme'
 import Button from '../Button/Button'
+import useJSS from './style'
 
 export interface Save {
   id: string,
@@ -22,8 +23,9 @@ function SpaceDBMenu() {
   useEffect(() => {
     window.projectSaveService.find().then((saveNames: string[]) => { setSaveList(saveNames) }) 
   }, [])
+  const classes = useJSS()
   return (
-    <div>
+    <div style={{  }}>
       <Button style={{ backgroundColor: colors.sdbSaveButton }}
         onClick={() => {
           window.openSpaceDBProjectSaveMenu(saveList, () => {
@@ -35,7 +37,7 @@ function SpaceDBMenu() {
       >
         save project
       </Button>
-      <div>
+      <div className={classes.SDBSaveList}>
         {saveList.map((saveName, index) => {
           return (
             <Button style={buttonStyle}
