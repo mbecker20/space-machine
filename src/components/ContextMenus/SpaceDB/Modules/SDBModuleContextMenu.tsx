@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from 'react'
+import { zIndex } from '../../../../theme/zIndex'
 import ContextMenu from '../../ContextMenu/ContextMenu'
 import { MouseDivEvent } from '../../types'
 import ModuleDeleteButton from './ModuleDeleteButton'
@@ -26,6 +27,7 @@ function SDBModuleContextMenu() {
       {!isOpen ? null :
         <ContextMenu event={event as MouseDivEvent} 
           onClose={() => setData(makeData(false))}
+          bounderStyle={{ zIndex: zIndex.centerMenu + 1 }}
         >
           <ModuleDeleteButton saveName={saveName as string} onClose={onClose}/>
         </ContextMenu>

@@ -7,6 +7,7 @@ import { useSpring } from 'react-spring'
 import CenterMenu from '../CenterMenu/CenterMenu'
 import FlexRow from '../../Flex/FlexRow'
 import FlexCol from '../../Flex/FlexCol'
+import { zIndex } from '../../../theme/zIndex'
 
 declare global {
   interface Window {
@@ -61,7 +62,7 @@ function AddModuleMenu() {
     <CenterMenu header='add module'
       onClose={onClose}
       bounderStyle={Object.assign({}, styleSpring, {
-        zIndex: isOpen ? 1000 : -1000,
+        zIndex: isOpen ? zIndex.centerMenu : zIndex.background - 1,
       })}
     >
       <FlexRow>
