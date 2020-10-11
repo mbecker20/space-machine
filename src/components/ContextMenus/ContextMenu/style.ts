@@ -1,5 +1,6 @@
 import { createUseStyles } from 'react-jss'
 import { colors } from '../../../theme/theme'
+import { zIndex } from '../../../theme/zIndex'
 
 const maxWidth = '8em'
 const maxHeight = '12em'
@@ -13,7 +14,7 @@ const useJSS = createUseStyles({
     overflow: 'hidden',
     top: 0,
     left: 0,
-    zIndex: 1000,
+    zIndex: zIndex.contextMenu,
   },
 
   ContextMenu: {

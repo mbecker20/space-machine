@@ -1,4 +1,5 @@
 import { createUseStyles } from 'react-jss'
+import { zIndex } from '../theme/zIndex'
 //import { colors } from '../theme/theme'
 
 const useJSS = createUseStyles({
@@ -16,7 +17,7 @@ const useJSS = createUseStyles({
     top: '0px',
     left: '0px',
     userSelect: 'none',
-    zIndex: '-1',
+    zIndex: zIndex.background,
     overflow: 'hidden',
   },
 
@@ -27,7 +28,7 @@ const useJSS = createUseStyles({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    zIndex: 0,
+    zIndex: zIndex.moduleViewBounder,
     overflow: 'scroll',
     '&::-webkit-scrollbar': {
       width: '0px',

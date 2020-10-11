@@ -1,5 +1,6 @@
 import { createUseStyles } from 'react-jss'
 import { colors, sizes } from '../../../theme/theme'
+import { zIndex } from '../../../theme/zIndex'
 
 const useJSS = createUseStyles({
   CenterMenuBounder: {
@@ -10,7 +11,7 @@ const useJSS = createUseStyles({
     left: 0,
     width: '100vw',
     height: '100vh',
-    zIndex: 100,
+    zIndex: zIndex.centerMenu,
   },
 
   CenterMenu: {
@@ -27,7 +28,6 @@ const useJSS = createUseStyles({
     minWidth: '15vw',
     padding: '1vmin 2vmin 2vmin 2vmin',
     border: `.1em solid ${colors.centerMenuBorder}`,
-    zIndex: 101,
   },
 
   Header: {

@@ -1,4 +1,4 @@
-import React, { RefObject, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CONTAINER } from '../../../../audioModules/moduleTypes'
 import { ContainerModule, RootState } from '../../../../redux/stateTSTypes'
@@ -17,7 +17,7 @@ export type OutModType = {
   setBig: (isBig: boolean) => void
 }
 
-function ContainerOutModule({ modID, startsBig, isBase }: Props, ref: RefObject<OutModType>) {
+function ContainerOutModule({ modID, startsBig, isBase }: Props) {
   const classes = useJSS()
   const modules = useSelector((state: RootState) => state.modules)
   const mod = modules[modID]
