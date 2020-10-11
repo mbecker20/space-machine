@@ -37,7 +37,7 @@ function ModuleViewIcon({ mod, gridCol, gridRow }: Props) {
   })
 
   const nameStyle: CSS.Properties = {
-    fontSize: isLarge ? sizes.text.medium : sizes.text.small,
+    fontSize: sizes.text.small,
   }
   
   /*

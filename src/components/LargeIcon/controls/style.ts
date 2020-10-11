@@ -31,6 +31,17 @@ const useJSS = createUseStyles({
     height: '15vmin',
     borderRadius: '2vmin',
     backgroundColor: 'black',
+  },
+
+  SrcName: {
+    fontSize: sizes.text.xsmall,
+    textAlign: 'center',
+    whiteSpace: 'normal',
+    justifyContent: 'center',
+    width: '100%',
+    overflowWrap: 'break-word',
+    wordWrap: 'break-word',
+    hyphens: 'auto',
   }
 })
 

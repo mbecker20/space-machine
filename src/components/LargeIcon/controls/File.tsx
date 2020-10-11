@@ -1,6 +1,6 @@
 import React from 'react'
 import useJSS from './style'
-import { colors, sizes } from '../../../theme/theme'
+import { sizes } from '../../../theme/theme'
 import { SetFunc } from '../../../audioModules/moduleTypes'
 import Button from '../../Button/Button'
 
@@ -20,11 +20,9 @@ function File({ actualModID, controlID, setFunc, reRenderIcon, modName, label }:
       <label style={{ minWidth: '50%', }}
         htmlFor={actualModID + controlID}
       >
-        <Button style={{
-          //backgroundColor: colors.fillModule,
-          borderColor: colors.deleteButton,
-        }}
-        >{label ? label : modName ? `${modName} - ${controlID}` : controlID}</Button>
+        <Button fontSize={sizes.text.small}>
+          {label ? label : modName ? `${modName} - ${controlID}` : controlID}
+        </Button>
       </label>
       <input style={{ width: 0, height: 0, opacity: 0 }}
         type='file'
@@ -37,18 +35,9 @@ function File({ actualModID, controlID, setFunc, reRenderIcon, modName, label }:
           reRenderIcon()
         }}
       />
-      <p style={{
-        fontSize: sizes.text.xsmall,
-        textAlign: 'center',
-        whiteSpace: 'normal',
-        justifyContent: 'center',
-        width: '100%',
-        overflowWrap: 'break-word',
-        wordWrap: 'break-word',
-        hyphens: 'auto',
-      }}>
+      <div className={classes.SrcName}>
         {window.audioTags[actualModID].srcName}
-      </p>
+      </div>
     </div>
   )
 }

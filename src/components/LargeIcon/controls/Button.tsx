@@ -1,6 +1,6 @@
 import React from 'react'
 import { SetFunc } from '../../../audioModules/moduleTypes'
-import { colors } from '../../../theme/theme'
+import { sizes } from '../../../theme/theme'
 import Button from '../../Button/Button'
 
 interface Props {
@@ -12,12 +12,7 @@ interface Props {
 
 function ButtonControl({ setFunc, controlID, modName, label }: Props) {
   return (
-    <Button style={{
-      //backgroundColor: colors.fillModule,
-      borderColor: colors.deleteButton,
-      width: '50%',
-      padding: '.3em',
-    }}
+    <Button fontSize={sizes.text.small}
       onClick={() => {
         setFunc('')
       }}
