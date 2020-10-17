@@ -4,6 +4,7 @@ import { RootState } from '../../redux/stateTSTypes'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import Button from '../Button/Button'
+import FlexCol from '../Flex/FlexCol'
 
 declare global {
   interface Window {
@@ -25,13 +26,7 @@ function FileMenu() {
     }, 50)
   }, [])
   return (
-    <div 
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-      }}
-    >
+    <FlexCol alignItems='center'>
       <Button
         onClick={async () => {
           window.saveDirectoryHandle = await window.showDirectoryPicker()
@@ -59,19 +54,24 @@ function FileMenu() {
         onClick={() => {
           window.openFileSaveMenu()
         }}
-      >save</Button>
+      >save project</Button>
       {saveList.map(saveName => {
         return (
           <Button key={saveName}
-            onClick={() => {
-
+            onClick={async () => {
+              const fileHandle = await window.saveDirectoryHandle.getFileHandle(saveName+'.sm')
+              const file = await fileHandle.getFile()
+              const data = await file.text()
+              const newState = JSON.parse(data)
+              restoreAMFromState(state.connections, newState)
+              dispatch(restoreFromState(newState))
             }}
           >
             {saveName}
           </Button>
         )
       })}
-    </div>
+    </FlexCol>
   )
 }
 
