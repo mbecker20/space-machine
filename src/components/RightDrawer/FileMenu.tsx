@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../redux/stateTSTypes'
 import { restoreFromState } from '../../redux/allActions'
@@ -16,7 +16,7 @@ function FileMenu() {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
-  
+  const [ saveList, setSaveList ] = useState<string[]>([])
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {
@@ -35,9 +35,14 @@ function FileMenu() {
       <Button
         onClick={async () => {
           window.saveDirectoryHandle = await window.showDirectoryPicker()
+          let sn: string[] = []
           for await (const entry of window.saveDirectoryHandle.values()) {
-            console.log(entry)
+            const name: string = entry.name
+            if (name.slice(name.length - 3) === '.sm') {
+              sn.push(name.slice(0, name.length - 3))
+            }
           }
+          setSaveList(sn)
         }}
       >choose directory</Button>
       <Button
@@ -55,6 +60,17 @@ function FileMenu() {
           window.openFileSaveMenu()
         }}
       >save</Button>
+      {saveList.map(saveName => {
+        return (
+          <Button key={saveName}
+            onClick={() => {
+
+            }}
+          >
+            {saveName}
+          </Button>
+        )
+      })}
     </div>
   )
 }

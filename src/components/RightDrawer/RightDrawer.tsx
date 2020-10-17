@@ -25,7 +25,7 @@ function RightDrawer() {
       clamp: true,
     }
   })
-  const [selectedRoute, setSR] = useState(SPACEDB_PROJECTS)
+  const [selectedRoute, setSR] = useState(window.usingElectron ? SPACEDB_PROJECTS : FILE)
   const drawerRef = useRef<HTMLDivElement>(null)
   const toggleRef = useRef<HTMLDivElement>(null)
   const drawerHeaderRef = useRef<HTMLDivElement>(null)
