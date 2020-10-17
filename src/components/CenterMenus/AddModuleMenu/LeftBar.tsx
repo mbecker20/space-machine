@@ -2,7 +2,7 @@ import React from 'react'
 import { colors } from '../../../theme/theme'
 import Button from '../../Button/Button'
 import FlexCol from '../../Flex/FlexCol'
-import { addModuleMenuGroups } from './AddModuleMenu'
+import { addModuleMenuGroups, SPACEDB_MODULES } from './AddModuleMenu'
 import useJSS from './style'
 
 interface Props {
@@ -14,7 +14,8 @@ function LeftBar({ selectedGroup, setSG }: Props) {
   const classes = useJSS()
   return (
     <FlexCol className={classes.LeftBar}>
-      {addModuleMenuGroups.map((group, index) => {
+      {addModuleMenuGroups.filter(group => window.usingElectron || group !== SPACEDB_MODULES)
+      .map((group, index) => {
         const isHL = group === selectedGroup
         return (
           <Button className={classes.LeftBarButton}

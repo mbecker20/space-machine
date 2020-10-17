@@ -4,15 +4,19 @@ import { RootState } from '../../redux/stateTSTypes'
 import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import Button from '../Button/Button'
-let fs: any = null
+
+declare global {
+  interface Window {
+    showOpenFilePicker: any
+    saveDirectoryHandle?: any
+  }
+}
 
 function FileMenu() {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
-  if (window.usingElectron && !fs) {
-    fs = window.require('fs')
-  }
+  
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {
@@ -28,26 +32,24 @@ function FileMenu() {
         alignItems: 'flex-start',
       }}
     >
-      <label htmlFor='chooseFile'>
-        <Button
-        >open file</Button>
-      </label>
-      <input style={{ width: 0, height: 0, opacity: 0 }}
-        id='chooseFile'
-        type='file'
-        onChange={e => {
-          const file = ((e.target as HTMLInputElement).files as FileList)[0]
-          if (file) {
-            const path = (file as any).path
-            fs.readFile(path, (err: any, data: string) => {
-              if (err) throw err;
-              const newState = JSON.parse(data)
-              restoreAMFromState(state.connections, newState)
-              dispatch(restoreFromState(newState))
-            })
+      <Button
+        onClick={async () => {
+          window.saveDirectoryHandle = await window.showDirectoryPicker()
+          for await (const entry of window.saveDirectoryHandle.values()) {
+            console.log(entry)
           }
         }}
-      />
+      >choose directory</Button>
+      <Button
+        onClick={async () => {
+          const [ fileHandle ] = await window.showOpenFilePicker()
+          const file = await fileHandle.getFile()
+          const data = await file.text()
+          const newState = JSON.parse(data)
+          restoreAMFromState(state.connections, newState)
+          dispatch(restoreFromState(newState))
+        }}
+      >open file</Button>
       <Button
         onClick={() => {
           window.openFileSaveMenu()
