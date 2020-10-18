@@ -44,7 +44,7 @@ function FileSaveMenu() {
           await writable.write(JSON.stringify(state))
           await writable.close()
         }}
-      >save</Button>
+      >choose folder and save</Button>
     </CenterMenu>
   )
 }

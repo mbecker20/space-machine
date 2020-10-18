@@ -14,7 +14,7 @@ function ContainerSaveButton({ modules, modID, onClose }: Props) {
   const classes = useJSS()
   return (
     <Fragment>
-      {modules[modID].moduleType !== CONTAINER ? null :
+      {!window.usingElectron || modules[modID].moduleType !== CONTAINER ? null :
       <Button className={classes.SaveButton}
         onClick={() => {
           window.containerSaveService.find().then((containerSaves: string[]) => {

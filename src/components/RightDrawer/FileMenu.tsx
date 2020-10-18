@@ -5,11 +5,14 @@ import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import Button from '../Button/Button'
 import FlexCol from '../Flex/FlexCol'
+import FlexRow from '../Flex/FlexRow'
 
 declare global {
   interface Window {
     showOpenFilePicker: any
+    showSaveFilePicker: any
     saveDirectoryHandle?: any
+    saveFileHandle?: any
   }
 }
 
@@ -27,6 +30,7 @@ function FileMenu() {
   }, [])
   return (
     <FlexCol alignItems='center'>
+      {true ? null : 
       <Button
         onClick={async () => {
           window.saveDirectoryHandle = await window.showDirectoryPicker()
@@ -39,7 +43,7 @@ function FileMenu() {
           }
           setSaveList(sn)
         }}
-      >choose directory</Button>
+      >choose directory</Button>}
       <Button
         onClick={async () => {
           const [ fileHandle ] = await window.showOpenFilePicker()
@@ -50,11 +54,23 @@ function FileMenu() {
           dispatch(restoreFromState(newState))
         }}
       >open file</Button>
-      <Button
-        onClick={() => {
-          window.openFileSaveMenu()
-        }}
-      >save project</Button>
+      <FlexRow>
+        <Button
+          onClick={async () => {
+            //window.openFileSaveMenu()
+            window.saveFileHandle = await window.showSaveFilePicker({
+              types: [
+                {
+                  description: 'space machine projects',
+                  accept: {
+                    'text/plain': ['.sm']
+                  }
+                }
+              ]
+            })
+          }}
+        >save project</Button>
+      </FlexRow>
       {saveList.map(saveName => {
         return (
           <Button key={saveName}

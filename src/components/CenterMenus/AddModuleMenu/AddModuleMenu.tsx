@@ -55,7 +55,7 @@ function AddModuleMenu() {
     }
   })
   useEffect(() => {
-    window.refreshSpaceDBModules()
+    if (window.usingElectron) window.refreshSpaceDBModules()
   }, [])
   const classes = useJSS()
   return (

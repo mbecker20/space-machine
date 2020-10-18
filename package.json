@@ -42,7 +42,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "cross-env BROWSER='brave' react-scripts start",
+    "start": "react-scripts start",
     "servor": "npx servor ./build index.html 8000",
     "build": "react-scripts build",
     "test": "react-scripts test",
