@@ -5,6 +5,8 @@ import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import Button from '../Button/Button'
 import FlexCol from '../Flex/FlexCol'
+import { getTrimmedFileName, loadJSONFromPickedFile, saveJSONToFileHandle } from '../../helpers/fileAccess'
+import { colors, sizes } from '../../theme/theme'
 
 declare global {
   interface Window {
@@ -19,7 +21,7 @@ function FileMenu() {
   const state = useSelector((state: RootState) => state)
   const folderRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
-  const [ saveList, setSaveList ] = useState<string[]>([])
+  const [, toReRender] = useState({})
   useEffect(() => {
     window.setTimeout(() => {
       if (folderRef.current) {
@@ -29,53 +31,23 @@ function FileMenu() {
   }, [])
   return (
     <FlexCol alignItems='center'>
-      {true ? null : 
-      <Button
+      <Button fontSize={sizes.text.medium}
         onClick={async () => {
-          window.saveDirectoryHandle = await window.showDirectoryPicker()
-          let sn: string[] = []
-          for await (const entry of window.saveDirectoryHandle.values()) {
-            const name: string = entry.name
-            if (name.slice(name.length - 3) === '.sm') {
-              sn.push(name.slice(0, name.length - 3))
-            }
+          const newState = await loadJSONFromPickedFile(fileHandle => {
+            window.saveFileHandle = fileHandle
+          })
+          if (newState) {
+            restoreAMFromState(state.connections, newState)
+            dispatch(restoreFromState(newState))
+            toReRender({})
+          } else {
+            window.flashNotification('rgba(1, 1, 1, .4)', 'no file selected')
           }
-          setSaveList(sn)
-        }}
-      >choose directory</Button>}
-      <Button
-        onClick={async () => {
-          const [ fileHandle ] = await window.showOpenFilePicker()
-          const file = await fileHandle.getFile()
-          const data = await file.text()
-          const newState = JSON.parse(data)
-          restoreAMFromState(state.connections, newState)
-          dispatch(restoreFromState(newState))
         }}
       >open file</Button>
-      <Button
+      <Button fontSize={sizes.text.medium}
         onClick={async () => {
-          //window.openFileSaveMenu()
-          if (!window.saveFileHandle) {
-            window.saveFileHandle = await window.showSaveFilePicker({
-              types: [
-                {
-                  description: 'space machine projects',
-                  accept: {
-                    'text/plain': '.sm',
-                  },
-                  excludeAcceptAllOption: true
-                }
-              ]
-            })
-          }
-          
-        }}
-      >save project</Button>
-      {!window.saveFileHandle ? null :
-      <Button
-        onClick={async () => {
-          const newFileHandle = await window.showSaveFilePicker({
+          window.saveFileHandle = await window.showSaveFilePicker({
             types: [
               {
                 description: 'space machine projects',
@@ -86,30 +58,23 @@ function FileMenu() {
               }
             ]
           })
-          if (newFileHandle) {
-            window.saveFileHandle = newFileHandle
+          if (!window.saveFileHandle) {
+            window.flashNotification('rgba(1, 1, 1, .4)', 'no file selected')
           } else {
-            window.flashNotification('rgba(1, 1, 1, .2)', 'no file selected, using previous file')
+            saveJSONToFileHandle(window.saveFileHandle, state)
+            toReRender({})
+            window.flashNotification(colors.success, `${getTrimmedFileName(window.saveFileHandle)} saved`)
           }
         }}
-      >change save file</Button>
+      >save as new project</Button>
+      {!window.saveFileHandle ? null :
+      <Button fontSize={sizes.text.medium}
+        onClick={async () => {
+          await saveJSONToFileHandle(window.saveFileHandle, state)
+          window.flashNotification(colors.success, `${getTrimmedFileName(window.saveFileHandle)} saved`)
+        }}
+      >{`save ${getTrimmedFileName(window.saveFileHandle)}`}</Button>
       }
-      {saveList.map(saveName => {
-        return (
-          <Button key={saveName}
-            onClick={async () => {
-              const fileHandle = await window.saveDirectoryHandle.getFileHandle(saveName+'.sm')
-              const file = await fileHandle.getFile()
-              const data = await file.text()
-              const newState = JSON.parse(data)
-              restoreAMFromState(state.connections, newState)
-              dispatch(restoreFromState(newState))
-            }}
-          >
-            {saveName}
-          </Button>
-        )
-      })}
     </FlexCol>
   )
 }
