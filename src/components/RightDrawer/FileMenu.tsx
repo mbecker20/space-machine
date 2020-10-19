@@ -5,7 +5,6 @@ import { restoreFromState } from '../../redux/allActions'
 import restoreAMFromState from '../../audioModules/restoreAMFromState'
 import Button from '../Button/Button'
 import FlexCol from '../Flex/FlexCol'
-import FlexRow from '../Flex/FlexRow'
 
 declare global {
   interface Window {
@@ -54,23 +53,47 @@ function FileMenu() {
           dispatch(restoreFromState(newState))
         }}
       >open file</Button>
-      <FlexRow>
-        <Button
-          onClick={async () => {
-            //window.openFileSaveMenu()
+      <Button
+        onClick={async () => {
+          //window.openFileSaveMenu()
+          if (!window.saveFileHandle) {
             window.saveFileHandle = await window.showSaveFilePicker({
               types: [
                 {
                   description: 'space machine projects',
                   accept: {
-                    'text/plain': ['.sm']
-                  }
+                    'text/plain': '.sm',
+                  },
+                  excludeAcceptAllOption: true
                 }
               ]
             })
-          }}
-        >save project</Button>
-      </FlexRow>
+          }
+          
+        }}
+      >save project</Button>
+      {!window.saveFileHandle ? null :
+      <Button
+        onClick={async () => {
+          const newFileHandle = await window.showSaveFilePicker({
+            types: [
+              {
+                description: 'space machine projects',
+                accept: {
+                  'text/plain': '.sm',
+                },
+                excludeAcceptAllOption: true
+              }
+            ]
+          })
+          if (newFileHandle) {
+            window.saveFileHandle = newFileHandle
+          } else {
+            window.flashNotification('rgba(1, 1, 1, .2)', 'no file selected, using previous file')
+          }
+        }}
+      >change save file</Button>
+      }
       {saveList.map(saveName => {
         return (
           <Button key={saveName}
