@@ -12,7 +12,7 @@ function SaveCurrentButton({ state }: Props) {
   return (
     <Fragment>
       {!window.saveFileHandle ? 
-        <div>no file chosen</div>
+        <Button fontSize={sizes.text.medium} notClickable={true}> no file open </Button>
       :
         <Button fontSize={sizes.text.medium}
           onClick={async () => {
