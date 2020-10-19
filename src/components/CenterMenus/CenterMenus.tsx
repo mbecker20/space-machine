@@ -9,6 +9,7 @@ import AnalyzerRangeSetMenu from './RangeSetMenu/AnalyzerRangeSetMenu'
 import RenameModuleMenu from './RenameMenu/RenameModuleMenu'
 import RenameControlMenu from './RenameMenu/RenameControlMenu'
 import AddModuleMenu from './AddModuleMenu/AddModuleMenu'
+import ConfirmBlankProject from '../RightDrawer/FileMenu/ConfirmBlankProject'
 
 function CenterMenus() {
           
@@ -24,6 +25,7 @@ function CenterMenus() {
       <SpaceDBContainerSaveMenu/>
       <ConfirmDeleteMenu/>
       <FileSaveMenu/>
+      <ConfirmBlankProject/>
     </Fragment>
   )
 }

@@ -16,6 +16,21 @@ export async function loadJSONFromPickedFile(onFileHandle?: (fileHandle: any) =>
   }
 }
 
+export async function saveJSONToChosenFile(json: any, onSaved?: () => void) {
+  window.saveFileHandle = await window.showSaveFilePicker({
+    types: [
+      {
+        description: 'space machine project',
+        accept: {
+          'example/*': ['.sm'],
+        },
+      }
+    ]
+  })
+  await saveJSONToFileHandle(window.saveFileHandle, json)
+  if (onSaved) onSaved()
+} 
+
 export function getTrimmedFileName(fileHandle: any) {
   const name = fileHandle.name
   return name.slice(0, name.length - 3)

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
-import FlexCol from '../../Flex/FlexCol'
+import FlexRow from '../../Flex/FlexRow'
+import BlankProjectButton from './BlankProjectButton'
 import OpenFileButton from './OpenFileButton'
 import SaveAsNewButton from './SaveAsNewButton'
 import SaveCurrentButton from './SaveCurrentButton'
@@ -12,19 +13,21 @@ declare global {
     showSaveFilePicker: any
     saveDirectoryHandle?: any
     saveFileHandle?: any
+    reRenderFileMenu: () => void
   }
 }
 
 function FileMenu() {
   const state = useSelector((state: RootState) => state)
   const [, toReRender] = useState({})
-  const reRender = () => { toReRender({}) }
+  window.reRenderFileMenu = () => { toReRender({}) }
   return (
-    <FlexCol alignItems='center'>
-      <OpenFileButton state={state} reRender={reRender} />
-      <SaveAsNewButton state={state} reRender={reRender}/>
+    <FlexRow alignItems='center' flexWrap='wrap' style={{ width: '100%' }}>
+      <OpenFileButton state={state} reRender={window.reRenderFileMenu} />
+      <SaveAsNewButton state={state} reRender={window.reRenderFileMenu}/>
       <SaveCurrentButton state={state} />
-    </FlexCol>
+      <BlankProjectButton />
+    </FlexRow>
   )
 }
 

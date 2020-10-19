@@ -22,6 +22,7 @@ export const colors: Colors = {
 
   text: 'white',
   selectedText: '#007ab3',
+  disabled: '#ffffff61',
 
   dropSquareHL: '#ffffff60',
 

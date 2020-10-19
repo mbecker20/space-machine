@@ -9,10 +9,11 @@ interface Props {
   ref?: React.RefObject<HTMLDivElement>
   justifyContent?: string
   alignItems?: string
+  flexWrap?: 'wrap' | 'nowrap' | 'wrap-reverse',
 }
 
-function FlexRow({ className, children, style, ref, justifyContent, alignItems }: Props) {
-  const classes = useJSS({ justifyContent, alignItems })
+function FlexRow({ className, children, style, ref, justifyContent, alignItems, flexWrap }: Props) {
+  const classes = useJSS({ justifyContent, alignItems, flexWrap })
   return (
     <div className={className ? `${classes.FlexRow} ${className}` : classes.FlexRow}
       style={style}

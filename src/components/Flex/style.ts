@@ -6,6 +6,7 @@ const useJSS = createUseStyles({
     flexDirection: 'row',
     justifyContent: ({ justifyContent }) => justifyContent,
     alignItems: ({ alignItems }) => alignItems,
+    flexWrap: ({ flexWrap }) => flexWrap,
   },
 
   FlexCol: {

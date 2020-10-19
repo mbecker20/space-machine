@@ -28,7 +28,7 @@ function OpenFileButton({ reRender, state }: Props) {
           window.flashNotification('rgba(1, 1, 1, .4)', 'no file selected')
         }
       }}
-    >open file</Button>
+    >open</Button>
   )
 }
 
