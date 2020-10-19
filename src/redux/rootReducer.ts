@@ -9,11 +9,15 @@ import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE, MERGE_CONTAINER } fro
 import { RESTORE_FROM_STATE } from './root/rootActionTypes'
 import { RootAction } from './root/rootActionTSTypes'
 
-const initState = {
-  modules: moduleReducer(),
-  connections: {},
-  baseContainerID: bcidReducer(),
+export function createInitState() {
+  return {
+    modules: moduleReducer(),
+    connections: {},
+    baseContainerID: bcidReducer(),
+  }
 }
+
+const initState = createInitState()
 
 function combinedModuleConnectionReducer(state: RootState, action: ModuleAction | ConnectionAction) {
   if (action.type === ADD_CONNECTION || action.type === REMOVE_CONNECTION || action.type === REMOVE_MODULE || action.type === MERGE_CONTAINER) {

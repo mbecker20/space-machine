@@ -5,7 +5,7 @@ import { sizes } from '../../theme/theme'
 import HeaderItem from './HeaderItem'
 import { clamp } from '../../helpers/genFuncs'
 import SpaceDBMenu from './SpaceDBMenu'
-import FileMenu from './FileMenu'
+import FileMenu from './FileMenu/FileMenu'
 
 const SPACEDB_PROJECTS = 'spaceDB projects'
 const FILE = 'file'
