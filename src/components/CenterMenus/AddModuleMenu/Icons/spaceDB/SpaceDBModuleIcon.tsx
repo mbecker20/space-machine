@@ -5,7 +5,7 @@ import { performContainerMerge } from '../../../../../redux/replicateContainer'
 import { RootState } from '../../../../../redux/stateTSTypes'
 import getModuleColor from '../../../../../theme/moduleColor'
 import { colors } from '../../../../../theme/theme'
-import useJSS from '../../style'
+import useJSS from '../style'
 
 interface Props {
   moduleName: string

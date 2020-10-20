@@ -5,7 +5,7 @@ import genRandomID from '../../../../../redux/idGen'
 import { ADD_MODULE } from '../../../../../redux/modules/moduleActionTypes'
 import getModuleColor from '../../../../../theme/moduleColor'
 import { colors } from '../../../../../theme/theme'
-import useJSS from '../../style'
+import useJSS from '../style'
 
 interface Props {
   fullName: string
