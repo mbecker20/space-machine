@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { ModuleType } from '../../../../audioModules/moduleTypes'
-import genRandomID from '../../../../redux/idGen'
-import { ADD_MODULE } from '../../../../redux/modules/moduleActionTypes'
-import getModuleColor from '../../../../theme/moduleColor'
-import { colors } from '../../../../theme/theme'
-import useJSS from '../style'
+import { ModuleType } from '../../../../../audioModules/moduleTypes'
+import genRandomID from '../../../../../redux/idGen'
+import { ADD_MODULE } from '../../../../../redux/modules/moduleActionTypes'
+import getModuleColor from '../../../../../theme/moduleColor'
+import { colors } from '../../../../../theme/theme'
+import useJSS from '../../style'
 
 interface Props {
   fullName: string

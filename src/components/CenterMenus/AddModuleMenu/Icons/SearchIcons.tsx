@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { allModuleData } from './moduleData'
-import ModuleIcon from './ModuleIcon'
-import SpaceDBModuleIcon from './SpaceDBModuleIcon'
+import { allModuleData } from './base/moduleData'
+import ModuleIcon from './base/ModuleIcon'
+import SpaceDBModuleIcon from './spaceDB/SpaceDBModuleIcon'
 
 interface Props {
   query: string

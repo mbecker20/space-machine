@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { CONTAINER } from '../../../../audioModules/moduleTypes'
-import { performContainerMerge } from '../../../../redux/replicateContainer'
-import { RootState } from '../../../../redux/stateTSTypes'
-import getModuleColor from '../../../../theme/moduleColor'
-import { colors } from '../../../../theme/theme'
-import useJSS from '../style'
+import { CONTAINER } from '../../../../../audioModules/moduleTypes'
+import { performContainerMerge } from '../../../../../redux/replicateContainer'
+import { RootState } from '../../../../../redux/stateTSTypes'
+import getModuleColor from '../../../../../theme/moduleColor'
+import { colors } from '../../../../../theme/theme'
+import useJSS from '../../style'
 
 interface Props {
   moduleName: string

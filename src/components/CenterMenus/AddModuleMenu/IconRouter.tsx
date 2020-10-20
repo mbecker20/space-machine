@@ -1,12 +1,12 @@
 import React from 'react'
-import ModuleIcons from './ModuleIcons/ModuleIcons'
+import ModuleIcons from './Icons/base/ModuleIcons'
 import useJSS from './style'
 import { EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES, SEARCH } from './AddModuleMenu'
-import { effectModuleData, sourceModuleData, utilityModuleData } from './ModuleIcons/moduleData'
-import SpaceDBModules from './ModuleIcons/SpaceDBModules'
+import { effectModuleData, sourceModuleData, utilityModuleData } from './Icons/base/moduleData'
+import SpaceDBModules from './Icons/SpaceDBModules'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
-import SearchIcons from './ModuleIcons/SearchIcons'
+import SearchIcons from './Icons/SearchIcons'
 
 interface Props {
   selectedGroup: string

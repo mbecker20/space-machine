@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { ModuleType } from '../../../../audioModules/moduleTypes'
+import { ModuleType } from '../../../../../audioModules/moduleTypes'
 import { DrawerModuleData } from './moduleData'
 import ModuleIcon from './ModuleIcon'
 
