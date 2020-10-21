@@ -137,5 +137,18 @@
 			"",
 			"export default ${1:$TM_FILENAME_BASE}"
 		]
+	},
+
+	"Extend Window": {
+		"scope": "typescript,typescriptreact",
+		"prefix": "extend-window",
+		"body": [
+			"declare global {",
+			"\tinterface Window {",
+			"\t\t$0",
+			"\t}",
+			"}"
+		],
+		"description": ""
 	}
 }

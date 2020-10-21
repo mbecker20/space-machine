@@ -1,4 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+
+declare global {
+  interface Window {
+    
+  }
+}
 
 interface Props {
   
@@ -6,9 +12,9 @@ interface Props {
 
 function FileModules({  }: Props) {
   return (
-    <div>
+    <Fragment>
 
-    </div>
+    </Fragment>
   )
 }
 
