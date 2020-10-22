@@ -1,13 +1,13 @@
 import React from 'react'
 
 interface Props {
-  
+  name: string
 }
 
-function FileModuleIcon({  }: Props) {
+function FileModuleIcon({ name }: Props) {
   return (
     <div>
-
+      name
     </div>
   )
 }

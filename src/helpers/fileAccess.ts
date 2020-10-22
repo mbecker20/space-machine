@@ -31,7 +31,21 @@ export async function saveJSONToChosenFile(json: any, onSaved?: () => void) {
   if (onSaved) onSaved()
 } 
 
-export function getTrimmedFileName(fileHandle: any) {
+export function getTrimmedSMFileName(fileHandle: any) {
   const name = fileHandle.name
   return name.slice(0, name.length - 3)
+}
+
+export async function getDirectoryContentNames(dirHandle: any) {
+  let names: string[] = []
+  for await (const entry of dirHandle.values()) {
+    names.push(entry.name)
+  }
+  return names
+}
+
+export async function getDirectorySMMNames(dirHandle: any) {
+  const allNames = await getDirectoryContentNames(dirHandle)
+  return allNames.filter(name => name.length > 4 && name.slice(name.length - 4) === '.smm')
+    .map(name => name.slice(0, name.length - 4))
 }

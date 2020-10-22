@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTrimmedFileName, saveJSONToChosenFile } from '../../../helpers/fileAccess'
+import { getTrimmedSMFileName, saveJSONToChosenFile } from '../../../helpers/fileAccess'
 import { RootState } from '../../../redux/stateTSTypes'
 import { colors, sizes } from '../../../theme/theme'
 import Button from '../../Button/Button'
@@ -15,7 +15,7 @@ function SaveAsNewButton({ state, reRender }: Props) {
       onClick={async () => {
         saveJSONToChosenFile(state, () => {
           reRender()
-          window.flashNotification(colors.success, `${getTrimmedFileName(window.saveFileHandle)} saved`)
+          window.flashNotification(colors.success, `${getTrimmedSMFileName(window.saveFileHandle)} saved`)
         })
       }}
     >save as</Button>

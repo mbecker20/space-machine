@@ -20,10 +20,11 @@ export const EFFECTS = 'effects'
 export const SOURCES = 'sources'
 export const UTILITY = 'utility'
 export const SPACEDB_MODULES = 'spaceDB'
+export const FILE_MODULES = 'local file'
 export const SEARCH = 'search'
 
 export const addModuleMenuGroups = [
-  EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES,
+  EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES, FILE_MODULES
 ]
 
 function makeData(isOpen: boolean, row?: number, col?: number) {

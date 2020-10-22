@@ -1,12 +1,13 @@
 import React from 'react'
 import ModuleIcons from './Icons/base/ModuleIcons'
 import useJSS from './style'
-import { EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES, SEARCH } from './AddModuleMenu'
+import { EFFECTS, SOURCES, UTILITY, SPACEDB_MODULES, SEARCH, FILE_MODULES } from './AddModuleMenu'
 import { effectModuleData, sourceModuleData, utilityModuleData } from './Icons/base/moduleData'
 import SpaceDBModules from './Icons/spaceDB/SpaceDBModules'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
 import SearchIcons from './Icons/SearchIcons'
+import FileModules from './Icons/file/FileModules'
 
 interface Props {
   selectedGroup: string
@@ -37,6 +38,11 @@ function IconRouter({ selectedGroup, row, col, onClose, query, spaceDBModules }:
         spaceDBModules={spaceDBModules}
         totNumModules={totNumModules}
         onClose={onClose}
+        row={row} col={col}
+      />}
+      {selectedGroup !== FILE_MODULES ? null :
+      <FileModules
+        totNumModules={totNumModules}
         row={row} col={col}
       />}
       {selectedGroup !== SEARCH ? null :

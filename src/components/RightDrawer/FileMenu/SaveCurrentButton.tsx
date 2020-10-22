@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { getTrimmedFileName, saveJSONToFileHandle } from '../../../helpers/fileAccess'
+import { getTrimmedSMFileName, saveJSONToFileHandle } from '../../../helpers/fileAccess'
 import { RootState } from '../../../redux/stateTSTypes'
 import { colors, sizes } from '../../../theme/theme'
 import Button from '../../Button/Button'
@@ -23,9 +23,9 @@ function SaveCurrentButton({ state }: Props) {
         <Button fontSize={sizes.text.medium}
           onClick={async () => {
             await saveJSONToFileHandle(window.saveFileHandle, state)
-            window.flashNotification(colors.success, `${getTrimmedFileName(window.saveFileHandle)} saved`)
+            window.flashNotification(colors.success, `${getTrimmedSMFileName(window.saveFileHandle)} saved`)
           }}
-        >{`save ${getTrimmedFileName(window.saveFileHandle)}`}</Button>
+        >{`save ${getTrimmedSMFileName(window.saveFileHandle)}`}</Button>
       }
     </Fragment>
   )
