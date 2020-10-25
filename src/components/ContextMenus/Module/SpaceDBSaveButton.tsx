@@ -10,7 +10,7 @@ interface Props {
   onClose: () => void
 }
 
-function ContainerSaveButton({ modules, modID, onClose }: Props) {
+function SpaceDBSaveButton({ modules, modID, onClose }: Props) {
   const classes = useJSS()
   return (
     <Fragment>
@@ -29,4 +29,4 @@ function ContainerSaveButton({ modules, modID, onClose }: Props) {
   )
 }
 
-export default ContainerSaveButton
+export default SpaceDBSaveButton

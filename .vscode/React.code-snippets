@@ -141,14 +141,27 @@
 
 	"Extend Window": {
 		"scope": "typescript,typescriptreact",
-		"prefix": "extend-window",
+		"prefix": "extend-window,declare-window",
 		"body": [
 			"declare global {",
 			"\tinterface Window {",
 			"\t\t$0",
 			"\t}",
 			"}"
-		],
-		"description": ""
+		]
+	},
+
+	"Button": {
+		"scope": "typescriptreact",
+		"prefix": "<Button",
+		"body": [
+			"<Button",
+			"\tonClick={() => {",
+			"\t\t$1",
+			"\t}}",
+			">",
+			"\t$0",
+			"</Button>"
+		]
 	}
 }

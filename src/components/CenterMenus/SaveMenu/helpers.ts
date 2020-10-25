@@ -1,3 +1,4 @@
+import { saveSMM } from "../../../helpers/fileAccess"
 import { stringIn } from "../../../helpers/genFuncs"
 import { getContainerModulesConnections } from "../../../redux/getContainerAsProject"
 import { RootState } from "../../../redux/stateTSTypes"
@@ -29,4 +30,14 @@ export function confirmContainerSaveName(setConfirmSaveData: (arg: any) => void,
   } else {
     setConfirmSaveData({ isOpen: true, message: 'module with this name already exists. would you like to update it?' })
   }
+}
+
+export async function saveContainerToFile(saveName: string, containerID: string, state: RootState) {
+  const { modules, connections } = getContainerModulesConnections(state, containerID)
+  const save = {
+    containerID,
+    modules,
+    connections
+  }
+  await saveSMM(window.moduleDirectoryHandle, saveName, save)
 }

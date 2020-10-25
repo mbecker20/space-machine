@@ -11,7 +11,6 @@ declare global {
   interface Window {
     showOpenFilePicker: any
     showSaveFilePicker: any
-    saveDirectoryHandle?: any
     saveFileHandle?: any
     reRenderFileMenu: () => void
   }

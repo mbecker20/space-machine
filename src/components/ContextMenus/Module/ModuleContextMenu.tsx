@@ -5,10 +5,11 @@ import ContextMenu from '../ContextMenu/ContextMenu'
 import DeleteButton from './ModuleDeleteButton'
 import InputOutputView from './InputOutputView'
 import ContainerOpenButton from './ContainerOpenButton'
-import ContainerSaveButton from './ContainerSaveButton'
+import SpaceDBSaveButton from './SpaceDBSaveButton'
 import { MouseDivEvent } from '../types'
 import MarkContainerIO from './MarkContainerIO'
 import useJSS from './style'
+import FileSaveButton from './FileSaveButton'
 
 declare global {
   interface Window {
@@ -42,7 +43,8 @@ function ModuleContextMenu() {
           >{modules[modID as string]?.name}</div>
           <ContainerOpenButton modules={modules} modID={modID as string} onClose={onClose} />
           <InputOutputView modID={modID as string} modules={modules}/>
-          <ContainerSaveButton modules={modules} modID={modID as string} onClose={onClose} />
+          <SpaceDBSaveButton modules={modules} modID={modID as string} onClose={onClose} />
+          <FileSaveButton modules={modules} modID={modID as string} onClose={onClose} />
           <MarkContainerIO modID={modID as string} />
           <DeleteButton modID={modID as string} onClose={onClose}/>
         </ContextMenu>

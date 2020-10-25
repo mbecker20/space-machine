@@ -7,6 +7,7 @@ import FileModuleIcon from './FileModuleIcon'
 declare global {
   interface Window {
     moduleDirectoryHandle?: any
+    fileModuleSaveNames: string[]
     showDirectoryPicker: () => void
   }
 }
@@ -16,6 +17,8 @@ interface Props {
   row: number
   col: number
 }
+
+window.fileModuleSaveNames = []
 
 function FileModules({ totNumModules, row, col }: Props) {
   const [fileModules, setFileModules] = useState<string[]>([])
@@ -39,8 +42,8 @@ function FileModules({ totNumModules, row, col }: Props) {
       <Button
         onClick={async () => {
           window.moduleDirectoryHandle = await window.showDirectoryPicker()
-          const names = await getDirectorySMMNames(window.moduleDirectoryHandle)
-          setFileModules(names)
+          window.fileModuleSaveNames = await getDirectorySMMNames(window.moduleDirectoryHandle)
+          setFileModules(window.fileModuleSaveNames)
         }}
       >
         select module directory

@@ -1,21 +1,24 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { CONTAINER } from '../../../audioModules/moduleTypes'
-import { RootState } from '../../../redux/stateTSTypes'
+import { Modules } from '../../../redux/stateTSTypes'
 import Button from '../../Button/Button'
 import Conditional from '../../Conditional/Conditional'
+import useJSS from './style'
 
 interface Props {
   modID: string
+  modules: Modules
+  onClose: () => void
 }
 
-function FileSaveButton({ modID }: Props) {
-  const modules = useSelector((state: RootState) => state.modules)
+function FileSaveButton({ modID, modules, onClose }: Props) {
+  const classes = useJSS()
   return (
     <Conditional showIf={modules[modID].moduleType === CONTAINER}>
-      <Button
+      <Button className={classes.SaveButton}
         onClick={() => {
-
+          window.openFileContainerSaveMenu(modID)
+          onClose()
         }}
       >
         save to file

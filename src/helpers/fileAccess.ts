@@ -1,3 +1,5 @@
+import { ContainerSave } from "../redux/stateTSTypes"
+
 export async function saveJSONToFileHandle(fileHandle: any, json: any) {
   const writable = await fileHandle.createWritable()
   await writable.write(JSON.stringify(json))
@@ -48,4 +50,9 @@ export async function getDirectorySMMNames(dirHandle: any) {
   const allNames = await getDirectoryContentNames(dirHandle)
   return allNames.filter(name => name.length > 4 && name.slice(name.length - 4) === '.smm')
     .map(name => name.slice(0, name.length - 4))
+}
+
+export async function saveSMM(dirHandle: any, saveName: string, containerSave: ContainerSave) {
+  const fileHandle = await dirHandle.getFileHandle(`${saveName}.smm`, { create: true })
+  await saveJSONToFileHandle(fileHandle, containerSave)
 }
