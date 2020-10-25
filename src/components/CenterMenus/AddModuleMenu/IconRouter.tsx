@@ -42,6 +42,7 @@ function IconRouter({ selectedGroup, row, col, onClose, query, spaceDBModules }:
       />}
       {selectedGroup !== FILE_MODULES ? null :
       <FileModules
+        onClose={onClose}
         totNumModules={totNumModules}
         row={row} col={col}
       />}
