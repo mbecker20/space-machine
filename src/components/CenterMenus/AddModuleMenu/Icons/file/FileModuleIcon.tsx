@@ -9,7 +9,7 @@ interface Props {
   row: number
   col: number
   onClose: () => void
-  isFocussed: boolean
+  isFocussed?: boolean
 }
 
 function FileModuleIcon({ name, totNumModules, row, col, onClose, isFocussed }: Props) {

@@ -28,7 +28,7 @@ function FileModules({ totNumModules, row, col, onClose }: Props) {
       {window.moduleDirectoryHandle ?
       (fileModules.length === 0 ?
       <Fragment>
-        <Button fontSize={sizes.text.small} notClickable={true}>
+        <Button fontSize={sizes.text.small} notClickable>
           no modules in this directory.
           save modules by right clicking a custom container,
           and selecting save to file.
