@@ -50,6 +50,12 @@ export interface Modules {
   [index: string]: AnyModule
 }
 
+export interface ContainerSave {
+  containerID: string
+  modules: Modules
+  connections: Connections
+}
+
 // connection related state
 
 export interface ConnectionData {

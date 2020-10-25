@@ -3,7 +3,7 @@ import ConnectionMenu from './ConnectionMenu/ConnectionMenu'
 import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
 import SpaceDBProjectSaveMenu from './SaveMenu/SpaceDBProjectSaveMenu'
 import ConfirmDeleteMenu from './ConfirmDeleteMenu/ConfirmDeleteMenu'
-import FileSaveMenu from './SaveMenu/FileSaveMenu'
+import FileContainerSaveMenu from './SaveMenu/FileContainerSaveMenu'
 import SpaceDBContainerSaveMenu from './SaveMenu/SpaceDBContainerSaveMenu'
 import AnalyzerRangeSetMenu from './RangeSetMenu/AnalyzerRangeSetMenu'
 import RenameModuleMenu from './RenameMenu/RenameModuleMenu'
@@ -24,7 +24,7 @@ function CenterMenus() {
       <SpaceDBProjectSaveMenu/>
       <SpaceDBContainerSaveMenu/>
       <ConfirmDeleteMenu/>
-      <FileSaveMenu/>
+      <FileContainerSaveMenu/>
       <ConfirmBlankProject/>
     </Fragment>
   )

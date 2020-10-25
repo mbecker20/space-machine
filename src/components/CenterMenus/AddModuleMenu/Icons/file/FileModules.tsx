@@ -7,6 +7,7 @@ import FileModuleIcon from './FileModuleIcon'
 declare global {
   interface Window {
     moduleDirectoryHandle?: any
+    showDirectoryPicker: () => void
   }
 }
 
