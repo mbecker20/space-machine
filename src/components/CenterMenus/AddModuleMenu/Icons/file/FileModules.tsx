@@ -6,9 +6,8 @@ import FileModuleIcon from './FileModuleIcon'
 
 declare global {
   interface Window {
-    moduleDirectoryHandle?: any
+    moduleDirectoryHandle: any
     fileModuleSaveNames: string[]
-    showDirectoryPicker: () => void
   }
 }
 
@@ -21,6 +20,10 @@ interface Props {
 }
 
 window.fileModuleSaveNames = []
+
+if (window.localStorage.getItem('moduleDirectoryPath')) {
+
+}
 
 function FileModules({ totNumModules, totNumConnections, row, col, onClose }: Props) {
   const [fileModules, setFileModules] = useState<string[]>(window.fileModuleSaveNames)

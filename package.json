@@ -27,6 +27,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/redux-logger": "^3.0.8",
     "@types/rethinkdb": "^2.3.16",
+    "@types/wicg-file-system-access": "^2020.9.1",
     "react": "^16.14.0",
     "react-archer": "^2.0.2",
     "react-dom": "^16.14.0",
