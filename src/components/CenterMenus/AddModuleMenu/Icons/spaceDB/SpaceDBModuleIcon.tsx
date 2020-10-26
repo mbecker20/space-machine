@@ -1,8 +1,7 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { CONTAINER } from '../../../../../audioModules/moduleTypes'
 import { performContainerMerge } from '../../../../../redux/replicateContainer'
-import { RootState } from '../../../../../redux/stateTSTypes'
 import getModuleColor from '../../../../../theme/moduleColor'
 import { colors } from '../../../../../theme/theme'
 import useJSS from '../style'
@@ -10,13 +9,14 @@ import useJSS from '../style'
 interface Props {
   moduleName: string
   totNumberModules: number
+  totNumberConnections: number
   onClose: () => void
   row: number
   col: number
   isFocussed?: boolean
 }
 
-function SpaceDBModuleIcon({ moduleName, totNumberModules, onClose, row, col, isFocussed }: Props) {
+function SpaceDBModuleIcon({ moduleName, totNumberModules, totNumberConnections, onClose, row, col, isFocussed }: Props) {
   const classes = useJSS()
   const dispatch = useDispatch()
   function addModule() {
@@ -28,7 +28,6 @@ function SpaceDBModuleIcon({ moduleName, totNumberModules, onClose, row, col, is
   if (isFocussed) {
     window.addSelectedSearchModule = addModule
   }
-  const totNumberConnections = useSelector((state: RootState) => Object.keys(state.connections).length)
   return (
     <div className={classes.DrawerItem}>
       <div className={classes.DrawerIcon}

@@ -56,3 +56,10 @@ export async function saveSMM(dirHandle: any, saveName: string, containerSave: C
   const fileHandle = await dirHandle.getFileHandle(`${saveName}.smm`, { create: true })
   await saveJSONToFileHandle(fileHandle, containerSave)
 }
+
+export async function getSavedSMMFromName(dirHandle: any, saveName: string): Promise<ContainerSave> {
+  const fileHandle = await dirHandle.getFileHandle(`${saveName}.smm`)
+  const file = await fileHandle.getFile()
+  const stringData = await file.text()
+  return JSON.parse(stringData)
+}

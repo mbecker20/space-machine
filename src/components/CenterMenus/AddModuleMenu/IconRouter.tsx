@@ -20,6 +20,7 @@ interface Props {
 
 function IconRouter({ selectedGroup, row, col, onClose, query, spaceDBModules }: Props) {
   const totNumModules = useSelector((state: RootState) => Object.keys(state.modules).length)
+  const totNumConnections = useSelector((state: RootState) => Object.keys(state.connections).length)
   const classes = useJSS()
   return (
     <div className={classes.IconRouter}>
@@ -37,6 +38,7 @@ function IconRouter({ selectedGroup, row, col, onClose, query, spaceDBModules }:
       <SpaceDBModules
         spaceDBModules={spaceDBModules}
         totNumModules={totNumModules}
+        totNumConnections={totNumConnections}
         onClose={onClose}
         row={row} col={col}
       />}
@@ -44,6 +46,7 @@ function IconRouter({ selectedGroup, row, col, onClose, query, spaceDBModules }:
       <FileModules
         onClose={onClose}
         totNumModules={totNumModules}
+        totNumConnections={totNumConnections}
         row={row} col={col}
       />}
       {selectedGroup !== SEARCH ? null :
@@ -51,6 +54,7 @@ function IconRouter({ selectedGroup, row, col, onClose, query, spaceDBModules }:
         query={query}
         spaceDBModules={spaceDBModules}
         totNumModules={totNumModules}
+        totNumConnections={totNumConnections}
         onClose={onClose}
         row={row} col={col}
       />}

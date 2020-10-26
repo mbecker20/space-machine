@@ -3,13 +3,14 @@ import SpaceDBModuleIcon from './SpaceDBModuleIcon'
 
 interface Props {
   totNumModules: number
+  totNumConnections: number
   onClose: () => void
   row: number
   col: number
   spaceDBModules: string[]
 }
 
-function SpaceDBModules({ spaceDBModules, totNumModules, onClose, row, col }: Props) {
+function SpaceDBModules({ spaceDBModules, totNumModules, totNumConnections, onClose, row, col }: Props) {
   useEffect(() => {
     window.refreshSpaceDBModules()
   }, [])
@@ -21,6 +22,7 @@ function SpaceDBModules({ spaceDBModules, totNumModules, onClose, row, col }: Pr
             moduleName={moduleName}
             key={index}
             totNumberModules={totNumModules}
+            totNumberConnections={totNumConnections}
             onClose={onClose}
             row={row} col={col}
           />

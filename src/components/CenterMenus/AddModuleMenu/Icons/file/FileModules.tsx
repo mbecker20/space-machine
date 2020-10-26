@@ -14,6 +14,7 @@ declare global {
 
 interface Props {
   totNumModules: number
+  totNumConnections: number
   row: number
   col: number
   onClose: () => void
@@ -21,7 +22,7 @@ interface Props {
 
 window.fileModuleSaveNames = []
 
-function FileModules({ totNumModules, row, col, onClose }: Props) {
+function FileModules({ totNumModules, totNumConnections, row, col, onClose }: Props) {
   const [fileModules, setFileModules] = useState<string[]>(window.fileModuleSaveNames)
   return (
     <Fragment>
@@ -46,9 +47,10 @@ function FileModules({ totNumModules, row, col, onClose }: Props) {
       :
       fileModules.map((name, index) => {
         return (
-          <FileModuleIcon key={index} 
+          <FileModuleIcon key={index}
             name={name} onClose={onClose}
-            totNumModules={totNumModules} 
+            totNumModules={totNumModules}
+            totNumConnections={totNumConnections}
             row={row} col={col}
           />
         )
