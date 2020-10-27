@@ -21,10 +21,6 @@ interface Props {
 
 window.fileModuleSaveNames = []
 
-if (window.localStorage.getItem('moduleDirectoryPath')) {
-
-}
-
 function FileModules({ totNumModules, totNumConnections, row, col, onClose }: Props) {
   const [fileModules, setFileModules] = useState<string[]>(window.fileModuleSaveNames)
   return (
