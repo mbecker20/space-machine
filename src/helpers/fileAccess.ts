@@ -10,7 +10,7 @@ export async function loadJSONFromPickedFile(onFileHandle?: (fileHandle: FileSys
   const [ fileHandle ] = await window.showOpenFilePicker()
   if (fileHandle) {
     if (onFileHandle) onFileHandle(fileHandle)
-    const file = await fileHandle.getFile()
+    const file = await fileHandle.getFile() as any
     const data = await file.text()
     return JSON.parse(data)
   } else {
@@ -59,7 +59,7 @@ export async function saveSMM(dirHandle: FileSystemDirectoryHandle, saveName: st
 
 export async function getSavedSMMFromName(dirHandle: FileSystemDirectoryHandle, saveName: string): Promise<ContainerSave> {
   const fileHandle = await dirHandle.getFileHandle(`${saveName}.smm`)
-  const file = await fileHandle.getFile()
+  const file = await fileHandle.getFile() as any
   const stringData = await file.text()
   return JSON.parse(stringData)
 }

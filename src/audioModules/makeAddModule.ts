@@ -14,6 +14,7 @@ import {
   ANALYZER,
   ENVELOPED_TRIGGER,
   WHITE_NOISE,
+  TUNER,
 } from './moduleTypes'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
@@ -32,6 +33,7 @@ import makeDistortion, { makeDistortionControlData } from './modules/distortion'
 import makeAnalyzer, { makeAnalyzerControlData } from './modules/analyzer'
 import makeEnvelopedTrigger, { makeEnvelopedTriggerControlData } from './modules/envelopedTrigger'
 import makeWhiteNoise, { makeWhiteNoiseControlData } from './modules/whiteNoise'
+import makeTuner, { makeTunerControlData } from './modules/tuner'
 
 declare global {
   interface Window {
@@ -129,6 +131,12 @@ function makeAddModule() {
         const whiteNoiseControlData = makeWhiteNoiseControlData()
         window.audioModules = { ...window.audioModules, [id]: whiteNoise }
         dispatch(addModule(id, name, moduleType, whiteNoiseControlData, parentID, row, col, [], ['0']))
+        break
+      case TUNER:
+        const tuner = makeTuner()
+        const tunerControlData = makeTunerControlData()
+        window.audioModules = { ...window.audioModules, [id]: tuner }
+        dispatch(addModule(id, name, moduleType, tunerControlData, parentID, row, col, ['0'], ['0']))
         break
     }
   }

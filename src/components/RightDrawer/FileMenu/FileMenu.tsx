@@ -9,8 +9,6 @@ import SaveCurrentButton from './SaveCurrentButton'
 
 declare global {
   interface Window {
-    showOpenFilePicker: any
-    showSaveFilePicker: any
     saveFileHandle?: any
     reRenderFileMenu: () => void
   }
