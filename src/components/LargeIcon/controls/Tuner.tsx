@@ -18,7 +18,7 @@ function Tuner({ modID }: Props) {
   }
 
   function draw(p5: p5Type) {
-
+    analyzer.audioNode
   }
 
   return (

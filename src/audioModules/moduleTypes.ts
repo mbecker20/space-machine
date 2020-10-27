@@ -59,7 +59,7 @@ export const TUNER_CONTROL = 'TUNER_CONTROL'
 
 export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH' | 'PAD' | 'TUNER_CONTROL'
 export type Value = number | string | boolean
-export type SetFunc = (arg: string) => void
+export type SetFunc = (arg: string) => number | void
 export type Range = [number, number] // min / max
 
 export interface ControlDataPacket {
