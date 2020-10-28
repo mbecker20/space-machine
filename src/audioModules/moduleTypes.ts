@@ -47,6 +47,7 @@ export interface AudioModules {
 
 // control types
 
+export const NONE = 'NONE' // no control rendered, but the func is available
 export const TYPE = 'TYPE'
 export const VALUE = 'VALUE'
 export const BUTTON = 'BUTTON'
@@ -57,7 +58,7 @@ export const GRAPH = 'GRAPH'
 export const PAD = 'PAD'
 export const TUNER_CONTROL = 'TUNER_CONTROL'
 
-export type ControlType = 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH' | 'PAD' | 'TUNER_CONTROL'
+export type ControlType = 'NONE' | 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH' | 'PAD' | 'TUNER_CONTROL'
 export type Value = number | string | boolean
 export type SetFunc = (arg: string) => number | number[] | void
 export type Range = [number, number] // min / max
