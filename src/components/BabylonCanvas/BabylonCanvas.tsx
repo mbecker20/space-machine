@@ -10,10 +10,8 @@ interface Props extends CanvasHTMLAttributes<HTMLCanvasElement> {
   onSceneReady?: (scene: Scene) => void
 }
 
-function BabylonCanvas(props: Props) {
+function BabylonCanvas({ onRender, onSceneReady, antialias, engineOptions, adaptToDeviceRatio, sceneOptions, ...rest }: Props) {
   const reactCanvas = useRef<HTMLCanvasElement>(null)
-  const { antialias, engineOptions, adaptToDeviceRatio, sceneOptions, onRender, onSceneReady, ...rest } = props
-
   useEffect(() => {
     if (reactCanvas.current) {
       const engine = new Engine(reactCanvas.current, antialias, engineOptions, adaptToDeviceRatio)
