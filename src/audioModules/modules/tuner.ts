@@ -16,6 +16,10 @@ export function makeTunerControlData(): ControlData {
   }
 }
 
+function addHarmonics(freqArray: Float32Array, bufferLength: number, numHarmonics: number) {
+
+}
+
 function getFreqFromIndex(index: number, bufferLength: number) {
   return index * audioCtx.sampleRate / (2 * bufferLength)
 }
