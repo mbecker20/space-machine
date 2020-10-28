@@ -1,3 +1,5 @@
+import { ObjFrom2Arrays } from "../redux/helpers"
+
 export const notes = {
   "C0": 16.35,
   "C#0": 17.32,
@@ -142,3 +144,5 @@ export const notes = {
   "D#8": 4978.03,
   "Eb8": 4978.03
 }
+
+export const noteIndices = ObjFrom2Arrays(Object.keys(notes), Object.keys(notes).map((note, index) => index))
