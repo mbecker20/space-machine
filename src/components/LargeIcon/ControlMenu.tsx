@@ -1,9 +1,9 @@
 import React from 'react'
 import useJSS from './style'
-import { AudioModule, GRAPH, PAD } from '../../audioModules/moduleTypes'
+import { AudioModule, GRAPH, PAD, TUNER_CONTROL } from '../../audioModules/moduleTypes'
 import { Module } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
-import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl } from './controls/all'
+import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl, TunerControl } from './controls/all'
 import PadControl from './controls/Pad'
 
 interface Props {
@@ -48,6 +48,10 @@ function ControlMenu({ audioModule, selectedModule, reRenderIcon }: Props) {
             controlType === PAD
             ?
             <PadControl setFunc={setFunc} />
+            :
+            controlType === TUNER_CONTROL
+            ?
+            <TunerControl modID={selectedModule.id} />
             :
             null
             }
