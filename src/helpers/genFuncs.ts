@@ -67,7 +67,7 @@ export function clamp(val: number, range: [number, number]) {
 }
 
 export function inRange(val: number, range: [number, number]) {
-	return val >= range[0] && val <= range[1] 
+	return val >= range[0] && val <= range[1]
 }
 
 export function mapValBetweenRanges(val: number, fromRange: [number, number], toRange: [number, number]) {
