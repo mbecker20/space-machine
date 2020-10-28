@@ -11,7 +11,8 @@ export function makeTunerControlData(): ControlData {
   return {
     'tuner': {
       controlType: TUNER_CONTROL,
-    }
+      range: [-20, 50],
+    },
   }
 }
 
@@ -32,7 +33,7 @@ function makeTuner(prevControlData?: ControlData): TunerModule {
           maxBin = i
         }
       }
-      return i 
+      return [maxBin * audioCtx.sampleRate / (2 * bufferLength), maxdB]
     }
   }
   return {

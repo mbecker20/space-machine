@@ -57,7 +57,7 @@ function Graph({ modID }: Props) {
 
   const dispatch = useDispatch()
   return (
-    <FlexCol style={{ justifyContent: 'center', alignItems: 'center' }}>
+    <FlexCol justifyContent='center' alignItems='center'>
       <Sketch style={{ width: sizes.moduleView.bigIconWidth }}
         setup={setup} 
         draw={draw} 
