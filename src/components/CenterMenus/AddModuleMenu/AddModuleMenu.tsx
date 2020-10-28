@@ -39,8 +39,12 @@ function AddModuleMenu() {
   const [{ isOpen, row, col }, setData] = useState(makeData(false))
   const searchRef = useRef<HTMLInputElement>(null)
   window.openAddModuleMenu = (row, col) => {
+    setQuery('')
     setData(makeData(true, row, col))
-    if (searchRef.current) searchRef.current.focus()
+    if (searchRef.current) {
+      searchRef.current.value = ''
+      searchRef.current.focus()
+    }
   }
   const onClose = () => { setData(makeData(false)) }
   const [selectedGroup, setSG] = useState(EFFECTS)

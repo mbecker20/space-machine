@@ -60,6 +60,7 @@ function Tuner({ modID }: Props) {
     p5.line(0, maxdBLine, width, maxdBLine)
     const maxFreqLine = mapValBetweenRanges(maxFreq, [0, audioCtx.sampleRate / 2], [0, width])
     p5.line(maxFreqLine, 0, maxFreqLine, height)
+    p5.text(maxFreq, width - 10, height / 2)
   }
 
   return (

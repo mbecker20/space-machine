@@ -11,21 +11,24 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, range: Range = [0, 0], onChangeSubmit: (newRange: Range) => void = () => { }) {
+function makeData(isOpen: boolean, onChangeSubmit: (newRange: Range) => void = () => { }) {
   return {
     isOpen,
-    range,
     onChangeSubmit,
   }
 }
 
 function AnalyzerRangeSetMenu() {
-  const [{ isOpen, range, onChangeSubmit }, setData] = useState(makeData(false))
-  window.openAnalyzerRangeSetMenu = (range, onChangeSubmit) => { setData(makeData(true, range, onChangeSubmit)) }
+  const [{ isOpen, onChangeSubmit }, setData] = useState(makeData(false))
+  const [min, setMin] = useState(0)
+  const [max, setMax] = useState(0)
+  window.openAnalyzerRangeSetMenu = (range, onChangeSubmit) => { 
+    setMin(range[0])
+    setMax(range[1])
+    setData(makeData(true, onChangeSubmit))
+  }
   const onClose = () => { setData(makeData(false)) }
   const classes = useJSS()
-  const [min, setMin] = useState(range[0])
-  const [max, setMax] = useState(range[1])
   return (
     <CenterMenu isClosed={!isOpen} header='set analyzer range' onClose={onClose}>
       <div className={classes.CMInputBounder}
