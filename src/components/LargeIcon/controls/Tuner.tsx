@@ -29,18 +29,19 @@ function Tuner({ modID }: Props) {
     p5.createCanvas(canvasParentRef.clientWidth, height).parent(canvasParentRef)
     p5.textAlign(p5.CENTER, p5.CENTER)
     p5.fill(100)
+    p5.frameRate(2)
     setWidth(canvasParentRef.clientWidth)
   }
 
   function draw(p5: p5Type) {
     const [maxFreq, maxdB] = tuner.controlSetFuncs['tuner']('') as number[]
-    const xStep = width / tuner.bufferLength
+    const xStep = width / (tuner.bufferLength / 16)
     p5.background(0) // draw black background
     let currX = 0
     let currY = height - mapValBetweenRanges(tuner.freqArray[0], yRange, [0, height])
     p5.stroke(colors.analyzerModuleBG)
     p5.strokeWeight(6)
-    for (let i = 0; i < tuner.bufferLength - 1; i++) {
+    for (let i = 0; i < tuner.bufferLength / 16; i++) {
       const nextX = (i + 1) * xStep
       const nextY = height - mapValBetweenRanges(tuner.freqArray[i + 1], yRange, [0, height])
       p5.line(currX, currY, nextX, nextY)
@@ -58,7 +59,7 @@ function Tuner({ modID }: Props) {
     // draw max freq/maxdB lines
     const maxdBLine = height - mapValBetweenRanges(maxdB, yRange, [0, height])
     p5.line(0, maxdBLine, width, maxdBLine)
-    const maxFreqLine = mapValBetweenRanges(maxFreq, [0, audioCtx.sampleRate / 2], [0, width])
+    const maxFreqLine = mapValBetweenRanges(maxFreq, [0, audioCtx.sampleRate / 32], [0, width])
     p5.line(maxFreqLine, 0, maxFreqLine, height)
     p5.text(maxFreq, width - 10, height / 2)
   }
