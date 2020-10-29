@@ -55,8 +55,9 @@ function makeDial(scene: Scene) {
     textPlane.parent = tick
     const textMat = AdvancedDynamicTexture.CreateForMesh(textPlane)
     const textBlock = new TextBlock(`${note}textplane`, note)
-    textBlock.fontSize = 16
+    textBlock.fontSize = 166
     textBlock.color = 'black'
+    textMat.addControl(textBlock)
   })
 }
 
