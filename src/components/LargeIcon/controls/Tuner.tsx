@@ -1,68 +1,23 @@
-import { AbstractMesh, Color3, Color4, Mesh, MeshBuilder, Plane, PointLight, Scene, StandardMaterial, TargetCamera, TransformNode, Vector3 } from '@babylonjs/core'
-import { AdvancedDynamicTexture, TextBlock } from 'babylonjs-gui'
+import { Color3, Color4, Mesh, PointLight, TargetCamera, Vector3 } from '@babylonjs/core'
 import React, { Fragment } from 'react'
+import { TunerModule } from '../../../audioModules/modules/tuner'
 import { Range, TUNER } from '../../../audioModules/moduleTypes'
-import { mapValBetweenRanges } from '../../../helpers/genFuncs'
-import { noteIndices, notes, notesNoSharp } from '../../../helpers/notes'
+import { clamp, mapValBetweenRanges } from '../../../helpers/genFuncs'
+import { notes } from '../../../helpers/notes'
 import getModuleColor from '../../../theme/moduleColor'
 import { sizes } from '../../../theme/theme'
 import BabylonCanvas from '../../BabylonCanvas/BabylonCanvas'
-import Button from '../../Button/Button'
-import FlexRow from '../../Flex/FlexRow'
+import makeDial, { dialRange, noteFreqRange } from './makeDial'
 
 
 interface Props {
   modID: string
 }
 
-const noteFreqRange = [Math.sqrt(notes['C1']), Math.sqrt(notes['C6'])]
-
-const diameter = 1600
-const height = 160
-
-function makeDial(scene: Scene) {
-  const dialMat = new StandardMaterial('dialMat', scene)
-  const tickMat = new StandardMaterial('tickMat', scene)
-  tickMat.diffuseColor = new Color3(0, .5, 0)
-
-  const dial = MeshBuilder.CreateCylinder('dial', {
-    height,
-    diameter,
-    tessellation: Math.pow(2, 7),
-  }, scene)
-  dial.material = dialMat
-  dial.cullingStrategy = AbstractMesh.CULLINGSTRATEGY_OPTIMISTIC_INCLUSION
-  Object.keys(notesNoSharp).filter((note, index) => index <= noteIndices['C6']).forEach(note => {
-    const tickPos = mapValBetweenRanges(Math.sqrt(notes[note]), noteFreqRange as Range, [0, 2 * Math.PI * .95])
-    const tickNode = new TransformNode(`${note}node`)
-    const tick = MeshBuilder.CreateBox(`${note}tick`, {
-      height: height - 60,
-      width:5,
-      depth: 2,
-    })
-    tick.material = tickMat
-    tick.position.x = diameter / 2
-    tick.parent = tickNode
-    tickNode.rotation.y = -tickPos
-    tickNode.parent = dial
-
-    const textPlane = MeshBuilder.CreatePlane(`${note}textplane`, {
-      width: 20,
-      height: 20,
-      sourcePlane: new Plane(1, 0, 0, 0)
-    }, scene)
-    textPlane.position.y = height - 30
-    textPlane.parent = tick
-    const textMat = AdvancedDynamicTexture.CreateForMesh(textPlane)
-    const textBlock = new TextBlock(`${note}textplane`, note)
-    textBlock.fontSize = 166
-    textBlock.color = 'black'
-    textMat.addControl(textBlock)
-  })
-}
-
 function Tuner({ modID }: Props) {
-  let target = 0
+  let target = -.1
+  let frame = 0
+  const tuner = window.audioModules[modID] as TunerModule
   return (
     <Fragment>
       <BabylonCanvas
@@ -89,8 +44,17 @@ function Tuner({ modID }: Props) {
           
         }}
         onRender={scene => {
+          if (frame === 0) {
+            const [maxFreq, maxdB] = tuner.controlSetFuncs['tuner']('') as Range
+            if (maxdB > -65) {
+              target = mapValBetweenRanges(clamp(Math.log(maxFreq), noteFreqRange as Range), noteFreqRange, dialRange)
+            } else {
+              target = -.15
+            }
+          }
           const dial = scene.getMeshByName('dial') as Mesh
           dial.rotation.y += .1 * (target - dial.rotation.y)
+          frame = (frame + 1) % 30
         }}
         style={{
           borderRadius: '.8em'
@@ -98,22 +62,6 @@ function Tuner({ modID }: Props) {
         width={sizes.moduleView.bigIconWidth}
         height='100px'
       />
-      <FlexRow>
-        <Button
-          onClick={() => {
-            target += Math.PI/32
-          }}
-        >
-          rotate left
-        </Button>
-        <Button
-          onClick={() => {
-            target -= Math.PI / 32
-          }}
-        >
-          rotate right
-        </Button>
-      </FlexRow>
     </Fragment>
   )
 }

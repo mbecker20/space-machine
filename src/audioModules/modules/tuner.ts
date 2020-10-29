@@ -12,7 +12,6 @@ export function makeTunerControlData(): ControlData {
   return {
     'tuner': {
       controlType: TUNER_CONTROL,
-      range: [-200, 10],
     },
   }
 }
@@ -48,6 +47,7 @@ function getFreqFromIndex(index: number, bufferLength: number) {
 function makeTuner(prevControlData?: ControlData): TunerModule {
   const analyzer = audioCtx.createAnalyser()
   analyzer.fftSize = Math.pow(2, 15)
+  analyzer.smoothingTimeConstant = 0
   const bufferLength = analyzer.frequencyBinCount
   const freqArray = new Float32Array(bufferLength)
   const controlSetFuncs: ControlSetFuncs = {
