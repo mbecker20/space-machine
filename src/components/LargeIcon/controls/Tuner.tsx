@@ -1,5 +1,5 @@
 import { AbstractMesh, Color3, Color4, Mesh, MeshBuilder, Plane, PointLight, Scene, StandardMaterial, TargetCamera, TransformNode, Vector3 } from '@babylonjs/core'
-import { AdvancedDynamicTexture } from 'babylonjs-gui'
+import { AdvancedDynamicTexture, TextBlock } from 'babylonjs-gui'
 import React, { Fragment } from 'react'
 import { Range, TUNER } from '../../../audioModules/moduleTypes'
 import { mapValBetweenRanges } from '../../../helpers/genFuncs'
@@ -36,7 +36,7 @@ function makeDial(scene: Scene) {
     const tickPos = mapValBetweenRanges(Math.sqrt(notes[note]), noteFreqRange as Range, [0, 2 * Math.PI * .95])
     const tickNode = new TransformNode(`${note}node`)
     const tick = MeshBuilder.CreateBox(`${note}tick`, {
-      height: height - 50,
+      height: height - 60,
       width:5,
       depth: 2,
     })
@@ -54,6 +54,9 @@ function makeDial(scene: Scene) {
     textPlane.position.y = height - 30
     textPlane.parent = tick
     const textMat = AdvancedDynamicTexture.CreateForMesh(textPlane)
+    const textBlock = new TextBlock(`${note}textplane`, note)
+    textBlock.fontSize = 16
+    textBlock.color = 'black'
   })
 }
 
