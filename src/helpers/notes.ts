@@ -1,6 +1,6 @@
 import { ObjFrom2Arrays } from "../redux/helpers"
 
-export const notes = {
+export const notes: { [index: string]: number } = {
   "C0": 16.35,
   "C#0": 17.32,
   "Db0": 17.32,
@@ -145,4 +145,11 @@ export const notes = {
   "Eb8": 4978.03
 }
 
-export const noteIndices = ObjFrom2Arrays(Object.keys(notes), Object.keys(notes).map((note, index) => index))
+const keysNoSharp = Object.keys(notes).filter(note => note.length <= 2 || note[1] !== '#')
+
+export const notesNoSharp = ObjFrom2Arrays(
+  keysNoSharp,
+  keysNoSharp.map(note => notes[note])
+)
+
+export const noteIndices = ObjFrom2Arrays(keysNoSharp, keysNoSharp.map((note, index) => index))

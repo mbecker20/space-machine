@@ -29,6 +29,7 @@
     "@types/redux-logger": "^3.0.8",
     "@types/rethinkdb": "^2.3.16",
     "@types/wicg-file-system-access": "^2020.9.1",
+    "babylonjs-gui": "^4.1.0",
     "mathjs": "^7.5.1",
     "react": "^16.14.0",
     "react-archer": "^2.0.2",
