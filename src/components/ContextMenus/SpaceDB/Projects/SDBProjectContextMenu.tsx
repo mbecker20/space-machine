@@ -1,5 +1,7 @@
-import React, { Fragment, useState } from 'react'
-import ContextMenu from '../../ContextMenu/ContextMenu'
+import React, { Fragment, useRef, useState } from 'react'
+import Conditional from '../../../Conditional/Conditional'
+import ContextMenu, { Location } from '../../ContextMenu/ContextMenu'
+import { getLocation } from '../../ContextMenu/helpers'
 import { MouseDivEvent } from '../../types'
 import ProjectDeleteButton from './ProjectDeleteButton'
 
@@ -17,30 +19,32 @@ declare global {
 
 export function makeData(
   isOpen: boolean,
-  event?: MouseDivEvent,
+  location?: Location,
   saveName?: string,
   setSaveList?: (arg: string[]) => void
 ) {
   return {
     isOpen,
-    event,
+    location,
     saveName,
     setSaveList
   }
 }
 
 function SDBProjectContextMenu() {
-  const [{ isOpen, event, saveName, setSaveList }, setData] = useState(makeData(false))
-  window.openSDBProjectContextMenu = (event, saveName, setSaveList) => { setData(makeData(true, event, saveName, setSaveList)) }
+  const [{ isOpen, location, saveName, setSaveList }, setData] = useState(makeData(false))
+  const cmRef = useRef<HTMLDivElement>(null)
+  window.openSDBProjectContextMenu = (event, saveName, setSaveList) => {
+    const newLocation = getLocation(event, cmRef)
+    setData(makeData(true, newLocation, saveName, setSaveList)) 
+  }
   const onClose = () => { setData(makeData(false)) }
   return (
-    <Fragment>
-      {!isOpen ? null :
-        <ContextMenu event={event as MouseDivEvent} onClose={onClose}>
-          <ProjectDeleteButton saveName={saveName as string} setSaveList={setSaveList as SetSaveList} onClose={onClose} />
-        </ContextMenu>
-      }
-    </Fragment>
+    <Conditional showIf={isOpen}>
+      <ContextMenu location={location as Location} cmRef={cmRef}  onClose={onClose}>
+        <ProjectDeleteButton saveName={saveName as string} setSaveList={setSaveList as SetSaveList} onClose={onClose} />
+      </ContextMenu>
+    </Conditional>
   )
 }
 

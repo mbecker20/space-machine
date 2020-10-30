@@ -1,26 +1,23 @@
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
-import { MouseDivEvent } from '../types'
-import { getLocation } from './helpers'
+import React, { ReactNode, RefObject } from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
 
+export type Location = { top: number, left: number }
+
 interface Props {
   children: ReactNode
-  event: MouseDivEvent
   onClose: () => void
   bounderStyle?: CSS.Properties
   style?: CSS.Properties
+  location: Location
+  cmRef: RefObject<HTMLDivElement>
 }
 
-function ContextMenu({ event, children, onClose, bounderStyle, style }: Props) {
+function ContextMenu({ children, onClose, bounderStyle, style, location, cmRef }: Props) {
   const classes = useJSS()
-  const cmRef = useRef<HTMLDivElement>(null)
-  const [location, setLocation] = useState(getLocation(event, cmRef))
-  useEffect(() => {
-    setLocation(getLocation(event, cmRef))
-  }, [event])
+  
   return (
-    <div className={classes.Bounder}
+    <div className={classes.ContextMenuBounder}
       onPointerDown={onClose}
       style={bounderStyle}
     >
@@ -28,6 +25,7 @@ function ContextMenu({ event, children, onClose, bounderStyle, style }: Props) {
         style={Object.assign({
           top: location.top,
           left: location.left,
+          opacity: 1,
         }, style)}
         ref={cmRef}
         onPointerDown={e => { e.stopPropagation() }}

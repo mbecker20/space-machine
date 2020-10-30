@@ -6,15 +6,16 @@ const maxWidth = '8em'
 const maxHeight = '12em'
 
 const useJSS = createUseStyles({
-  Bounder: {
+  ContextMenuBounder: {
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0,0,0,0)',
     position: 'absolute',
     overflow: 'hidden',
     top: 0,
     left: 0,
     zIndex: zIndex.contextMenu,
+    opacity: 1,
   },
 
   ContextMenu: {
@@ -32,6 +33,7 @@ const useJSS = createUseStyles({
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'white',
     },
+    zIndex: zIndex.contextMenu + 100
   },
 
   MenuItem: {

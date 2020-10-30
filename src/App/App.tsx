@@ -49,8 +49,8 @@ function App() {
         <PointerLayer pointerLayerData={ pointerLayerData } resetPointerLayerData={resetPointerLayerData}/>
       }
       <CenterMenus />
-      <Notification />
       <ContextMenus />
+      <Notification />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { sizes } from '../../../theme/theme'
 import { Module, ContainerModule, RootState, ContainerControl } from '../../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import FlexRow from '../../Flex/FlexRow'
 import Switch from '../../Switch/Switch'
 import FlexCol from '../../Flex/FlexCol'
 import useJSS from './style'
+import Conditional from '../../Conditional/Conditional'
 
 interface Props {
   selectedModule: Module
@@ -24,8 +25,7 @@ function MarkContainerControls({ selectedModule }: Props) {
     :
     Object.keys(selectedModule.controlData).length !== 0
   return (
-    <Fragment>
-      {!open ? null :
+    <Conditional showIf={open}>
       <FlexCol>
         <div className={classes.MenuHeader}> mark as container control </div>
         <FlexRow justifyContent='center' style={{ flexWrap: 'wrap', maxWidth: '40vmin' }}>
@@ -112,8 +112,8 @@ function MarkContainerControls({ selectedModule }: Props) {
           })
           }
         </FlexRow>
-      </FlexCol>}
-    </Fragment>
+      </FlexCol>
+    </Conditional>
   )
 }
 

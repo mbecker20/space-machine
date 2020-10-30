@@ -1,12 +1,15 @@
 import { DragEvent } from 'react'
-import { Modules, Module } from '../../redux/stateTSTypes'
+import { Modules, Module, Connections } from '../../redux/stateTSTypes'
 import { MOVE, COPY } from '../DropSquare/DropSquare'
 import { Dispatch } from 'redux'
 import { moveModule } from '../../redux/allActions'
+import { onlyOneConnectionOption } from './helpers'
+import { executeConnection } from '../CenterMenus/ConnectionMenu/Modules/helpers'
 
 export function iconOnDrop(
   e: DragEvent<HTMLDivElement>,
   modules: Modules,
+  connections: Connections,
   mod: Module,
   dispatch: Dispatch,
 ) {
@@ -28,7 +31,15 @@ export function iconOnDrop(
     } else {
       const fromID = e.dataTransfer.getData('fromID')
       if (fromID) {
-        window.openConnectionMenu(fromID, mod.id)
+        const { onlyOne, actualFromID, actualToID } = onlyOneConnectionOption(fromID, mod.id, modules)
+        if (onlyOne) {
+          executeConnection(
+            fromID, actualFromID as string, mod.id, actualToID as string, 
+            modules, connections, dispatch, 0, 0,
+          )
+        } else {
+          window.openConnectionMenu(fromID, mod.id)
+        }
       }
     }
   }

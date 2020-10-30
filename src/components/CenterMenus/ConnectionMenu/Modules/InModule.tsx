@@ -9,7 +9,7 @@ import { colors } from '../../../../theme/theme'
 import AutoPlacingGrid from '../../../AutoPlacingGrid.tsx/AutoPlacingGrid'
 import FlexCol from '../../../Flex/FlexCol'
 import FlexRow from '../../../Flex/FlexRow'
-import { connectionExists } from './helpers'
+import { connectionExists, executeConnection } from './helpers'
 import useJSS from './style'
 
 interface Props {
@@ -46,30 +46,13 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
                   onDrop={e => {
                     e.preventDefault()
                     const actualFromID = e.dataTransfer.getData('actualFromID')
-                    const fromMod = modules[actualFromID]
                     const outputIndex = Number(e.dataTransfer.getData('outputIndex'))
-                    if (!connectionExists(connections, fromMod as Module, modID)) {
-                      connect(
-                        am[actualFromID] as ConnectingAudioModule,
-                        am[modID] as ConnectingAudioModule,
-                        '',
-                        outputIndex,
-                        index,
-                      )
-                      dispatch(addConnection(
-                        fromID,
-                        toID,
-                        '',
-                        outputIndex,
-                        index,
-                        isFromContainer ? actualFromID : undefined,
-                        isToContainer ? modID : undefined,
-                      ))
-                      window.flashNotification(colors.success, 'connection created')
-                      onClose()
-                    } else {
-                      alert('modules already connected')
-                    }
+                    executeConnection(
+                      fromID, actualFromID, 
+                      toID, modID, modules, 
+                      connections, dispatch, 
+                      outputIndex, index,
+                      onClose)
                   }}
                 />
                 {mod.connectionInputs.length !== 1 ? input : null}
