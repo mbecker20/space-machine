@@ -1,13 +1,12 @@
 import { Color3, Color4, Mesh, PointLight, TargetCamera, Vector3 } from '@babylonjs/core'
 import React, { Fragment } from 'react'
-import { TunerModule } from '../../../audioModules/modules/tuner'
-import { Range, TUNER } from '../../../audioModules/moduleTypes'
-import { clamp, mapValBetweenRanges } from '../../../helpers/genFuncs'
-import { notes } from '../../../helpers/notes'
-import getModuleColor from '../../../theme/moduleColor'
-import { sizes } from '../../../theme/theme'
-import BabylonCanvas from '../../BabylonCanvas/BabylonCanvas'
-import makeDial, { dialRange, noteFreqRange } from './makeDial'
+import { TunerModule } from '../../../../audioModules/modules/tuner'
+import { Range, TUNER } from '../../../../audioModules/moduleTypes'
+import { clamp, mapValBetweenRanges } from '../../../../helpers/genFuncs'
+import getModuleColor from '../../../../theme/moduleColor'
+import { sizes } from '../../../../theme/theme'
+import BabylonCanvas from '../../../BabylonCanvas/BabylonCanvas'
+import makeDial, { dialRange, diameter, noteFreqRange } from './makeDial'
 
 
 interface Props {
@@ -27,7 +26,7 @@ function Tuner({ modID }: Props) {
           scene.ambientColor = new Color3(.5, .5, .5)
 
           // setup camera
-          const camPos = new Vector3(1001, 0, 0)
+          const camPos = new Vector3(diameter/2 + 200, 0, 0)
           const camera = new TargetCamera('tunerCam', camPos, scene)
           //camera.fov = Math.PI / 3
           camera.setTarget(new Vector3(0, 0, 0))
@@ -46,7 +45,7 @@ function Tuner({ modID }: Props) {
         onRender={scene => {
           if (frame === 0) {
             const [maxFreq, maxdB] = tuner.controlSetFuncs['tuner']('') as Range
-            if (maxdB > -65) {
+            if (maxdB > -75) {
               target = mapValBetweenRanges(clamp(Math.log(maxFreq), noteFreqRange as Range), noteFreqRange, dialRange)
             } else {
               target = -.15
@@ -57,10 +56,11 @@ function Tuner({ modID }: Props) {
           frame = (frame + 1) % 30
         }}
         style={{
-          borderRadius: '.8em'
+          borderRadius: '.8em',
+          marginTop: '1em',
         }}
         width={sizes.moduleView.bigIconWidth}
-        height='100px'
+        height='200px'
       />
     </Fragment>
   )

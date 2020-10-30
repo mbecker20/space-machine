@@ -1,25 +1,25 @@
 import { AbstractMesh, Color3, MeshBuilder, Plane, Scene, StandardMaterial, TransformNode } from "@babylonjs/core"
 import { AdvancedDynamicTexture, TextBlock } from "babylonjs-gui"
-import { Range } from "../../../audioModules/moduleTypes"
-import { mapValBetweenRanges } from "../../../helpers/genFuncs"
-import { noteIndices, notes, notesNoSharp } from "../../../helpers/notes"
+import { Range } from "../../../../audioModules/moduleTypes"
+import { mapValBetweenRanges } from "../../../../helpers/genFuncs"
+import { noteIndices, notes, notesNoSharp } from "../../../../helpers/notes"
 
 export const noteFreqRange = [Math.log(notes['C1']), Math.log(notes['C5'])] as Range
 export const dialRange = [0, 2 * Math.PI * .95] as Range
 
-const diameter = 1600
+export const diameter = 1600
 const height = 160
 
 function makeTextPlane(name: string, text: string, width: number, fontSize: number) {
   const textPlane = MeshBuilder.CreatePlane(name, {
     width,
-    height: 50,
+    height: 40,
     sourcePlane: new Plane(1, 0, 0, 0)
   })
   const textMat = AdvancedDynamicTexture.CreateForMesh(textPlane)
   const textBlock = new TextBlock(`${name}text`, text)
   textBlock.fontSize = fontSize
-  textBlock.width = 80
+  textBlock.width = width
   textBlock.height = 50
   textBlock.color = 'black'
   textMat.addControl(textBlock)
@@ -57,7 +57,7 @@ function makeDial(scene: Scene) {
     noteTextPlane.position.y = height/2 - 20
     noteTextPlane.parent = tick
 
-    const freqTextPlane = makeTextPlane(`${note}freqplane`, `${notes[note]}`, 50, 400)
+    const freqTextPlane = makeTextPlane(`${note}freqplane`, `${notes[note]}`.slice(0, Math.min(`${notes[note]}`.length, 5)), 50, 400)
     freqTextPlane.position.y = - height/2 + 20
     freqTextPlane.parent = tick
   })
