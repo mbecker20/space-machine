@@ -1,8 +1,8 @@
 import React from 'react'
 import useJSS from './style'
 import { ContainerModule, RootState } from '../../redux/stateTSTypes'
-import { TYPE, BUTTON, VALUE, FILE, SWITCH, GRAPH, PAD, TUNER_CONTROL } from '../../audioModules/moduleTypes'
-import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl, TunerControl } from './controls/all'
+import { TYPE, BUTTON, VALUE, FILE, SWITCH, GRAPH, PAD, TUNER_CONTROL, VISUALIZER_CONTROL } from '../../audioModules/moduleTypes'
+import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl, TunerControl, VisualizerControl } from './controls/all'
 import { useSelector } from 'react-redux'
 import PadControl from './controls/Pad'
 
@@ -55,6 +55,10 @@ function ContainerControlMenu({ selectedModule, reRenderIcon }: Props) {
             controlType === TUNER_CONTROL
             ?
             <TunerControl modID={actualModID} />
+            :
+            controlType === VISUALIZER_CONTROL
+            ?
+            <VisualizerControl modID={actualModID} />
             :
             null
             }
