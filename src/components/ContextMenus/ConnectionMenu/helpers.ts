@@ -5,11 +5,16 @@ import { Dispatch } from 'redux'
 import { addConnection } from "../../../redux/allActions";
 import { colors } from "../../../theme/theme";
 
-export function connectionExists(connections: Connections, fromMod: Module, actualToID: string, newParam = '') {
+export function connectionExists(connections: Connections, fromMod: Module, actualToID: string, newOutputIndex: number, newInputIndex: number, newParam = '') {
   for(var i = 0; i < fromMod.outputs.length; i++) {
-    const { toID, actualInputID, param } = connections[fromMod.outputs[i]]
+    const { toID, actualInputID, param, outputIndex, inputIndex } = connections[fromMod.outputs[i]]
     const testingID = actualInputID ? actualInputID : toID
-    if (testingID === actualToID && newParam === param) {
+    if (
+      testingID === actualToID && 
+      newParam === param &&
+      newOutputIndex === outputIndex &&
+      newInputIndex === inputIndex
+    ) {
       return true
     }
   }
@@ -26,24 +31,25 @@ export function executeConnection(
   dispatch: Dispatch,
   outputIndex: number,
   inputIndex: number,
-  onClose?: () => void
+  onClose?: () => void,
+  paramID = '',
 ) {
   const fromMod = modules[fromID]
   const am = window.audioModules
   const isFromContainer = fromMod.moduleType === CONTAINER
   const isToContainer = modules[toID].moduleType === CONTAINER
-  if (!connectionExists(connections, fromMod as Module, actualToID)) {
+  if (!connectionExists(connections, fromMod as Module, actualToID, outputIndex, inputIndex, paramID)) {
     connect(
       am[actualFromID] as ConnectingAudioModule,
       am[actualToID] as ConnectingAudioModule,
-      '',
+      paramID,
       outputIndex,
       inputIndex,
     )
     dispatch(addConnection(
       fromID,
       toID,
-      '',
+      paramID,
       outputIndex,
       inputIndex,
       isFromContainer ? actualFromID : undefined,

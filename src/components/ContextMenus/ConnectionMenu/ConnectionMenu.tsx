@@ -65,8 +65,6 @@ function ConnectionMenu() {
             startsBig={true}
             fromID={fromMod?.id as string}
             toID={toMod?.id as string}
-            isFromContainer={fromMod?.moduleType === CONTAINER}
-            isToContainer={false}
             onClose={onClose}
           />
         }

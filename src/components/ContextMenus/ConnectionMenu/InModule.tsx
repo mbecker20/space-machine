@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { connect } from '../../../audioModules/connection'
-import { ConnectingAudioModule } from '../../../audioModules/moduleTypes'
-import { addConnection } from '../../../redux/allActions'
-import { Module, RootState } from '../../../redux/stateTSTypes'
+import { RootState } from '../../../redux/stateTSTypes'
 import getModuleColor from '../../../theme/moduleColor'
-import { colors } from '../../../theme/theme'
 import AutoPlacingGrid from '../../AutoPlacingGrid.tsx/AutoPlacingGrid'
 import FlexCol from '../../Flex/FlexCol'
 import FlexRow from '../../Flex/FlexRow'
-import { connectionExists, executeConnection } from './helpers'
+import { executeConnection } from './helpers'
 import useJSS from './style'
 
 interface Props {
@@ -17,17 +13,14 @@ interface Props {
   startsBig: boolean
   fromID: string // of the original modules that made the connection
   toID: string
-  isFromContainer: boolean
-  isToContainer: boolean
   onClose: () => void
 }
 
-function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContainer, onClose }: Props) {
+function InModule({ modID, startsBig, fromID, toID, onClose }: Props) {
   const classes = useJSS()
   const mod = useSelector((state: RootState) => state.modules[modID])
   const { modules, connections } = useSelector((state: RootState) => state)
   const audioMod = window.audioModules[modID]
-  const am = window.audioModules
   const [isBig, setBig] = useState(startsBig)
   const dispatch = useDispatch()
   return (
@@ -52,7 +45,8 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
                       toID, modID, modules, 
                       connections, dispatch, 
                       outputIndex, index,
-                      onClose)
+                      onClose
+                    )
                   }}
                 />
                 {mod.connectionInputs.length !== 1 ? input : null}
@@ -69,30 +63,14 @@ function InModule({ modID, startsBig, fromID, toID, isFromContainer, isToContain
                 onDrop={e => {
                   e.preventDefault()
                   const actualFromID = e.dataTransfer.getData('actualFromID')
-                  const fromMod = modules[actualFromID]
                   const outputIndex = Number(e.dataTransfer.getData('outputIndex'))
-                  if (!connectionExists(connections, fromMod as Module, modID, paramID)) {
-                    connect(
-                      am[actualFromID] as ConnectingAudioModule,
-                      am[modID] as ConnectingAudioModule,
-                      paramID,
-                      outputIndex,
-                      0,
-                    )
-                    dispatch(addConnection(
-                      fromID,
-                      toID,
-                      paramID,
-                      outputIndex,
-                      0,
-                      isFromContainer ? actualFromID : undefined,
-                      isToContainer ? modID : undefined,
-                    ))
-                    window.flashNotification(colors.success, 'connection created')
-                    onClose()
-                  } else {
-                    alert('modules already connected')
-                  }
+                  executeConnection(
+                    fromID, actualFromID,
+                    toID, modID, modules,
+                    connections, dispatch,
+                    outputIndex, index,
+                    onClose, paramID
+                  )
                 }}
               >
                 <div className={classes.SmallConnectionReciever}/>

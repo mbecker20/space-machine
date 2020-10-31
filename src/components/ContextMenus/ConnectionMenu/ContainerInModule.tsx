@@ -56,8 +56,6 @@ function ContainerInModule({ modID, startsBig, fromID, toID, isFromContainer, on
                 modID={inputModID}
                 fromID={fromID}
                 toID={toID}
-                isFromContainer={true}
-                isToContainer={true}
                 onClose={onClose}
                 startsBig={childrenStartBig}
               />
