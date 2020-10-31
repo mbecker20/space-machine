@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { CONTAINER } from '../../../audioModules/moduleTypes'
 import { AnyModule, RootState } from '../../../redux/stateTSTypes'
+import ContextMenu from '../ContextMenu/ContextMenu'
+import { DragDivEvent } from '../types'
 import FlexRow from '../../Flex/FlexRow'
-import CenterMenu from '../CenterMenu/CenterMenu'
 import ContainerInModule from './Modules/ContainerInModule'
 import ContainerOutModule from './Modules/ContainerOutModule'
 import InModule from './Modules/InModule'
@@ -11,30 +12,37 @@ import OutModule from './Modules/OutModule'
 
 declare global {
   interface Window {
-    openConnectionMenu: (fromID: string, toID: string) => void
+    openConnectionMenu: (event: DragDivEvent, fromID: string, toID: string) => void
   }
 }
 
-function makeData(isOpen: boolean, fromMod?: AnyModule, toMod?: AnyModule) {
+function makeData(isOpen: boolean, event?: DragDivEvent, fromMod?: AnyModule, toMod?: AnyModule) {
   return {
     isOpen,
+    event,
     fromMod,
     toMod,
   }
 }
 
 function ConnectionMenu() {
-  const [{ isOpen, fromMod, toMod }, setData] = useState(makeData(false))
+  const [{ isOpen, event, fromMod, toMod }, setData] = useState(makeData(false))
   const { modules } = useSelector((state: RootState) => state)
-  window.openConnectionMenu = (fromID, toID) => {
-    setData(makeData(true, modules[fromID], modules[toID]))
+  window.openConnectionMenu = (event, fromID, toID) => {
+    setData(makeData(true, event, modules[fromID], modules[toID]))
   }
   const onClose = () => {
     setData(makeData(false)) 
   }
-  //const classes = useJSS()
   return (
-    <CenterMenu header='add connection' isClosed={!isOpen} onClose={onClose}>
+    <ContextMenu event={event as DragDivEvent} isOpen={isOpen} onClose={onClose}
+      style={{
+        padding: '.7em'
+      }}
+      bounderStyle={{
+        backgroundColor: 'rgba(0,0,0,.4)'
+      }}
+    >
       <FlexRow>
         {fromMod?.moduleType === CONTAINER ? 
           <ContainerOutModule modID={fromMod?.id as string} startsBig={true} isBase={true}/>
@@ -63,7 +71,7 @@ function ConnectionMenu() {
           />
         }
       </FlexRow>
-    </CenterMenu>
+    </ContextMenu>
   )
 }
 

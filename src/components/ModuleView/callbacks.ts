@@ -4,7 +4,7 @@ import { MOVE, COPY } from '../DropSquare/DropSquare'
 import { Dispatch } from 'redux'
 import { moveModule } from '../../redux/allActions'
 import { onlyOneConnectionOption } from './helpers'
-import { executeConnection } from '../CenterMenus/ConnectionMenu/Modules/helpers'
+import { executeConnection } from '../ContextMenus/ConnectionMenu/Modules/helpers'
 
 export function iconOnDrop(
   e: DragEvent<HTMLDivElement>,
@@ -38,7 +38,8 @@ export function iconOnDrop(
             modules, connections, dispatch, 0, 0,
           )
         } else {
-          window.openConnectionMenu(fromID, mod.id)
+          e.persist()
+          window.openConnectionMenu(e, fromID, mod.id)
         }
       }
     }

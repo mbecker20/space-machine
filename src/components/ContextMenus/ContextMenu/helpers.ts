@@ -1,6 +1,7 @@
-import { MouseEvent, RefObject } from "react";
+import { DragEvent, RefObject } from "react";
+import { MouseDivEvent } from "../types";
 
-export function getLocation(e: MouseEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement>) {
+export function getLocation(e: MouseDivEvent | DragEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement>) {
   if (!ref.current) {
     return {
       top: -1000,
