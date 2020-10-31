@@ -4,7 +4,7 @@ import { MOVE, COPY } from '../DropSquare/DropSquare'
 import { Dispatch } from 'redux'
 import { moveModule } from '../../redux/allActions'
 import { onlyOneConnectionOption } from './helpers'
-import { executeConnection } from '../ContextMenus/ConnectionMenu/Modules/helpers'
+import { executeConnection } from '../ContextMenus/ConnectionMenu/helpers'
 
 export function iconOnDrop(
   e: DragEvent<HTMLDivElement>,

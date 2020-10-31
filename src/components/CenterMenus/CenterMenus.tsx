@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import ConnectionMenu from '../ContextMenus/ConnectionMenu/ConnectionMenu'
 import KnobRangeSetMenu from './RangeSetMenu/KnobRangeSetMenu'
 import SpaceDBProjectSaveMenu from './SaveMenu/SpaceDBProjectSaveMenu'
 import ConfirmDeleteMenu from './ConfirmDeleteMenu/ConfirmDeleteMenu'
@@ -16,7 +15,6 @@ function CenterMenus() {
   return (
     <Fragment>
       <AddModuleMenu/>
-      <ConnectionMenu/>
       <RenameModuleMenu/>
       <RenameControlMenu/>
       <KnobRangeSetMenu/>

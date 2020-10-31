@@ -5,10 +5,10 @@ import { AnyModule, RootState } from '../../../redux/stateTSTypes'
 import ContextMenu from '../ContextMenu/ContextMenu'
 import { DragDivEvent } from '../types'
 import FlexRow from '../../Flex/FlexRow'
-import ContainerInModule from './Modules/ContainerInModule'
-import ContainerOutModule from './Modules/ContainerOutModule'
-import InModule from './Modules/InModule'
-import OutModule from './Modules/OutModule'
+import ContainerInModule from './ContainerInModule'
+import ContainerOutModule from './ContainerOutModule'
+import InModule from './InModule'
+import OutModule from './OutModule'
 
 declare global {
   interface Window {

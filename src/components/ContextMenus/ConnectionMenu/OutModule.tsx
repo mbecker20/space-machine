@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../../../redux/stateTSTypes'
-import getModuleColor from '../../../../theme/moduleColor'
-import AutoPlacingGrid from '../../../AutoPlacingGrid.tsx/AutoPlacingGrid'
-import FlexCol from '../../../Flex/FlexCol'
+import { RootState } from '../../../redux/stateTSTypes'
+import getModuleColor from '../../../theme/moduleColor'
+import AutoPlacingGrid from '../../AutoPlacingGrid.tsx/AutoPlacingGrid'
+import FlexCol from '../../Flex/FlexCol'
 import useJSS from './style'
 
 interface Props {

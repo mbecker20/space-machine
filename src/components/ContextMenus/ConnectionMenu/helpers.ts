@@ -1,14 +1,15 @@
-import { connect } from "../../../../audioModules/connection";
-import { ConnectingAudioModule, CONTAINER } from "../../../../audioModules/moduleTypes";
-import { Module, Connections, Modules } from "../../../../redux/stateTSTypes"
+import { connect } from "../../../audioModules/connection";
+import { ConnectingAudioModule, CONTAINER } from "../../../audioModules/moduleTypes";
+import { Module, Connections, Modules } from "../../../redux/stateTSTypes"
 import { Dispatch } from 'redux'
-import { addConnection } from "../../../../redux/allActions";
-import { colors } from "../../../../theme/theme";
+import { addConnection } from "../../../redux/allActions";
+import { colors } from "../../../theme/theme";
 
 export function connectionExists(connections: Connections, fromMod: Module, actualToID: string, newParam = '') {
   for(var i = 0; i < fromMod.outputs.length; i++) {
-    const { actualInputID, param } = connections[fromMod.outputs[i]]
-    if (actualInputID === actualToID && newParam === param) {
+    const { toID, actualInputID, param } = connections[fromMod.outputs[i]]
+    const testingID = actualInputID ? actualInputID : toID
+    if (testingID === actualToID && newParam === param) {
       return true
     }
   }

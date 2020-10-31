@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { CONTAINER } from '../../../../audioModules/moduleTypes'
-import { ContainerModule, RootState } from '../../../../redux/stateTSTypes'
-import getModuleColor from '../../../../theme/moduleColor'
-import AutoPlacingGrid from '../../../AutoPlacingGrid.tsx/AutoPlacingGrid'
+import { CONTAINER } from '../../../audioModules/moduleTypes'
+import { ContainerModule, RootState } from '../../../redux/stateTSTypes'
+import getModuleColor from '../../../theme/moduleColor'
+import AutoPlacingGrid from '../../AutoPlacingGrid.tsx/AutoPlacingGrid'
 import InModule from './InModule'
 import useJSS from './style'
 
