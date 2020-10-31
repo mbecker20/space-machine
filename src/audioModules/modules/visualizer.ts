@@ -18,14 +18,14 @@ export function makeVisualizerControlData(): ControlData {
 
 function makeVisualizer(prevControlData?: ControlData): VisualizerModule {
   const analyzer = audioCtx.createAnalyser()
-  analyzer.fftSize = 1024
+  analyzer.fftSize = Math.pow(2, 10)
   const bufferLength = analyzer.frequencyBinCount
   const timeArray = new Float32Array(bufferLength)
   const freqArray = new Float32Array(bufferLength)
   const controlSetFuncs: ControlSetFuncs = {
     'visualizer-update': () => {
       analyzer.getFloatFrequencyData(freqArray)
-      analyzer.getFloatTimeDomainData(timeArray)
+      //analyzer.getFloatTimeDomainData(timeArray)
     }
   }
 

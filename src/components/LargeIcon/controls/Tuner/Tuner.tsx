@@ -1,5 +1,5 @@
 import { Color3, Color4, Mesh, PointLight, TargetCamera, Vector3 } from '@babylonjs/core'
-import React, { Fragment } from 'react'
+import React from 'react'
 import { TunerModule } from '../../../../audioModules/modules/tuner'
 import { Range, TUNER } from '../../../../audioModules/moduleTypes'
 import { clamp, mapValBetweenRanges } from '../../../../helpers/genFuncs'

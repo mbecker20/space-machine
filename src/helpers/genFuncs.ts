@@ -1,3 +1,5 @@
+import { atan2 } from "mathjs"
+
 export function stringIn(str: string, ar: any[]) {
 	// returns true if string is an element of array
 	// false otherwise
@@ -74,4 +76,37 @@ export function mapValBetweenRanges(val: number, fromRange: [number, number], to
 	const valProportion = (val - fromRange[0]) / (fromRange[1] - fromRange[0])
 	const toRangeDif = toRange[1] - toRange[0]
 	return toRange[0] + valProportion * toRangeDif
+}
+
+export function GetAzimXZ(x: number, z: number) {
+	// ground plane is xz
+	// from 0 to 2pi
+	// measures azim from pos x axis
+	// positive azim if z < 0, negative if z > 0 because positive rotation about yHat moves xHat away from positive zhat
+	// vec must be unit
+	if (x > 0) {
+		if (z > 0) {
+			return -atan2(z, x) + Math.PI
+		} else if (z < 0) {
+			return atan2(-z, x) + Math.PI
+		} else {
+			return 0 + Math.PI
+		}
+	} else if (x < 0) {
+		if (z > 0) {
+			return atan2(z, -x)
+		} else if (z < 0) {
+			return 2 * Math.PI - atan2(-z, -x)
+		} else {
+			return 2 * Math.PI
+		}
+	} else { // x = 0;
+		if (z > 0) {
+			return Math.PI / 2
+		} else if (z < 0) {
+			return 3 * Math.PI / 2
+		} else {
+			return Math.PI // on y axis can kind of be anything
+		}
+	}
 }
