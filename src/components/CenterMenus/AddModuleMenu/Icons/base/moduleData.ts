@@ -1,4 +1,4 @@
-import { GAIN, AUTOFILTER, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, MEDIA_ELEMENT, LINE_IN, OSCILLATOR, CONSTANT, CONTAINER, OUTPUT, DISTORTION, ANALYZER, ENVELOPED_TRIGGER, WHITE_NOISE, TUNER } from "../../../../../audioModules/moduleTypes";
+import { GAIN, AUTOFILTER, KOMPRESSOR, SIGNAL_DELAY, STEREO_PANNER, MEDIA_ELEMENT, LINE_IN, OSCILLATOR, CONSTANT, CONTAINER, OUTPUT, DISTORTION, ANALYZER, ENVELOPED_TRIGGER, WHITE_NOISE, TUNER, VISUALIZER } from "../../../../../audioModules/moduleTypes";
 
 export type DrawerModuleData = [string, string, string][]
 
@@ -25,6 +25,7 @@ export const utilityModuleData: DrawerModuleData = [
   ['output', 'out', OUTPUT],
   ['analyzer', 'analyzer', ANALYZER],
   ['tuner', 'tuner', TUNER],
+  ['visualizer', 'viz', VISUALIZER],
 ]
 
 export const allModuleData: DrawerModuleData = effectModuleData.concat(sourceModuleData).concat(utilityModuleData)

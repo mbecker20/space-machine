@@ -16,6 +16,7 @@ import {
   ENVELOPED_TRIGGER,
   WHITE_NOISE,
   TUNER,
+  VISUALIZER,
 } from './moduleTypes'
 import makeConstantSource from './modules/constant'
 import makeAutoFilter from './modules/autoFilter'
@@ -32,6 +33,7 @@ import makeAnalyzer from './modules/analyzer'
 import makeEnvelopedTrigger from './modules/envelopedTrigger'
 import makeWhiteNoise from './modules/whiteNoise'
 import makeTuner from './modules/tuner'
+import makeVisualizer from './modules/visualizer'
 
 
 function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData: ControlData) {
@@ -97,6 +99,10 @@ function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData:
     case TUNER:
       const tuner = makeTuner(prevControlData)
       window.audioModules = { ...window.audioModules, [id]: tuner }
+      break
+    case VISUALIZER:
+      const visualizer = makeVisualizer(prevControlData)
+      window.audioModules = { ...window.audioModules, [id]: visualizer }
       break
   }
 }

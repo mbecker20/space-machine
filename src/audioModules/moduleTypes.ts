@@ -13,6 +13,7 @@ import { DistortionModule } from './modules/distortion'
 import { AnalyzerModule } from './modules/analyzer'
 import { WhiteNoiseModule } from './modules/whiteNoise'
 import { TunerModule } from './modules/tuner'
+import { VisualizerModule } from './modules/visualizer'
 
 // module types
 
@@ -32,12 +33,13 @@ export const ANALYZER = 'ANALYZER'
 export const ENVELOPED_TRIGGER = 'ENVELOPED_TRIGGER'
 export const WHITE_NOISE = 'WHITE_NOISE'
 export const TUNER = 'TUNER'
+export const VISUALIZER = 'VISUALIZER'
 
-export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER' | 'ENVELOPED_TRIGGER' | 'WHITE_NOISE' | 'TUNER'
+export type ModuleType = 'OSCILLATOR' | 'CONTAINER' | 'OUTPUT' | 'GAIN' | 'AUTOFILTER' | 'KOMPRESSOR' | 'STEREO_PANNER' | 'SIGNAL_DELAY' | 'CONSTANT' | 'MEDIA_ELEMENT' | 'LINE_IN' | 'DISTORTION' | 'ANALYZER' | 'ENVELOPED_TRIGGER' | 'WHITE_NOISE' | 'TUNER' | 'VISUALIZER'
 
 export type AudioModuleWithTypes = OscillatorModule | AutoFilterModule
 
-export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule | AnalyzerModule | WhiteNoiseModule | TunerModule
+export type ConnectingAudioModule = OscillatorModule | GainModule | AutoFilterModule | KompressorModule | StereoPannerModule | SignalDelayModule | ConstantModule | MediaElementModule | LineInputModule | OutputModule | DistortionModule | AnalyzerModule | WhiteNoiseModule | TunerModule | VisualizerModule
 
 export type AudioModule = ConnectingAudioModule | ContainerModule
 
@@ -57,8 +59,9 @@ export const SWITCH = 'SWITCH'
 export const GRAPH = 'GRAPH'
 export const PAD = 'PAD'
 export const TUNER_CONTROL = 'TUNER_CONTROL'
+export const VISUALIZER_CONTROL = 'VISUALIZER_CONTROL'
 
-export type ControlType = 'NONE' | 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH' | 'PAD' | 'TUNER_CONTROL'
+export type ControlType = 'NONE' | 'TYPE' | 'VALUE' | 'BUTTON' | 'FILE' | 'INFO' | 'SWITCH' | 'GRAPH' | 'PAD' | 'TUNER_CONTROL' | 'VISUALIZER_CONTROL'
 export type Value = number | string | boolean
 export type SetFunc = (arg: string) => number | number[] | void
 export type Range = [number, number] // min / max

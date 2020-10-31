@@ -15,6 +15,7 @@ import {
   ENVELOPED_TRIGGER,
   WHITE_NOISE,
   TUNER,
+  VISUALIZER,
 } from './moduleTypes'
 import { Dispatch } from 'redux'
 import { addModule } from '../redux/allActions'
@@ -34,6 +35,7 @@ import makeAnalyzer, { makeAnalyzerControlData } from './modules/analyzer'
 import makeEnvelopedTrigger, { makeEnvelopedTriggerControlData } from './modules/envelopedTrigger'
 import makeWhiteNoise, { makeWhiteNoiseControlData } from './modules/whiteNoise'
 import makeTuner, { makeTunerControlData } from './modules/tuner'
+import makeVisualizer, { makeVisualizerControlData } from './modules/visualizer'
 
 declare global {
   interface Window {
@@ -137,6 +139,12 @@ function makeAddModule() {
         const tunerControlData = makeTunerControlData()
         window.audioModules = { ...window.audioModules, [id]: tuner }
         dispatch(addModule(id, name, moduleType, tunerControlData, parentID, row, col, ['0'], ['0']))
+        break
+      case VISUALIZER:
+        const visualizer = makeVisualizer()
+        const visualizerControlData = makeVisualizerControlData()
+        window.audioModules = { ...window.audioModules, [id]: visualizer }
+        dispatch(addModule(id, name, moduleType, visualizerControlData, parentID, row, col, ['0'], ['0']))
         break
     }
   }
