@@ -18,10 +18,15 @@ function ContextMenu({ children, onClose, bounderStyle, style, event, isOpen }: 
   const classes = useJSS({ isOpen })
   const cmRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (cmRef.current && event) {
-      const { top, left } = getLocation(event, cmRef)
-      cmRef.current.style.top = `${top}px`
-      cmRef.current.style.left = `${left}px`
+    if (cmRef.current) {
+      if (event) {
+        const { top, left } = getLocation(event, cmRef)
+        cmRef.current.style.top = `${top}px`
+        cmRef.current.style.left = `${left}px`
+      } else {
+        cmRef.current.style.top = '-1000px'
+        cmRef.current.style.left = '-1000px'
+      }
     }
   }, [event])
   return (
