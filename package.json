@@ -1,4 +1,5 @@
 {
+  "homepage": "./",
   "name": "space-machine",
   "description": "space DAW transmitted by Jonny Alaska from deep space",
   "version": "0.1.0",
@@ -9,7 +10,6 @@
     }
   },
   "main": "electron.ts",
-  "homepage": "./",
   "private": true,
   "dependencies": {
     "@babylonjs/core": "^4.1.0",
