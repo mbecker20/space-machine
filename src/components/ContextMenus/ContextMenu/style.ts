@@ -9,13 +9,14 @@ const useJSS = createUseStyles({
   ContextMenuBounder: {
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'rgba(0,0,0,0)',
-    position: 'absolute',
+    backgroundColor: 'transparent',
+    position: 'fixed',
     overflow: 'hidden',
     top: 0,
     left: 0,
     zIndex: zIndex.contextMenu,
     opacity: 1,
+    visibility: ({ isOpen }) => isOpen ? 'visible' : 'hidden'
   },
 
   ContextMenu: {
@@ -25,7 +26,7 @@ const useJSS = createUseStyles({
     borderRadius: '.2em',
     display: 'flex',
     flexDirection: 'column',
-    position: 'absolute',
+    position: 'fixed',
     overflowY: 'scroll',
     '&::-webkit-scrollbar': {
       width: '0em',
@@ -33,7 +34,6 @@ const useJSS = createUseStyles({
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: 'white',
     },
-    zIndex: zIndex.contextMenu + 100
   },
 
   MenuItem: {

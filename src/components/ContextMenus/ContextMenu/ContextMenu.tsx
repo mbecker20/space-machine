@@ -1,36 +1,51 @@
-import React, { ReactNode, RefObject } from 'react'
+import React, { ReactNode, useEffect, useRef } from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
-
-export type Location = { top: number, left: number }
+import { MouseDivEvent } from '../types'
+import { getLocation } from './helpers'
+import Conditional from '../../Conditional/Conditional'
 
 interface Props {
   children: ReactNode
   onClose: () => void
   bounderStyle?: CSS.Properties
   style?: CSS.Properties
-  location: Location
-  cmRef: RefObject<HTMLDivElement>
+  event: MouseDivEvent
+  isOpen: boolean
 }
 
-function ContextMenu({ children, onClose, bounderStyle, style, location, cmRef }: Props) {
-  const classes = useJSS()
-  
+function ContextMenu({ children, onClose, bounderStyle, style, event, isOpen }: Props) {
+  const classes = useJSS({ isOpen })
+  const cmRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (cmRef.current && event) {
+      const { top, left } = getLocation(event, cmRef)
+      cmRef.current.style.top = `${top}px`
+      cmRef.current.style.left = `${left}px`
+    }
+  }, [event])
   return (
     <div className={classes.ContextMenuBounder}
-      onPointerDown={onClose}
+      onPointerDown={() => {
+        if (cmRef.current) {
+          cmRef.current.style.top = '-1000px'
+          cmRef.current.style.left = '-1000px'
+        }
+        onClose()
+      }}
       style={bounderStyle}
     >
       <div className={classes.ContextMenu}
         style={Object.assign({
-          top: location.top,
-          left: location.left,
-          opacity: 1,
+          top: -1000,
+          left: -1000,
         }, style)}
         ref={cmRef}
         onPointerDown={e => { e.stopPropagation() }}
       >
-        { children }
+        <Conditional showIf={isOpen}>
+          { children }
+        </Conditional>
       </div>
     </div>
   )

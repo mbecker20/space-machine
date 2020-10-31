@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/stateTSTypes'
-import ContextMenu, { Location } from '../ContextMenu/ContextMenu'
+import ContextMenu from '../ContextMenu/ContextMenu'
 import DeleteButton from './ModuleDeleteButton'
 import InputOutputView from './InputOutputView'
 import ContainerOpenButton from './ContainerOpenButton'
@@ -10,8 +10,6 @@ import { MouseDivEvent } from '../types'
 import MarkContainerIO from './MarkContainerIO'
 import useJSS from './style'
 import FileSaveButton from './FileSaveButton'
-import Conditional from '../../Conditional/Conditional'
-import { getLocation } from '../ContextMenu/helpers'
 
 declare global {
   interface Window {
@@ -19,20 +17,18 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, location?: Location, modID?: string) {
+function makeData(isOpen: boolean, event?: MouseDivEvent, modID?: string) {
   return {
     isOpen,
-    location,
+    event,
     modID,
   }
 }
 
 function ModuleContextMenu() {
-  const [{ isOpen, location, modID }, setData] = useState(makeData(false))
-  const cmRef = useRef<HTMLDivElement>(null)
+  const [{ isOpen, event, modID }, setData] = useState(makeData(false))
   window.openModuleContextMenu = (event, modID) => {
-    const newLocation = getLocation(event, cmRef)
-    setData(makeData(true, newLocation, modID)) 
+    setData(makeData(true, event, modID)) 
   }
   const onClose = () => {
     setData(makeData(false)) 
@@ -40,22 +36,20 @@ function ModuleContextMenu() {
   const classes = useJSS()
   const modules = useSelector((state: RootState) => state.modules)
   return (
-    <Conditional showIf={isOpen}>
-      <ContextMenu onClose={onClose} location={location as Location} cmRef={cmRef}>
-        <div className={classes.Name}
-          title='rename module'
-          onClick={() => {
-            window.openModuleRenameMenu(modID as string)
-          }}
-        >{modules[modID as string]?.name}</div>
-        <ContainerOpenButton modules={modules} modID={modID as string} onClose={onClose} />
-        <InputOutputView modID={modID as string} modules={modules}/>
-        <SpaceDBSaveButton modules={modules} modID={modID as string} onClose={onClose} />
-        <FileSaveButton modules={modules} modID={modID as string} onClose={onClose} />
-        <MarkContainerIO modID={modID as string} />
-        <DeleteButton modID={modID as string} onClose={onClose}/>
-      </ContextMenu>
-    </Conditional>
+    <ContextMenu onClose={onClose} event={event as MouseDivEvent} isOpen={isOpen}>
+      <div className={classes.Name}
+        title='rename module'
+        onClick={() => {
+          window.openModuleRenameMenu(modID as string)
+        }}
+      >{modules[modID as string]?.name}</div>
+      <ContainerOpenButton modules={modules} modID={modID as string} onClose={onClose} />
+      <InputOutputView modID={modID as string} modules={modules}/>
+      <SpaceDBSaveButton modules={modules} modID={modID as string} onClose={onClose} />
+      <FileSaveButton modules={modules} modID={modID as string} onClose={onClose} />
+      <MarkContainerIO modID={modID as string} />
+      <DeleteButton modID={modID as string} onClose={onClose}/>
+    </ContextMenu>
   )
 }
 

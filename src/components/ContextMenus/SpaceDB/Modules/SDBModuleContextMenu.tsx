@@ -1,8 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { zIndex } from '../../../../theme/zIndex'
-import Conditional from '../../../Conditional/Conditional'
-import ContextMenu, { Location } from '../../ContextMenu/ContextMenu'
-import { getLocation } from '../../ContextMenu/helpers'
+import ContextMenu from '../../ContextMenu/ContextMenu'
 import { MouseDivEvent } from '../../types'
 import ModuleDeleteButton from './ModuleDeleteButton'
 
@@ -12,31 +10,28 @@ declare global {
   }
 }
 
-function makeData(isOpen: boolean, location?: Location, saveName?: string) {
+function makeData(isOpen: boolean, event?: MouseDivEvent, saveName?: string) {
   return {
     isOpen,
-    location,
+    event,
     saveName
   }
 }
 
 function SDBModuleContextMenu() {
-  const [{ isOpen, location, saveName }, setData] = useState(makeData(false))
-  const cmRef = useRef<HTMLDivElement>(null)
+  const [{ isOpen, event, saveName }, setData] = useState(makeData(false))
   window.openSDBModuleContextMenu = (event, saveName) => {
-    const newLocation = getLocation(event, cmRef)
-    setData(makeData(true, newLocation, saveName)) 
+    setData(makeData(true, event, saveName)) 
   }
   const onClose = () => setData(makeData(false))
   return (
-    <Conditional showIf={isOpen}>
-      <ContextMenu cmRef={cmRef} location={location as Location}
-        onClose={() => setData(makeData(false))}
-        bounderStyle={{ zIndex: zIndex.centerMenu + 1 }}
-      >
-        <ModuleDeleteButton saveName={saveName as string} onClose={onClose}/>
-      </ContextMenu>
-    </Conditional>
+    <ContextMenu event={event as MouseDivEvent}
+      onClose={() => setData(makeData(false))}
+      bounderStyle={{ zIndex: zIndex.centerMenu + 1 }}
+      isOpen={isOpen}
+    >
+      <ModuleDeleteButton saveName={saveName as string} onClose={onClose}/>
+    </ContextMenu>
   )
 }
 

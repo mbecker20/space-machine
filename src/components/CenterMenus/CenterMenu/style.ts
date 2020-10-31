@@ -6,7 +6,7 @@ const useJSS = createUseStyles({
   CenterMenuBounder: {
     backgroundColor: colors.centerMenuBackground,
     backdropFilter: 'blur(5px)',
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: 0,
     width: '100vw',
@@ -16,7 +16,7 @@ const useJSS = createUseStyles({
 
   CenterMenu: {
     backgroundColor: colors.centerMenu,
-    position: 'absolute',
+    position: 'fixed',
     top: '50vh',
     left: '50vw',
     transform: 'translate(-50%, calc(-50% - 50px))',
