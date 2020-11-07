@@ -78,6 +78,8 @@ export const colors: Colors = {
 
   // notification
   success: '#00802d',
+
+  buttonBorder: '#543737c7', 
 }
 
 export const paramColors = ['#dbde02', '#0a9408', '#470ff5', '#0ba8cc']

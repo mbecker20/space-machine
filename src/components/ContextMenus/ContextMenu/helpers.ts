@@ -1,7 +1,9 @@
 import { DragEvent, RefObject } from "react";
 import { MouseDivEvent } from "../types";
 
-export function getLocation(e: MouseDivEvent | DragEvent<HTMLDivElement>, ref: RefObject<HTMLDivElement>) {
+export type DivRef = RefObject<HTMLDivElement>
+
+export function getCMLocation(e: MouseDivEvent | DragEvent<HTMLDivElement>, ref: DivRef) {
   if (!ref.current) {
     return {
       top: -1000,
@@ -15,5 +17,4 @@ export function getLocation(e: MouseDivEvent | DragEvent<HTMLDivElement>, ref: R
         e.pageX : window.innerWidth - ref.current.offsetWidth,
     }
   }
-  
 }

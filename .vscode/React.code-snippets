@@ -163,5 +163,13 @@
 			"\t$0",
 			"</Button>"
 		]
+	},
+
+	"OpenState": {
+		"scope": "typescriptreact",
+		"prefix": "open-state",
+		"body": [
+			"const [isOpen, setOpen] = useState(false)"
+		]
 	}
 }

@@ -12,7 +12,7 @@ const useJSS = createUseStyles({
     },
     '&:hover': {
       cursor: ({ notClickable }) => notClickable ? '' : 'pointer',
-      borderColor: ({ notClickable }) => notClickable ? 'transparent' : 'white',
+      borderColor: ({ notClickable }) => notClickable ? 'transparent' : colors.buttonBorder,
     },
     display: 'flex',
     alignItems: 'center',

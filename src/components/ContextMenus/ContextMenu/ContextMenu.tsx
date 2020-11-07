@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useRef } from 'react'
 import useJSS from './style'
 import CSS from 'csstype'
 import { MouseDivEvent } from '../types'
-import { getLocation } from './helpers'
+import { getCMLocation } from './helpers'
 import Conditional from '../../Conditional/Conditional'
 
 interface Props {
@@ -20,7 +20,7 @@ function ContextMenu({ children, onClose, bounderStyle, style, event, isOpen }: 
   useEffect(() => {
     if (cmRef.current) {
       if (event) {
-        const { top, left } = getLocation(event, cmRef)
+        const { top, left } = getCMLocation(event, cmRef)
         cmRef.current.style.top = `${top}px`
         cmRef.current.style.left = `${left}px`
       } else {
@@ -41,10 +41,7 @@ function ContextMenu({ children, onClose, bounderStyle, style, event, isOpen }: 
       style={bounderStyle}
     >
       <div className={classes.ContextMenu}
-        style={Object.assign({
-          top: -1000,
-          left: -1000,
-        }, style)}
+        style={style}
         ref={cmRef}
         onPointerDown={e => { e.stopPropagation() }}
       >

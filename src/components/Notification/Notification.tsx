@@ -1,7 +1,8 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { makeNotificationData } from './makeData'
 import useJSS from './style'
 import { useSpring, animated } from 'react-spring'
+import Conditional from '../Conditional/Conditional'
 
 declare global {
   interface Window {
@@ -21,24 +22,19 @@ function Notification() {
     window.setTimeout(() => {
       setIsVisible(false)
     }, notificationTime)
-    window.setTimeout(() => {
-      setNotificationData(makeNotificationData(false))
-    }, notificationTime + 700)
   }
   const spring = useSpring({
-    opacity: isVisible ? 1 : 0
+    opacity: isVisible ? 1 : 0,
+    onRest: () => { if (!isOpen) setNotificationData(makeNotificationData(false)) }
   })
   return (
-    <Fragment>
-      {
-        !isOpen ? null :
-        <animated.div className={classes.Notification}
-          style={Object.assign({ backgroundColor: color }, spring)}
-        >
-          {text}
-        </animated.div>
-      }
-    </Fragment>
+    <Conditional showIf={isOpen}>
+      <animated.div className={classes.Notification}
+        style={Object.assign({ backgroundColor: color }, spring)}
+      >
+        {text}
+      </animated.div>
+    </Conditional>
   )
 }
 

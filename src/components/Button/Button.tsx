@@ -8,21 +8,21 @@ interface Props {
   onClick?: (e: MouseEvent<HTMLDivElement>) => void
   style?: CSS.Properties
   onPointerDown?: (e: React.PointerEvent<HTMLDivElement>) => void
-  ref?: RefObject<HTMLDivElement>
+  buttonRef?: RefObject<HTMLDivElement>
   onKeyDown?: (e: KeyboardEvent<HTMLDivElement>) => void
   onContextMenu?: (e: MouseEvent<HTMLDivElement>) => void
   fontSize?: string
   notClickable?: boolean
 }
 
-function Button({ className, onClick, children, style, onPointerDown, ref, onKeyDown, onContextMenu, fontSize, notClickable }: Props) {
+function Button({ className, onClick, children, style, onPointerDown, buttonRef, onKeyDown, onContextMenu, fontSize, notClickable }: Props) {
   const classes = useJSS({ fontSize, notClickable })
   return (
     <div className={className ? `${classes.Button} ${className}` : classes.Button}
       onClick={onClick}
       onPointerDown={onPointerDown}
       style={style}
-      ref={ref}
+      ref={buttonRef}
       onKeyDown={onKeyDown}
       onContextMenu={onContextMenu}
     >

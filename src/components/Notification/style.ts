@@ -3,7 +3,7 @@ import { sizes } from '../../theme/theme'
 
 const useJSS = createUseStyles({
   Notification: {
-    position: 'absolute',
+    position: 'fixed',
     top: '10vh',
     left: '50vw',
     transform: 'translate(-50%, 0%)',
