@@ -10,8 +10,11 @@ interface Props {
   text: string
 }
 
+const timeout = 200
+
 function ExtensionMenu({ text, children }: Props) {
   const [isOpen, setOpen] = useState(false)
+  const [timeoutID, setTimeoutID] = useState(-1)
   const classes = useJSS()
   const buttonRef = useRef<HTMLDivElement>(null)
   const emRef = useRef<HTMLDivElement>(null)
@@ -19,7 +22,6 @@ function ExtensionMenu({ text, children }: Props) {
     if (emRef.current) {
       // this is only run if div is rendered, ie when isOpen is true
       const { top, left } = getEMLocation(buttonRef, emRef)
-      console.log('running this')
       emRef.current.style.top = `${top}px`
       emRef.current.style.left = `${left}px`
     }
@@ -28,8 +30,15 @@ function ExtensionMenu({ text, children }: Props) {
     <Fragment>
       <Button buttonRef={buttonRef}
         fontSize={sizes.text.small}
-        onClick={() => { 
-          setOpen(!isOpen)
+        onPointerEnter={() => {
+          window.clearTimeout(timeoutID)
+          setOpen(true)
+        }}
+        onPointerLeave={() => {
+          const newID = window.setTimeout(() => {
+            setOpen(false)
+          }, timeout)
+          setTimeoutID(newID)
         }}
       >
         { text }
@@ -37,6 +46,15 @@ function ExtensionMenu({ text, children }: Props) {
       <Conditional showIf={isOpen}>
         <div className={classes.ExtensionMenu}
           ref={emRef}
+          onPointerEnter={() => {
+            window.clearTimeout(timeoutID)
+          }}
+          onPointerLeave={() => {
+            const newID = window.setTimeout(() => {
+              setOpen(false)
+            }, timeout)
+            setTimeoutID(newID)
+          }}
         >
           { children }
         </div>

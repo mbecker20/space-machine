@@ -2,7 +2,6 @@ import { createUseStyles } from 'react-jss'
 import { colors } from '../../../theme/theme'
 import { zIndex } from '../../../theme/zIndex'
 
-const maxWidth = '8em'
 const maxHeight = '12em'
 
 const useJSS = createUseStyles({
@@ -21,7 +20,6 @@ const useJSS = createUseStyles({
 
   ContextMenu: {
     maxHeight,
-    maxWidth,
     backgroundColor: colors.contextMenuBackground,
     padding: '.2em',
     borderRadius: '.2em',
