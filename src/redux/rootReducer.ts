@@ -8,12 +8,21 @@ import { ConnectionAction } from './connections/connectionTSTypes'
 import { ADD_CONNECTION, REMOVE_CONNECTION, REMOVE_MODULE, MERGE_CONTAINER } from './connections/connectionActionTypes'
 import { RESTORE_FROM_STATE } from './root/rootActionTypes'
 import { RootAction } from './root/rootActionTSTypes'
+import restoreAMFromState from '../audioModules/restoreAMFromState'
 
 export function createInitState() {
-  return {
-    modules: moduleReducer(),
-    connections: {},
-    baseContainerID: bcidReducer(),
+  const savedState = window.localStorage.getItem('spaceState')
+  if (savedState !== 'undefined') {
+    const restoredState = JSON.parse(savedState as string)
+    restoreAMFromState({}, restoredState)
+    return restoredState
+  } else {
+    window.audioModules = {}
+    return {
+      modules: moduleReducer(),
+      connections: {},
+      baseContainerID: bcidReducer(),
+    }
   }
 }
 
@@ -33,16 +42,20 @@ function combinedModuleConnectionReducer(state: RootState, action: ModuleAction 
 const rootReducer = (state = initState, action: ModuleAction | BCIDAction | ConnectionAction | RootAction): RootState => {
   if (action.type === RESTORE_FROM_STATE) {
     const newState = (action as RootAction).state
-    return Object.assign(newState, newState.connections ? {} : {
+    const fullNewState = Object.assign(newState, newState.connections ? {} : {
       connections: {}
     })
+    window.localStorage.setItem('spaceState', JSON.stringify(fullNewState))
+    return fullNewState
   } else {
     const { newModules, newConnections } = combinedModuleConnectionReducer(state, action as ModuleAction | ConnectionAction)
-    return {
+    const newState = {
       modules: newModules,
       connections: newConnections,
       baseContainerID: bcidReducer(state.baseContainerID, action as BCIDAction),
     }
+    window.localStorage.setItem('spaceState', JSON.stringify(newState))
+    return newState
   }
 }
 

@@ -27,7 +27,6 @@ declare global {
 
 window.fillContainerID = 'project'
 
-window.audioModules = {}
 makeAddModule()
 configureSpaceDB()
 setUserAgent()
