@@ -119,6 +119,10 @@ const useJSS = createUseStyles({
     alignSelf: 'flex-end',
     flexShrink: 0,
   },
+
+  FillControls: {
+    padding: '.5em'
+  },
 })
 
 export default useJSS

@@ -50,7 +50,11 @@ function ValueControl({ controlID, setFunc, actualModID, displayModName, label }
           })
         }}
       />
-      <div>{label ? label : displayModName ? `${displayModName} - ${controlID}` : controlID}</div>
+      <div
+        style={{
+          marginTop: '-.3em'
+        }}
+      >{label ? label : displayModName ? `${displayModName} - ${controlID}` : controlID}</div>
     </div>
   )
 }

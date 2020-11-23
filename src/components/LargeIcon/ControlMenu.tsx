@@ -3,8 +3,15 @@ import useJSS from './style'
 import { AudioModule, GRAPH, PAD, TUNER_CONTROL, VISUALIZER_CONTROL } from '../../audioModules/moduleTypes'
 import { Module } from '../../redux/stateTSTypes'
 import { TYPE, BUTTON, VALUE, FILE, SWITCH } from '../../audioModules/moduleTypes'
-import { FileControl, TypeControl, ValueControl, ButtonControl, SwitchControl, GraphControl, TunerControl, VisualizerControl } from './controls/all'
 import PadControl from './controls/Pad'
+import ValueControl from './controls/Value'
+import ButtonControl from './controls/Button'
+import TypeControl from './controls/Type'
+import FileControl from './controls/File'
+import SwitchControl from './controls/Switch'
+import GraphControl from './controls/Graph'
+import TunerControl from './controls/Tuner/Tuner'
+import VisualizerControl from './controls/Visualizer/Visualizer'
 
 interface Props {
   audioModule: AudioModule

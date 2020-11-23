@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { RootState } from '../../../redux/stateTSTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { markContainerInput, unmarkContainerInput, markContainerOutput, unmarkContainerOutput } from '../../../redux/allActions'
@@ -27,9 +27,12 @@ function MarkContainerIO({ modID }: Props) {
   const showingContainerOutput = selectedModule.connectionOutputs.length !== 0
   const classes = useJSS()
   return (
-    <Conditional showIf={window.fillContainerID !== baseContainerID}>
+    <Fragment>
       <MarkContainerControls selectedModule={selectedModule} />
-      <Conditional showIf={showingContainerInput || showingContainerOutput}>
+      <Conditional showIf={
+        window.fillContainerID !== baseContainerID && 
+        (showingContainerInput || showingContainerOutput)
+      }>
         <div className={classes.MenuHeader}>
           mark as container io
         </div>
@@ -66,7 +69,7 @@ function MarkContainerIO({ modID }: Props) {
           </Conditional>
         </FlexRow>
       </Conditional>
-    </Conditional>
+    </Fragment>
   )
 }
 

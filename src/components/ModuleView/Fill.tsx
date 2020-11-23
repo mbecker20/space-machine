@@ -9,6 +9,9 @@ import { range } from '../../helpers/genFuncs'
 import DropSquare from '../DropSquare/DropSquare'
 import { ArcherContainer } from 'react-archer'
 import Button from '../Button/Button'
+import FlexRow from '../Flex/FlexRow'
+import FillControls from './FillControls'
+import Conditional from '../Conditional/Conditional'
 
 declare global {
   interface Window { 
@@ -68,37 +71,42 @@ function ModuleViewFill() {
         </Button>
         }
       </div>
-      <ArcherContainer ref={archerContainerRef}
-        svgContainerStyle={{ zIndex: -1 }}
-        strokeWidth={8}
-        arrowLength={0}
-      >
-        <div className={classes.Fill} style={gridStyle}>
-          {isEmpty ? <DropSquare row={0} col={0}/> :
-          range(0, maxRow + 2).map(row => {
-            return range(0, maxCol + 2).map(col => {
+      <FlexRow>
+        <Conditional showIf={containerModule.containerControls.length !== 0}>
+          <FillControls />
+        </Conditional>
+        <ArcherContainer ref={archerContainerRef}
+          svgContainerStyle={{ zIndex: -1 }}
+          strokeWidth={8}
+          arrowLength={0}
+        >
+          <div className={classes.Fill} style={gridStyle}>
+            {isEmpty ? <DropSquare row={0} col={0}/> :
+            range(0, maxRow + 2).map(row => {
+              return range(0, maxCol + 2).map(col => {
+                return (
+                  <DropSquare
+                    key={`${row} ${col}`}
+                    row={row} 
+                    col={col}
+                  />
+                )
+              })
+            }).flat()}
+            {containerModule.childModules.map(moduleID => {
+              const mod = modules[moduleID]
               return (
-                <DropSquare
-                  key={`${row} ${col}`}
-                  row={row} 
-                  col={col}
+                <ModuleViewIcon
+                  key={mod.id}
+                  mod={mod}
+                  gridRow={mod.row + 1}
+                  gridCol={mod.col + 1}
                 />
               )
-            })
-          }).flat()}
-          {containerModule.childModules.map(moduleID => {
-            const mod = modules[moduleID]
-            return (
-              <ModuleViewIcon
-                key={mod.id}
-                mod={mod}
-                gridRow={mod.row + 1}
-                gridCol={mod.col + 1}
-              />
-            )
-          })}
-        </div>
-      </ArcherContainer>
+            })}
+          </div>
+        </ArcherContainer>
+      </FlexRow>
     </div>
   )
 }
