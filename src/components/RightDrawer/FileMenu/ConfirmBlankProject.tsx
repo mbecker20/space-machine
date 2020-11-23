@@ -17,7 +17,7 @@ declare global {
 }
 
 function makeBlankProject(dispatch: Dispatch<any>, connections: Connections) {
-  const emptyState = createInitState()
+  const emptyState = createInitState(true)
   restoreAMFromState(connections, emptyState)
   dispatch(restoreFromState(emptyState))
   window.flashNotification(colors.success, 'created blank project')

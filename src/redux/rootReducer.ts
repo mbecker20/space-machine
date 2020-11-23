@@ -10,8 +10,8 @@ import { RESTORE_FROM_STATE } from './root/rootActionTypes'
 import { RootAction } from './root/rootActionTSTypes'
 import restoreAMFromState from '../audioModules/restoreAMFromState'
 
-export function createInitState() {
-  const savedState = window.localStorage.getItem('spaceState')
+export function createInitState(forceNew?: boolean) {
+  const savedState = forceNew ? 'undefined' : window.localStorage.getItem('spaceState')
   if (savedState !== 'undefined') {
     const restoredState = JSON.parse(savedState as string)
     restoreAMFromState({}, restoredState)
