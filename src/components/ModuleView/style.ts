@@ -121,7 +121,7 @@ const useJSS = createUseStyles({
   },
 
   FillControls: {
-    padding: '.5em'
+    padding: '.1em'
   },
 })
 

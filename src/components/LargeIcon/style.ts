@@ -16,7 +16,7 @@ const useJSS = createUseStyles({
     alignItems: 'center',
     fontSize: sizes.text.small,
     justifyContent: 'center',
-    margin: '0vmin 1vmin'
+    margin: '.2em'
   },
 
   ControlMenu: {

@@ -62,7 +62,7 @@ function Graph({ modID }: Props) {
         setup={setup} 
         draw={draw} 
       />
-      <Button style={{ width: '10em' }}
+      <Button
         onClick={() => {
           window.openAnalyzerRangeSetMenu(yRange, newRange => {
             dispatch(updateControlRange(modID, 'time graph', newRange))
