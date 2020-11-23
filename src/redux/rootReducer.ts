@@ -12,7 +12,7 @@ import restoreAMFromState from '../audioModules/restoreAMFromState'
 
 export function createInitState(forceNew?: boolean) {
   const savedState = forceNew ? 'undefined' : window.localStorage.getItem('spaceState')
-  if (savedState !== 'undefined') {
+  if (savedState && savedState !== 'undefined') {
     const restoredState = JSON.parse(savedState as string)
     restoreAMFromState({}, restoredState)
     return restoredState
