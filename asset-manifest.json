@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/mbecker20.github.io/space-machine/static/css/main.d776b7e9.chunk.css",
-    "main.js": "/mbecker20.github.io/space-machine/static/js/main.89b73b52.chunk.js",
-    "main.js.map": "/mbecker20.github.io/space-machine/static/js/main.89b73b52.chunk.js.map",
-    "runtime-main.js": "/mbecker20.github.io/space-machine/static/js/runtime-main.395c42a7.js",
-    "runtime-main.js.map": "/mbecker20.github.io/space-machine/static/js/runtime-main.395c42a7.js.map",
-    "static/js/2.f9df2823.chunk.js": "/mbecker20.github.io/space-machine/static/js/2.f9df2823.chunk.js",
-    "static/js/2.f9df2823.chunk.js.map": "/mbecker20.github.io/space-machine/static/js/2.f9df2823.chunk.js.map",
-    "index.html": "/mbecker20.github.io/space-machine/index.html",
-    "precache-manifest.ee1276994b16a4a5007e0584534f9d18.js": "/mbecker20.github.io/space-machine/precache-manifest.ee1276994b16a4a5007e0584534f9d18.js",
-    "service-worker.js": "/mbecker20.github.io/space-machine/service-worker.js",
-    "static/css/main.d776b7e9.chunk.css.map": "/mbecker20.github.io/space-machine/static/css/main.d776b7e9.chunk.css.map",
-    "static/js/2.f9df2823.chunk.js.LICENSE.txt": "/mbecker20.github.io/space-machine/static/js/2.f9df2823.chunk.js.LICENSE.txt",
-    "static/media/settings.svg": "/mbecker20.github.io/space-machine/static/media/settings.04e848f8.svg",
-    "static/media/trash.svg": "/mbecker20.github.io/space-machine/static/media/trash.9d2c8d42.svg"
+    "main.css": "/space-machine/static/css/main.d776b7e9.chunk.css",
+    "main.js": "/space-machine/static/js/main.839ce004.chunk.js",
+    "main.js.map": "/space-machine/static/js/main.839ce004.chunk.js.map",
+    "runtime-main.js": "/space-machine/static/js/runtime-main.e6471807.js",
+    "runtime-main.js.map": "/space-machine/static/js/runtime-main.e6471807.js.map",
+    "static/js/2.0a6798ce.chunk.js": "/space-machine/static/js/2.0a6798ce.chunk.js",
+    "static/js/2.0a6798ce.chunk.js.map": "/space-machine/static/js/2.0a6798ce.chunk.js.map",
+    "index.html": "/space-machine/index.html",
+    "precache-manifest.08515dce8c3b0d44b5acd5535df61843.js": "/space-machine/precache-manifest.08515dce8c3b0d44b5acd5535df61843.js",
+    "service-worker.js": "/space-machine/service-worker.js",
+    "static/css/main.d776b7e9.chunk.css.map": "/space-machine/static/css/main.d776b7e9.chunk.css.map",
+    "static/js/2.0a6798ce.chunk.js.LICENSE.txt": "/space-machine/static/js/2.0a6798ce.chunk.js.LICENSE.txt",
+    "static/media/settings.svg": "/space-machine/static/media/settings.04e848f8.svg",
+    "static/media/trash.svg": "/space-machine/static/media/trash.9d2c8d42.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.395c42a7.js",
-    "static/js/2.f9df2823.chunk.js",
+    "static/js/runtime-main.e6471807.js",
+    "static/js/2.0a6798ce.chunk.js",
     "static/css/main.d776b7e9.chunk.css",
-    "static/js/main.89b73b52.chunk.js"
+    "static/js/main.839ce004.chunk.js"
   ]
 }
