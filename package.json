@@ -1,5 +1,5 @@
 {
-  "homepage": "./",
+  "homepage": "https://mbecker20.github.io/space-machine",
   "name": "space-machine",
   "description": "space DAW transmitted by Jonny Alaska from deep space",
   "version": "0.1.0",
@@ -9,7 +9,6 @@
       "category": "audio"
     }
   },
-  "main": "electron.ts",
   "private": true,
   "dependencies": {
     "@babylonjs/core": "^4.1.0",

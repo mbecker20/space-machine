@@ -61,7 +61,7 @@ function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData:
     case STEREO_PANNER:
       const panner = makeStereoPanner(prevControlData)
       window.audioModules = { ...window.audioModules, [id]: panner }
-      break;
+      break
     case SIGNAL_DELAY:
       const delay = makeSignalDelay(prevControlData)
       window.audioModules = { ...window.audioModules, [id]: delay }
@@ -71,8 +71,9 @@ function restoreAudioModule(id: string, moduleType: ModuleType, prevControlData:
       window.audioModules = { ...window.audioModules, [id]: constant }
       break
     case MEDIA_ELEMENT:
-      window.addAudioTag(id); window.reRenderAudioTags();
-      break;
+      window.addAudioTag(id)
+      if (window.reRenderAudioTags) window.reRenderAudioTags()
+      break
     case LINE_IN:
       makeLineInput(id)
       break;
