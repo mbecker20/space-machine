@@ -1,4 +1,6 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, RefObject, useImperativeHandle } from 'react'
+import Sketch from 'react-p5'
+import { SplineLines } from './types'
 //import useJSS from './style'
 
 interface Props {
@@ -6,13 +8,26 @@ interface Props {
   canvasClassName: string
 }
 
-function SplineLines({ interactClassName }: Props) {
+function SplineLines({ interactClassName }: Props, ref: RefObject<SplineLines>) {
   //const classes = useJSS()
+  let redraw = () => {}
+  useImperativeHandle(ref, () => ({
+    redraw: () => {
+      redraw()
+    }
+  }))
   return (
     <Fragment>
       <div className={interactClassName}>
-        
+
       </div>
+      <Sketch
+        setup={(p5, canvasParentRef) => {
+          p5.createCanvas(100, 100).parent(canvasParentRef)
+          p5.noLoop()
+          redraw = p5.redraw
+        }}
+      />
     </Fragment>
   )
 }
