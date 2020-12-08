@@ -1,16 +1,19 @@
-import React from 'react'
-import useJSS from './style'
+import React, { Fragment } from 'react'
+//import useJSS from './style'
 
 interface Props {
-  
+  interactClassName: string
+  canvasClassName: string
 }
 
-function SplineLines({  }: Props) {
-  const classes = useJSS()
+function SplineLines({ interactClassName }: Props) {
+  //const classes = useJSS()
   return (
-    <div>
-
-    </div>
+    <Fragment>
+      <div className={interactClassName}>
+        
+      </div>
+    </Fragment>
   )
 }
 

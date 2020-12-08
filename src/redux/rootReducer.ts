@@ -26,7 +26,7 @@ export function createInitState(forceNew?: boolean) {
   }
 }
 
-const initState = createInitState()
+const initState = createInitState(true)
 
 function combinedModuleConnectionReducer(state: RootState, action: ModuleAction | ConnectionAction) {
   if (action.type === ADD_CONNECTION || action.type === REMOVE_CONNECTION || action.type === REMOVE_MODULE || action.type === MERGE_CONTAINER) {

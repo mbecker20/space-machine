@@ -1,12 +1,12 @@
 import React from 'react'
-import useJSS from './style'
+//import useJSS from './style'
 
 interface Props {
   
 }
 
 function SplineDiv({  }: Props) {
-  const classes = useJSS()
+  //const classes = useJSS()
   return (
     <div>
 
