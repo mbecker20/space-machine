@@ -1,14 +1,7 @@
 import { atan2 } from "mathjs"
 
 export function stringIn(str: string, ar: any[]) {
-	// returns true if string is an element of array
-	// false otherwise
-	for (var i = 0; i < ar.length; i++) {
-		if (ar[i] === str) {
-			return true
-		}
-	}
-	return false
+	return ar.includes(str)
 }
 
 export function allStringsIn(strings: string[], ar: any[]) {
